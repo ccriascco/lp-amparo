@@ -42,7 +42,11 @@ export function CircularBadge({
           </textPath>
         </text>
       </svg>
-      <img src={onPhoto ? simboloBranco : simbolo} alt="" className="h-[34%] w-auto" />
+      <img
+        src={onPhoto ? simboloBranco : simbolo}
+        alt=""
+        className="absolute inset-0 m-auto h-[38%] w-auto"
+      />
     </div>
   )
 }

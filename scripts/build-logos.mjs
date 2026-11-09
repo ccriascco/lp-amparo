@@ -55,6 +55,19 @@ for (const [suffix, fill] of [
   )
 }
 
+// Só o nome "Amparo" em branco (preloader: a gota se desenha e o nome sobe separado)
+{
+  const pad = 4
+  await write(
+    'amparo-wordmark-branco.svg',
+    svg(
+      `${WORD.x - pad} ${WORD.y - pad} ${WORD.w + pad * 2} ${WORD.h + pad * 2}`,
+      path_(wordmark, BRANCO),
+      'Amparo',
+    ),
+  )
+}
+
 // Vertical (layout do original, sem fundo)
 {
   const pad = 8

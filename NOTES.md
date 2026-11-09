@@ -141,3 +141,27 @@ O DESIGN.md e o COPY.md foram reescritos com base nos 5 sites de referência (Ga
 | `comecar-4` | **Placeholder** | idem |
 - As fotos de `#direitos` foram recortadas de novo em 3:4 (DESIGN §9).
 - Os placeholders são gerados pelo próprio `scripts/process-images.mjs` (lista `PLACEHOLDERS`) e marcados com `placeholder: true` em `src/content/images.json`.
+
+## Rotina por seção (CLAUDE.md, Fase 0)
+Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que a torna memorável, revisão contra o brief); 2) construção com o acabamento da `design-taste-frontend` (bordas no container, UI real do app, hover/clique, toque de 44px, nada estourando em 320px); 3) animação comparada lado a lado com o site de referência; 4) crítica com screenshots em 1440 e 390; 5) revisão dos arquivos da seção com a `web-design-guidelines` antes do commit.
+- Regra da `web-design-guidelines` que **não** se aplica: "Title Case para títulos e botões" — o DESIGN.md §4 pede sentence case em pt-BR.
+- Regras da `design-taste-frontend` que **não** se aplicam (conflitam com o DESIGN §7): "nada se move por causa do scroll", "nenhum cartão aparece no scroll" e "sem parallax".
+
+### Item 0 — Base (plano registrado depois do commit `bc56f50`, por causa da rotina nova)
+- **Wireframe/regra:** §3 (tokens), §4 (escala), §7.11 (aparecer no scroll), §8 (slots de foto).
+- **Referência:** NextPay (estado inicial dos elementos: opacidade 0, `y 10px`, `blur(10px)`), Gaia (`y 20–40px`), Gardance (`scale 0.9`) — base do `appear` (`y 32`, `blur 8px`, `expo.out` 0.9s).
+- **Memorável:** não é uma seção; o que importa é o sistema: títulos saindo do desfoque palavra por palavra em todas as seções, igual ao H1.
+- **Revisão `web-design-guidelines` (src/lib/appear.ts, src/index.css, src/content/copy.ts, scripts/process-images.mjs):**
+  - `appear` só roda dentro do `matchMedia` sem movimento reduzido; o `filter` é limpo ao fim (`clearProps`) ✓
+  - `display-xl` com `white-space: nowrap`: o clamp cabe em 360px (confirmado no item 1) ✓
+  - **Corrigido:** aspas retas nos textos de UI (`"="`, `"Ver como chegamos nisso."`) → aspas curvas “ ” (regra de tipografia); as palavras do COPY.md não mudam.
+
+### Item 1 — Preloader + Header + Hero
+- **Wireframe:** §9 Hero (sem card, `--grad-hero` + anéis cobrindo tudo, H1 em uma linha, 3 celulares em leque, 2 pílulas, 3 notificações empilhadas à direita, selo no canto inferior esquerdo), §6.2/§7.11 (header), §6.22/§7.0 (preloader).
+- **Referências:** Gaia (preloader com contador grande de % no canto inferior direito), NextPay (H1 palavra por palavra saindo do desfoque), Eduzz (notificações empilhando ao lado do aparelho), Gardance (header que vira pílula compacta; aparelho girando ao sair), Task.io (leque de celulares).
+- **Memorável:** a calculadora digita 1907, o "=" solta uma onda vinho que pinta o hero inteiro (gradiente + anéis) e, logo depois, chegam as notificações reais do app ("Alerta enviado · agora"), empilhando como no celular.
+- **Revisão contra o brief:** hero centralizado com celulares é um padrão comum; o que o tira do genérico é (1) o desbloqueio da calculadora, que é o produto, e (2) só UI real do app (nada de ícones genéricos). Para não poluir: 2 pílulas, 1 pilha de notificações (não 3 cartões soltos), o selo e nada mais. Mobile: só o celular central, 1 pílula e 1 notificação.
+- **Construído:** `Preloader` (gota se desenhando, nome saindo do desfoque, contador grande 0→100 no canto, fade; só na 1ª visita da sessão, `?intro` força), `lib/intro.ts` (o hero começa quando o preloader inicia o fade), `NotificationCard`, `BrandDrop` (gota inline), wordmark branco gerado por `npm run logos`. Hero de ponta a ponta com `--grad-hero` + 12 anéis revelados em onda a partir do "="; H1 palavra por palavra saindo do desfoque; 3 notificações chegando e se empilhando (a mais nova em cima); celular central girando/inclinando ao sair (`rotate -8°`, `rotateX 12°`, `scale 0.92`). Header largo e transparente no topo, pílula compacta de vidro a partir de 80px, "Entrar" + CTA, sublinhado que se desenha no hover.
+- **Decisões:** pílula compacta com `max-w-[920px]` (com 880px "Como funciona" e "Seus direitos" quebravam em duas linhas); o header **não some** mais ao rolar — o §7.11 novo descreve a pílula compacta sempre visível, como na Gardance. No mobile o header já é pílula desde o topo (transparente sobre o gradiente ficaria sem contorno). Notificações à direita do celular central, sobre o celular lateral, para não cobrir o círculo de ícone.
+- **Crítica (screenshots 1440/390):** H1 em uma linha em 360/390/768/1440 (26px no mobile, conforme o `clamp` do §4); sem scroll horizontal; sem erros de console. Movimento reduzido: sem preloader, sem Lenis, estado final.
+- **Revisão `web-design-guidelines` (Preloader, Header, Hero, NotificationCard, BrandDrop, intro, useHeroMotion):** botão de menu com `aria-label` e `aria-expanded` ✓; ícones decorativos com `aria-hidden` ✓; contador do preloader `aria-hidden` (a tela é decorativa e some em <3s) ✓; texto das notificações com `truncate` + `min-w-0` ✓; `transition` com propriedades listadas (sem `all`) ✓; folha do menu com `overscroll-behavior: contain` (**corrigido**) ✓; foco visível global ✓; links com hover ✓. Não aplicado: Title Case (DESIGN §4 pede sentence case).

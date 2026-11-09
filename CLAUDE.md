@@ -24,9 +24,29 @@ Confira se estão instaladas (`npx skills ls`). Se faltar alguma, instale com
 3. **`web-design-guidelines`**: regras de qualidade e acessibilidade. Vale integralmente, exceto onde contradiz o item 1.
 4. **`design-taste-frontend`, `copywriting` e `remotion-best-practices`**: só nas partes indicadas abaixo.
 
+### Rotina obrigatória por seção (skills de frontend sempre ativas)
+Em **toda** seção (layout, componentes e animação), sem exceção, siga este ciclo. O objetivo é uma **UI avançada e tecnológica, no nível dos sites de referência** (§2.1 do `DESIGN.md`):
+1. **Planejar com a `frontend-design`:** antes de codar a seção, escreva no `NOTES.md` um mini-plano: o wireframe do §9, o site de referência correspondente e o que vai tornar a seção memorável. Revise o plano contra o brief: se parecer genérico (cartões iguais, ícone + título + texto repetido, seção só de texto), refaça antes de codar.
+2. **Construir com o padrão de acabamento da `design-taste-frontend`:**
+   - bordas alinhadas ao container;
+   - visual real do produto (UI do app codada, fotos) em vez de ilustração genérica;
+   - microinterações de hover e clique;
+   - áreas de toque de 44px;
+   - nada estourando em 320px.
+   Lembre: não usar os comandos de sorteio dessa skill (ver abaixo).
+3. **Animar** exatamente como o §7 e o site de referência daquela seção. Abra o site e compare o movimento lado a lado: tempo, curva, desfoque, ordem de entrada.
+4. **Criticar com screenshots (`frontend-design`):** tire prints em 1440 e 390 e compare com a referência. Pergunte:
+   - Está tão rica e "tecnológica" quanto a referência?
+   - Tem densidade suficiente (§9.0)?
+   - Algo parece template?
+   Ajuste e repita até ficar no nível da referência.
+5. **Revisar com a `web-design-guidelines`** só os arquivos da seção (acessibilidade, foco, semântica, desempenho). Depois, commit.
+
+Nenhuma seção é dada como pronta sem passar pelos 5 passos.
+
 ### Mapa de uso por fase
 
-**`frontend-design`** (Anthropic): leia antes da Fase 2.
+**`frontend-design`** (Anthropic): leia antes da Fase 2 e **aplique em toda seção** (rotina acima).
 - **Use:** o processo "planejar → revisar contra o brief → construir → criticar com screenshots". Restrição: a ousadia fica concentrada num só lugar (o desbloqueio do hero) e o resto é disciplinado.
 - **Já está aplicada no `DESIGN.md`:** sem destacar palavras soltas nos títulos, sem rótulos em caixa-alta, numeração só onde há sequência real.
 - **Conflito resolvido a favor do cliente:** a skill desaconselha "aparecer no scroll" em toda seção, mas o cliente pediu explicitamente o padrão dos sites Framer de referência. Siga o `DESIGN.md` §7.11.

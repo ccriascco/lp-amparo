@@ -148,7 +148,7 @@ export const disfarce = {
   steps: [
     { strong: 'Ícone e nome de calculadora', rest: ' na tela do celular.' },
     { strong: 'Faz contas de verdade.', rest: ' Qualquer outra sequência é só um cálculo.' },
-    { strong: 'Seu código, seu acesso.', rest: ' 4 números que só você sabe, seguidos de "=".' },
+    { strong: 'Seu código, seu acesso.', rest: ' 4 números que só você sabe, seguidos de “=”.' },
     {
       strong: 'Nem a tela de apps abertos entrega.',
       rest: ' Na multitarefa aparece apenas a calculadora.',
@@ -301,7 +301,7 @@ export const risco = {
     },
   ],
   highlight: {
-    strong: '"Ver como chegamos nisso."',
+    strong: '“Ver como chegamos nisso.”',
     rest: ' Você sempre pode ver quais sinais levaram àquela leitura. Nada disso é enviado para ninguém.',
   } satisfies Lead,
   note: 'Os sinais considerados foram inspirados no Formulário Nacional de Avaliação de Risco (Lei nº 14.149/2021).',

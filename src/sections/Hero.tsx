@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import {
   ArrowDown,
   Calculator,
@@ -8,206 +9,245 @@ import {
   Siren,
   Smartphone,
 } from 'lucide-react'
-import { useRef, type ReactNode } from 'react'
-import { CalculatorScreen, type CalculatorHandle } from '../components/phone/CalculatorScreen'
+import { useRef, type CSSProperties, type ReactNode } from 'react'
 import { AlertScreen } from '../components/phone/AlertScreen'
+import { CalculatorScreen, type CalculatorHandle } from '../components/phone/CalculatorScreen'
 import { HomeScreen } from '../components/phone/HomeScreen'
 import { ProofScreen } from '../components/phone/ProofScreen'
 import { Button } from '../components/ui/Button'
 import { Chip } from '../components/ui/Chip'
 import { CircularBadge } from '../components/ui/CircularBadge'
-import { ConcentricRings } from '../components/ui/ConcentricRings'
-import { FloatCard, Initials } from '../components/ui/FloatCard'
+import { NotificationCard } from '../components/ui/NotificationCard'
 import { PhoneFrame } from '../components/ui/PhoneFrame'
 import { Container } from '../components/ui/Section'
 import { a11y, cta, hero, recursos, ui } from '../content/copy'
 import { APP_URL } from '../lib/config'
 import { useHeroMotion } from '../motion/useHeroMotion'
 
-/** Hero "Desbloqueio" (DESIGN.md §9 Hero, §7.1). */
+/** Pilha de notificações (a mais nova em cima). Estado final; a timeline faz elas chegarem. */
+const STACK: CSSProperties[] = [
+  { transform: 'translateY(0px) scale(1)', opacity: 1, zIndex: 3 },
+  { transform: 'translateY(14px) scale(0.94)', opacity: 0.75, zIndex: 2 },
+  { transform: 'translateY(28px) scale(0.88)', opacity: 0.45, zIndex: 1 },
+]
+
+/** Hero "Desbloqueio" (DESIGN §9 Hero, §7.1): de ponta a ponta, sem card. */
 export function Hero() {
-  const root = useRef<HTMLDivElement>(null)
+  const root = useRef<HTMLElement>(null)
   const calc = useRef<CalculatorHandle>(null)
   const { replay } = useHeroMotion(root, calc)
 
   return (
-    <section id="inicio" aria-labelledby="hero-title" className="px-3 pt-3 md:px-4 md:pt-4">
+    <section
+      ref={root}
+      id="inicio"
+      aria-labelledby="hero-title"
+      data-hero
+      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-white md:min-h-[920px]"
+    >
+      {/* Véu: gradiente do hero + anéis, revelado em onda a partir do "=". */}
       <div
-        ref={root}
-        data-hero
-        className="relative isolate flex min-h-[100svh] flex-col overflow-hidden rounded-[28px] border border-borda/60 bg-white md:min-h-[880px] md:rounded-shell"
+        data-hero-veil
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{
+          background: 'var(--grad-hero)',
+          clipPath: 'circle(var(--r, 150%) at var(--x, 50%) var(--y, 80%))',
+        }}
       >
-        {/* Véu vinho que se espalha a partir do "=" no desbloqueio */}
+        <HeroRings />
+      </div>
+
+      <Container className="relative z-10 pt-32 text-center md:pt-40">
+        <div data-hero-text>
+          <div data-hero-chip>
+            <Chip icon={<ShieldCheck />}>{hero.chip}</Chip>
+          </div>
+          <h1 id="hero-title" data-hero-title className="mt-6 display-xl text-texto">
+            {hero.h1}
+          </h1>
+          <div data-hero-rest className="mx-auto max-w-[820px]">
+            <p className="mx-auto mt-6 max-w-[52ch] lead text-pretty text-texto-secundario">
+              {hero.sub}
+            </p>
+            <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+              <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
+                {cta.acessar}
+              </Button>
+              <Button variant="secondary" href="#disfarce" icon={<ArrowDown />}>
+                {hero.ctaSecondary}
+              </Button>
+            </div>
+            <ul className="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-small text-texto-secundario sm:flex-row sm:flex-wrap">
+              {hero.checks.map((c) => (
+                <li key={c} className="flex items-center gap-2">
+                  <Check className="size-4 text-vinho" strokeWidth={2.5} aria-hidden />
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Container>
+
+      {/* Palco dos celulares, cortado pela base do hero */}
+      <div
+        data-hero-stage
+        className="relative mt-12 h-[420px] shrink-0 grow [perspective:1200px] md:mt-14 md:h-[470px] lg:h-[500px]"
+      >
         <div
-          data-hero-veil
-          aria-hidden
-          className="absolute inset-0 -z-10"
-          style={{
-            background: 'var(--grad-suave)',
-            // Onda do desbloqueio: animada pelas variáveis (ver useHeroMotion).
-            clipPath: 'circle(var(--r, 150%) at var(--x, 50%) var(--y, 70%))',
-          }}
+          data-hero-side="left"
+          className="absolute top-[90px] left-[calc(50%-400px)] hidden w-[255px] md:block lg:left-[calc(50%-430px)] lg:w-[272px]"
+          style={{ transform: 'rotate(-12deg)' }}
+        >
+          <div data-hero-side-inner className="relative">
+            <IconBubble icon={<MapPin />} className="-top-7 left-[58%]" />
+            <PhoneFrame decorative>
+              <AlertScreen />
+            </PhoneFrame>
+          </div>
+        </div>
+        <div
+          data-hero-side="right"
+          className="absolute top-[90px] right-[calc(50%-400px)] hidden w-[255px] md:block lg:right-[calc(50%-430px)] lg:w-[272px]"
+          style={{ transform: 'rotate(12deg)' }}
+        >
+          <div data-hero-side-inner className="relative">
+            <IconBubble icon={<ShieldCheck />} className="-top-7 left-[22%]" flip />
+            <PhoneFrame decorative>
+              <ProofScreen />
+            </PhoneFrame>
+          </div>
+        </div>
+
+        {/* Celular central: calculadora → tela inicial. Gira/inclina ao sair (§7.9). */}
+        <div
+          data-hero-phone
+          className="absolute top-0 left-1/2 z-[5] w-[248px] -translate-x-1/2 md:w-[300px] lg:w-[320px]"
+        >
+          <PhoneFrame screenClassName="bg-black" label={a11y.altHome}>
+            <div className="relative h-full w-full">
+              <div data-hero-home className="absolute inset-0">
+                <HomeScreen />
+              </div>
+              <div data-hero-calc className="absolute inset-0 opacity-0">
+                <CalculatorScreen mode="auto" compact ref={calc} />
+              </div>
+            </div>
+          </PhoneFrame>
+          <button
+            type="button"
+            data-hero-replay
+            onClick={replay}
+            style={{ visibility: 'hidden' }}
+            className="absolute top-6 -left-3 hidden -translate-x-full items-center gap-1.5 rounded-full border border-borda bg-white/90 px-3.5 py-2 text-[0.8125rem] font-bold text-vinho-profundo transition-[color,transform] duration-250 hover:text-vinho active:scale-[0.97] lg:inline-flex"
+          >
+            <span aria-hidden>↺</span> {ui.verDeNovo}
+          </button>
+        </div>
+
+        <Pill
+          href="#disfarce"
+          depth={-60}
+          icon={<Calculator />}
+          label={recursos.items[5].title}
+          className="top-2 left-[4%] -rotate-6 md:-top-4 lg:left-[calc(50%-560px)]"
+        />
+        <Pill
+          href="#sos"
+          depth={-110}
+          icon={<Siren />}
+          label={recursos.items[0].title}
+          className="-top-4 right-[calc(50%-570px)] hidden rotate-6 lg:flex"
         />
 
-        <Container className="relative z-10 pt-28 text-center md:pt-32">
-          <div data-hero-text>
-            <div data-hero-chip>
-              <Chip icon={<ShieldCheck />}>{hero.chip}</Chip>
-            </div>
-            <h1
-              id="hero-title"
-              data-hero-title
-              className="mt-6 display-xl text-texto max-md:text-[clamp(2.5rem,12.4vw,3rem)]"
-            >
-              {hero.h1}
-            </h1>
-            <div data-hero-rest className="mx-auto max-w-[820px]">
-              <p className="mx-auto mt-6 max-w-[52ch] lead text-texto-secundario">{hero.sub}</p>
-              <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-                <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
-                  {cta.acessar}
-                </Button>
-                <Button variant="secondary" href="#disfarce" icon={<ArrowDown />}>
-                  {hero.ctaSecondary}
-                </Button>
-              </div>
-              <ul className="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-small text-texto-secundario sm:flex-row sm:flex-wrap">
-                {hero.checks.map((c) => (
-                  <li key={c} className="flex items-center gap-2">
-                    <Check className="size-4 text-vinho" strokeWidth={2.5} aria-hidden />
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </Container>
-
-        {/* Palco dos celulares, cortado pela base do shell */}
+        {/* Notificações empilhadas (padrão Eduzz), à direita do celular central */}
         <div
-          data-hero-stage
-          className="relative mt-10 h-[400px] shrink-0 grow md:mt-12 md:h-[460px] lg:h-[500px]"
+          data-hero-pop
+          data-depth="-90"
+          data-hero-notifs
+          className="absolute top-[150px] right-[3%] z-20 h-[110px] w-[250px] md:top-[200px] md:right-auto md:left-[calc(50%+140px)] md:w-[280px] lg:top-[190px] lg:left-[calc(50%+190px)]"
         >
-          <ConcentricRings
-            r={150}
-            className="absolute top-[230px] left-1/2 -translate-x-1/2 -translate-y-1/2"
-          />
-
-          {/* Celulares laterais (só ≥ 768px) */}
-          <div
-            data-hero-side="left"
-            className="absolute top-[90px] left-[calc(50%-400px)] hidden w-[255px] md:block lg:left-[calc(50%-430px)] lg:w-[272px]"
-            style={{ transform: 'rotate(-12deg)' }}
-          >
-            <div data-hero-side-inner className="relative">
-              <IconBubble icon={<MapPin />} className="-top-7 left-[58%]" />
-              <PhoneFrame decorative>
-                <AlertScreen />
-              </PhoneFrame>
-            </div>
-          </div>
-          <div
-            data-hero-side="right"
-            className="absolute top-[90px] right-[calc(50%-400px)] hidden w-[255px] md:block lg:right-[calc(50%-430px)] lg:w-[272px]"
-            style={{ transform: 'rotate(12deg)' }}
-          >
-            <div data-hero-side-inner className="relative">
-              <IconBubble icon={<ShieldCheck />} className="-top-7 left-[22%]" flip />
-              <PhoneFrame decorative>
-                <ProofScreen />
-              </PhoneFrame>
-            </div>
-          </div>
-
-          {/* Celular central: calculadora → tela inicial */}
-          <div
-            data-hero-phone
-            className="absolute top-0 left-1/2 w-[248px] -translate-x-1/2 md:w-[300px] lg:w-[320px]"
-          >
-            <PhoneFrame screenClassName="bg-black" label={a11y.altHome}>
-              <div className="relative h-full w-full">
-                <div data-hero-home className="absolute inset-0">
-                  <HomeScreen />
-                </div>
-                <div data-hero-calc className="absolute inset-0 opacity-0">
-                  <CalculatorScreen mode="auto" compact ref={calc} />
-                </div>
-              </div>
-            </PhoneFrame>
-            <button
-              type="button"
-              data-hero-replay
-              onClick={replay}
-              style={{ visibility: 'hidden' }}
-              className="absolute top-6 -right-3 hidden translate-x-full items-center gap-1.5 rounded-full border border-borda bg-white/90 px-3.5 py-2 text-[0.8125rem] font-bold text-vinho-profundo backdrop-blur hover:text-vinho lg:inline-flex"
-            >
-              <span aria-hidden>↺</span> {ui.verDeNovo}
-            </button>
-          </div>
-
-          {/* Pílulas inclinadas (links âncora) */}
-          <a
-            data-hero-pop
-            data-depth="-60"
-            href="#disfarce"
-            className="absolute top-2 left-[4%] z-10 flex -rotate-6 items-center gap-2.5 rounded-full border border-borda bg-white py-2 pr-4 pl-2 shadow-float md:-top-6 md:top-6 lg:left-[calc(50%-560px)]"
-          >
-            <span className="grid size-8 place-items-center rounded-full bg-vinho text-white">
-              <Calculator className="size-4" strokeWidth={2} />
-            </span>
-            <span className="text-[0.9375rem] font-bold text-texto">{recursos.items[5].title}</span>
-          </a>
-          <a
-            data-hero-pop
-            data-depth="-110"
-            href="#sos"
-            className="absolute top-6 right-[calc(50%-560px)] z-10 hidden rotate-6 items-center gap-2.5 rounded-full border border-borda bg-white py-2 pr-4 pl-2 shadow-float lg:flex"
-          >
-            <span className="grid size-8 place-items-center rounded-full bg-vinho text-white">
-              <Siren className="size-4" strokeWidth={2} />
-            </span>
-            <span className="text-[0.9375rem] font-bold text-texto">{recursos.items[0].title}</span>
-          </a>
-
-          {/* Cartões flutuantes */}
-          <div
-            data-hero-pop
-            data-depth="-40"
-            className="absolute top-[230px] right-[3%] z-10 w-[200px] md:top-[70px] md:right-auto md:left-[2%] md:w-[230px] lg:left-[calc(50%-600px)]"
-          >
-            <FloatCard
-              tone="confirma"
-              icon={<Check strokeWidth={2.75} />}
-              title={ui.alertaEnviado.title}
-              text={ui.alertaEnviado.text}
+          {hero.notifications.map((n, i) => (
+            <NotificationCard
+              key={n.title}
+              title={n.title}
+              text={n.text}
+              time={n.time}
+              className={clsx(
+                'absolute top-0 left-0 origin-top max-md:w-[250px]',
+                i > 0 && 'max-md:hidden',
+              )}
+              style={STACK[i]}
             />
-          </div>
-          <div
-            data-hero-pop
-            data-depth="-90"
-            className="absolute top-[210px] right-[2%] z-10 hidden w-[230px] md:block lg:right-[calc(50%-600px)]"
-          >
-            <FloatCard
-              tone="confirma"
-              icon={
-                <Initials className="size-9 text-[0.8125rem]">{ui.confirmou.initials}</Initials>
-              }
-              title={ui.confirmou.name}
-              text={<span className="font-semibold text-confirma">{ui.confirmou.status}</span>}
-              className="[&>span:first-child]:bg-transparent"
-            />
-          </div>
+          ))}
         </div>
+      </div>
 
-        <div className="absolute bottom-8 left-8 z-10 hidden lg:block">
-          <CircularBadge />
-        </div>
+      <div data-hero-pop className="absolute bottom-8 left-8 z-10 hidden lg:block">
+        <CircularBadge />
       </div>
     </section>
   )
 }
 
-/** Círculo vinho com ícone sobre os celulares laterais + seta de cursor (ref. Task.io). */
+/** Anéis do hero (§6.19, variante `hero`): 12 anéis a cada 90px, centrados no celular central. */
+function HeroRings() {
+  const rings = Array.from({ length: 12 }, (_, i) => 150 + i * 90)
+  const max = rings[rings.length - 1]
+  return (
+    <svg
+      data-rings
+      aria-hidden
+      viewBox={`${-max - 2} ${-max - 2} ${max * 2 + 4} ${max * 2 + 4}`}
+      className="pointer-events-none absolute top-[calc(100%-210px)] left-1/2 h-[2600px] w-[2600px] -translate-x-1/2 -translate-y-1/2"
+      fill="none"
+    >
+      {rings.map((r, i) => (
+        <circle
+          key={r}
+          data-ring
+          r={r}
+          stroke={`rgb(149 75 110 / ${(0.18 - (i * 0.1) / 11).toFixed(3)})`}
+          strokeWidth={1}
+          vectorEffect="non-scaling-stroke"
+        />
+      ))}
+    </svg>
+  )
+}
+
+function Pill({
+  href,
+  depth,
+  icon,
+  label,
+  className,
+}: {
+  href: string
+  depth: number
+  icon: ReactNode
+  label: string
+  className?: string
+}) {
+  return (
+    <a
+      data-hero-pop
+      data-depth={depth}
+      href={href}
+      className={clsx(
+        'absolute z-10 flex items-center gap-2.5 rounded-full border border-borda bg-white py-2 pr-4 pl-2 shadow-float transition-[translate] duration-300 ease-amparo hover:-translate-y-0.5',
+        className,
+      )}
+    >
+      <span className="grid size-8 place-items-center rounded-full bg-vinho text-white [&>svg]:size-4">
+        {icon}
+      </span>
+      <span className="text-[0.9375rem] font-bold text-texto">{label}</span>
+    </a>
+  )
+}
+
 function IconBubble({
   icon,
   className,
@@ -218,13 +258,13 @@ function IconBubble({
   flip?: boolean
 }) {
   return (
-    <span data-hero-pop className={`absolute z-10 flex items-end gap-1 ${className ?? ''}`}>
+    <span data-hero-pop className={clsx('absolute z-10 flex items-end gap-1', className)}>
       <span className="grid size-14 place-items-center rounded-full border-4 border-white bg-vinho text-white shadow-float [&>svg]:size-5">
         {icon}
       </span>
       <MousePointer2
         aria-hidden
-        className={`size-5 fill-vinho-profundo text-vinho-profundo ${flip ? '-scale-x-100' : ''}`}
+        className={clsx('size-5 fill-vinho-profundo text-vinho-profundo', flip && '-scale-x-100')}
         strokeWidth={1.5}
       />
     </span>

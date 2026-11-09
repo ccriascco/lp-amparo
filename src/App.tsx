@@ -1,4 +1,6 @@
-import { lazy, Suspense, useSyncExternalStore } from 'react'
+import { lazy, Suspense, useEffect, useState, useSyncExternalStore } from 'react'
+import { shouldShowPreloader, startIntro } from './lib/intro'
+import { Preloader } from './sections/Preloader'
 import { useSiteMotion } from './motion/useSiteMotion'
 import { Ajudar } from './sections/Ajudar'
 import { Comecar } from './sections/Comecar'
@@ -45,8 +47,13 @@ export default function App() {
 
 function Landing() {
   useSiteMotion()
+  const [withPreloader] = useState(shouldShowPreloader)
+  useEffect(() => {
+    if (!withPreloader) startIntro()
+  }, [withPreloader])
   return (
     <>
+      {withPreloader && <Preloader />}
       <a
         href="#contexto"
         className="sr-only z-[60] rounded-full bg-vinho px-5 py-3 font-bold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
