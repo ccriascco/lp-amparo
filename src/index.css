@@ -57,4 +57,101 @@
     outline: 2px solid var(--color-vinho);
     outline-offset: 3px;
   }
+
+  /* Em fundo escuro o foco é branco (DESIGN.md §10). */
+  .on-dark :focus-visible {
+    outline-color: #fff;
+  }
+
+  ::selection {
+    background: rgb(149 75 110 / 0.25);
+  }
+}
+
+/* ── Tipografia (DESIGN.md §4) ─────────────────────────────── */
+@utility display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+}
+@utility display-l {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.5vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+@utility display-m {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+@utility numero {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+@utility lead {
+  font-size: clamp(1.125rem, 1.4vw, 1.3125rem);
+  line-height: 1.55;
+}
+@utility text-body {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+@utility text-small {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+@utility caption {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  font-weight: 600;
+}
+
+/* ── Vidro (DESIGN.md §6.17) — no máximo 4 visíveis ao mesmo tempo ─ */
+@utility glass {
+  background: rgb(255 255 255 / 0.14);
+  border: 1px solid rgb(255 255 255 / 0.28);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+@utility glass-light {
+  background: rgb(255 255 255 / 0.72);
+  border: 1px solid rgb(255 255 255 / 0.6);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+@utility glass-vinho {
+  background: rgb(75 42 63 / 0.35);
+  border: 1px solid rgb(255 255 255 / 0.16);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+@media (max-width: 767px) {
+  .glass,
+  .glass-light,
+  .glass-vinho {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass-vinho {
+    background: rgb(75 42 63 / 0.85);
+  }
+  .glass-light {
+    background: rgb(255 255 255 / 0.96);
+  }
 }
