@@ -262,3 +262,18 @@ section[id] {
     object-fit: cover;
   }
 }
+
+/* Lenis (cópia de lenis/dist/lenis.css — o pacote não exporta o arquivo) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}

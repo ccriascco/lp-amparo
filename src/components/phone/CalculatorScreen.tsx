@@ -16,6 +16,11 @@ type CalculatorScreenProps = {
    * `interactive`: funciona de verdade; digitar o código + "=" chama `onUnlock`.
    */
   mode?: 'auto' | 'interactive'
+  /**
+   * Visor logo abaixo da ilha e teclado em seguida (sem o espaço preto do visor).
+   * Usado no hero, onde só a parte de cima do celular aparece acima da dobra.
+   */
+  compact?: boolean
   onUnlock?: () => void
   ref?: Ref<CalculatorHandle>
 }
@@ -76,7 +81,12 @@ const KEYBOARD: Record<string, CalcKey> = {
  * Réplica da calculadora do Modo Disfarce (DESIGN.md §6.4), desenhada em 390×845.
  * Use dentro de `PhoneFrame` (com `screenClassName="bg-black"`).
  */
-export function CalculatorScreen({ mode = 'interactive', onUnlock, ref }: CalculatorScreenProps) {
+export function CalculatorScreen({
+  mode = 'interactive',
+  compact,
+  onUnlock,
+  ref,
+}: CalculatorScreenProps) {
   const { entry, op, press, reset } = useCalculator(DEMO_CODE, onUnlock)
   useImperativeHandle(ref, () => ({ press, reset }), [press, reset])
 
@@ -100,7 +110,12 @@ export function CalculatorScreen({ mode = 'interactive', onUnlock, ref }: Calcul
       onKeyDown={onKeyDown}
     >
       {/* Display */}
-      <div className="flex flex-1 items-end justify-end px-[34px] pb-[10px]">
+      <div
+        className={clsx(
+          'flex items-end justify-end px-[34px] pb-[10px]',
+          compact ? 'h-[150px] flex-none' : 'flex-1',
+        )}
+      >
         <output
           data-calc-display
           aria-live={interactive ? 'polite' : undefined}

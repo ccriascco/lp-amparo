@@ -1,11 +1,13 @@
 import clsx from 'clsx'
 import { Menu, X } from 'lucide-react'
+import { useGSAP } from '@gsap/react'
 import { useEffect, useId, useRef, useState } from 'react'
 import logoBranco from '../assets/brand/amparo-logo-horizontal-branco.svg'
 import logoVinho from '../assets/brand/amparo-logo-horizontal.svg'
 import { Button } from '../components/ui/Button'
 import { cta, nav } from '../content/copy'
 import { APP_URL } from '../lib/config'
+import { getLenis, gsap, MQ, ScrollTrigger } from '../lib/gsap'
 
 type HeaderProps = {
   /**
@@ -18,17 +20,25 @@ type HeaderProps = {
 /** Header em pílula flutuante (DESIGN.md §6.2). */
 export function Header({ tone = 'light' }: HeaderProps) {
   const [open, setOpen] = useState(false)
+  const [overDark, setOverDark] = useState(false)
   const sheetId = useId()
+  const pill = useRef<HTMLDivElement>(null)
+  const openRef = useRef(open)
+  useEffect(() => {
+    openRef.current = open
+  }, [open])
   const menuButton = useRef<HTMLButtonElement>(null)
   const firstLink = useRef<HTMLAnchorElement>(null)
   // Com a folha aberta a pílula fica sobre o fundo escuro: usa a versão escura.
-  const dark = tone === 'dark' || open
+  const dark = tone === 'dark' || overDark || open
 
   // Folha aberta: trava o scroll, foca o primeiro link e fecha com Esc.
   useEffect(() => {
     if (!open) return
     const prev = document.documentElement.style.overflow
     document.documentElement.style.overflow = 'hidden'
+    getLenis()?.stop()
+    gsap.to(pill.current, { yPercent: 0, duration: 0.2, overwrite: true })
     firstLink.current?.focus()
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -39,13 +49,64 @@ export function Header({ tone = 'light' }: HeaderProps) {
     window.addEventListener('keydown', onKey)
     return () => {
       document.documentElement.style.overflow = prev
+      getLenis()?.start()
       window.removeEventListener('keydown', onKey)
     }
   }, [open])
 
+  // Tom escuro sobre #disfarce e rodapé; some ao descer e volta ao subir (§6.2, Fase 4).
+  useGSAP(() => {
+    const active = new Set<Element>()
+    const darks = gsap.utils.toArray<HTMLElement>('[data-header-dark]')
+    darks.forEach((el) =>
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 48px',
+        end: 'bottom 48px',
+        onToggle: (self) => {
+          if (self.isActive) active.add(el)
+          else active.delete(el)
+          setOverDark(active.size > 0)
+        },
+      }),
+    )
+
+    const mm = gsap.matchMedia()
+    mm.add(`${MQ.desktop}, ${MQ.mobile}`, () => {
+      // Só anima quando o estado muda (reiniciar a cada evento de scroll travaria o tween no começo).
+      let visible = true
+      const show = (v: boolean) => {
+        if (v === visible) return
+        visible = v
+        gsap.to(pill.current, {
+          yPercent: v ? 0 : -150,
+          duration: v ? 0.45 : 0.35,
+          ease: v ? 'expo.out' : 'power2.in',
+          overwrite: true,
+        })
+      }
+      ScrollTrigger.create({
+        start: 0,
+        end: 'max',
+        onUpdate: (self) => {
+          if (openRef.current) return
+          if (self.direction === 1 && self.scroll() > 200) show(false)
+          else if (self.direction === -1) show(true)
+        },
+      })
+    })
+    return () => mm.revert()
+  })
+
   return (
     <header data-header className="fixed inset-x-0 top-3 z-50 px-3 md:top-4 md:px-4">
       <div
+        ref={pill}
+        data-header-pill
+        // Foco por teclado sempre traz o header de volta.
+        onFocusCapture={() =>
+          gsap.to(pill.current, { yPercent: 0, duration: 0.3, overwrite: true })
+        }
         className={clsx(
           'relative mx-auto flex h-16 max-w-[1180px] items-center justify-between gap-4 rounded-full pr-2 pl-5 transition-colors duration-300 md:pl-6',
           dark

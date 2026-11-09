@@ -42,47 +42,53 @@ export function Hero() {
           data-hero-veil
           aria-hidden
           className="absolute inset-0 -z-10"
-          style={{ background: 'var(--grad-suave)' }}
+          style={{
+            background: 'var(--grad-suave)',
+            // Onda do desbloqueio: animada pelas variáveis (ver useHeroMotion).
+            clipPath: 'circle(var(--r, 150%) at var(--x, 50%) var(--y, 70%))',
+          }}
         />
 
-        <Container className="relative z-10 pt-28 text-center md:pt-36">
-          <div data-hero-chip>
-            <Chip icon={<ShieldCheck />}>{hero.chip}</Chip>
-          </div>
-          <h1
-            id="hero-title"
-            data-hero-title
-            className="mt-6 display-xl text-texto max-md:text-[clamp(2.5rem,12.4vw,3rem)]"
-          >
-            <span className="block lg:inline">{hero.h1Lines[0]}</span>{' '}
-            <span className="block lg:inline">{hero.h1Lines[1]}</span>
-          </h1>
-          <div data-hero-rest className="mx-auto max-w-[820px]">
-            <p className="mx-auto mt-6 max-w-[52ch] lead text-texto-secundario">{hero.sub}</p>
-            <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-              <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
-                {cta.acessar}
-              </Button>
-              <Button variant="secondary" href="#disfarce" icon={<ArrowDown />}>
-                {hero.ctaSecondary}
-              </Button>
+        <Container className="relative z-10 pt-28 text-center md:pt-32">
+          <div data-hero-text>
+            <div data-hero-chip>
+              <Chip icon={<ShieldCheck />}>{hero.chip}</Chip>
             </div>
-            <ul className="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-small text-texto-secundario sm:flex-row sm:flex-wrap">
-              {hero.checks.map((c) => (
-                <li key={c} className="flex items-center gap-2">
-                  <Check className="size-4 text-vinho" strokeWidth={2.5} aria-hidden />
-                  {c}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-8 caption text-texto-secundario">{hero.caption}</p>
+            <h1
+              id="hero-title"
+              data-hero-title
+              className="mt-6 display-xl text-texto max-md:text-[clamp(2.5rem,12.4vw,3rem)]"
+            >
+              <span className="block lg:inline">{hero.h1Lines[0]}</span>{' '}
+              <span className="block lg:inline">{hero.h1Lines[1]}</span>
+            </h1>
+            <div data-hero-rest className="mx-auto max-w-[820px]">
+              <p className="mx-auto mt-6 max-w-[52ch] lead text-texto-secundario">{hero.sub}</p>
+              <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+                <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
+                  {cta.acessar}
+                </Button>
+                <Button variant="secondary" href="#disfarce" icon={<ArrowDown />}>
+                  {hero.ctaSecondary}
+                </Button>
+              </div>
+              <ul className="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-small text-texto-secundario sm:flex-row sm:flex-wrap">
+                {hero.checks.map((c) => (
+                  <li key={c} className="flex items-center gap-2">
+                    <Check className="size-4 text-vinho" strokeWidth={2.5} aria-hidden />
+                    {c}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 caption text-texto-secundario">{hero.caption}</p>
+            </div>
           </div>
         </Container>
 
         {/* Palco dos celulares, cortado pela base do shell */}
         <div
           data-hero-stage
-          className="relative mt-12 h-[400px] shrink-0 grow md:mt-14 md:h-[460px] lg:h-[500px]"
+          className="relative mt-10 h-[400px] shrink-0 grow md:mt-12 md:h-[460px] lg:h-[500px]"
         >
           <ConcentricRings
             r={150}
@@ -95,20 +101,24 @@ export function Hero() {
             className="absolute top-[90px] left-[calc(50%-400px)] hidden w-[255px] md:block lg:left-[calc(50%-430px)] lg:w-[272px]"
             style={{ transform: 'rotate(-12deg)' }}
           >
-            <IconBubble icon={<MapPin />} className="-top-7 left-[58%]" />
-            <PhoneFrame decorative>
-              <AlertScreen />
-            </PhoneFrame>
+            <div data-hero-side-inner className="relative">
+              <IconBubble icon={<MapPin />} className="-top-7 left-[58%]" />
+              <PhoneFrame decorative>
+                <AlertScreen />
+              </PhoneFrame>
+            </div>
           </div>
           <div
             data-hero-side="right"
             className="absolute top-[90px] right-[calc(50%-400px)] hidden w-[255px] md:block lg:right-[calc(50%-430px)] lg:w-[272px]"
             style={{ transform: 'rotate(12deg)' }}
           >
-            <IconBubble icon={<ShieldCheck />} className="-top-7 left-[22%]" flip />
-            <PhoneFrame decorative>
-              <ProofScreen />
-            </PhoneFrame>
+            <div data-hero-side-inner className="relative">
+              <IconBubble icon={<ShieldCheck />} className="-top-7 left-[22%]" flip />
+              <PhoneFrame decorative>
+                <ProofScreen />
+              </PhoneFrame>
+            </div>
           </div>
 
           {/* Celular central: calculadora → tela inicial */}
@@ -122,7 +132,7 @@ export function Hero() {
                   <HomeScreen />
                 </div>
                 <div data-hero-calc className="absolute inset-0 opacity-0">
-                  <CalculatorScreen mode="auto" ref={calc} />
+                  <CalculatorScreen mode="auto" compact ref={calc} />
                 </div>
               </div>
             </PhoneFrame>
@@ -130,6 +140,7 @@ export function Hero() {
               type="button"
               data-hero-replay
               onClick={replay}
+              style={{ visibility: 'hidden' }}
               className="absolute top-6 -right-3 hidden translate-x-full items-center gap-1.5 rounded-full border border-borda bg-white/90 px-3.5 py-2 text-[0.8125rem] font-bold text-vinho-profundo backdrop-blur hover:text-vinho lg:inline-flex"
             >
               <span aria-hidden>↺</span> {ui.verDeNovo}

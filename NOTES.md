@@ -98,3 +98,22 @@ O hero **não tem foto** (DESIGN.md atualizado: fundo branco + véu vinho). Todo
   - Legenda da rede "Guardiã principal: Ana Beatriz" e os textos alternativos dos celulares e da rede.
   - "Stack" e "Equipe" (rótulos que já aparecem no COPY.md 3.14).
 - **Scripts de verificação:** `node scripts/shoot-sections.mjs <url> <pasta> [larguras]` tira um screenshot por seção e informa scroll horizontal e erros. Conferido em 360, 768 e 1280px: sem scroll horizontal e sem erros de console.
+
+## Fase 4 — Movimento (GSAP)
+- **Base:** `src/lib/gsap.ts` registra ScrollTrigger, SplitText e DrawSVGPlugin e cria o Lenis no ticker do GSAP (`lerp 0.085`, `wheelMultiplier 0.9`, `lagSmoothing(0)`, `ignoreMobileResize`). Com `prefers-reduced-motion` o Lenis não é criado. Âncoras (`a[href^="#"]`) rolam com `lenis.scrollTo(offset -96, 1.4s)` e movem o foco para a seção. `ScrollTrigger.refresh()` roda após `document.fonts.ready` e no `load`. O CSS do Lenis foi copiado para o `index.css` (o pacote não exporta o arquivo).
+- **Organização:** um hook por responsabilidade em `src/motion/` (`useSiteMotion`, `useHeroMotion`, `useDisfarceMotion`, `pulseRings`) e o header cuida do próprio movimento. Tudo em `useGSAP` + `gsap.matchMedia()` com desktop, mobile (metade das amplitudes) e reduzido (estado final, nada animado).
+- **Hero "Desbloqueio" (§7.1):** segue a timeline do DESIGN.md (texto → celular sobe → 1-9-0-7 → "=" → onda vinho → anéis → leque → pílulas/cartões/selo, ~3,6s).
+  - A onda usa `clip-path: circle(var(--r) at var(--x) var(--y))`; a posição da tecla "=" é medida no instante da onda, então não erra se o layout mudar com o carregamento das fontes. Sem movimento, `--r` vale 150% (véu cheio).
+  - O "=" é só visual na timeline: assim o visor continua mostrando "1907" até o crossfade para a tela inicial.
+  - **Calculadora compacta no hero:** em telas comuns (ex.: 1280×860) só a parte de cima do celular central fica acima da dobra, e lá a calculadora é só o fundo preto do visor. No hero, o visor fica logo abaixo da ilha (`CalculatorScreen compact`), para "1907" e as teclas aparecerem enquanto são digitados. Fora do hero a calculadora mantém o layout fiel ao app.
+  - Celulares laterais em duas camadas: a de dentro faz a entrada (sobe e abre de 0° para ±12°); a de fora recebe o parallax (±12° → ±18°, x ∓40, yPercent −6), sem disputar a mesma rotação.
+  - "↺ Ver de novo" reinicia a partir das teclas (passos 3–7), como pede o DESIGN.md.
+- **Parallax e revelações (§7.9):** exatamente os elementos da tabela. Detalhe: a imagem interna das fotos se move ±8% (não ±10%) porque a folga da imagem é de 20% da altura; com ±10% apareceria uma faixa vazia.
+- **Pin do `#disfarce` (§7.2):** desktop com `pin`, `start: center center`, `end: +=250%`, `scrub: 0.6`; o progresso escolhe o passo (0–3). Mobile e movimento reduzido: sem pin, cada passo troca a tela ao entrar.
+- **Header (§6.2):** a pílula some ao descer (`yPercent -150`) e volta ao subir; só anima quando o estado muda. Fica escura (`.glass` + logo branco) sobre `#disfarce` e o rodapé. Foco por teclado traz o header de volta; com o menu aberto o Lenis é pausado. Com movimento reduzido o header não some.
+- **Outros:** contadores pt-BR (§7.3), hash embaralhando com o selo "Prova verificada" no fim (§6.12), rede se desenhando com scrub (linhas tracejadas das vagas livres aparecem por opacidade, porque o DrawSVG desfaria o tracejado), linha de progresso de "Como começar" (horizontal no desktop, vertical no mobile), selo girando 24s com aceleração pela velocidade do scroll, cartões flutuantes só no desktop, pulsação dos anéis ao completar o SOS.
+- **Performance (§7.10), medida com Chrome + CPU 4×, rolando a página inteira:**
+  - mediana de 16,7 ms por quadro (60 fps) e nenhuma *long task* em desktop e mobile;
+  - mobile (390px): **0 quadros > 50 ms** em duas execuções;
+  - desktop (1280px): 0 quadros > 50 ms com cache; na primeira visita (cache frio) há picos isolados de 50–100 ms quando as fotos são decodificadas pela primeira vez durante a rolagem;
+  - `will-change: transform` é ligado nos elementos do hero só enquanto ele está na tela (sem isso, girar os celulares laterais re-rasterizava o texto das telas e gerava quadros de ~100 ms).

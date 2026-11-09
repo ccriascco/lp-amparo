@@ -17,7 +17,7 @@ export function InteractiveCalculator({ className }: { className?: string }) {
 
   // Abre o círculo no quadro seguinte para a transição de `clip-path` acontecer.
   useEffect(() => {
-    if (!unlocked) return setOpen(false)
+    if (!unlocked) return
     const id = requestAnimationFrame(() => requestAnimationFrame(() => setOpen(true)))
     return () => cancelAnimationFrame(id)
   }, [unlocked])
@@ -47,6 +47,7 @@ export function InteractiveCalculator({ className }: { className?: string }) {
             type="button"
             onClick={() => {
               setUnlocked(false)
+              setOpen(false)
               setRound((r) => r + 1)
             }}
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white/10 px-5 font-bold text-white hover:bg-white/15"
