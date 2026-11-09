@@ -30,6 +30,17 @@
   --shadow-phone: 0 50px 100px -30px rgb(75 42 63 / 0.45);
 
   --ease-amparo: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Crossfade de 250ms (RiskLevels, §6.13) */
+  --animate-fade-in: fade-in 250ms ease-out both;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 /* Variáveis auxiliares (DESIGN.md §3.1 e §3.4) */
@@ -153,5 +164,101 @@
   }
   .glass-light {
     background: rgb(255 255 255 / 0.96);
+  }
+}
+
+/* Foto com topo em arco/pílula (DESIGN.md §6.21) */
+@utility arch {
+  border-radius: 999px 999px 28px 28px;
+}
+
+/* Âncoras não ficam escondidas atrás do header fixo */
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+/* Rolagem horizontal sem barra (cartões de direitos no mobile) */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Estilos de componente ficam em @layer components para as utilidades do Tailwind poderem sobrescrever. */
+@layer components {
+  /* ── Fotografia tingida no vinho do app (DESIGN.md §6.18) ─────── */
+  .tinted {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--grad-vinho);
+  }
+  .tinted img {
+    filter: grayscale(1) contrast(1.05) brightness(1.02);
+  }
+  .tinted::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    mix-blend-mode: color;
+    background: linear-gradient(160deg, rgb(149 75 110 / 0.7) 0%, #954b6e 55%, #4b2a3f 100%);
+    pointer-events: none;
+  }
+  .tinted::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    /* Legibilidade: vertical (de baixo para cima) por padrão; ver modificadores. */
+    background: linear-gradient(
+      0deg,
+      rgb(75 42 63 / 0.82) 0%,
+      rgb(75 42 63 / 0.25) 55%,
+      transparent 100%
+    );
+  }
+  .tinted--none::after {
+    background: none;
+  }
+  .tinted--soft::after {
+    background: linear-gradient(0deg, rgb(75 42 63 / 0.35) 0%, transparent 60%);
+  }
+  .tinted--left::after {
+    background: linear-gradient(
+      0deg,
+      rgb(75 42 63 / 0.82) 0%,
+      rgb(75 42 63 / 0.25) 55%,
+      transparent 100%
+    );
+  }
+  @media (min-width: 768px) {
+    .tinted--left::after {
+      background: linear-gradient(
+        90deg,
+        rgb(75 42 63 / 0.78) 0%,
+        rgb(75 42 63 / 0.3) 55%,
+        transparent 100%
+      );
+    }
+  }
+  /* CTA final: overlay forte (80%) para texto branco centralizado. */
+  .tinted--strong::after {
+    background: radial-gradient(
+      70% 80% at 50% 50%,
+      rgb(75 42 63 / 0.82) 0%,
+      rgb(75 42 63 / 0.7) 100%
+    );
+  }
+
+  /* Imagem com folga para parallax interno (DESIGN.md §7.9) */
+  .parallax-img {
+    position: absolute;
+    inset: -10% 0 auto 0;
+    height: 120%;
+    width: 100%;
+    object-fit: cover;
   }
 }

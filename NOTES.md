@@ -79,3 +79,22 @@ O hero **não tem foto** (DESIGN.md atualizado: fundo branco + véu vinho). Todo
 - **Para a Fase 4:** o hide/show do header deve animar a pílula interna, não o `<header>` — um `transform` no `<header>` tornaria ele o contêiner do menu `fixed`.
 - **Ferramentas de verificação:** `playwright-core` (devDependency) com o Chrome instalado; `node scripts/shoot.mjs <url> <pasta> [larguras] [--full] [--selector=css]` tira screenshots e informa scroll horizontal e erros de console.
 - Página de componentes: **`/#kit`** (telas codadas lado a lado com as originais; a calculadora funciona).
+
+## Fase 3 — Seções (estáticas e responsivas)
+- **Tela inicial do app atualizada:** o cliente enviou `inicio-celular.png` (1170×2532, a versão atual). A `HomeScreen` foi refeita a partir dela: iniciais "MA" no lugar da foto, "Esta semana" sem ocorrências marcadas, cartão "Leitura de risco" (IA) e ações rápidas novas. O DESIGN.md §6.5 descreve a versão antiga; vale a imagem nova. `home-sos.png` fica como referência histórica.
+- **Ordem e estrutura:** as 16 seções seguem a ordem do COPY.md (o marquee saiu no DESIGN.md revisado). `Sos`, `Cofre`, `Rede` e `Risco` ficam juntas em `sections/Pilares.tsx`.
+- **"O produto é a ilustração":** cada seção de recurso mostra um fragmento real do app, codado a partir das telas do protótipo (`AlertScreen`, `ProofScreen`, cartão "Quem foi avisada", "Prova verificada" com hash, guardiãs da tela `rede-de-apoio.png`, cartão de leitura de risco, mini-telas do cadastro). Os textos desses fragmentos estão em `copy.ts` → `app`/`ui`, copiados das telas.
+- **Rede de apoio:** 3 guardiãs são as da tela do app (Ana Beatriz — principal, Rafaela, Lúcia); as outras 2 posições aparecem como vagas livres ("até 5"), para não inventar pessoas.
+- **Cartões de direitos** são links para o app (`VITE_APP_URL`), já que o conteúdo completo está na Central de Conteúdo e Direitos; o botão redondo de vidro indica isso.
+- **Calculadora interativa:** ao destravar, a tela inicial abre em círculo a partir da tecla "=" (transição de `clip-path` em CSS, sem GSAP; com movimento reduzido abre direto).
+- **Modo Disfarce no mobile:** sem pin; o celular fica "grudado" (sticky) numa coluna estreita ao lado dos passos, para continuar visível enquanto eles rolam.
+- **Hero em 360px:** o H1 usa `clamp(2.5rem, 12.4vw, 3rem)` abaixo de 768px (≈45px em 360px), porque com 48px "Você não está" quebrava em 3 linhas; assim mantém as 2 linhas pedidas no DESIGN.md §4. O selo circular aparece só a partir de 1024px (em 768px cobria o celular lateral).
+- **CSS em camadas:** os estilos de `TintedPhoto` (`.tinted`) ficam em `@layer components`; fora de camada eles venciam as utilidades do Tailwind (`absolute`) e as fotos ficavam com altura zero.
+- **Microtexto novo** (não está no COPY.md — para o cliente revisar):
+  - "Perguntas frequentes" — H2 do FAQ (a seção não tinha título, e cada seção precisa de um para acessibilidade); também no rodapé.
+  - "Ver de novo" (hero, DESIGN.md §7.1), "Testar de novo" (SOSDemo concluído), "Voltar à calculadora" (calculadora interativa).
+  - "Pular para o conteúdo" (link de acessibilidade) e "— Ler no Amparo" (só para leitores de tela, nos cartões de direitos).
+  - Mini-telas de "Como começar": "E-mail", "Digite seu e-mail", "Seu código" (as demais — "Etapa 1…4", "Adicionar guardiã", "Tudo pronto", "Guardiã principal" — vêm do DESIGN.md e das telas do app).
+  - Legenda da rede "Guardiã principal: Ana Beatriz" e os textos alternativos dos celulares e da rede.
+  - "Stack" e "Equipe" (rótulos que já aparecem no COPY.md 3.14).
+- **Scripts de verificação:** `node scripts/shoot-sections.mjs <url> <pasta> [larguras]` tira um screenshot por seção e informa scroll horizontal e erros. Conferido em 360, 768 e 1280px: sem scroll horizontal e sem erros de console.

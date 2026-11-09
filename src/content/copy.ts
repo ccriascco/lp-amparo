@@ -483,38 +483,97 @@ export const a11y = {
  * Não são copy de marketing: são a interface real do app dentro dos mockups.
  */
 export const app = {
+  /** Tela inicial atual do app (inicio-celular.png). */
   home: {
+    initials: 'MA',
     greeting: 'Olá, Marina',
     subtitle: 'Como podemos te ajudar hoje?',
     ocorrencias: 'Ocorrências',
-    periodo: 'Últimos 7 dias',
-    /** Dias da semana e se houve ocorrência (tela home-sos.png). */
-    days: [
-      { d: 'S', on: false },
-      { d: 'T', on: true },
-      { d: 'Q', on: false },
-      { d: 'Q', on: true },
-      { d: 'S', on: true },
-      { d: 'S', on: true },
-      { d: 'D', on: false },
-    ],
-    helpTitle: 'Está precisando de ajuda?',
-    helpText:
-      'Toque e segure o botão abaixo por alguns segundos para acionar uma emergência silenciosa.',
+    periodo: 'Esta semana',
+    days: ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
     sos: 'SOS',
+    risco: {
+      title: 'Leitura de risco',
+      badge: 'IA',
+      levels: ['Baixo', 'Médio', 'Alto'],
+      active: 1,
+      link: 'Como a IA calcula →',
+    },
     quickTitle: 'Ações rápidas',
-    quick: [
-      'Registrar prova',
-      'Adicionar guardião',
-      'Ver minhas ocorrências',
-      'Delegacias próximas',
-    ],
+    quick: ['Registrar prova', 'Delegacias próximas', 'Ativar Modo Disfarce', 'Adicionar guardião'],
   },
+  /** alerta-enviado.png */
+  alerta: {
+    sair: 'Sair rápido',
+    title: 'Alerta enviado',
+    text: 'Sua localização foi compartilhada com sua rede de guardiãs. Aguardando confirmação.',
+    reenvio: 'Sua localização é reenviada a cada 30 s enquanto o aviso estiver ativo.',
+    cancelar: 'Cancelar aviso',
+  },
+  /** prova-verificada.png */
+  prova: {
+    title: 'Áudio · 2 min 14 s',
+    date: '14/03, 21:47',
+    guardado: 'Guardado com segurança',
+    guardadoText: 'Criptografado neste aparelho em 14/03, 21:49.',
+    verificada: 'Prova verificada',
+    verificadaText:
+      'O arquivo não foi alterado desde o registro. Isso é o que dá valor legal a ele.',
+    hashLabel: 'Hash de integridade',
+    registrado: 'Registrado em 14/03, 21:47',
+  },
+  /** rede-de-apoio.png */
+  rede: [
+    {
+      name: 'Ana Beatriz',
+      initials: 'AB',
+      group: 'Família',
+      status: 'Confirmou há 2 dias',
+      confirmed: true,
+      principal: true,
+    },
+    {
+      name: 'Rafaela',
+      initials: 'RA',
+      group: 'Amigos',
+      status: 'Confirmou há 3 semanas',
+      confirmed: true,
+      principal: false,
+    },
+    {
+      name: 'Lúcia',
+      initials: 'LU',
+      group: 'Amigos',
+      status: 'Convite enviado há 1 dia',
+      confirmed: false,
+      principal: false,
+    },
+  ],
+  /** nova-ocorrencia.png */
+  tipos: ['Física', 'Psicológica', 'Sexual', 'Patrimonial'],
+  /** Telas de cadastro (cadastro-*.png) e DESIGN.md §9 "Como começar". */
+  cadastro: {
+    etapas: ['Etapa 1', 'Etapa 2', 'Etapa 3', 'Etapa 4'],
+    emailLabel: 'E-mail',
+    emailPlaceholder: 'Digite seu e-mail',
+    disfarce: 'Ativar Modo Disfarce',
+    codigo: 'Seu código',
+    guardiaPrincipal: 'Guardiã principal',
+    adicionarGuardia: 'Adicionar guardiã',
+    pronto: 'Tudo pronto',
+  },
+  /** Ícone da calculadora na tela de apps (Modo Disfarce, passo 1). */
+  calculadora: 'Calculadora',
 }
 
 /** Fragmentos de UI usados nos cartões flutuantes (DESIGN.md §6.6 e §9). */
 export const ui = {
   alertaEnviado: { title: 'Alerta enviado', text: 'Sua rede foi avisada' },
   provaVerificada: { title: 'Prova verificada', text: 'Arquivo sem alterações desde 14/03, 21:47' },
-  confirmou: { name: 'Ana Beatriz', status: 'Confirmou · 12:31' },
+  confirmou: { name: 'Ana Beatriz', initials: 'AB', status: 'Confirmou · 12:31' },
+  verDeNovo: 'Ver de novo',
+  testarDeNovo: 'Testar de novo',
+  voltarCalculadora: 'Voltar à calculadora',
+  faqTitle: 'Perguntas frequentes',
+  lerNoApp: 'Ler no Amparo',
 }

@@ -1,7 +1,7 @@
 import { ArrowDown, Check, ShieldCheck, Smartphone } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import calcPng from '../assets/app-screens/modo-disfarce-calculadora.png'
-import homePng from '../assets/app-screens/home-sos.png'
+import homePng from '../assets/app-screens/inicio-celular.png'
 import simbolo from '../assets/brand/amparo-simbolo.svg'
 import { Button } from '../components/ui/Button'
 import { Chip } from '../components/ui/Chip'
