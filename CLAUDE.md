@@ -11,20 +11,61 @@ Se algo não estiver definido nesses arquivos, escolha a opção mais simples e 
 
 ---
 
-## Fase 0 — Skills
-Instale as skills e **leia** as que forem relevantes antes de começar cada fase:
-```bash
-npx skills add https://github.com/anthropics/skills --skill frontend-design
-npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines
-npx skills add https://github.com/leonxlnx/taste-skill --skill design-taste-frontend
-npx skills add https://github.com/coreyhaines31/marketingskills --skill copywriting
-npx skills add https://github.com/remotion-dev/skills --skill remotion-best-practices
-npx skills add https://uizze.sh/
-```
-- Use `frontend-design` e `design-taste-frontend` para o acabamento visual, **sem contrariar o `DESIGN.md`**. Se houver conflito, o `DESIGN.md` vence.
-- Use `web-design-guidelines` na revisão final (Fase 5).
-- Use `copywriting` só para microcopy que faltar. Os textos de `COPY.md` não devem ser reescritos.
-- Se alguma instalação falhar, siga sem ela e anote em `NOTES.md`.
+## Fase 0 — Skills (já instaladas pelo usuário)
+Confira se estão instaladas (`npx skills ls`). Se faltar alguma, instale com
+`npx -y skills add <fonte> --skill <nome> -y`, um comando por vez.
+
+### Ordem de prioridade (quando duas fontes discordarem)
+1. **`DESIGN.md` e `COPY.md`**: são o brief do cliente e **sempre vencem**.
+2. **`frontend-design`**: alinhada ao `DESIGN.md`, vale integralmente.
+3. **`web-design-guidelines`**: regras de qualidade e acessibilidade. Vale integralmente, exceto onde contradiz o item 1.
+4. **`design-taste-frontend`, `copywriting` e `remotion-best-practices`**: só nas partes indicadas abaixo.
+
+### Mapa de uso por fase
+
+**`frontend-design`** (Anthropic): leia antes da Fase 2.
+- **Use:** o processo "planejar → revisar contra o brief → construir → criticar com screenshots". Restrição: a ousadia fica concentrada num só lugar (o desbloqueio do hero) e o resto é disciplinado.
+- **Já está aplicada no `DESIGN.md`:** sem destacar palavras soltas nos títulos, sem rótulos em caixa-alta, numeração só onde há sequência real (Como começar), nada de fade-up em toda seção.
+- **Não refaça** o plano de cores e fontes: ele já está decidido no `DESIGN.md` §3–§4 e vem do design system do app.
+
+**`web-design-guidelines`** (Vercel): use na Fase 5, como revisão.
+- Ela baixa as regras atualizadas de `https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md` e audita os arquivos.
+- Rode sobre `src/components/**` e `src/sections/**`, corrija os achados e liste no `NOTES.md` os que não foram corrigidos por conflitarem com o `DESIGN.md`, com o motivo.
+
+**`design-taste-frontend`** (tasteskill): **uso parcial e controlado.**
+Ela é um sistema completo que sorteia paletas, fontes e layouts e proíbe parallax e marquee. Isso conflita com o brief (cores e fontes do app, parallax pedido pelo cliente). Portanto:
+- ❌ **Não rode** `start.mjs deal`, `start.mjs css`, `deal.mjs` nem `moments.mjs pick`. Eles sorteiam paletas, fontes e heróis e **armam o gate**.
+- ❌ **Não rode** `gate.mjs --start`. Sem o gate armado, o hook de parada da skill não bloqueia o trabalho. Se `.taste-skill/build.json` aparecer por engano, rode `gate.mjs --done "brief do cliente define o design"`.
+- ❌ **Não copie** os assets dela (`system.css`, `starter.html`, `assets/motion`): o projeto é React + Tailwind com tokens próprios.
+- ❌ **Ignore** as regras dela que proíbem parallax, marquee, pin, revelação no scroll, carrossel e abas com tempo. O `DESIGN.md` §7 pede esses efeitos explicitamente.
+- ✅ **Adote** como padrão de acabamento:
+  - bordas esquerda e direita iguais em todas as seções (tudo alinhado ao container);
+  - área de toque de 44px e 8px entre alvos;
+  - nada estourando a tela em 320px;
+  - microinterações de hover: botão "afunda" no clique, sublinhado que se desenha, foto com zoom de 1.02 dentro da moldura e cartão-link subindo 2px;
+  - nenhuma legenda explicando imagens;
+  - nenhum depoimento, número ou cliente inventado.
+- ✅ **Pode rodar** como verificação, na Fase 5 (Node 22+ e Chrome), com `npm run build && npm run preview` ativo:
+  ```bash
+  node <pasta-da-skill>/assets/layout/check.mjs --url http://localhost:4173/ --sizes 1440x900,1024x768,768x1024,390x844 --shots shots/layout --profile .taste-skill/chrome-check
+  node <pasta-da-skill>/scripts/perf.mjs http://localhost:4173/ --profile .taste-skill/chrome-perf
+  node <pasta-da-skill>/scripts/shoot.mjs --url http://localhost:4173/ --w 1440 --out shots/1440.png --profile .taste-skill/chrome-shoot
+  ```
+  Corrija o que for de alinhamento, sobreposição, área de toque, overflow e peso. Ignore os achados ligados a scroll, parallax, pin, marquee ou "uma seção por tela" que conflitem com o `DESIGN.md`, e anote no `NOTES.md`.
+- ❌ Não rode o `copy-lint.mjs`: ele é calibrado para inglês e a copy é pt-BR fechada.
+
+**`copywriting`** (marketingskills): **só para edições pontuais** (a situação "C" da skill).
+- A copy já está pronta e aprovada no `COPY.md`. Use a skill apenas se faltar algum microtexto (`aria-label`, mensagem de erro, estado vazio) ou se um texto não couber no layout e precisar ser encurtado.
+- Mantenha vocabulário e tom do `COPY.md`. Nunca invente números, depoimentos ou resultados. Qualquer texto novo vai para o `NOTES.md`, para o cliente revisar.
+
+**`remotion-best-practices`** (Remotion): **só na Fase 6** (vídeo opcional).
+- Siga o roteador da skill: `remotion-create` para criar o projeto em `video/`, e `remotion-markup` para escrever as composições.
+- Siga a regra dela de **abrir o Remotion Studio para o cliente ver o preview** antes de renderizar, e só renderize o `.mp4` quando ele aprovar.
+- Licença: o Remotion é gratuito para uso individual, acadêmico e por empresas pequenas. Para um TCC está ok; consulte `remotion-license` se houver dúvida.
+
+**`uizze`** (`npx skills add https://uizze.sh/`): não foi possível inspecionar o conteúdo dela antes. Na Fase 0, **leia o SKILL.md instalado** e resuma no `NOTES.md` o que ela faz.
+- Use-a só no que não conflitar com o `DESIGN.md`: cores e fontes do app, movimento do §7 e copy do `COPY.md`.
+- Se ela pedir conta, chave de API, pagamento ou acesso à rede fora do npm/GitHub, **não use** e avise o cliente.
 
 ## Fase 1 — Ambiente
 A pasta do projeto já existe. **Primeiro inspecione o que há nela** (`ls -la`, `package.json`).
@@ -82,6 +123,7 @@ Regras: `useGSAP` com `scope`, `gsap.matchMedia()` para desktop, mobile e movime
 - Rode `npm run build` sem erros nem warnings de TypeScript.
 - Passe pelos critérios do `DESIGN.md` §10 e pela lista "O que não fazer" (§11).
 - Aplique a skill `web-design-guidelines` e corrija o que ela apontar.
+- Rode as verificações da `design-taste-frontend` listadas na Fase 0 (layout, performance e screenshots).
 - Revise todos os textos contra o `COPY.md`, palavra por palavra, incluindo números (`1.492`, `64,3%`, `8 em 10`, `101.656`, `97%`, `99%`, `10.000`) e a ressalva sobre dados sintéticos.
 - Se possível, tire screenshots (desktop e mobile) de cada seção, compare com os wireframes e ajuste.
 

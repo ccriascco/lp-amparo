@@ -18,45 +18,46 @@ const WIDTHS = [640, 1080, 1600, 2200]
 
 /**
  * crop: região do arquivo-fonte (px do original). Ajustado à mão para cada foto.
- * - ajudar: recortada acima do crachá com a marca grafada errado ("Ampore").
+ * As fotos não usadas ficam em assets/fotos/reserva/.
  */
 const SLOTS = [
+  // 3:4 — três amigas no banco (1024×1024)
   {
     slot: 'rede-duas-mulheres',
     file: 'rede-duas-mulheres.png',
     crop: { left: 110, top: 0, width: 768, height: 1024 },
-  }, // 3:4
-  { slot: 'ajudar', file: 'ajudar.png', crop: { left: 226, top: 0, width: 622, height: 829 } }, // 3:4, sem o crachá
+  },
+  // 3:4 — duas amigas conversando no sofá (1086×1448, já 3:4)
+  { slot: 'ajudar', file: 'ajudar.png', crop: { left: 0, top: 0, width: 1086, height: 1448 } },
+  // 4:5 — detalhes sem rosto (1122×1402, já 4:5)
   {
     slot: 'direitos-1',
     file: 'direitos-1.png',
-    crop: { left: 160, top: 0, width: 819, height: 1024 },
-  }, // 4:5
+    crop: { left: 0, top: 0, width: 1122, height: 1402 },
+  },
   {
     slot: 'direitos-2',
     file: 'direitos-2.png',
-    crop: { left: 102, top: 0, width: 819, height: 1024 },
+    crop: { left: 0, top: 0, width: 1122, height: 1402 },
   },
   {
     slot: 'direitos-3',
     file: 'direitos-3.png',
-    crop: { left: 140, top: 0, width: 819, height: 1024 },
+    crop: { left: 0, top: 0, width: 1122, height: 1402 },
   },
   {
     slot: 'direitos-4',
     file: 'direitos-4.png',
-    crop: { left: 60, top: 0, width: 819, height: 1024 },
+    crop: { left: 0, top: 0, width: 1122, height: 1402 },
   },
-  {
-    slot: 'cta-final',
-    file: 'cta-final.jpg',
-    crop: { left: 0, top: 120, width: 2048, height: 1152 },
-  }, // 16:9
+  // 16:9 — caminhada na calçada arborizada (1672×941)
+  { slot: 'cta-final', file: 'cta-final.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
+  // 4:5 — recorte mobile centrado na figura (terço direito do original)
   {
     slot: 'cta-final-mobile',
-    file: 'cta-final.jpg',
-    crop: { left: 400, top: 60, width: 1248, height: 1560 },
-  }, // 4:5
+    file: 'cta-final.png',
+    crop: { left: 900, top: 0, width: 753, height: 941 },
+  },
 ]
 
 async function encode(pipeline, file, fmt) {
@@ -76,6 +77,9 @@ async function encode(pipeline, file, fmt) {
 
 async function photos() {
   await fs.mkdir(OUT, { recursive: true })
+  // Limpa saídas antigas dos slots (sem tocar em outros arquivos, como a og-image).
+  const slotFile = new RegExp(`^(${SLOTS.map((s) => s.slot).join('|')})(-\\d+)?\\.(avif|webp|jpg)$`)
+  for (const f of await fs.readdir(OUT)) if (slotFile.test(f)) await fs.rm(path.join(OUT, f))
   const manifest = {}
   for (const { slot, file, crop } of SLOTS) {
     const base = sharp(path.join(SRC, file)).extract(crop)
