@@ -31,26 +31,26 @@ const SLOTS = [
   { slot: 'ajudar', file: 'ajudar.png', crop: { left: 0, top: 0, width: 1086, height: 1448 } },
   // 4:5 — StatCard foto em #contexto: mulher na janela com a caneca (1122×1402, já 4:5)
   { slot: 'contexto', file: 'contexto.png', crop: { left: 0, top: 0, width: 1122, height: 1402 } },
-  // 3:5 — PhotoCard (topo em pílula) em #direitos: detalhes sem rosto (originais 1122×1402)
+  // 3:4 — PhotoCard em #direitos (DESIGN §9): detalhes sem rosto (originais 1122×1402)
   {
     slot: 'direitos-1',
     file: 'direitos-1.png',
-    crop: { left: 150, top: 0, width: 841, height: 1402 },
+    crop: { left: 36, top: 0, width: 1051, height: 1402 },
   },
   {
     slot: 'direitos-2',
     file: 'direitos-2.png',
-    crop: { left: 90, top: 0, width: 841, height: 1402 },
+    crop: { left: 36, top: 0, width: 1051, height: 1402 },
   },
   {
     slot: 'direitos-3',
     file: 'direitos-3.png',
-    crop: { left: 140, top: 0, width: 841, height: 1402 },
+    crop: { left: 36, top: 0, width: 1051, height: 1402 },
   },
   {
     slot: 'direitos-4',
     file: 'direitos-4.png',
-    crop: { left: 70, top: 0, width: 841, height: 1402 },
+    crop: { left: 36, top: 0, width: 1051, height: 1402 },
   },
   // 16:9 — caminhada na calçada arborizada (1672×941)
   { slot: 'cta-final', file: 'cta-final.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
@@ -60,7 +60,82 @@ const SLOTS = [
     file: 'cta-final.png',
     crop: { left: 900, top: 0, width: 753, height: 941 },
   },
+  // ── PROVISÓRIAS (ver NOTES.md): alternativas de assets/fotos até as fotos definitivas chegarem ──
+  // sos: mulher com o celular junto à janela, espelhada para a figura ficar no terço esquerdo.
+  // O recorte é feito antes do espelho: o mobile pega o lado direito do original (onde está a figura).
+  {
+    slot: 'sos',
+    file: 'mulher-celular-janela-16x9.png',
+    flip: true,
+    crop: { left: 0, top: 0, width: 1672, height: 941 },
+  },
+  {
+    slot: 'sos-mobile',
+    file: 'mulher-celular-janela-16x9.png',
+    flip: true,
+    crop: { left: 919, top: 0, width: 753, height: 941 },
+  },
+  // risco: mulher no sofá lendo o celular (1024×1024): do rosto ao celular
+  {
+    slot: 'risco',
+    file: 'mulher-sofa-lendo-celular.png',
+    crop: { left: 0, top: 170, width: 1024, height: 576 },
+  },
+  {
+    slot: 'risco-mobile',
+    file: 'mulher-sofa-lendo-celular.png',
+    crop: { left: 100, top: 0, width: 819, height: 1024 },
+  },
+  // comecar-2: mulher sorrindo para o celular (1024×1024)
+  {
+    slot: 'comecar-2',
+    file: 'mulher-rua-sorrindo-celular.png',
+    crop: { left: 0, top: 120, width: 1024, height: 576 },
+  },
+  // comecar-3: duas mulheres olhando o mesmo celular. O crachá "Ampore" começa em y≈835:
+  // os recortes terminam em y=776 (16:9) e y=800 (mobile), então ele não existe nos arquivos gerados.
+  {
+    slot: 'comecar-3',
+    file: 'mulher-mostrando-celular-a-senhora.png',
+    crop: { left: 0, top: 200, width: 1024, height: 576 },
+  },
+  {
+    slot: 'comecar-3-mobile',
+    file: 'mulher-mostrando-celular-a-senhora.png',
+    crop: { left: 190, top: 0, width: 640, height: 800 },
+  },
 ]
+
+/** Placeholders (DESIGN §8): --grad-vinho + gota em white/10, com os nomes exatos dos slots. */
+const PLACEHOLDERS = [
+  { slot: 'cofre', width: 1600, height: 900 },
+  { slot: 'cofre-mobile', width: 1080, height: 1350 },
+  { slot: 'comecar-1', width: 1600, height: 900 },
+  { slot: 'comecar-4', width: 1600, height: 900 },
+]
+
+async function placeholderSource(width, height) {
+  const sym = await fs.readFile(
+    path.join(ROOT, 'src/assets/brand/amparo-simbolo-branco.svg'),
+    'utf8',
+  )
+  const inner = sym
+    .replace(/^<svg[^>]*>/, '')
+    .replace(/<\/svg>\s*$/, '')
+    .replace(/<title>.*?<\/title>/, '')
+  const vb = sym
+    .match(/viewBox="([^"]+)"/)[1]
+    .split(' ')
+    .map(Number)
+  const h = height * 0.32
+  const w = (vb[2] / vb[3]) * h
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#954B6E"/><stop offset="1" stop-color="#4B2A3F"/></linearGradient></defs>
+    <rect width="100%" height="100%" fill="url(#g)"/>
+    <svg x="${(width - w) / 2}" y="${(height - h) / 2}" width="${w}" height="${h}" viewBox="${vb.join(' ')}" opacity="0.1">${inner}</svg>
+  </svg>`
+  return sharp(Buffer.from(svg)).png().toBuffer()
+}
 
 async function encode(pipeline, file, fmt) {
   // Reduz a qualidade até caber no limite de tamanho; a última tentativa é gravada de qualquer forma.
@@ -80,15 +155,33 @@ async function encode(pipeline, file, fmt) {
 async function photos() {
   await fs.mkdir(OUT, { recursive: true })
   // Limpa saídas antigas dos slots (sem tocar em outros arquivos, como a og-image).
-  const slotFile = new RegExp(`^(${SLOTS.map((s) => s.slot).join('|')})(-\\d+)?\\.(avif|webp|jpg)$`)
+  const names = [...SLOTS, ...PLACEHOLDERS].map((s) => s.slot)
+  const slotFile = new RegExp(`^(${names.join('|')})(-\\d+)?\\.(avif|webp|jpg)$`)
   for (const f of await fs.readdir(OUT)) if (slotFile.test(f)) await fs.rm(path.join(OUT, f))
   const manifest = {}
-  for (const { slot, file, crop } of SLOTS) {
-    const base = sharp(path.join(SRC, file)).extract(crop)
+  const jobs = [
+    ...SLOTS.map((s) => ({ ...s, input: path.join(SRC, s.file) })),
+    ...(await Promise.all(
+      PLACEHOLDERS.map(async (p) => ({
+        slot: p.slot,
+        input: await placeholderSource(p.width, p.height),
+        crop: { left: 0, top: 0, width: p.width, height: p.height },
+        placeholder: true,
+      })),
+    )),
+  ]
+  for (const { slot, input, crop, flip, placeholder } of jobs) {
+    let base = sharp(input).extract(crop)
+    if (flip) base = base.flop()
     const widths = [...WIDTHS.filter((w) => w < crop.width), crop.width].filter(
       (w, i, a) => a.indexOf(w) === i && w <= 2200,
     )
-    manifest[slot] = { width: crop.width, height: crop.height, widths }
+    manifest[slot] = {
+      width: crop.width,
+      height: crop.height,
+      widths,
+      ...(placeholder ? { placeholder: true } : {}),
+    }
     for (const w of widths) {
       const p = base.clone().resize({ width: w })
       const a = await encode(p, path.join(OUT, `${slot}-${w}.avif`), 'avif')

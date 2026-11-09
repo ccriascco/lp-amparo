@@ -15,24 +15,24 @@
     "widths": [640, 1080, 1122]
   },
   "direitos-1": {
-    "width": 841,
+    "width": 1051,
     "height": 1402,
-    "widths": [640, 841]
+    "widths": [640, 1051]
   },
   "direitos-2": {
-    "width": 841,
+    "width": 1051,
     "height": 1402,
-    "widths": [640, 841]
+    "widths": [640, 1051]
   },
   "direitos-3": {
-    "width": 841,
+    "width": 1051,
     "height": 1402,
-    "widths": [640, 841]
+    "widths": [640, 1051]
   },
   "direitos-4": {
-    "width": 841,
+    "width": 1051,
     "height": 1402,
-    "widths": [640, 841]
+    "widths": [640, 1051]
   },
   "cta-final": {
     "width": 1672,
@@ -43,5 +43,64 @@
     "width": 753,
     "height": 941,
     "widths": [640, 753]
+  },
+  "sos": {
+    "width": 1672,
+    "height": 941,
+    "widths": [640, 1080, 1600, 1672]
+  },
+  "sos-mobile": {
+    "width": 753,
+    "height": 941,
+    "widths": [640, 753]
+  },
+  "risco": {
+    "width": 1024,
+    "height": 576,
+    "widths": [640, 1024]
+  },
+  "risco-mobile": {
+    "width": 819,
+    "height": 1024,
+    "widths": [640, 819]
+  },
+  "comecar-2": {
+    "width": 1024,
+    "height": 576,
+    "widths": [640, 1024]
+  },
+  "comecar-3": {
+    "width": 1024,
+    "height": 576,
+    "widths": [640, 1024]
+  },
+  "comecar-3-mobile": {
+    "width": 640,
+    "height": 800,
+    "widths": [640]
+  },
+  "cofre": {
+    "width": 1600,
+    "height": 900,
+    "widths": [640, 1080, 1600],
+    "placeholder": true
+  },
+  "cofre-mobile": {
+    "width": 1080,
+    "height": 1350,
+    "widths": [640, 1080],
+    "placeholder": true
+  },
+  "comecar-1": {
+    "width": 1600,
+    "height": 900,
+    "widths": [640, 1080, 1600],
+    "placeholder": true
+  },
+  "comecar-4": {
+    "width": 1600,
+    "height": 900,
+    "widths": [640, 1080, 1600],
+    "placeholder": true
   }
 }

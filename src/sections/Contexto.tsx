@@ -1,10 +1,10 @@
 import { StatCard } from '../components/ui/StatCard'
 import { Container, SECTION_Y, SectionHeading } from '../components/ui/Section'
-import { contexto } from '../content/copy'
+import { contexto, numeros } from '../content/copy'
 
 /** `#contexto` — bento de números ao estilo Finexa (DESIGN.md §9). */
 export function Contexto() {
-  const [s1, s2, s3, s4] = contexto.stats
+  const [s1, s2, s3, s4] = numeros.stats
   return (
     <section id="contexto" aria-labelledby="contexto-title" data-counters className={SECTION_Y}>
       <Container>
@@ -23,7 +23,7 @@ export function Contexto() {
           <StatCard stat={s3} />
           <StatCard stat={s4} variant="destaque" />
         </div>
-        <p className="mt-4 text-right text-small text-texto-secundario">{contexto.source}</p>
+        <p className="mt-4 text-right text-small text-texto-secundario">{numeros.source}</p>
       </Container>
     </section>
   )

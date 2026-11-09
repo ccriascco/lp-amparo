@@ -1,7 +1,8 @@
 import { useGSAP } from '@gsap/react'
 import { useEffect } from 'react'
 import { formatNumber } from '../lib/format'
-import { gsap, MQ, ScrollTrigger, scrollToHash, SplitText, startSmoothScroll } from '../lib/gsap'
+import { initAppear } from '../lib/appear'
+import { gsap, MQ, ScrollTrigger, scrollToHash, startSmoothScroll } from '../lib/gsap'
 
 const HEX = '0123456789abcdef'
 
@@ -52,25 +53,8 @@ export function useSiteMotion() {
       const { desktop } = ctx.conditions as { desktop: boolean; mobile: boolean }
       const k = desktop ? 1 : 0.5 // mobile: metade das amplitudes (§7.10)
 
-      // H2: linhas sobem por máscara, uma vez.
-      gsap.utils.toArray<HTMLElement>('[data-split]').forEach((el) => {
-        SplitText.create(el, {
-          type: 'lines',
-          mask: 'lines',
-          autoSplit: true,
-          onSplit(self) {
-            // Mobile: sem SplitText em textos com mais de 3 linhas.
-            if (!desktop && self.lines.length > 3) return
-            return gsap.from(self.lines, {
-              yPercent: 100,
-              stagger: 0.08,
-              duration: 0.9,
-              ease: 'expo.out',
-              scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-            })
-          },
-        })
-      })
+      // "Aparecer no scroll" (§7.11): títulos palavra por palavra, textos, cartões e visuais.
+      initAppear(document)
 
       // Fotos: revelação por máscara + imagem interna com parallax.
       gsap.utils.toArray<HTMLElement>('[data-reveal-photo]').forEach((el) => {

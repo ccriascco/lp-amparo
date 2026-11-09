@@ -32,7 +32,7 @@ export function CtaFinal() {
             tone="white"
             className="absolute top-1/2 left-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"
           />
-          <h2 id="cta-title" data-split className="mx-auto max-w-[14ch] display-l text-white">
+          <h2 id="cta-title" data-words className="mx-auto max-w-[14ch] display-l text-white">
             {ctaFinal.h2}
           </h2>
           <p className="mx-auto mt-5 max-w-[36ch] lead text-white/85">{ctaFinal.text}</p>

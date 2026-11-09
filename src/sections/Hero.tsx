@@ -59,8 +59,7 @@ export function Hero() {
               data-hero-title
               className="mt-6 display-xl text-texto max-md:text-[clamp(2.5rem,12.4vw,3rem)]"
             >
-              <span className="block lg:inline">{hero.h1Lines[0]}</span>{' '}
-              <span className="block lg:inline">{hero.h1Lines[1]}</span>
+              {hero.h1}
             </h1>
             <div data-hero-rest className="mx-auto max-w-[820px]">
               <p className="mx-auto mt-6 max-w-[52ch] lead text-texto-secundario">{hero.sub}</p>
@@ -80,7 +79,6 @@ export function Hero() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 caption text-texto-secundario">{hero.caption}</p>
             </div>
           </div>
         </Container>

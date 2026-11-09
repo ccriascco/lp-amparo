@@ -1,9 +1,9 @@
 import logoBranco from '../assets/brand/amparo-logo-horizontal-branco.svg'
 import { EmergencyBar } from '../components/ui/EmergencyBar'
 import { Container } from '../components/ui/Section'
-import { footer, nav, ui } from '../content/copy'
+import { faq, footer, nav } from '../content/copy'
 
-const LINKS = [...nav.links, { label: ui.faqTitle, href: '#faq' }]
+const LINKS = [...nav.links, { label: faq.h2, href: '#faq' }]
 
 /** Rodapé (DESIGN.md §6.16): marca + links · EmergencyBar · texto legal. */
 export function Footer() {

@@ -12,7 +12,6 @@ import { Footer } from './sections/Footer'
 import { Header } from './sections/Header'
 import { Hero } from './sections/Hero'
 import { Cofre, Rede, Risco, Sos } from './sections/Pilares'
-import { Projeto } from './sections/Projeto'
 import { Recursos } from './sections/Recursos'
 import { Seguranca } from './sections/Seguranca'
 
@@ -69,7 +68,6 @@ function Landing() {
         <Seguranca />
         <Comecar />
         <Ajudar />
-        <Projeto />
         <Faq />
         <CtaFinal />
       </main>

@@ -161,13 +161,13 @@ export function Rede() {
 
         <div className="relative lg:col-span-7">
           <div className="relative ml-auto w-[78%] max-w-[440px] md:w-[62%]">
-            <div data-reveal-photo className="relative aspect-[3/4] overflow-hidden arch">
+            <div data-reveal-photo className="arch relative aspect-[3/4] overflow-hidden">
               <TintedPhoto
                 slot="rede-duas-mulheres"
                 overlay="soft"
                 parallax
                 sizes="(min-width: 1024px) 440px, 62vw"
-                className="absolute inset-0 arch"
+                className="arch absolute inset-0"
               />
             </div>
           </div>

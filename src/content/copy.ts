@@ -25,6 +25,11 @@ export const cta = {
   acessar: 'Acessar o Amparo',
 }
 
+// 3.01
+export const preloader = {
+  line: 'Preparando um lugar seguro para você',
+}
+
 // 3.0
 export const nav = {
   links: [
@@ -32,23 +37,28 @@ export const nav = {
     { label: 'Recursos', href: '#recursos' },
     { label: 'Segurança', href: '#seguranca' },
     { label: 'Seus direitos', href: '#direitos' },
-    { label: 'O projeto', href: '#projeto' },
+    { label: 'Dúvidas', href: '#faq' },
   ],
+  /** Link de texto antes do botão (abre VITE_APP_URL). */
+  entrar: 'Entrar',
 }
 
 // 3.1
 export const hero = {
   chip: 'Proteção discreta para mulheres',
   h1: 'Você não está sozinha.',
-  /** Quebra controlada no mobile (DESIGN.md §4). */
-  h1Lines: ['Você não está', 'sozinha.'],
   sub: 'Um app que parece uma calculadora, avisa quem você confia com um toque e guarda suas provas num cofre que só você abre.',
   ctaSecondary: 'Ver como funciona',
   checks: ['Gratuito', 'Funciona no navegador do celular', 'Seus dados protegidos pela LGPD'],
-  caption: 'Por fora, uma calculadora. Por dentro, o Amparo.',
+  /** Notificações flutuantes (aparecem em sequência, a mais nova em cima). */
+  notifications: [
+    { title: 'Alerta enviado', text: 'Sua rede foi avisada', time: 'agora' },
+    { title: 'Ana Beatriz confirmou', text: 'Está a caminho', time: '12:31' },
+    { title: 'Prova verificada', text: 'Arquivo sem alterações', time: '21:47' },
+  ],
 }
 
-// 3.2
+// 3.2a
 export type Stat = {
   value: number
   decimals?: number
@@ -57,9 +67,8 @@ export type Stat = {
   label: string
 }
 
-export const contexto = {
-  h2: 'Na maioria dos casos, o perigo está dentro de casa.',
-  text: 'A violência doméstica cresce em silêncio. Muitas mulheres convivem com quem as agride, dividem o mesmo teto e, muitas vezes, o mesmo celular. Pedir ajuda pode ser arriscado.',
+export const numeros = {
+  title: 'Por que o Amparo existe',
   stats: [
     { value: 1492, label: 'feminicídios em 2024, o maior número já registrado no Brasil' },
     {
@@ -72,6 +81,27 @@ export const contexto = {
     { value: 101656, label: 'medidas protetivas descumpridas pelo agressor em 2024' },
   ] satisfies Stat[],
   source: 'Fonte: 19º Anuário Brasileiro de Segurança Pública (FBSP, 2025).',
+}
+
+// 3.2b
+export const marquee = {
+  items: [
+    'Modo Disfarce',
+    'SOS silencioso',
+    'Cofre de provas',
+    'Rede de apoio',
+    'Leitura de risco',
+    'Seus direitos',
+    'Feito para o celular',
+    'Protegido pela LGPD',
+  ],
+}
+
+// 3.2c
+export const contexto = {
+  h2: 'Na maioria dos casos, o perigo está dentro de casa.',
+  text: 'A violência doméstica cresce em silêncio. Muitas mulheres convivem com quem as agride, dividem o mesmo teto e, muitas vezes, o mesmo celular. Pedir ajuda pode ser arriscado.',
+  fecho: 'Por trás de cada número, existe uma mulher. O Amparo foi feito para ela.',
 }
 
 // 3.3
@@ -100,8 +130,11 @@ export const dores = {
       text: 'A lei protege, mas a informação nem sempre chega em linguagem simples.',
     },
   ],
+  /** Link em cada cartão de dor e o destino de cada um (COPY 3.3). */
+  link: 'Como o Amparo ajuda',
+  linkTargets: ['#disfarce', '#cofre', '#rede', '#risco', '#direitos'],
   fecho: 'O Amparo foi desenhado a partir de cada uma dessas barreiras.',
-  fechoLink: { label: 'Conheça os recursos', href: '#recursos' },
+  fechoButton: { label: 'Conheça os recursos', href: '#recursos' },
 }
 
 // 3.4
@@ -304,6 +337,40 @@ export const direitos = {
   violencias: ['Física', 'Psicológica', 'Sexual', 'Patrimonial', 'Moral'],
 }
 
+// 3.10b — no lugar dos depoimentos (nada de depoimento inventado)
+export const mitos = {
+  h2: 'Informação também protege.',
+  sub: 'Algumas ideias erradas ainda afastam mulheres da ajuda de que precisam.',
+  mitoLabel: 'Mito',
+  verdadeLabel: 'Verdade',
+  items: [
+    {
+      mito: 'Só é violência se deixar marca.',
+      verdade:
+        'A Lei Maria da Penha reconhece cinco formas de violência: física, psicológica, sexual, patrimonial e moral.',
+    },
+    {
+      mito: 'Para ter medida protetiva, preciso de boletim de ocorrência.',
+      verdade:
+        'Desde 2023 (Lei nº 14.550), a medida protetiva pode ser concedida mesmo sem boletim de ocorrência, inquérito ou processo.',
+    },
+    {
+      mito: 'Preciso de advogado para pedir proteção.',
+      verdade: 'O pedido de medida protetiva pode ser feito sem advogado e sem custo.',
+    },
+    {
+      mito: 'O Ligue 180 serve só para denunciar.',
+      verdade:
+        'O 180 também orienta sobre direitos e serviços. É gratuito, sigiloso e funciona 24 horas.',
+    },
+    {
+      mito: 'Se ele nunca me bateu, não estou em risco.',
+      verdade:
+        'Ameaças, controle e isolamento também são sinais de risco e fazem parte da avaliação oficial de risco.',
+    },
+  ],
+}
+
 // 3.11
 export const seguranca = {
   h2: 'A sua segurança vem antes de qualquer recurso.',
@@ -336,12 +403,29 @@ export const seguranca = {
 // 3.12
 export const comecar = {
   h2: 'Comece em poucos minutos.',
+  /** Rótulos da barra de progresso do palco (COPY 3.12). */
+  labels: ['1. Crie sua conta', '2. Modo Disfarce', '3. Rede de apoio', '4. Pronto'],
   steps: [
     { strong: 'Crie sua conta.', rest: ' Use um e-mail ao qual só você tenha acesso.' },
     { strong: 'Escolha o Modo Disfarce', rest: ' e crie o seu código de 4 números.' },
     { strong: 'Adicione sua rede de apoio.', rest: ' Pelo menos uma pessoa de confiança.' },
     { strong: 'Pronto.', rest: ' O Amparo fica com você, discreto, até você precisar.' },
   ] satisfies Lead[],
+}
+
+// 3.12b
+export const acesso = {
+  chip: 'Acesso gratuito',
+  title: 'Tudo isso, sem pagar nada.',
+  text: 'Sem loja de aplicativos e sem instalação complicada. Abra no navegador do celular e comece.',
+  list: [
+    'Modo Disfarce',
+    'SOS silencioso',
+    'Cofre de provas com integridade verificável',
+    'Rede de até 5 guardiãs',
+    'Leitura de risco',
+    'Central de direitos',
+  ],
 }
 
 // 3.13
@@ -354,49 +438,11 @@ export const ajudar = {
 }
 
 // 3.14
-export const projeto = {
-  h2: 'Tecnologia a serviço de quem precisa de amparo.',
-  text: 'O Amparo é um Trabalho de Conclusão de Curso em Ciência da Computação na UNIRP. Nasceu de uma pergunta: como uma plataforma discreta, apoiada por inteligência artificial, pode reduzir as barreiras entre uma mulher e a ajuda de que ela precisa?',
-  diferenteTitle: 'Por que é diferente',
-  diferente: [
-    'Uma revisão de 136 apps de proteção (Sumra et al., 2023) mostrou que nenhum usava inteligência artificial e que a maioria dependia só do acionamento manual. O Amparo une ',
-    { strong: 'disfarce' },
-    ', ',
-    { strong: 'provas com integridade verificável' },
-    ' e ',
-    { strong: 'IA na avaliação de risco' },
-    '.',
-  ] satisfies Rich,
-  metrics: [
-    { value: 97, suffix: '%', label: 'de acurácia' },
-    { value: 99, suffix: '%', label: 'de recall na classe de alto risco' },
-  ] satisfies Stat[],
-  model: {
-    strong: 'Random Forest',
-    rest: ', comparado com Regressão Logística e SVM',
-  } satisfies Lead,
-  ressalva:
-    'Resultados obtidos em base sintética de 10.000 registros. A validação com dados reais, sob protocolo ético, é a próxima etapa.',
-  stack: [
-    'React Native',
-    'TypeScript',
-    'NestJS',
-    'Supabase (PostgreSQL)',
-    'Python',
-    'FastAPI',
-    'Scikit-learn',
-  ],
-  equipe: [
-    'Eduardo Fauzi Barboza',
-    'Lucas de Andrade Lameira',
-    'Mário Otávio Viudes Alves',
-    'Rafael Henrique Roncoleta',
-  ],
-  orientacao: { label: 'Orientação', name: 'Me. Valéria Maria Volpe' },
-}
 
 // 3.15
 export const faq = {
+  h2: 'Perguntas frequentes',
+  sub: 'Respostas rápidas para as dúvidas mais comuns.',
   items: [
     { q: 'O Amparo é gratuito?', a: ['Sim.'] satisfies Rich },
     {
@@ -452,6 +498,13 @@ export const faq = {
 export const ctaFinal = {
   h2: 'Você merece se sentir segura.',
   text: 'O primeiro passo pode ser pequeno e discreto.',
+  /** Cartão "Hoje" (linha do tempo de exemplo no app). */
+  hojeTitle: 'Hoje',
+  hoje: [
+    { time: '09:12', text: 'Registro salvo no cofre' },
+    { time: '18:40', text: 'Alerta enviado à sua rede' },
+    { time: '18:41', text: 'Ana Beatriz confirmou' },
+  ],
 }
 
 // 3.17 — os números viram links tel:
@@ -466,6 +519,40 @@ export const emergencia = {
 
 // 3.18
 export const footer = {
+  banner: {
+    title: 'Proteção que cabe no seu celular.',
+    text: 'Discreta, segura e sempre com você.',
+  },
+  selos: ['100% no navegador', 'Dados protegidos (LGPD)', 'Modo Disfarce'],
+  columns: [
+    {
+      title: 'Recursos',
+      links: [
+        { label: 'Modo Disfarce', href: '#disfarce' },
+        { label: 'SOS silencioso', href: '#sos' },
+        { label: 'Cofre de provas', href: '#cofre' },
+        { label: 'Rede de apoio', href: '#rede' },
+        { label: 'Leitura de risco', href: '#risco' },
+      ],
+    },
+    {
+      title: 'Informação',
+      links: [
+        { label: 'Seus direitos', href: '#direitos' },
+        { label: 'Mitos e verdades', href: '#mitos' },
+        { label: 'Segurança', href: '#seguranca' },
+        { label: 'Perguntas frequentes', href: '#faq' },
+      ],
+    },
+    {
+      title: 'Ajuda agora',
+      links: [
+        { label: 'Ligue 190', href: 'tel:190' },
+        { label: 'Ligue 180', href: 'tel:180' },
+      ],
+    },
+  ],
+  voltarTopo: 'Voltar ao topo',
   lema: 'Você não está sozinha.',
   legal:
     'Amparo é um projeto acadêmico (TCC — Ciência da Computação, UNIRP, 2026) em desenvolvimento. Não substitui os serviços oficiais de segurança e atendimento à mulher.',
@@ -574,6 +661,5 @@ export const ui = {
   verDeNovo: 'Ver de novo',
   testarDeNovo: 'Testar de novo',
   voltarCalculadora: 'Voltar à calculadora',
-  faqTitle: 'Perguntas frequentes',
   lerNoApp: 'Ler no Amparo',
 }

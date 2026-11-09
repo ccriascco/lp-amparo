@@ -117,3 +117,27 @@ O hero **não tem foto** (DESIGN.md atualizado: fundo branco + véu vinho). Todo
   - mobile (390px): **0 quadros > 50 ms** em duas execuções;
   - desktop (1280px): 0 quadros > 50 ms com cache; na primeira visita (cache frio) há picos isolados de 50–100 ms quando as fotos são decodificadas pela primeira vez durante a rolagem;
   - `will-change: transform` é ligado nos elementos do hero só enquanto ele está na tela (sem isso, girar os celulares laterais re-rasterizava o texto das telas e gerava quadros de ~100 ms).
+
+---
+
+# Rodada 2 — estrutura dos sites de referência (DESIGN.md revisado, §2.1)
+O DESIGN.md e o COPY.md foram reescritos com base nos 5 sites de referência (Gaia, Gardance, Eduzz, NextPay, FitPay). A página é refeita seção por seção, de cima para baixo, com um commit por seção.
+
+## Item 0 — Base
+- **Tokens:** raios menores (`shell 32px`, `card-lg 20px`, `card 16px`, `sm 12px`), gradientes `--grad-hero`, `--grad-secao` e `--grad-painel` em `:root`, `display-xl` com `clamp(1.625rem, 6.6vw, 4.75rem)` e `white-space: nowrap` (H1 sempre em uma linha). Ritmo das seções `py-20 md:py-28`. O utilitário de topo em arco foi removido (proibido no §3.2).
+- **`src/lib/appear.ts`** (§7.11): `data-appear` (texto/cartão), `data-appear="visual"` (celular/painel), `data-appear="float"` (cartões flutuantes, +0.2s), `data-appear-stagger` (grupos) e `data-words` (H2 palavra por palavra saindo do desfoque, como o H1). Substitui as linhas subindo por máscara.
+- **`copy.ts`** atualizado para o COPY.md novo (preloader, "Entrar", "Dúvidas", notificações do hero, faixa de números, marquee, frase do manifesto, link das dores, rótulos de "Como começar", acesso, mitos, FAQ, cartão "Hoje" e rodapé). A seção "O projeto" saiu da página e do `copy.ts`.
+- **Rotação 3D do celular do hero:** o §11 que está no disco ainda proíbe "rotação 3D"; o cliente autorizou na conversa a inclinação do §7.9 (`rotate -8°`, `rotateX 12°`, `scale 0.92`). Seguimos o §7.9.
+
+## Fotos provisórias (trocar quando as definitivas chegarem — basta substituir em `assets/fotos/` e rodar `npm run images`)
+| Slot | Situação | Origem / observação |
+|---|---|---|
+| `sos` (+ `sos-mobile`) | **Provisória** | `mulher-celular-janela-16x9.png`, **espelhada** para a figura ficar no terço esquerdo |
+| `risco` (+ `risco-mobile`) | **Provisória** | `mulher-sofa-lendo-celular.png` (original 1024 px: fica um pouco suave em telas grandes) |
+| `comecar-2` | **Provisória** | `mulher-rua-sorrindo-celular.png` (1024 px) |
+| `comecar-3` (+ `comecar-3-mobile`) | **Provisória** | `mulher-mostrando-celular-a-senhora.png`. O crachá com a marca grafada errado ("Ampore") começa em y≈835 do original; os recortes terminam em y=776 (16:9) e y=800 (mobile), então ele **não existe nos arquivos gerados** e não aparece em nenhuma largura. Fica visível só a alça do cordão. |
+| `cofre` (+ `cofre-mobile`) | **Placeholder** | `--grad-vinho` + gota em `white/10` (DESIGN §8) |
+| `comecar-1` | **Placeholder** | idem |
+| `comecar-4` | **Placeholder** | idem |
+- As fotos de `#direitos` foram recortadas de novo em 3:4 (DESIGN §9).
+- Os placeholders são gerados pelo próprio `scripts/process-images.mjs` (lista `PLACEHOLDERS`) e marcados com `placeholder: true` em `src/content/images.json`.

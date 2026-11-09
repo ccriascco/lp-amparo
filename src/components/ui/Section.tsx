@@ -10,7 +10,7 @@ export function Container({ className, children }: { className?: string; childre
 }
 
 /** Ritmo vertical entre seções (DESIGN.md §3.3). */
-export const SECTION_Y = 'py-24 md:py-32 lg:py-40'
+export const SECTION_Y = 'py-20 md:py-28'
 
 type HeadingProps = {
   id: string
@@ -23,7 +23,7 @@ type HeadingProps = {
 }
 
 /**
- * H2 de seção. `data-split` marca o título para a revelação por linhas (Fase 4, §7.9).
+ * H2 de seção. `data-words` marca o título para a revelação por linhas (Fase 4, §7.9).
  */
 export function SectionHeading({ id, children, pillar, className, light }: HeadingProps) {
   return (
@@ -35,7 +35,7 @@ export function SectionHeading({ id, children, pillar, className, light }: Headi
       )}
       <h2
         id={id}
-        data-split
+        data-words
         className={clsx('display-l text-balance', light ? 'text-white' : 'text-texto', className)}
       >
         {children}

@@ -47,8 +47,8 @@ export function Dores() {
 
         <div className="mt-6 flex flex-col gap-3 border-t border-borda pt-10 md:flex-row md:items-center md:justify-between">
           <p className="max-w-[40ch] lead font-semibold text-texto">{dores.fecho}</p>
-          <Button variant="ghost" href={dores.fechoLink.href}>
-            {dores.fechoLink.label}
+          <Button variant="ghost" href={dores.fechoButton.href}>
+            {dores.fechoButton.label}
           </Button>
         </div>
       </Container>

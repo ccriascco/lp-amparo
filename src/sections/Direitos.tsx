@@ -31,14 +31,14 @@ export function Direitos() {
                 href={APP_URL}
                 target="_blank"
                 rel="noopener"
-                className="group relative block aspect-[3/5] overflow-hidden arch"
+                className="group arch relative block aspect-[3/5] overflow-hidden"
                 data-reveal-photo
               >
                 <TintedPhoto
                   slot={c.image as ImageSlot}
                   parallax
                   sizes="(min-width: 1024px) 300px, (min-width: 768px) 45vw, 72vw"
-                  className="absolute inset-0 arch transition-transform duration-500 ease-amparo group-hover:scale-[1.02]"
+                  className="arch absolute inset-0 transition-transform duration-500 ease-amparo group-hover:scale-[1.02]"
                 />
                 <span className="absolute inset-x-0 bottom-0 z-10 flex flex-col p-6">
                   <span

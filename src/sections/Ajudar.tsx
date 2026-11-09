@@ -10,13 +10,13 @@ export function Ajudar() {
       <div className="rounded-[28px] bg-superficie md:rounded-shell">
         <Container className="grid items-center gap-12 py-20 md:py-28 lg:grid-cols-12 lg:gap-8">
           <div className="mx-auto w-full max-w-[400px] lg:col-span-5 lg:mx-0">
-            <div data-reveal-photo className="relative aspect-[3/4] overflow-hidden arch">
+            <div data-reveal-photo className="arch relative aspect-[3/4] overflow-hidden">
               <TintedPhoto
                 slot="ajudar"
                 overlay="soft"
                 parallax
                 sizes="(min-width: 1024px) 400px, 90vw"
-                className="absolute inset-0 arch"
+                className="arch absolute inset-0"
               />
             </div>
           </div>

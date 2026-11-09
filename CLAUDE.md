@@ -3,6 +3,9 @@
 Você vai preparar o ambiente e construir **toda a parte visual** da landing page do **Amparo**, um app discreto de proteção para mulheres em situação de violência doméstica (TCC de Ciência da Computação, UNIRP). O objetivo da página é levar a visitante a **acessar o app**, que roda como web app na Netlify.
 
 ## Fontes de verdade (ler antes de qualquer código)
+0. **Sites de referência de estrutura e animação** (`DESIGN.md` §2.1). **Abra os 5 no navegador antes de começar** e estude a tela de abertura, a entrada do hero, o "aparecer" no scroll, os contadores, o marquee, as abas, o carrossel e o FAQ:
+   https://nextpay.framer.website/ · https://gardance.framer.website/ · https://eduzz.framer.website/ · https://yurifitpay.framer.website/ · https://gaianutri.app/
+   Reproduza fielmente a estrutura e o estilo de movimento, **sem copiar** código, textos, imagens ou marcas deles.
 1. **`DESIGN.md`**: design system, tokens, componentes, movimento (GSAP) e wireframes. Siga à risca.
 2. **`COPY.md`**: estratégia e **todos** os textos. Não invente textos, números, depoimentos nem funcionalidades.
 3. **`assets/`**: logos (`assets/brand/`), telas do protótipo do app (`assets/app-screens/`) e referências visuais (`assets/referencias/`). **Abra as telas** para replicar fielmente a calculadora e a tela inicial, e **abra as referências** para calibrar o acabamento (fotografia tingida, vidro, anéis, parallax). As referências servem só para a parte visual e de composição: **não** tire delas cores nem fontes.
@@ -25,7 +28,8 @@ Confira se estão instaladas (`npx skills ls`). Se faltar alguma, instale com
 
 **`frontend-design`** (Anthropic): leia antes da Fase 2.
 - **Use:** o processo "planejar → revisar contra o brief → construir → criticar com screenshots". Restrição: a ousadia fica concentrada num só lugar (o desbloqueio do hero) e o resto é disciplinado.
-- **Já está aplicada no `DESIGN.md`:** sem destacar palavras soltas nos títulos, sem rótulos em caixa-alta, numeração só onde há sequência real (Como começar), nada de fade-up em toda seção.
+- **Já está aplicada no `DESIGN.md`:** sem destacar palavras soltas nos títulos, sem rótulos em caixa-alta, numeração só onde há sequência real.
+- **Conflito resolvido a favor do cliente:** a skill desaconselha "aparecer no scroll" em toda seção, mas o cliente pediu explicitamente o padrão dos sites Framer de referência. Siga o `DESIGN.md` §7.11.
 - **Não refaça** o plano de cores e fontes: ele já está decidido no `DESIGN.md` §3–§4 e vem do design system do app.
 
 **`web-design-guidelines`** (Vercel): use na Fase 5, como revisão.
@@ -93,11 +97,15 @@ src/
   lib/        gsap.ts (registro de plugins + Lenis), useReducedMotion.ts, format.ts (pt-BR)
   content/    copy.ts  ← textos de COPY.md tipados (uma única fonte no código)
   components/
-    ui/       Button, Chip, PhoneFrame, FloatCard, StatItem, Accordion, Marquee, EmergencyBar
+    ui/       Button, Chip, PhoneFrame, FloatCard, NotificationCard, StatsBand, Marquee, PeopleScatter,
+              QuestionStage, FeatureStack, PhotoStage, StepShowcase, MythCarousel, AccessCard,
+              FooterBanner, Accordion, EmergencyBar,
+              CircularBadge, ConcentricRings, TintedPhoto, PhotoCard
     phone/    CalculatorScreen, HomeScreen, AlertScreen, AppGridScreen, MultitaskScreen
     demo/     SOSDemo, HashScramble, RiskLevels, InteractiveCalculator
-  sections/   Header, Hero, Contexto, Dores, MarqueeBand, Disfarce, Recursos, Sos, Cofre,
-              Rede, Risco, Direitos, Seguranca, Comecar, Ajudar, Projeto, Faq, CtaFinal, Footer
+  sections/   Preloader, Header, Hero, Numeros, MarqueeBand, Contexto, Dores, Disfarce,
+              Recursos (FeatureStack: Sos, Cofre, Rede, Risco), Direitos, Mitos, Seguranca,
+              Comecar, Acesso, Ajudar, Faq, CtaFinal, Footer
 ```
 
 ## Fase 2 — Fundações
@@ -107,24 +115,25 @@ Tokens, fontes, `Button`, `Chip`, `PhoneFrame`, `CalculatorScreen`, `HomeScreen`
 Construa todas as seções de forma estática e responsiva (mobile primeiro, testando em 360px, 768px e 1280px). Só depois parta para o movimento.
 
 ## Fase 4 — Movimento (GSAP)
-Siga o `DESIGN.md` §7, nesta ordem de prioridade:
-0. **Base smooth:** Lenis + ScrollTrigger (§7, bloco `src/lib/gsap.ts`) e `TintedPhoto`.
-1. **Hero "Desbloqueio"** (§7.1). É a assinatura da página e precisa estar impecável.
-2. Pin do `#disfarce` + calculadora interativa (§7.2).
-3. **Parallax e revelações por máscara** (§7.9), exatamente nos elementos da tabela.
-4. `SOSDemo` (§6.11), `HashScramble`, `RiskLevels`, contadores, rede se desenhando, linha de progresso, marquee e `CircularBadge`.
-5. Header que some e volta ao rolar.
+Siga o `DESIGN.md` §7 e **compare sempre lado a lado com os sites de referência** (§2.1), nesta ordem:
+0. **Base smooth:** Lenis + ScrollTrigger (bloco `src/lib/gsap.ts`) e o utilitário `appear` (§7.11).
+1. **Preloader** (§7.0, padrão Gaia) emendando no **hero** (§7.1): título palavra por palavra saindo do desfoque (NextPay), desbloqueio da calculadora e notificações empilhando (Eduzz).
+2. **Header que vira pílula compacta** ao rolar e **celular do hero girando** ao sair (§7.11, §7.9, padrão Gardance).
+3. **"Aparecer no scroll"** em todas as seções (§7.11), **contadores** (§7.3) e **marquee** (§6.25).
+4. **Seções fixas com elementos flutuando** (§7.12): `PeopleScatter` (Gaia) e `QuestionStage` (Gardance).
+5. **`FeatureStack`** com a barra de navegação fixa na base (§6.27, Gardance), incluindo SOSDemo, HashScramble, rede e RiskLevels.
+6. **`StepShowcase`** do Modo Disfarce (§7.2) e **`PhotoStage`** do Como começar (§6.28, §7.6).
+7. **`MythCarousel`**, **Accordion** do FAQ e **galeria que se junta** antes do CTA (§7.13, Eduzz).
+8. **Parallax e revelações por máscara** nas fotos (§7.9) e `CircularBadge`.
 
-Antes de encerrar a fase, cheque a performance (§7.10). A página precisa ser *smooth* e não travar, inclusive num celular médio.
-
-Regras: `useGSAP` com `scope`, `gsap.matchMedia()` para desktop, mobile e movimento reduzido, e `ScrollTrigger.refresh()` após o carregamento das fontes. **Não** adicione animações que não estejam no `DESIGN.md`.
+Regras: `useGSAP` com `scope`, `gsap.matchMedia()` para desktop, mobile e movimento reduzido, e `ScrollTrigger.refresh()` após o carregamento das fontes e imagens. Antes de encerrar a fase, cheque a performance (§7.10): a página precisa ser *smooth* e não travar, inclusive num celular médio.
 
 ## Fase 5 — Revisão e qualidade
 - Rode `npm run build` sem erros nem warnings de TypeScript.
 - Passe pelos critérios do `DESIGN.md` §10 e pela lista "O que não fazer" (§11).
 - Aplique a skill `web-design-guidelines` e corrija o que ela apontar.
 - Rode as verificações da `design-taste-frontend` listadas na Fase 0 (layout, performance e screenshots).
-- Revise todos os textos contra o `COPY.md`, palavra por palavra, incluindo números (`1.492`, `64,3%`, `8 em 10`, `101.656`, `97%`, `99%`, `10.000`) e a ressalva sobre dados sintéticos.
+- Revise todos os textos contra o `COPY.md`, palavra por palavra, incluindo números (`1.492`, `64,3%`, `8 em 10`, `101.656`).
 - Se possível, tire screenshots (desktop e mobile) de cada seção, compare com os wireframes e ajuste.
 
 ## Fase 6 (opcional) — Vídeo com Remotion
