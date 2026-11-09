@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+.DS_Store
+Thumbs.db
+
+# Skills instaladas localmente (reprodutíveis via skills-lock.json)
+.agents/
+.claude/skills/
