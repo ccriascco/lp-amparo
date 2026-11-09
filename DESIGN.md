@@ -43,20 +43,21 @@ Síntese das referências visuais enviadas:
 - **Wordmark gigante** atrás do conteúdo (ref. Luminor), usado só no rodapé.
 
 **Segunda rodada de referências (BeautyCenter, LawnBuster, Neonix): a fotografia vira protagonista.**
-- **Hero com foto em tela cheia dentro do shell**, tingida num **monocromático vinho e rosé** (refs. BeautyCenter e Neonix). A foto não é um quadradinho ao lado do texto: ela é o fundo do hero.
+- **Foto tingida monocromática** no vinho do app (refs. BeautyCenter e Neonix). Ela é usada nas seções internas e no CTA final; **o hero não tem foto** (ver 4ª rodada).
 - **Vidro (glassmorphism)** na navegação, nos chips e nos cartões que se sobrepõem à foto (ref. BeautyCenter).
 - **Círculos concêntricos de linha fina** saindo de trás da figura (ref. Neonix), que aqui ecoam o anel do SOS.
 - **Selo circular girando** com texto em volta (ref. BeautyCenter), com "Você não está sozinha" girando ao redor do símbolo da gota.
 - **Fotos em formato de arco ou pílula** e **cartões com foto + overlay** (refs. BeautyCenter e LawnBuster).
 - ~~Barra inferior em vidro no hero~~ (substituída pelas pílulas e celulares em leque da 3ª rodada).
 
-**Terceira rodada (Task.io + "mulher com o celular"): composição final do hero.**
+**Terceira e quarta rodadas (Task.io): composição final do hero.**
+- **Fundo branco** com o véu suave de vinho (`--grad-suave`). **Sem foto no hero:** o protagonista é o **app**.
 - Texto **centralizado** no topo (chip, H1, subtítulo e CTAs), como na Task.io.
-- **Três celulares em leque** saindo da base do hero: o central reto e os laterais inclinados. Em volta, **pílulas inclinadas** e **cartões flutuantes** com ícone num círculo vinho.
-- **Anéis concêntricos** grandes centrados atrás dos celulares.
-- O fundo é uma **foto moderna de uma mulher usando o celular**, tingida no vinho do app. A figura fica num dos terços laterais, para não competir com os celulares.
+- **Três celulares em leque** saindo da base do hero, mostrando telas reais do app: o central reto e os laterais inclinados. Em volta, **pílulas inclinadas** e **cartões flutuantes** com ícone num círculo vinho.
+- **Anéis concêntricos** grandes, em vinho bem claro, centrados atrás dos celulares.
+- A fotografia de mulheres aparece **depois do hero**: em `#rede`, `#direitos`, `#ajudar` e no CTA final.
 
-**Como isso conversa com o conceito:** a foto do hero começa **dessaturada, em cinza** (a camada "por fora"). Quando a calculadora destrava, a onda que sai do "=" **colore a foto em vinho e rosé**. O desbloqueio passa a transformar o hero inteiro, não só o celular.
+**Como isso conversa com o conceito:** o hero abre limpo, só com o texto e um celular mostrando a calculadora preta (a camada "por fora"). Quando ela destrava no "=", um **brilho vinho suave se espalha em onda pelo fundo branco**, os anéis se desenham e os outros celulares abrem em leque, revelando o app (a camada "por dentro").
 
 ---
 
@@ -218,7 +219,7 @@ Regras:
 - O CTA principal é sempre `primary` com o texto **"Acessar o Amparo"**, `href={APP_URL}`, `target="_blank" rel="noopener"`.
 
 ### 6.2 `Header`
-- Pílula flutuante: `fixed top-4`, `max-w-[1180px]`, `rounded-full`. **Sobre o hero (foto):** `.glass` com texto e logo brancos. **Depois do hero:** `.glass-light` com logo vinho. A troca é um crossfade de 0.3s via ScrollTrigger.
+- Pílula flutuante: `fixed top-4`, `max-w-[1180px]`, `rounded-full`. Sempre `.glass-light` com logo vinho (o hero é claro). Sobre as seções escuras (`#disfarce`, rodapé), troca para `.glass` com logo branco, num crossfade de 0.3s via ScrollTrigger.
 - Esquerda: logo horizontal vinho, altura 28px. Centro: links (desktop). Direita: `Button primary` compacto.
 - Ao rolar para baixo some (`yPercent: -150`); ao rolar para cima volta. Sobre a seção escura, inverte para fundo `vinho-profundo/60` com logo branco.
 - Mobile: logo + botão de menu (pílula 44px), abrindo uma folha de tela cheia com os links em `display-m`.
@@ -308,7 +309,7 @@ Para tudo que fica **sobre fotografia**: header, chips, pílulas e FloatCards so
 - No máximo 4 elementos de vidro visíveis ao mesmo tempo (o blur é caro no mobile).
 
 ### 6.19 `TintedPhoto` (tratamento fotográfico)
-Toda fotografia da página passa pelo **tingimento monocromático vinho/rosé**, como nas refs. BeautyCenter e Neonix:
+Toda fotografia da página (seções internas e CTA final) passa pelo **tingimento monocromático vinho/rosé**, como nas refs. BeautyCenter e Neonix:
 ```css
 .tinted        { position: relative; isolation: isolate; }
 .tinted img    { filter: grayscale(1) contrast(1.05) brightness(1.02); }
@@ -316,20 +317,16 @@ Toda fotografia da página passa pelo **tingimento monocromático vinho/rosé**,
                  background: linear-gradient(160deg, rgb(149 75 110 / .7) 0%, #954B6E 55%, #4B2A3F 100%); }
 .tinted::after { content:""; position:absolute; inset:0; z-index:2; /* legibilidade do texto */
                  background: linear-gradient(90deg, rgb(75 42 63 / .78) 0%, rgb(75 42 63 / .3) 55%, transparent 100%); }
-/* Hero: véu radial (centro e topo mais fortes, figura no terço direito mais livre) */
-.tinted--hero::after { background:
-  radial-gradient(60% 70% at 50% 35%, rgb(75 42 63 / .78) 0%, rgb(75 42 63 / .45) 60%, rgb(75 42 63 / .25) 100%),
-  linear-gradient(180deg, transparent 55%, rgb(75 42 63 / .6) 100%); }
 ```
-- Prop `state="neutral" | "tinted"`. No estado `neutral`, `::before` fica com `opacity: 0` (foto em cinza: a "camada de fora"). O desbloqueio do hero anima para `tinted`.
+- Usado nas fotos das seções internas e do CTA final (o hero não tem foto).
 - O gradiente `::after` muda de direção conforme o lado do texto. No mobile ele é vertical (de baixo para cima).
 - Mesmo com a foto já tingida na origem, manter o `::before` para garantir uma paleta idêntica entre todas as fotos.
 
 ### 6.20 `ConcentricRings`
-SVG com 5 círculos concêntricos, `stroke` branco a 12% (sobre foto) ou `vinho` a 25% (sobre fundo claro), espessura 1px, raios crescendo em progressão (1, 1.35, 1.75, 2.2, 2.7 × r). Centro atrás da cabeça da figura no hero (ref. Neonix) e atrás do botão SOS em `#sos`. Movimento: parallax leve (§7.9) e uma "pulsação" única ao completar o SOSDemo (os anéis se expandem 4% e voltam, em sequência).
+SVG com 5 círculos concêntricos, `stroke` branco a 12% (sobre foto) ou `vinho` a 25% (sobre fundo claro), espessura 1px, raios crescendo em progressão (1, 1.35, 1.75, 2.2, 2.7 × r). Centro atrás do celular central no hero (ref. Task.io), atrás do botão SOS em `#sos` e atrás do título do CTA final. Movimento: parallax leve (§7.9) e uma "pulsação" única ao completar o SOSDemo (os anéis se expandem 4% e voltam, em sequência).
 
 ### 6.21 `CircularBadge`
-Selo de 128px (mobile 96px) com o texto *"Você não está sozinha • Você não está sozinha •"* em SVG `textPath` ao redor, Nunito Sans 600, 11px, tracking 0.18em, e o **símbolo da gota** no centro, em `.glass`. Gira 360° em 24s (`repeat: -1`, `ease: none`); com o scroll, a velocidade acelera um pouco (`ScrollTrigger` `onUpdate` → `timeScale` entre 1 e 3, voltando suavemente). Fica no canto inferior direito da foto do hero e no CTA final. Com movimento reduzido: parado.
+Selo de 128px (mobile 96px) com o texto *"Você não está sozinha • Você não está sozinha •"* em SVG `textPath` ao redor, Nunito Sans 600, 11px, tracking 0.18em, e o **símbolo da gota** no centro. Fundo `branco` com borda `borda` sobre fundo claro, ou `.glass` sobre foto. Gira 360° em 24s (`repeat: -1`, `ease: none`); com o scroll, a velocidade acelera um pouco (`ScrollTrigger` `onUpdate` → `timeScale` entre 1 e 3, voltando suavemente). Fica no canto inferior esquerdo do hero e no CTA final. Com movimento reduzido: parado.
 
 ### 6.22 `PhotoCard` e `ArchPhoto`
 - **`PhotoCard`** (ref. LawnBuster): foto tingida, `r-card-lg`, proporção 4:5, overlay escuro na base, título em `display-m` branco, texto curto e um botão-ícone redondo de vidro no canto. Usado em `#direitos`.
@@ -375,15 +372,15 @@ gsap.ticker.lagSmoothing(0);
 | Longo | 1.2s | Momento do hero |
 
 ### 7.1 Hero: "Desbloqueio" (assinatura da página)
-Timeline no carregamento, ~3,2s no total:
-1. `0.0s` O hero começa **neutro**: a foto de fundo em **cinza** (`TintedPhoto state="neutral"`), sem anéis, sem selo e **só com o celular central** visível, mostrando a `CalculatorScreen`. O H1 ainda não aparece. (Para o texto não ficar ausente por muito tempo, o chip e o H1 podem entrar já no passo 3 se o teste com usuárias mostrar espera longa.)
-2. `0.3s` As teclas `1`, `9`, `0`, `7` "acendem" uma a uma (escala 0.92 + clarear, 180ms cada) e o display mostra `1907`.
-3. `1.2s` A tecla `=` é pressionada.
-4. `1.35s` A partir da posição da tecla "=" do **celular central**, uma **camada da mesma foto, já tingida em vinho/rosé**, se revela por `clip-path: circle(0% at X Y) → circle(150% at X Y)` sobre a versão cinza (0.9s, `expo.inOut`): a cor se espalha em onda a partir do "=". Ao mesmo tempo, a tela do celular faz crossfade da calculadora para a `HomeScreen`, e os `ConcentricRings` se desenham de dentro para fora (stagger 0.08).
-5. `1.9s` H1 entra por linhas com `SplitText` (`yPercent: 110 → 0`, máscara, stagger 0.08).
-6. `2.3s` Subtítulo, botões, barra de vidro inferior e `CircularBadge` entram. A foto termina um `scale` 1.08 → 1 que começou no passo 4.
-7. `2.6s` Os **celulares laterais** sobem da base e abrem em leque (`y: 120 → 0`, `rotate: 0 → ±12`, 0.9s, `expo.out`). Depois, pílulas, cartões e círculos de ícone aparecem a partir do celular central (`scale 0.8 → 1`, stagger 0.1).
-- Botão discreto "↺ Ver de novo" no canto do celular (reinicia a timeline).
+Timeline no carregamento, ~3,6s no total. O texto aparece **primeiro**, para a visitante nunca ficar esperando para entender a página:
+1. `0.0s` Fundo **branco puro**, sem véu e sem anéis. Chip e H1 entram por linhas com `SplitText` (`yPercent: 110 → 0`, máscara, stagger 0.08, `expo.out`). Logo depois entram subtítulo, botões e os três checks (0.6s, `y: 16 → 0` + opacity).
+2. `0.4s` Só o **celular central** sobe da base do shell (`yPercent: 40 → 0`, 1s, `expo.out`) mostrando a `CalculatorScreen`.
+3. `1.3s` As teclas `1`, `9`, `0`, `7` "acendem" uma a uma (escala 0.92 + clarear, 180ms cada) e o display mostra `1907`.
+4. `2.2s` A tecla `=` é pressionada.
+5. `2.35s` A partir da posição da tecla "=", a camada do **véu vinho** (`--grad-suave`) se revela sobre o branco por `clip-path: circle(0% at X Y) → circle(150% at X Y)` (1s, `expo.inOut`): a cor se espalha em onda a partir do "=". Ao mesmo tempo, a tela do celular faz crossfade da calculadora para a `HomeScreen`, e os `ConcentricRings` se desenham de dentro para fora (stagger 0.08).
+6. `2.9s` Os **celulares laterais** sobem de trás do central e abrem em leque (`y: 120 → 0`, `rotate: 0 → ±12`, 0.9s, `expo.out`).
+7. `3.2s` Pílulas, cartões flutuantes, círculos de ícone e o `CircularBadge` aparecem a partir do celular central (`scale 0.8 → 1`, stagger 0.1).
+- Botão discreto "↺ Ver de novo" junto ao celular central (reinicia a parte do celular, passos 3–7).
 - `prefers-reduced-motion`: estado final direto, sem timeline.
 
 ### 7.2 `#disfarce`: pin com scroll
@@ -425,8 +422,8 @@ Linha vertical (mobile) ou horizontal (desktop) que se preenche com `scrub` conf
 Aplicar **exatamente** nestes lugares, com estes valores (todos com `scrub: true` sobre o Lenis, que já suaviza; não somar `scrub` numérico alto):
 | Elemento | Efeito | Valores |
 |---|---|---|
-| Foto do hero | Parallax para baixo + leve zoom ao sair | `yPercent: 0 → 18`, `scale: 1 → 1.08`, `start: "top top"`, `end: "bottom top"` |
-| Celular central do hero | Sobe mais rápido que a foto | `yPercent: 0 → -14` |
+| Véu vinho e anéis do hero | Ficam para trás (mais lentos) | `yPercent: 0 → 15`, anéis `scale: 1 → 1.15`, `start: "top top"`, `end: "bottom top"` |
+| Celular central do hero | Sobe mais rápido que o fundo | `yPercent: 0 → -14` |
 | Celulares laterais | Abrem mais o leque ao rolar | `rotate: ±12 → ±18`, `x: 0 → ∓40`, `yPercent: 0 → -6` |
 | Pílulas e cartões do hero | Velocidades diferentes entre si (profundidade) | `y: 0 → -60 / -110 / -40 / -90` |
 | Texto do hero | Some ao sair | `opacity: 1 → 0`, `y: 0 → -40`, só entre 0% e 40% do scroll do hero |
@@ -441,7 +438,7 @@ Não animar parágrafos, cartões de texto, ícones nem listas: eles simplesment
 ### 7.10 Performance (o que garante o "não travado")
 - Animar só `transform`, `opacity` e `clip-path`.
 - `will-change: transform` **apenas** nos elementos com parallax ativo (aplicar no `onEnter` e remover no `onLeave` dos triggers longos).
-- Fotos: AVIF/WebP com `srcset` (640/1080/1600/2200), hero com `fetchpriority="high"` e o restante `loading="lazy"`. Hero ≤ 250 KB.
+- Fotos: AVIF/WebP com `srcset` (640/1080/1600/2200), a primeira foto visível com `fetchpriority="high"` e o restante `loading="lazy"`. Nenhuma foto acima de 300 KB. No hero, as telas do celular são **codadas** (sem imagem pesada acima da dobra).
 - `backdrop-filter` em no máximo 4 elementos visíveis ao mesmo tempo. Em telas < 768px, blur reduzido para 12px.
 - Nenhum listener de `scroll` próprio: tudo via ScrollTrigger e Lenis.
 - `ScrollTrigger.config({ ignoreMobileResize: true })` e `normalizeScroll` desligado (o Lenis já cuida).
@@ -475,14 +472,13 @@ A fotografia agora é **protagonista** (refs. BeautyCenter, Neonix, Moonsync e L
 **Slots (`public/images/`):**
 | Arquivo | Onde | Proporção / tamanho | Descrição |
 |---|---|---|---|
-| `hero-mulher.jpg` | Fundo do hero (tela cheia no shell) | 16:9, 2400×1350 (+ recorte 4:5 para mobile, `hero-mulher-mobile.jpg`) | **Foto moderna** de uma mulher de 25–35 anos **usando o celular**: olhando para a tela com expressão tranquila, rosto levemente iluminado pela tela, num ambiente urbano contemporâneo (janela grande, concreto claro ou café minimalista), luz natural lateral. **Figura no terço direito, enquadramento da cintura para cima, centro e topo do quadro livres** (para o texto e os celulares). Fundo com profundidade de campo rasa |
 | `rede-duas-mulheres.jpg` | `ArchPhoto` em `#rede` | 3:4 | Duas mulheres lado a lado, uma com o braço no ombro da outra, sorrindo de leve, rostos parcialmente cortados |
 | `direitos-1.jpg` … `direitos-4.jpg` | `PhotoCard` em `#direitos` | 4:5 | Detalhes, sem rosto: mão segurando um caderno; mão no celular; duas mãos se tocando sobre uma mesa; mulher de costas olhando pela janela |
 | `ajudar.jpg` | `ArchPhoto` em `#ajudar` | 3:4 | Duas amigas conversando de perto num sofá, luz suave |
 | `cta-final.jpg` | Fundo do CTA final (tingido, overlay forte) | 16:9 | Mulher caminhando em uma calçada arborizada ao entardecer, de costas ou de perfil, ao estilo da foto de onboarding do app |
-| `og-image.jpg` | Compartilhamento | 1200×630 | Recorte do hero tingido + logo branco + "Você não está sozinha." |
+| `og-image.jpg` | Compartilhamento | 1200×630 | Gerada pelo Claude Code: fundo `--grad-suave`, celular com a `HomeScreen`, logo vinho e "Você não está sozinha." |
 
-**Prompt base para IA** (adicionar a descrição de cada slot no início). Para o hero, use: *modern lifestyle photo, young Brazilian woman using her smartphone, looking at the screen with a calm, confident expression, face softly lit by the screen, contemporary urban interior with large window, subject on the right third of the frame, empty space in the center and top*:
+**Prompt base para IA** (adicionar a descrição de cada slot no início). Exemplo, slot `cta-final.jpg`:
 > *editorial portrait photography, [descrição do slot], Brazilian woman, natural window side light, soft shadows, calm and dignified expression, minimal background, generous negative space on the left, shot on 35mm, shallow depth of field, subtle film grain, muted warm tones, no text, no logo*
 
 Enquanto as fotos não chegam: placeholder em `--grad-vinho` com o símbolo da gota em `white/10` e o mesmo overlay do `TintedPhoto`, para o layout já ficar fiel. Não usar imagens de banco aleatórias.
@@ -496,41 +492,41 @@ Enquanto as fotos não chegam: placeholder em `--grad-vinho` com o símbolo da g
 
 ### Hero (`#inicio`)
 ```
-┌─ shell r-shell · TintedPhoto: mulher usando o celular (figura no terço direito) ┐
-│ ( logo     Como funciona  Recursos  Segurança  Direitos    [Acessar o Amparo] )  │ ← header glass
+┌─ shell r-shell · fundo branco → véu --grad-suave após o desbloqueio ─────────────┐
+│ ( logo     Como funciona  Recursos  Segurança  Direitos    [Acessar o Amparo] )  │ ← header glass-light
 │                                                                                   │
-│                   ( 🛡 Proteção discreta para mulheres )   ← chip glass           │
+│                   ( 🛡 Proteção discreta para mulheres )   ← chip soft            │
 │                                                                                   │
-│                          Você não está sozinha.            ← H1 centralizado      │
+│                          Você não está sozinha.            ← H1 texto, centro     │
 │            Um app que parece uma calculadora, avisa quem você confia...           │
 │                 [Acessar o Amparo]   ( Ver como funciona )                        │
 │              ✓ Gratuito   ✓ Funciona no navegador   ✓ LGPD                        │
-│                                                                    [ figura da   │
-│  (◐ Modo Disfarce)  ◯ ◯ ◯ anéis concêntricos ◯ ◯ ◯   (◉ SOS silencioso)  mulher ]│
-│        ┌glass card┐   ╱‾‾‾‾╲  ┌──────┐  ╱‾‾‾‾╲   ┌glass card────┐               │
-│        │✓ Alerta  │  │alerta│ │calc →│ │ prova│  │Ana Beatriz   │               │
-│        │ enviado  │  │enviad│ │ app  │ │verif.│  │Confirmou·12:31│              │
-│        └──────────┘  ╱      ╲ │(SOS) │ ╱      ╲  └──────────────┘               │
-└────────────────────── celulares cortados pela base do shell ─────────────────────┘
+│                                                                                   │
+│  (◐ Modo Disfarce)   ◯ ◯ ◯ anéis concêntricos vinho claro ◯ ◯ ◯ (◉ SOS silencioso)│
+│  ┌card─────────┐  (●)               ┌──────┐            (●)  ┌card──────────────┐ │
+│  │✓ Alerta     │  ╱‾‾‾‾╲            │calc →│           ╱‾‾‾‾╲ │ Ana Beatriz      │ │
+│  │ enviado     │ │alerta│           │ app  │          │ prova│ │ Confirmou · 12:31│ │
+│  └─────────────┘ │enviad│           │(SOS) │          │verif.│ └──────────────────┘ │
+│ (selo)          ╱       ╲           │      │          ╱      ╲                    │
+└───────────────────────── celulares cortados pela base do shell ──────────────────┘
 ```
 **Composição:**
-- **Texto centralizado** no topo, `max-w-[820px] mx-auto text-center`. H1 em `display-xl` numa linha só no desktop (`Você não está sozinha.`) e em duas no mobile. Texto branco sobre o véu do `TintedPhoto`.
-- **Celulares em leque** (ref. Task.io), saindo da base do shell e cortados por ela (`overflow-hidden` no shell):
-  - **Central** (`PhoneFrame` maior, ~300px de largura no desktop): a `CalculatorScreen` que vira `HomeScreen` no desbloqueio (§7.1).
-  - **Esquerdo** (rotate `-12deg`, 85% do tamanho, mais baixo): tela **"Alerta enviado"** (`AlertScreen`, codada ou imagem `alerta-enviado.png`).
-  - **Direito** (rotate `12deg`, 85%, mais baixo): tela **"Prova verificada"** (imagem `prova-verificada.png` ou codada).
-- **Pílulas inclinadas** (`Chip` grande em `.glass-light`, rotate ±6°, ícone num círculo `vinho` com ícone branco): *Modo Disfarce* (esquerda alta) e *SOS silencioso* (direita alta). São links âncora.
-- **Cartões flutuantes** (`FloatCard` em `.glass-light`): *✓ Alerta enviado · Sua rede foi avisada* (esquerda) e *Ana Beatriz · Confirmou · 12:31*, com avatar (direita).
+- **Fundo:** branco (`branco`) no carregamento; depois do desbloqueio, `--grad-suave` (véu de vinho em baixa opacidade). Nada de foto.
+- **Texto centralizado** no topo, `max-w-[820px] mx-auto text-center`, cor `texto`. H1 em `display-xl` numa linha só no desktop (`Você não está sozinha.`) e em duas no mobile. Chip no estilo `soft`. Subtítulo em `lead` `texto-secundario`.
+- **Celulares em leque** (ref. Task.io), saindo da base do shell e cortados por ela (`overflow-hidden` no shell). Usam `shadow-phone`, que se destaca bem no branco:
+  - **Central** (`PhoneFrame` maior, ~320px de largura no desktop): a `CalculatorScreen` que vira `HomeScreen` no desbloqueio (§7.1). Telas **codadas**, nítidas em qualquer tamanho.
+  - **Esquerdo** (rotate `-12deg`, 85% do tamanho, mais baixo, atrás do central): tela **"Alerta enviado"** (`AlertScreen`, de preferência codada).
+  - **Direito** (rotate `12deg`, 85%, mais baixo): tela **"Prova verificada"** (de preferência codada).
+- **Pílulas inclinadas** (`Chip` grande, fundo `branco`, borda `borda`, `shadow-float`, rotate ±6°, ícone num círculo `vinho` com ícone branco): *Modo Disfarce* (esquerda alta) e *SOS silencioso* (direita alta). São links âncora.
+- **Cartões flutuantes** (`FloatCard` branco com `shadow-float`): *✓ Alerta enviado · Sua rede foi avisada* (esquerda) e *Ana Beatriz · Confirmou · 12:31*, com avatar (direita).
 - **Círculos de ícone sobre os celulares laterais** (ref. Task.io): círculo `vinho` de 56px com borda branca de 4px e um ícone (`MapPin` no esquerdo, `ShieldCheck` no direito), com uma pequena seta de cursor ao lado.
-- **Anéis concêntricos** (`ConcentricRings`, branco a 12%) centrados atrás do celular central, com raio máximo maior que a largura do shell.
-- **A mulher:** foto de fundo em tela cheia; a figura fica no **terço direito**, com profundidade de campo rasa. O véu do `TintedPhoto` é **radial**, mais forte no centro e no topo (onde ficam o texto e os celulares) e mais leve no lado da figura, para ela continuar visível.
-- `CircularBadge` no canto inferior esquerdo do shell.
-- Altura: `min-h-[100svh]` (desktop `min-h-[860px]`), com os celulares ocupando ~40% inferiores.
+- **Anéis concêntricos** (`ConcentricRings`, `vinho` a 12–25%) centrados atrás do celular central, com raio máximo maior que a largura do shell.
+- `CircularBadge` (em `branco` com borda `borda`) no canto inferior esquerdo do shell.
+- Altura: `min-h-[100svh]` (desktop `min-h-[880px]`), com os celulares ocupando ~45% inferiores.
 
 **Mobile (360–767px):**
-- Foto em recorte 4:5 (`hero-mulher-mobile.jpg`) com a mulher **centralizada**, atrás de tudo, véu mais forte.
 - Texto centralizado, CTAs empilhados em largura total.
-- Só o **celular central** + 1 pílula (*Modo Disfarce*) + 1 cartão (*Alerta enviado*). Os celulares laterais e o selo somem.
+- Só o **celular central** (~260px), 1 pílula (*Modo Disfarce*) e 1 cartão (*Alerta enviado*). Os celulares laterais e o selo somem.
 
 ### Contexto e dores
 Fundo `branco`. H2 à esquerda (7 col) e texto à direita (5 col). Grid de stats abaixo. Em seguida, as dores no formato lista de `PainCard`, com o fecho em `lead` e o link `ghost`.

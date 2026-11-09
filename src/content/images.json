@@ -1,0 +1,68 @@
+{
+  "rede-duas-mulheres": {
+    "width": 768,
+    "height": 1024,
+    "widths": [
+      640,
+      768
+    ]
+  },
+  "ajudar": {
+    "width": 622,
+    "height": 829,
+    "widths": [
+      622
+    ]
+  },
+  "direitos-1": {
+    "width": 819,
+    "height": 1024,
+    "widths": [
+      640,
+      819
+    ]
+  },
+  "direitos-2": {
+    "width": 819,
+    "height": 1024,
+    "widths": [
+      640,
+      819
+    ]
+  },
+  "direitos-3": {
+    "width": 819,
+    "height": 1024,
+    "widths": [
+      640,
+      819
+    ]
+  },
+  "direitos-4": {
+    "width": 819,
+    "height": 1024,
+    "widths": [
+      640,
+      819
+    ]
+  },
+  "cta-final": {
+    "width": 2048,
+    "height": 1152,
+    "widths": [
+      640,
+      1080,
+      1600,
+      2048
+    ]
+  },
+  "cta-final-mobile": {
+    "width": 1248,
+    "height": 1560,
+    "widths": [
+      640,
+      1080,
+      1248
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+/* Tokens do design system do app (DESIGN.md §3.5). Não criar cores novas. */
+@theme {
+  --font-display: 'Quicksand', ui-rounded, system-ui, sans-serif;
+  --font-sans: 'Nunito Sans', system-ui, sans-serif;
+
+  --color-vinho: #954b6e;
+  --color-vinho-profundo: #4b2a3f;
+  --color-sos: #c62828;
+  --color-confirma: #2e7d6b;
+
+  --color-branco: #ffffff;
+  --color-superficie: #f3edef;
+  --color-borda: #e4d3d9;
+  --color-texto: #111111;
+  --color-texto-secundario: #5d5d5d;
+
+  --color-calc-preto: #000000;
+  --color-calc-cinza: #333333;
+  --color-calc-claro: #a5a5a5;
+  --color-calc-laranja: #ff9f0a;
+
+  --radius-shell: 2.5rem;
+  --radius-card-lg: 1.75rem;
+  --radius-card: 1.25rem;
+  --radius-phone: 3rem;
+
+  --shadow-float: 0 24px 48px -16px rgb(75 42 63 / 0.22), 0 4px 12px -4px rgb(75 42 63 / 0.1);
+  --shadow-phone: 0 50px 100px -30px rgb(75 42 63 / 0.45);
+
+  --ease-amparo: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Variáveis auxiliares (DESIGN.md §3.1 e §3.4) */
+:root {
+  --grad-vinho: linear-gradient(135deg, #954b6e 0%, #4b2a3f 100%);
+  --grad-suave:
+    radial-gradient(70% 90% at 80% 10%, rgb(149 75 110 / 0.14) 0%, transparent 60%),
+    radial-gradient(60% 80% at 10% 90%, rgb(75 42 63 / 0.08) 0%, transparent 60%), #ffffff;
+  --shadow-sos: 0 0 0 12px rgb(198 40 40 / 0.12), 0 0 0 28px rgb(198 40 40 / 0.06);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-branco font-sans text-texto antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-vinho);
+    outline-offset: 3px;
+  }
+}
