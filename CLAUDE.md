@@ -1,5 +1,7 @@
 # CLAUDE.md — Landing page do Amparo
 
+> Antes de qualquer coisa, leia o PROGRESSO.md para saber onde o trabalho parou.
+
 Você vai preparar o ambiente e construir **toda a parte visual** da landing page do **Amparo**, um app discreto de proteção para mulheres em situação de violência doméstica (TCC de Ciência da Computação, UNIRP). O objetivo da página é levar a visitante a **acessar o app**, que roda como web app na Netlify.
 
 ## Fontes de verdade (ler antes de qualquer código)
