@@ -16,40 +16,45 @@
       1086
     ]
   },
-  "direitos-1": {
+  "contexto": {
     "width": 1122,
     "height": 1402,
     "widths": [
       640,
       1080,
       1122
+    ]
+  },
+  "direitos-1": {
+    "width": 841,
+    "height": 1402,
+    "widths": [
+      640,
+      841
     ]
   },
   "direitos-2": {
-    "width": 1122,
+    "width": 841,
     "height": 1402,
     "widths": [
       640,
-      1080,
-      1122
+      841
     ]
   },
   "direitos-3": {
-    "width": 1122,
+    "width": 841,
     "height": 1402,
     "widths": [
       640,
-      1080,
-      1122
+      841
     ]
   },
   "direitos-4": {
-    "width": 1122,
+    "width": 841,
     "height": 1402,
     "widths": [
       640,
-      1080,
-      1122
+      841
     ]
   },
   "cta-final": {

@@ -30,32 +30,27 @@ A página encena o recurso mais característico do app, o **Modo Disfarce**. Tud
 | **Por fora** | Neutra, escura, mecânica: o preto e o cinza da calculadora, teclas redondas, números | Início do hero, seção `#disfarce` |
 | **Por dentro** | Quente, luminosa e humana: o vinho da marca, fotografia com luz natural, brancos com um leve véu de vinho | Todo o resto |
 
-**O momento memorável (o único lugar onde a página "grita"):** no hero, um celular mostra uma calculadora preta. Ela digita `1907`, toca `=`, e a partir da tecla "=" uma onda circular de cor vinho e rosa se expande, dissolve a calculadora e acende o hero inteiro, revelando o app e a fotografia. Todo o resto da página é calmo e disciplinado para que esse momento seja lembrado.
+**O momento memorável (o único lugar onde a página "grita"):** no hero, um celular mostra uma calculadora preta. Ela digita `1907`, toca `=`, e a partir da tecla "=" um brilho vinho suave se espalha em onda pelo fundo branco e os outros celulares se abrem em leque, revelando o app. Todo o resto da página é calmo e disciplinado para que esse momento seja lembrado.
 
-Síntese das referências visuais enviadas:
-- **Aura de gradiente suave** dentro de um container arredondado e recuado das bordas (refs. Curely e Luminor), feita só com o vinho do app em baixa opacidade sobre branco (`--grad-suave`).
-- **Fotografia de mulher com celular, luz natural e sombras** (ref. Moonsync): digna, serena, nunca em sofrimento.
-- **Cartões de UI flutuando ao redor do celular** (refs. Finexa e Curely), mostrando recursos reais: "Alerta enviado", "Prova verificada", "Ana Beatriz confirmou".
-- **Seção escura** de contraste (refs. Food Delivery e Aurient), em vinho profundo, não em preto.
-- **Faixa marquee** (ref. Food Delivery) com as frases reais do onboarding do app.
-- **Números com fio no topo** (ref. Optibiz) para as estatísticas.
-- **Círculos de linha fina** (ref. Aurient) ecoando o anel do SOS.
-- **Wordmark gigante** atrás do conteúdo (ref. Luminor), usado só no rodapé.
+### Direção visual: **fintech moderna, com calor humano**
+O cliente escolheu 5 referências, e **só elas orientam a composição** (cores e fontes continuam sendo as do app):
 
-**Segunda rodada de referências (BeautyCenter, LawnBuster, Neonix): a fotografia vira protagonista.**
-- **Foto tingida monocromática** no vinho do app (refs. BeautyCenter e Neonix). Ela é usada nas seções internas e no CTA final; **o hero não tem foto** (ver 4ª rodada).
-- **Vidro (glassmorphism)** na navegação, nos chips e nos cartões que se sobrepõem à foto (ref. BeautyCenter).
-- **Círculos concêntricos de linha fina** saindo de trás da figura (ref. Neonix), que aqui ecoam o anel do SOS.
-- **Selo circular girando** com texto em volta (ref. BeautyCenter), com "Você não está sozinha" girando ao redor do símbolo da gota.
-- **Fotos em formato de arco ou pílula** e **cartões com foto + overlay** (refs. BeautyCenter e LawnBuster).
-- ~~Barra inferior em vidro no hero~~ (substituída pelas pílulas e celulares em leque da 3ª rodada).
+| Ref. | Nome | O que define na landing |
+|---|---|---|
+| **11** | Task.io | **O hero inteiro:** fundo claro, texto centralizado, 3 celulares em leque saindo da base, pílulas inclinadas, cartões flutuantes, círculos de ícone e anéis concêntricos ao fundo |
+| **03** | Finexa | **A linguagem "fintech" das seções:** muito branco, **fragmentos reais da interface do app** como ilustração (cartões de UI flutuando ao redor do celular e dentro dos cartões), bento que mistura foto, número e destaque, passos em cartões com mini-UI dentro, FAQ limpo |
+| **01** | Curely | **Organização dos recursos:** bento com um **cartão alto central com o celular** e cartões de recurso ao redor, gradiente suave nos fundos, faixa de CTA em gradiente vinho |
+| **08** | BeautyCenter | **Fotografia e acabamento:** fotos tingidas no vinho do app, **vidro** sobre foto, **fotos com topo em arco ou pílula**, selo circular girando |
+| **06** | Moonsync | **Tom das fotos:** mulher com celular, luz natural e sombras, serena e digna; espaço negativo generoso |
 
-**Terceira e quarta rodadas (Task.io): composição final do hero.**
-- **Fundo branco** com o véu suave de vinho (`--grad-suave`). **Sem foto no hero:** o protagonista é o **app**.
-- Texto **centralizado** no topo (chip, H1, subtítulo e CTAs), como na Task.io.
-- **Três celulares em leque** saindo da base do hero, mostrando telas reais do app: o central reto e os laterais inclinados. Em volta, **pílulas inclinadas** e **cartões flutuantes** com ícone num círculo vinho.
-- **Anéis concêntricos** grandes, em vinho bem claro, centrados atrás dos celulares.
-- A fotografia de mulheres aparece **depois do hero**: em `#rede`, `#direitos`, `#ajudar` e no CTA final.
+**O que faz a página parecer "fintech moderna" (regras de acabamento):**
+- **Base branca** (`branco`), com respiros grandes. `superficie` só em painéis pontuais. Uma única seção escura (`#disfarce`), que se justifica pelo conceito da calculadora.
+- **O produto é a ilustração.** Em cada seção de recurso aparece um pedaço real da interface do app ("Alerta enviado", "Prova verificada", lista de guardiãs, card de leitura de risco), feito em código, nítido, com `shadow-float`. Nada de ícones genéricos gigantes ou ilustrações abstratas.
+- **Cartões precisos:** fundo branco, borda 1px `borda`, raio da escala (§3.2). Sem sombra quando estão "no chão"; com `shadow-float` quando "flutuam" sobre outro elemento.
+- **Números com cara de produto:** Quicksand com `tabular-nums`, grandes, dentro de cartões (como o "450M+" da Finexa).
+- **Fotografia como contraponto humano:** cada foto aparece recortada (arco, pílula ou cartão), tingida e, quando possível, com um fragmento de UI sobreposto, unindo pessoa e produto.
+
+**Saíram da direção** (vinham de referências não escolhidas): faixa marquee, números com fio no topo, wordmark gigante no rodapé, carrossel de cartões com foto e anéis sobre foto escura.
 
 **Como isso conversa com o conceito:** o hero abre limpo, só com o texto e um celular mostrando a calculadora preta (a camada "por fora"). Quando ela destrava no "=", um **brilho vinho suave se espalha em onda pelo fundo branco**, os anéis se desenham e os outros celulares abrem em leque, revelando o app (a camada "por dentro").
 
@@ -166,7 +161,7 @@ Duas famílias, **as mesmas do app**, com papéis bem distintos:
 
 | Família | Papel | Pesos |
 |---|---|---|
-| **Quicksand** (Google Fonts) | Display: H1, H2, números grandes, wordmark do rodapé. A geometria arredondada ecoa o logotipo | 500, 600, 700 |
+| **Quicksand** (Google Fonts) | Display: H1, H2, números grandes. A geometria arredondada ecoa o logotipo | 500, 600, 700 |
 | **Nunito Sans** (Google Fonts) | Texto, interface, botões, legendas | 400, 600, 700 |
 
 **Sem fontes novas.** As referências misturam sans com serifa itálica, mas a tipografia é a do app e não muda. A personalidade vem da **escala**: Quicksand muito grande, com tracking negativo, vira forma. Quando um título quebra em duas linhas (ex.: `Você não está` / `sozinha.`), as duas linhas usam a mesma fonte, o mesmo peso e a mesma cor.
@@ -248,27 +243,33 @@ No desktop, flutuação lenta (`y ±6px`, 4–6s, `yoyo`). Com movimento reduzid
 ### 6.7 `Chip` / `Pill`
 `rounded-full`, `px-3.5 py-1.5`, `caption`. Variantes: `soft` (fundo `superficie`, texto `vinho-profundo`), `glass` (fundo `white/50`, `backdrop-blur`, borda `white/60`, sobre foto ou gradiente) e `outline`. Os rótulos dos pilares ("Proteger", "Documentar", "Conectar", "Transformar") usam `soft` com um ponto de 6px `vinho` à esquerda.
 
-### 6.8 `StatItem`
-Fio de 2px `vinho` no topo (largura 40px que cresce até 100% quando o número entra na tela), `numero` em Quicksand, rótulo em `small` `texto-secundario` com `max-w-[22ch]`. Grid de 4 colunas no desktop e 2 no mobile.
+### 6.8 `StatCard`
+Cartão de número (ref. Finexa): fundo `branco`, borda `borda`, `r-card-lg`, `p-6 md:p-8`, altura mínima de 220px. Número em `numero` (Quicksand 500, `tabular-nums`, cor `texto`) no topo e rótulo em `small` `texto-secundario` com `max-w-[24ch]` na base, nas pontas opostas do cartão.
+- **Variante `destaque`:** fundo `--grad-vinho`, texto branco. Só uma por grupo.
+- **Variante `foto`:** `TintedPhoto` de fundo, número e rótulo em branco na base.
 
 ### 6.9 `PainCard` (dores)
 **Não** é um cartão com sombra. É uma linha de lista: ícone lucide num círculo 44px `superficie`, título `display-m` menor (`1.375rem`) e texto `body`, separados por divisória `borda`. Layout em 2 colunas no desktop, com a primeira dor ocupando a largura toda.
 
 ### 6.10 `BentoGrid` (recursos)
-6 itens em tamanhos **diferentes**, de acordo com a importância:
+Estrutura da ref. Curely: **um cartão alto central com o celular** e os recursos ao redor.
 ```
 desktop (12 col)
-┌───────────────────────┬─────────────┐
-│ SOS silencioso (7)    │ Cofre (5)   │
-│ [mini SOS + anel]     │ [hash]      │
-├────────────┬──────────┴─────────────┤
-│ Rede (5)   │ Leitura de risco (7)   │
-│ [avatares] │ [3 níveis]             │
-├────────────┴─────┬──────────────────┤
-│ Direitos (6)     │ Modo Disfarce(6) │
-└──────────────────┴──────────────────┘
+┌────────────────┬──────────────────┬────────────────┐
+│ SOS silencioso │                  │ Cofre de provas│
+│ [mini SOS+anel]│   CARTÃO ALTO    │ [selo + hash]  │
+├────────────────┤  (4 col, 2 lin)  ├────────────────┤
+│ Rede de apoio  │  fundo superficie│ Leitura de     │
+│ [3 avatares ✓] │  + PhoneFrame    │ risco [card]   │
+│                │  com HomeScreen  │                │
+├────────────────┴────────┬─────────┴────────────────┤
+│ Seus direitos (6 col)   │ Modo Disfarce (6) preto  │
+└─────────────────────────┴──────────────────────────┘
+mobile: cartão do celular primeiro, depois os 6 recursos em 1 coluna
 ```
-Cartões em `branco` com borda `borda` e `r-card-lg`. O cartão do Modo Disfarce é **preto**, como a calculadora (as duas camadas aparecem até aqui). Cada cartão tem uma mini-ilustração **codada** (não imagem) e é um link âncora para a seção detalhada.
+- Cartões em `branco` com borda `borda` e `r-card-lg`. O cartão central tem fundo `superficie`, com o celular saindo pela base (cortado, como na Curely).
+- O cartão do **Modo Disfarce** é **preto**, como a calculadora: as duas camadas aparecem até aqui.
+- Cada cartão traz: ícone num círculo `vinho` de 40px (ícone branco), título `display-m` menor (`1.375rem`), uma linha de texto e um **mini fragmento de UI codado** (não imagem). O cartão inteiro é um link âncora para a seção detalhada.
 
 ### 6.11 `SOSDemo`
 - Botão circular de 160px, `sos-600`, ícone `TriangleAlert` + "SOS" em Quicksand 700 branco, com `--shadow-sos`.
@@ -288,13 +289,10 @@ Itens com divisória `borda`, pergunta em `display-m` menor (`1.25rem`) e ícone
 ### 6.15 `EmergencyBar`
 Faixa `vinho-profundo`, texto `white/80`, com **190** e **180** em Quicksand 700 branco, como links `tel:`. Aparece acima do rodapé e, em versão compacta, no topo do FAQ.
 
-### 6.16 `Marquee`
-Faixa `vinho` de 72px com as frases do onboarding do app em Quicksand 600 branco, `1.5rem`: *Você não está sozinha* · *Guarde o que importa* · *Uma rede com você* · *Sua história, suas escolhas*. Separador: o **símbolo da gota** em branco, 20px (não usar ponto ou "·"). Loop infinito com GSAP (`xPercent`), 40s por volta; pausa no hover e com movimento reduzido.
+### 6.16 `Footer`
+Fundo `vinho-profundo`, em 3 faixas: (1) logo branco + lema à esquerda, colunas de links à direita; (2) `EmergencyBar`; (3) texto legal + © em `small` `white/60`, separado por uma divisória `white/10`.
 
-### 6.17 `Footer`
-Fundo `vinho-profundo`. Logo branco, lema, links e texto legal (`COPY.md` 3.18). Embaixo, o **wordmark "Amparo" gigante** (Quicksand 700, `font-size: 22vw`, cor `white/6`, cortado na base: `overflow-hidden` com `translateY(30%)`).
-
-### 6.18 `Glass` (superfície de vidro)
+### 6.17 `Glass` (superfície de vidro)
 Para tudo que fica **sobre fotografia**: header, chips, pílulas e FloatCards sobre a foto, e botões secundários sobre a foto.
 ```css
 .glass      { background: rgb(255 255 255 / .14); border: 1px solid rgb(255 255 255 / .28);
@@ -308,8 +306,8 @@ Para tudo que fica **sobre fotografia**: header, chips, pílulas e FloatCards so
 - Fallback sem `backdrop-filter` (`@supports not`): fundo sólido `vinho-profundo/85`.
 - No máximo 4 elementos de vidro visíveis ao mesmo tempo (o blur é caro no mobile).
 
-### 6.19 `TintedPhoto` (tratamento fotográfico)
-Toda fotografia da página (seções internas e CTA final) passa pelo **tingimento monocromático vinho/rosé**, como nas refs. BeautyCenter e Neonix:
+### 6.18 `TintedPhoto` (tratamento fotográfico)
+Toda fotografia da página (seções internas e CTA final) passa pelo **tingimento monocromático no vinho do app**, como na ref. BeautyCenter:
 ```css
 .tinted        { position: relative; isolation: isolate; }
 .tinted img    { filter: grayscale(1) contrast(1.05) brightness(1.02); }
@@ -322,14 +320,14 @@ Toda fotografia da página (seções internas e CTA final) passa pelo **tingimen
 - O gradiente `::after` muda de direção conforme o lado do texto. No mobile ele é vertical (de baixo para cima).
 - Mesmo com a foto já tingida na origem, manter o `::before` para garantir uma paleta idêntica entre todas as fotos.
 
-### 6.20 `ConcentricRings`
+### 6.19 `ConcentricRings`
 SVG com 5 círculos concêntricos, `stroke` branco a 12% (sobre foto) ou `vinho` a 25% (sobre fundo claro), espessura 1px, raios crescendo em progressão (1, 1.35, 1.75, 2.2, 2.7 × r). Centro atrás do celular central no hero (ref. Task.io), atrás do botão SOS em `#sos` e atrás do título do CTA final. Movimento: parallax leve (§7.9) e uma "pulsação" única ao completar o SOSDemo (os anéis se expandem 4% e voltam, em sequência).
 
-### 6.21 `CircularBadge`
+### 6.20 `CircularBadge`
 Selo de 128px (mobile 96px) com o texto *"Você não está sozinha • Você não está sozinha •"* em SVG `textPath` ao redor, Nunito Sans 600, 11px, tracking 0.18em, e o **símbolo da gota** no centro. Fundo `branco` com borda `borda` sobre fundo claro, ou `.glass` sobre foto. Gira 360° em 24s (`repeat: -1`, `ease: none`); com o scroll, a velocidade acelera um pouco (`ScrollTrigger` `onUpdate` → `timeScale` entre 1 e 3, voltando suavemente). Fica no canto inferior esquerdo do hero e no CTA final. Com movimento reduzido: parado.
 
-### 6.22 `PhotoCard` e `ArchPhoto`
-- **`PhotoCard`** (ref. LawnBuster): foto tingida, `r-card-lg`, proporção 4:5, overlay escuro na base, título em `display-m` branco, texto curto e um botão-ícone redondo de vidro no canto. Usado em `#direitos`.
+### 6.21 `PhotoCard` e `ArchPhoto`
+- **`PhotoCard`** (ref. BeautyCenter): foto tingida, **topo em pílula** (`border-radius: 999px 999px 28px 28px`), proporção 3:5, overlay escuro na base, título em `display-m` branco, texto curto e um botão-ícone redondo de vidro no canto. Usado em `#direitos`.
 - **`ArchPhoto`** (ref. BeautyCenter): foto com o topo em arco (`border-radius: 999px 999px 28px 28px`). Usado em `#rede` (duas mulheres) e `#ajudar`.
 
 ---
@@ -395,7 +393,7 @@ Seção em `vinho-profundo`, `pin: true`, `end: "+=250%"`, `scrub: 0.6`.
 - Mobile: sem pin. Os 4 passos viram uma lista vertical com o celular no topo, trocando de tela com `ScrollTrigger` (`onEnter` de cada passo).
 
 ### 7.3 Contadores (`#contexto`)
-`ScrollTrigger` `once: true`: números de 0 ao valor em 1,6s, `power3.out`, `snap` adequado (inteiros; `64,3` com uma casa e vírgula decimal pt-BR via `Intl.NumberFormat('pt-BR')`). O fio do `StatItem` cresce junto.
+`ScrollTrigger` `once: true`: números de 0 ao valor em 1,6s, `power3.out`, `snap` adequado (inteiros; `64,3` com uma casa e vírgula decimal pt-BR via `Intl.NumberFormat('pt-BR')`). Os `StatCard` não se movem: só o número conta.
 
 ### 7.4 `#rede`: rede se desenhando
 SVG com o símbolo do Amparo no centro e 5 avatares em órbita. Com `scrub`, as linhas do centro até cada avatar se desenham (`DrawSVGPlugin` ou `stroke-dashoffset`) e cada avatar aparece com um check `confirma` quando sua linha completa. A guardiã principal tem um anel `vinho`.
@@ -431,7 +429,6 @@ Aplicar **exatamente** nestes lugares, com estes valores (todos com `scrub: true
 | H2 de cada seção | Linhas sobem por máscara (`SplitText` `type: "lines", mask: "lines"`) | `yPercent: 100 → 0`, `stagger: 0.08`, `duration: 0.9`, `ease: "expo.out"`, `start: "top 85%"`, **uma vez** |
 | `PhotoCard` / `ArchPhoto` | Revelação por máscara + imagem interna com parallax | contêiner `clip-path: inset(100% 0 0 0) → inset(0)` (1.1s, `expo.inOut`, uma vez); `img` `yPercent: -10 → 10` com scrub, imagem com `height: 120%` |
 | Shells (`#disfarce`, CTA final) | Entram "abrindo" das margens | `clip-path: inset(6% 4% round 40px) → inset(0% 0% round 40px)`, scrub entre `top bottom` e `top 30%` |
-| Marquee | Velocidade reage ao scroll | `timeScale` entre 1 e 4 conforme `lenis.velocity`, voltando com `gsap.to(..., { timeScale: 1, duration: 0.6 })` |
 
 Não animar parágrafos, cartões de texto, ícones nem listas: eles simplesmente estão lá. A sensação de fluidez vem das fotos e dos títulos.
 
@@ -455,23 +452,24 @@ Não animar parágrafos, cartões de texto, ícones nem listas: eles simplesment
 | `assets/brand/amparo-logo-horizontal-vinho.png` | Header, fundos claros |
 | `assets/brand/amparo-logo-horizontal-branco.png` | Seções escuras, rodapé |
 | `assets/brand/amparo-logo-vertical-vinho.png` | Favicon grande, OG image |
-| `assets/brand/amparo-simbolo-vinho.png` | Favicon, marquee, centro da rede |
+| `assets/brand/amparo-simbolo-vinho.png` | Favicon, centro da rede, selo circular |
 | `assets/app-screens/*.png` | 16 telas do protótipo (≈450px de largura; usar só em tamanhos ≤ 300px de largura de tela ou trocar por exports em alta) |
 
-**Recomendado:** vetorizar o símbolo em **SVG** (`assets/brand/amparo-simbolo.svg`) para usá-lo no marquee, no SVG da rede e como favicon. O Claude Code pode traçar o símbolo à mão em SVG a partir do PNG (gota + círculo + curva).
+**Recomendado:** vetorizar o símbolo em **SVG** (`assets/brand/amparo-simbolo.svg`) para usá-lo no selo circular, no SVG da rede e como favicon. O Claude Code pode traçar o símbolo à mão em SVG a partir do PNG (gota + círculo + curva).
 
 ### Fotografia (a providenciar)
-A fotografia agora é **protagonista** (refs. BeautyCenter, Neonix, Moonsync e LawnBuster).
+A fotografia agora é **protagonista** (refs. BeautyCenter e Moonsync).
 
 **Direção:**
 - Mulheres brasileiras reais e diversas (idades e tons de pele variados), **serenas, dignas e em movimento**: olhando para longe, segurando o celular junto ao corpo, caminhando. Força tranquila, não fragilidade.
 - Luz natural lateral, sombras suaves, fundo simples (parede, janela, cortina). Espaço negativo do lado onde vai o texto.
-- Todas recebem o `TintedPhoto` (§6.19), então a cor original importa pouco. O que importa é **luz e contraste**.
+- Todas recebem o `TintedPhoto` (§6.18), então a cor original importa pouco. O que importa é **luz e contraste**.
 - **Nunca:** hematomas, choro, mãos cobrindo o rosto, sombras ameaçadoras de homem, olhar de medo, ou qualquer imagem de violência.
 
 **Slots (`public/images/`):**
 | Arquivo | Onde | Proporção / tamanho | Descrição |
 |---|---|---|---|
+| `contexto.jpg` | `StatCard` foto em `#contexto` | 4:5 | Mulher sentada perto de uma janela em casa, segurando uma caneca, olhar pensativo para fora, luz suave de manhã; rosto de perfil, sem tristeza exagerada |
 | `rede-duas-mulheres.jpg` | `ArchPhoto` em `#rede` | 3:4 | Duas mulheres lado a lado, uma com o braço no ombro da outra, sorrindo de leve, rostos parcialmente cortados |
 | `direitos-1.jpg` … `direitos-4.jpg` | `PhotoCard` em `#direitos` | 4:5 | Detalhes, sem rosto: mão segurando um caderno; mão no celular; duas mãos se tocando sobre uma mesa; mulher de costas olhando pela janela |
 | `ajudar.jpg` | `ArchPhoto` em `#ajudar` | 3:4 | Duas amigas conversando de perto num sofá, luz suave |
@@ -529,13 +527,23 @@ Enquanto as fotos não chegam: placeholder em `--grad-vinho` com o símbolo da g
 - Só o **celular central** (~260px), 1 pílula (*Modo Disfarce*) e 1 cartão (*Alerta enviado*). Os celulares laterais e o selo somem.
 
 ### Contexto e dores
-Fundo `branco`. H2 à esquerda (7 col) e texto à direita (5 col). Grid de stats abaixo. Em seguida, as dores no formato lista de `PainCard`, com o fecho em `lead` e o link `ghost`.
-
-### Marquee
-Entre `#dores` e `#disfarce`.
+**`#contexto`** (bento ao estilo Finexa):
+```
+┌──────────────────────────────────────────────────────────────┐
+│ H2 (7 col, à esquerda)                 texto (5 col)          │
+├──────────────────┬──────────────┬─────────────┬──────────────┤
+│ StatCard foto    │ StatCard     │ StatCard    │ StatCard     │
+│ (TintedPhoto     │ 64,3%        │ 8 em 10     │ destaque     │
+│  contexto.jpg)   │ dentro de    │ companheiros│ 101.656      │
+│ 1.492            │ casa         │ ou ex       │ medidas      │
+│ feminicídios     │              │             │ descumpridas │
+└──────────────────┴──────────────┴─────────────┴──────────────┘
+fonte em small, abaixo à direita · mobile: 2×2
+```
+**`#dores`:** fundo `branco`, lista de `PainCard` em 2 colunas (a primeira dor ocupa a largura toda), fecho em `lead` e link `ghost`.
 
 ### Modo Disfarce
-Shell `vinho-profundo` (é a "camada de fora"). Texto em `white/80`, H2 branco. Ver 7.2.
+A única seção escura da página. Shell `vinho-profundo` (é a "camada de fora"). Texto em `white/80`, H2 branco. Ver 7.2.
 
 ### Recursos
 H2 centralizado + `BentoGrid`.
@@ -551,19 +559,19 @@ Risco:  [RiskLevels: controle + cartão 7col] [texto 5col]
 Chip do pilar acima de cada H2. O fundo das quatro é `branco`; só a seção de Risco recebe um painel `superficie` arredondado para variar o ritmo.
 
 ### Direitos
-4 `PhotoCard` (§6.22) em **carrossel horizontal** (ref. LawnBuster): no desktop mostram 3,4 cartões com o restante cortado na borda, e setas de vidro à direita do H2; no mobile, scroll horizontal com `snap`. Cada cartão: foto tingida + título + texto do `COPY.md` 3.10. Abaixo, a faixa de chips com as 5 formas de violência.
+4 `PhotoCard` com topo em pílula (ref. BeautyCenter), em **grid de 4 colunas** no desktop, 2 no tablet e rolagem horizontal com `snap` no mobile. Sem setas e sem avanço automático. Cada cartão: foto tingida + título + texto do `COPY.md` 3.10. Abaixo, a faixa de chips com as 5 formas de violência.
 
 ### Segurança
 Fundo `superficie`. H2 + texto à esquerda (sticky no desktop) e grade 2×3 de itens à direita (ícone + título + 1 linha, **sem cartão**, só espaçamento).
 
 ### Como começar
-4 passos com a linha de progresso (7.6). Aqui a numeração faz sentido, porque é uma sequência real. CTA ao final.
+4 **cartões de passo** (ref. Finexa, "Simple Steps"). No topo de cada cartão fica um **mini fragmento codado da tela correspondente do cadastro do app**: campo de e-mail; seleção do Modo Disfarce com o teclado de código; card "Adicionar guardiã"; selo ✓ "Tudo pronto". Embaixo, "Etapa 1"…"Etapa 4" em `caption` `vinho`, depois título e texto. Uma linha fina `borda` liga os cartões e se preenche em `vinho` com o scroll (7.6). Aqui a numeração faz sentido, porque é uma sequência real. CTA centralizado ao final.
 
 ### Para quem quer ajudar
 `ArchPhoto` (`ajudar.jpg`) à esquerda (5 col) e texto + botão "Copiar link do Amparo" à direita (7 col), sobre `superficie`.
 
 ### O projeto
-Texto + stats da IA (mesmo `StatItem`) + ressalva logo abaixo em `small` + chips da stack + equipe em lista simples (nome, e a orientadora destacada no fim).
+Texto + stats da IA (em `StatCard`, o de 99% de recall como `destaque`) + ressalva logo abaixo em `small` + chips da stack + equipe em lista simples (nome, e a orientadora destacada no fim).
 
 ### FAQ
 `EmergencyBar` compacta no topo + `Accordion`.
@@ -572,7 +580,7 @@ Texto + stats da IA (mesmo `StatItem`) + ressalva logo abaixo em `small` + chips
 Shell com `cta-final.jpg` em `TintedPhoto` (overlay mais forte, 80%), texto branco **centralizado**, `Button on-dark`, `ConcentricRings` atrás do título e `CircularBadge` no canto. Entra "abrindo" das margens (§7.9).
 
 ### Rodapé
-`EmergencyBar` + `Footer` (6.17).
+`EmergencyBar` + `Footer` (6.16).
 
 ---
 

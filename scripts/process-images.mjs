@@ -18,7 +18,7 @@ const WIDTHS = [640, 1080, 1600, 2200]
 
 /**
  * crop: região do arquivo-fonte (px do original). Ajustado à mão para cada foto.
- * As fotos não usadas ficam em assets/fotos/reserva/.
+ * Todas as fotos ficam em assets/fotos/; as que não estão em SLOTS são alternativas (ver NOTES.md).
  */
 const SLOTS = [
   // 3:4 — três amigas no banco (1024×1024)
@@ -29,26 +29,28 @@ const SLOTS = [
   },
   // 3:4 — duas amigas conversando no sofá (1086×1448, já 3:4)
   { slot: 'ajudar', file: 'ajudar.png', crop: { left: 0, top: 0, width: 1086, height: 1448 } },
-  // 4:5 — detalhes sem rosto (1122×1402, já 4:5)
+  // 4:5 — StatCard foto em #contexto: mulher na janela com a caneca (1122×1402, já 4:5)
+  { slot: 'contexto', file: 'contexto.png', crop: { left: 0, top: 0, width: 1122, height: 1402 } },
+  // 3:5 — PhotoCard (topo em pílula) em #direitos: detalhes sem rosto (originais 1122×1402)
   {
     slot: 'direitos-1',
     file: 'direitos-1.png',
-    crop: { left: 0, top: 0, width: 1122, height: 1402 },
+    crop: { left: 150, top: 0, width: 841, height: 1402 },
   },
   {
     slot: 'direitos-2',
     file: 'direitos-2.png',
-    crop: { left: 0, top: 0, width: 1122, height: 1402 },
+    crop: { left: 90, top: 0, width: 841, height: 1402 },
   },
   {
     slot: 'direitos-3',
     file: 'direitos-3.png',
-    crop: { left: 0, top: 0, width: 1122, height: 1402 },
+    crop: { left: 140, top: 0, width: 841, height: 1402 },
   },
   {
     slot: 'direitos-4',
     file: 'direitos-4.png',
-    crop: { left: 0, top: 0, width: 1122, height: 1402 },
+    crop: { left: 70, top: 0, width: 841, height: 1402 },
   },
   // 16:9 — caminhada na calçada arborizada (1672×941)
   { slot: 'cta-final', file: 'cta-final.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },

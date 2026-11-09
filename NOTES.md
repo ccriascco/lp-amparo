@@ -46,20 +46,21 @@ O cliente destacou as referências **01 (Curely), 03 (Finexa), 06 (Moonsync), 08
 - Favicons gerados do símbolo vetorial: `favicon.svg`, `favicon-32.png` (transparente), `apple-touch-icon.png` (180, fundo branco) e `icon-512.png`.
 
 ### Fotos (`assets/fotos/` → `public/images/`)
-O hero **não tem foto** (DESIGN.md atualizado: fundo branco + véu vinho). Os originais ficam em `assets/fotos/` com o nome do slot; o que não está em uso fica em `assets/fotos/reserva/`.
+O hero **não tem foto** (DESIGN.md atualizado: fundo branco + véu vinho). Todos os originais ficam numa pasta só, `assets/fotos/`: os que estão em uso têm o nome do slot; os demais têm nomes descritivos e servem de alternativa.
 
 | Slot | Seção | Foto | Recorte |
 |---|---|---|---|
+| `contexto` | `#contexto` (StatCard foto, do DESIGN.md revisado) | Mulher na janela segurando uma caneca, de perfil, serena | 4:5 (original) |
 | `rede-duas-mulheres` | `#rede` (ArchPhoto) | Três amigas no banco, mão no ombro | 3:4 |
 | `ajudar` | `#ajudar` (ArchPhoto) | Duas amigas conversando de perto no sofá, uma com a mão no braço da outra | 3:4 (original) |
-| `direitos-1` | Lei Maria da Penha, explicada | Mão escrevendo num caderno, luz natural | 4:5 (original) |
-| `direitos-2` | Como pedir uma medida protetiva | Mão segurando o celular | 4:5 (original) |
-| `direitos-3` | Monitoramento eletrônico do agressor | Duas mãos se tocando sobre a mesa, com xícaras | 4:5 (original) |
-| `direitos-4` | Sinais de relacionamento abusivo | Mulher de costas olhando a cidade pela janela | 4:5 (original) |
+| `direitos-1` | Lei Maria da Penha, explicada | Mão escrevendo num caderno, luz natural | 3:5 (PhotoCard com topo em pílula) |
+| `direitos-2` | Como pedir uma medida protetiva | Mão segurando o celular | 3:5 |
+| `direitos-3` | Monitoramento eletrônico do agressor | Duas mãos se tocando sobre a mesa, com xícaras | 3:5 |
+| `direitos-4` | Sinais de relacionamento abusivo | Mulher de costas olhando a cidade pela janela | 3:5 |
 | `cta-final` (+ `cta-final-mobile` 4:5) | CTA final | Mulher de costas caminhando na calçada arborizada ao entardecer | 16:9 (original); mobile centrado na figura |
 
 - A segunda leva de fotos corresponde exatamente às descrições do DESIGN.md §8 (detalhes sem rosto em `#direitos`, amigas no sofá em `#ajudar`, caminhada de costas no CTA) e substituiu a primeira nesses slots.
 - O nome `rede-duas-mulheres` foi mantido (slot do DESIGN.md §8), embora a foto tenha três mulheres, para a troca continuar sendo só substituir o arquivo.
-- **Reserva** (`assets/fotos/reserva/`, sem slot no DESIGN.md): `mulher-celular-janela-16x9` e `mulher-celular-poltrona-4x5` (mesma mulher, com o celular, no estilo da ref. 06 Moonsync), `mulher-caminhando-calcada-frente` (a antiga do CTA), `mulher-janela-sorrindo-celular`, `mulher-sofa-lendo-celular`, `mulher-rua-sorrindo-celular`, `mulher-costas-olhando-mar` e `mulher-mostrando-celular-a-senhora` (**atenção:** esta tem um crachá com a marca grafada errado, "Ampore"; se for usada, recortar acima dele).
+- **Alternativas** (em `assets/fotos/`, sem slot no DESIGN.md): `mulher-celular-janela-16x9` e `mulher-celular-poltrona-4x5` (mesma mulher, com o celular, no estilo da ref. 06 Moonsync), `mulher-caminhando-calcada-frente` (a antiga do CTA), `mulher-janela-sorrindo-celular`, `mulher-sofa-lendo-celular`, `mulher-rua-sorrindo-celular`, `mulher-costas-olhando-mar` e `mulher-mostrando-celular-a-senhora` (**atenção:** esta tem um crachá com a marca grafada errado, "Ampore"; se for usada, recortar acima dele).
 - Saídas: AVIF + WebP nas larguras do srcset até o tamanho do original e um `.jpg` de fallback com o nome do slot. Maior arquivo: 177 KB (limite de 300 KB). O script apaga as saídas antigas de cada slot antes de gerar. As dimensões ficam em `src/content/images.json` para o `srcset` e o `width`/`height`.
 - **Pendente:** `og-image.jpg` (1200×630). Pelo DESIGN.md §8 ela é gerada com o celular mostrando a `HomeScreen`, que só existe a partir da Fase 2; será gerada na Fase 5. Até lá, a meta `og:image` aponta para um arquivo que ainda não existe.
