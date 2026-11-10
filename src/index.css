@@ -94,10 +94,11 @@
 }
 
 /* ── Tipografia (DESIGN.md §4) ─────────────────────────────── */
-/* H1 do hero sempre em uma linha (DESIGN §4): clamp calculado para caber em 360px */
+/* H1 do hero sempre em uma linha (DESIGN §4). ~32px no celular (decisão do cliente):
+   o texto mede ≈10,26em, então 8.4vw cabe com folga de 320px (26,9px) a 390px (32,8px). */
 @utility display-xl {
   font-family: var(--font-display);
-  font-size: clamp(1.625rem, 6.6vw, 4.75rem);
+  font-size: clamp(1.625rem, 8.4vw, 4.75rem);
   line-height: 1;
   letter-spacing: -0.03em;
   font-weight: 600;

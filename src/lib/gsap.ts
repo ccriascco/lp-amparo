@@ -29,6 +29,8 @@ export function startSmoothScroll(): () => void {
   if (prefersReducedMotion()) return () => {}
   lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, smoothWheel: true })
   lenis.on('scroll', ScrollTrigger.update)
+  // Só em desenvolvimento: scripts/shoot-scroll.mjs rola pelo Lenis.
+  if (import.meta.env.DEV) (window as unknown as { __lenis: Lenis }).__lenis = lenis
   const tick = (t: number) => lenis?.raf(t * 1000)
   gsap.ticker.add(tick)
   gsap.ticker.lagSmoothing(0)

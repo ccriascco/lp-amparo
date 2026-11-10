@@ -3,7 +3,8 @@ import { EmergencyBar } from '../components/ui/EmergencyBar'
 import { Container } from '../components/ui/Section'
 import { faq, footer, nav } from '../content/copy'
 
-const LINKS = [...nav.links, { label: faq.h2, href: '#faq' }]
+// "Dúvidas" (nav) e "Perguntas frequentes" levam ao mesmo #faq: fica só o segundo (rodapé, COPY 3.18).
+const LINKS = [...nav.links.filter((l) => l.href !== '#faq'), { label: faq.h2, href: '#faq' }]
 
 /** Rodapé (DESIGN.md §6.16): marca + links · EmergencyBar · texto legal. */
 export function Footer() {
