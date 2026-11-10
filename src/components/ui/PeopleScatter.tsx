@@ -25,9 +25,15 @@ const PHOTOS: Floating[] = [
     size: 156,
     speed: 1.3,
     ratio: 'portrait',
-    mobile: { left: '0%', top: '0%' },
+    mobile: { left: '5%', top: '3%' },
   },
-  { slot: 'direitos-1', pos: { left: '29%', top: '4%' }, size: 112, speed: 0.6 },
+  {
+    slot: 'direitos-1',
+    pos: { left: '29%', top: '4%' },
+    size: 112,
+    speed: 0.6,
+    mobile: { left: '40%', top: '1%' },
+  },
   {
     slot: 'direitos-3',
     pos: { right: '5%', top: '11%' },
@@ -43,7 +49,8 @@ const PHOTOS: Floating[] = [
     mobile: { left: '4%', bottom: '18%' },
   },
   {
-    slot: 'sos',
+    // versão 4:5 centrada na figura (no 16:9 a mulher ficava na borda do quadrado)
+    slot: 'sos-mobile',
     pos: { right: '8%', top: '57%' },
     size: 160,
     speed: 1.2,
@@ -58,13 +65,19 @@ const PHOTOS: Floating[] = [
   },
   { slot: 'cta-final', pos: { right: '21%', top: '90%' }, size: 108, speed: 0.55 },
   // Mais fotos (pedido do cliente, 10/11/2026), nos vãos que não cruzam a frase no estado parado
-  { slot: 'risco', pos: { left: '14%', top: '24%' }, size: 118, speed: 0.7 },
+  {
+    slot: 'risco',
+    pos: { left: '14%', top: '24%' },
+    size: 118,
+    speed: 0.7,
+    mobile: { left: '30%', bottom: '1%' },
+  },
   {
     slot: 'comecar-2',
     pos: { right: '4%', top: '84%' },
     size: 120,
     speed: 0.95,
-    mobile: { right: '0%', top: '4%' },
+    mobile: { right: '4%', top: '5%' },
   },
 ]
 
@@ -82,7 +95,7 @@ type PeopleScatterProps = {
 /**
  * "É sobre pessoas" (DESIGN.md §6.26 + §7.12, padrão Gaia). Desktop: 200vh com palco sticky; as
  * fotos sobem em velocidades diferentes e a foto central diminui enquanto o palco entra.
- * < 1024px: sem sticky, composição estática com `appear`. Movimento reduzido: estado final.
+ * < 1024px: sem sticky; as fotos também se movem (amplitude menor). Movimento reduzido: estado final.
  */
 export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterProps) {
   const root = useRef<HTMLDivElement>(null)
@@ -90,28 +103,34 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
   useGSAP(
     () => {
       const mm = gsap.matchMedia()
-      mm.add(MQ.desktop, () => {
+      mm.add({ desktop: MQ.desktop, mobile: MQ.mobile }, (ctx) => {
+        const { desktop } = ctx.conditions as { desktop: boolean }
         const el = root.current!
         const vh = () => window.innerHeight
         const range = { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true }
+        // Celular (pedido do cliente): as fotos também se movem, com amplitude menor e sem o palco
+        // fixo; desktop: +35vh → −60vh × velocidade, como no §7.12.
+        const [from, to] = desktop ? [0.35, -0.6] : [0.14, -0.14]
 
         // Fotos pequenas: cada uma no seu ritmo (§7.12).
         gsap.utils.toArray<HTMLElement>('[data-speed]', el).forEach((ph) => {
           const s = Number(ph.dataset.speed)
           gsap.fromTo(
             ph,
-            { y: () => vh() * 0.35 * s },
-            { y: () => -vh() * 0.6 * s, ease: 'none', scrollTrigger: range },
+            { y: () => vh() * from * s },
+            { y: () => vh() * to * s, ease: 'none', scrollTrigger: range },
           )
         })
 
-        // Foto central: grande na base, cobrindo a frase → 150px abaixo dela.
-        gsap.from('[data-scatter-center]', {
-          scale: CENTER_START / CENTER_FINAL,
-          y: () => vh() * 0.12,
-          ease: 'none',
-          scrollTrigger: { trigger: el, start: 'top 85%', end: 'top top', scrub: true },
-        })
+        // Foto central (desktop): grande na base, cobrindo a frase → 150px abaixo dela.
+        if (desktop) {
+          gsap.from('[data-scatter-center]', {
+            scale: CENTER_START / CENTER_FINAL,
+            y: () => vh() * 0.12,
+            ease: 'none',
+            scrollTrigger: { trigger: el, start: 'top 85%', end: 'top top', scrub: true },
+          })
+        }
 
         // A nuvem do fundo fica parada (pedido do cliente: o parallax do fundo travava a rolagem).
 
@@ -164,7 +183,7 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
                 className={clsx(
                   'absolute',
                   p.mobile ? 'block' : 'hidden lg:block',
-                  back && 'lg:opacity-50 lg:blur-[2px]',
+                  back && 'opacity-50 blur-[2px]',
                   // celular: tamanho fixo menor
                   'w-[92px] md:w-[116px] lg:w-[var(--w)]',
                   '[top:var(--mt,auto)] [right:var(--mr,auto)] [bottom:var(--mb,auto)] [left:var(--ml,auto)]',
@@ -188,6 +207,7 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
                     slot={p.slot}
                     sizes={`${p.size}px`}
                     overlay="none"
+                    natural
                     className={clsx(
                       'rounded-card-lg shadow-float',
                       p.ratio === 'portrait' ? 'aspect-[4/5]' : 'aspect-square',
@@ -223,6 +243,7 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
                 slot={centerSlot}
                 sizes={`${CENTER_START}px`}
                 overlay="none"
+                natural
                 className="aspect-[4/5] rounded-card shadow-float"
               />
             </div>

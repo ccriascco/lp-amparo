@@ -11,7 +11,8 @@ import {
   UsersRound,
 } from 'lucide-react'
 import { useRef, type CSSProperties, type ReactNode } from 'react'
-import { HomeSosScreen, OcorrenciasScreen, RedeScreen } from '../components/phone/AppScreens'
+import { OcorrenciasScreen, RedeScreen } from '../components/phone/AppScreens'
+import { HomeScreen } from '../components/phone/HomeScreen'
 import { CalculatorScreen, type CalculatorHandle } from '../components/phone/CalculatorScreen'
 import { Button } from '../components/ui/Button'
 import { Chip } from '../components/ui/Chip'
@@ -94,7 +95,7 @@ export function Hero() {
       >
         <div
           data-hero-side="left"
-          className="absolute top-[90px] left-[calc(50%-400px)] hidden w-[255px] md:block lg:left-[calc(50%-430px)] lg:w-[272px]"
+          className="absolute top-[70px] left-[calc(50%-232px)] w-[176px] md:top-[90px] md:left-[calc(50%-400px)] md:w-[255px] lg:left-[calc(50%-430px)] lg:w-[272px]"
           style={{ transform: 'rotate(-12deg)' }}
         >
           <div data-hero-side-inner className="relative">
@@ -108,7 +109,7 @@ export function Hero() {
         </div>
         <div
           data-hero-side="right"
-          className="absolute top-[90px] right-[calc(50%-400px)] hidden w-[255px] md:block lg:right-[calc(50%-430px)] lg:w-[272px]"
+          className="absolute top-[70px] right-[calc(50%-232px)] w-[176px] md:top-[90px] md:right-[calc(50%-400px)] md:w-[255px] lg:right-[calc(50%-430px)] lg:w-[272px]"
           style={{ transform: 'rotate(12deg)' }}
         >
           <div data-hero-side-inner className="relative">
@@ -130,7 +131,8 @@ export function Hero() {
             <PhoneFrame screenClassName="bg-black" label={a11y.altHome}>
               <div className="relative h-full w-full">
                 <div data-hero-home className="absolute inset-0">
-                  <HomeSosScreen />
+                  {/* Tela inicial atual do app (inicio-celular.png), pedido do cliente */}
+                  <HomeScreen />
                 </div>
                 <div data-hero-calc className="absolute inset-0 opacity-0">
                   <CalculatorScreen mode="auto" compact ref={calc} />
@@ -164,7 +166,7 @@ export function Hero() {
           depth={-60}
           icon={<Calculator />}
           label={recursos.items[5].title}
-          className="top-2 left-[4%] -rotate-6 md:-top-4 lg:left-[calc(50%-560px)]"
+          className="bottom-24 left-[2%] -rotate-6 md:bottom-auto md:-top-4 md:left-[4%] lg:left-[calc(50%-560px)]"
         />
         <Pill
           href="#sos"

@@ -125,7 +125,8 @@ export function Contexto() {
 
           {/* Bento: cartões 2×2 (7 col) + foto vertical (5 col) com a mesma altura */}
           <div className="mt-12 grid gap-6 md:mt-16 lg:grid-cols-12 lg:gap-6">
-            <div className="relative lg:order-2 lg:col-span-5">
+            {/* Celular: texto → cartões → foto (pedido do cliente); desktop: cartões à esquerda */}
+            <div className="relative order-2 lg:col-span-5">
               <div
                 data-ctx-photo
                 className="aspect-[4/5] overflow-hidden rounded-card-lg md:aspect-[16/11] lg:aspect-auto lg:h-full"
@@ -181,7 +182,7 @@ export function Contexto() {
               stats={numeros.stats}
               icons={ICONS}
               highlight={3}
-              className="lg:order-1 lg:col-span-7"
+              className="order-1 lg:col-span-7"
             />
           </div>
         </Container>

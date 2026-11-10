@@ -28,7 +28,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 3c | Ajustes 3b: `#contexto` com fundo branco (sem shell) e foto definitiva `numeros` — screenshots em `./screenshots/ajustes-3b/` | `be4cb8e` |
 | 3d | Ajustes 4: foto do `#contexto` sem tingimento; `#pessoas` em shell rosado com divisória e 11 fotos — screenshots em `./screenshots/ajustes-4/` | `a192110` |
 | 3e | Ajustes 5: fundo de `#pessoas` abrindo até a tela cheia (sem bordas laterais); 2 fotos a menos — screenshots em `./screenshots/ajustes-5/` | `8150b21` |
-| 3f | Ajustes 6: fundo de `#pessoas` parado em tela cheia (sem `clip-path` e sem parallax da nuvem); fotos em camada própria — screenshots em `./screenshots/ajustes-6/` | (este commit) |
+| 3f | Ajustes 6: fundo de `#pessoas` parado em tela cheia (sem `clip-path` e sem parallax da nuvem); fotos em camada própria — screenshots em `./screenshots/ajustes-6/` | `f62c3b0` |
+| 1e/3g | Ajustes 7: central do hero com `inicio-celular`, 3 celulares no celular, `#contexto` texto → cartões → foto, fotos de `#pessoas` naturais e com movimento no celular — screenshots em `./screenshots/ajustes-7/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -70,9 +71,15 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 5. **Animação:** H2 palavra por palavra saindo do desfoque; cartões com `appear` em stagger e contador; foto com revelação por máscara de baixo para cima e parallax interno leve; os dois flutuantes entram 0,2s depois da foto e depois flutuam devagar (`y ±6px`).
 
 ### Ajustes 4 — foto natural e seção das fotos espalhadas (10/11/2026) — têm prioridade sobre o `DESIGN.md`
-1. **Foto do `#contexto` nas cores originais:** sem o tingimento vinho do §6.18 (exceção; as outras fotos continuam tingidas). `TintedPhoto natural`.
+1. **Foto do `#contexto` nas cores originais:** sem o tingimento vinho do §6.18. `TintedPhoto natural`. (Nos Ajustes 7 o mesmo vale para as fotos de `#pessoas`.)
 2. **`#pessoas` com fundo próprio e divisória:** fundo rosado com borda clara entre as seções (não esmaece no branco). **Revisto (2×):** o fundo fica em **tela cheia e parado** — sem a abertura por `clip-path` e sem o parallax da nuvem (travavam a rolagem). Só as fotos e o texto se movem.
 3. **Fotos de `#pessoas`:** 9 fotos pequenas + a central (eram 8; foram a 11 e o cliente pediu para tirar 2 — saíram `ajudar` e `comecar-3`). As de baixo passam pelas laterais, fora da largura da frase, para nunca cobrir o texto.
+
+### Ajustes 7 — hero, `#contexto` e `#pessoas` (10/11/2026) — têm prioridade sobre o `DESIGN.md`
+1. **Celular central do hero = tela `inicio-celular.png`** (a `HomeScreen` em código, fiel a ela: "MA", "Esta semana", Leitura de risco). **Substitui o item 3 dos Ajustes do hero** para o central (`home-sos.png` sai do hero); laterais continuam Rede de apoio e Ocorrências.
+2. **Hero no celular com os 3 celulares**, os laterais menores (176px) e cortados pela borda da tela. A pílula "Modo Disfarce" desce para a parte de baixo do celular esquerdo (no topo ela cobria o círculo do celular).
+3. **`#contexto` no celular:** texto → cartões → foto (a foto vem depois dos cartões, como no desktop).
+4. **`#pessoas`:** todas as fotos nas **cores originais** (sem o tingimento vinho); a foto `sos` usa o recorte 4:5 centrado na mulher; no celular a foto do canto superior esquerdo fica mais para dentro, há fotos desfocadas ao fundo e as fotos se movem (parallax com amplitude menor, sem palco fixo).
 
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |
