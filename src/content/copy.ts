@@ -109,24 +109,25 @@ export const beneficios = {
   chip: 'Benefícios',
   h2a: 'Mais que um app de proteção.',
   h2b: 'Um amparo no seu dia a dia.',
+  /** Cartões no padrão Gardance (pedido do cliente): tópico, texto e link para o recurso. */
   cards: [
     {
       slot: 'beneficio-tranquilidade',
       title: 'Mais tranquilidade',
       text: 'Sua rede de apoio fica a um toque, mesmo em silêncio.',
-      ui: { title: 'Rede ativa', text: '3 guardiãs prontas para ajudar' },
+      link: { label: 'Conheça a rede de apoio', href: '#rede' },
     },
     {
       slot: 'beneficio-controle',
       title: 'Sua história, suas escolhas',
       text: 'Registre agora e decida depois o que fazer, sem pressão.',
-      ui: { title: 'Registro salvo no cofre', text: 'Hoje, 21:47' },
+      link: { label: 'Conheça o cofre de provas', href: '#cofre' },
     },
     {
       slot: 'beneficio-confianca',
       title: 'Decida com informação',
       text: 'Entenda seus direitos e acompanhe como está o seu risco.',
-      ui: { title: 'Leitura de risco', levels: ['Baixo', 'Médio', 'Alto'], active: 0 },
+      link: { label: 'Conheça a leitura de risco', href: '#risco' },
     },
   ],
 } as const

@@ -37,7 +37,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 3h | `#pessoas`: foto central em movimento, sem ficar colada na base — screenshots em `./screenshots/pessoas-centro/` | `5725147` |
 | 4f | Seção nova `#beneficios` (Gardance + NextPay) e foto no vão acima da frase em `#pessoas` — screenshots em `./screenshots/beneficios/` | `339d31d` |
 | 4g | Ajustes 4 (geral): fotos dos Benefícios, Manifesto sem degradê, grid de 1280px, celular das Dores 300px, correção da tela branca — screenshots em `./screenshots/ajustes-4/` | `686d159` |
-| 4h | Cartão das Dores com largura máxima de 1216px — screenshots em `./screenshots/ajustes-4b/` | (este commit) |
+| 4h | Cartão das Dores com largura máxima de 1216px — screenshots em `./screenshots/ajustes-4b/` | `5495701` |
+| 4i | `#beneficios` no padrão Gardance (cartão ativo cresce e abre a etiqueta de vidro) — screenshots em `./screenshots/beneficios-3/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -135,6 +136,12 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 4. **Celular da lista das Dores:** 300px fixo, cortado pela base de um painel com no máximo 560px de altura e 7 colunas; mesmo tamanho em 1440/1920/2560.
 5. **Tela branca do celular:** proteção contra escala 0 no `PhoneFrame` e estado inicial explícito das telas.
 6. **Cartão das Dores com largura máxima de 1216px** (bordas iguais às dos cartões dos Benefícios), centralizado, sem crescer em telas largas; título do banner até 5.25rem, cada linha inteira.
+
+### `#beneficios` — cartões no padrão Gardance (10/11/2026) — substitui os cartões anteriores
+- Sem selo no topo; etiqueta de vidro na base (ícone vinho 32px + tópico). Aberta: texto + link para `#rede`, `#cofre`, `#risco`.
+- Desktop: o cartão ativo cresce (flex-grow 1.6) e abre a etiqueta; os outros ficam fechados. 1º ativo; mouse e Tab ativam; ao sair fica o último. Foto do ativo com zoom 1.04; enquadramento que mantém o rosto visível.
+- Celular: carrossel com snap (85vw), etiquetas abertas. Movimento reduzido: larguras iguais e etiquetas abertas.
+- Tópicos longos quebram em 2 linhas no cartão estreito (em vez de reticências).
 
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |
