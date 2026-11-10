@@ -244,6 +244,13 @@ section[id] {
   .tinted--none::after {
     background: none;
   }
+  /* Foto nas cores originais, sem o tingimento vinho (pedido do cliente: foto de #contexto). */
+  .tinted--natural img {
+    filter: none;
+  }
+  .tinted--natural::before {
+    content: none;
+  }
   .tinted--soft::after {
     background: linear-gradient(0deg, rgb(75 42 63 / 0.35) 0%, transparent 60%);
   }

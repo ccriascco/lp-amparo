@@ -17,7 +17,7 @@ type Floating = {
   ratio?: 'square' | 'portrait'
 }
 
-/** 8 fotos em volta da frase (§6.26). As de speed baixo ficam "ao fundo". */
+/** 11 fotos em volta da frase (§6.26; 8 + 3 a pedido do cliente). As de speed baixo ficam "ao fundo". */
 const PHOTOS: Floating[] = [
   {
     slot: 'rede-duas-mulheres',
@@ -58,12 +58,16 @@ const PHOTOS: Floating[] = [
   },
   {
     slot: 'direitos-4',
-    pos: { left: '23%', top: '86%' },
+    pos: { left: '4%', top: '90%' },
     size: 136,
-    speed: 1.1,
+    speed: 1,
     ratio: 'portrait',
   },
   { slot: 'cta-final', pos: { right: '21%', top: '90%' }, size: 108, speed: 0.55 },
+  // Mais fotos (pedido do cliente, 10/11/2026), nos vãos que não cruzam a frase no estado parado
+  { slot: 'risco', pos: { left: '14%', top: '24%' }, size: 118, speed: 0.7 },
+  { slot: 'comecar-2', pos: { right: '4%', top: '84%' }, size: 120, speed: 0.95 },
+  { slot: 'comecar-3', pos: { right: '20%', top: '22%' }, size: 112, speed: 0.75 },
 ]
 
 /** Foto central: 150px no estado final (CSS); entra a partir de ~340px (escala 2,27). */
@@ -130,7 +134,7 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
         <div
           aria-hidden
           data-scatter-cloud
-          className="absolute -inset-x-[10%] -top-[10%] -bottom-[25%] mask-[linear-gradient(180deg,transparent_10%,#000_30%)]"
+          className="absolute -inset-x-[10%] -top-[10%] -bottom-[25%]"
           style={{
             background: [
               'radial-gradient(40% 36% at 16% 24%, rgb(149 75 110 / 0.55) 0%, transparent 70%)',

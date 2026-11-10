@@ -14,6 +14,8 @@ type TintedPhotoProps = {
   /** Imagem com folga de 20% para o parallax interno (§7.9). */
   parallax?: boolean
   priority?: boolean
+  /** Cores originais da foto, sem o tingimento vinho (exceção pedida pelo cliente). */
+  natural?: boolean
   className?: string
   /** Conteúdo sobre a foto (texto branco). */
   children?: ReactNode
@@ -65,11 +67,12 @@ export function TintedPhoto({
   overlay = 'bottom',
   parallax,
   priority,
+  natural,
   className,
   children,
 }: TintedPhotoProps) {
   return (
-    <div className={clsx('tinted', OVERLAY[overlay], className)}>
+    <div className={clsx('tinted', OVERLAY[overlay], natural && 'tinted--natural', className)}>
       <Picture
         slot={slot}
         alt={alt}

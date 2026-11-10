@@ -25,7 +25,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 1c | Ajustes do hero e do header (logo alinhado, central reto, telas Rede/Ocorrências/home-sos, sem onda, celulares inteiros flutuando, base dissolvendo) — screenshots em `./screenshots/ajustes-hero/` | `5ee052a` |
 | 1d/2b | Ajustes 2: logo oficial (PNG recortado), círculos por cima da moldura, marquee antes dos números e sem pausa, números em cartões, fonte no rodapé — screenshots em `./screenshots/ajustes-2/` | `911c220` |
 | 2c/3b | Ajustes 3: números + contexto numa seção `#contexto` (shell rosado, bento com foto e flutuantes); fotos espalhadas viram `#pessoas`; token `--grad-rosa`; regra de fundos — screenshots em `./screenshots/ajustes-3/` | `adb7e93` |
-| 3c | Ajustes 3b: `#contexto` com fundo branco (sem shell) e foto definitiva `numeros` — screenshots em `./screenshots/ajustes-3b/` | (este commit) |
+| 3c | Ajustes 3b: `#contexto` com fundo branco (sem shell) e foto definitiva `numeros` — screenshots em `./screenshots/ajustes-3b/` | `be4cb8e` |
+| 3d | Ajustes 4: foto do `#contexto` sem tingimento; `#pessoas` em shell rosado com divisória e 11 fotos — screenshots em `./screenshots/ajustes-4/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -66,13 +67,18 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 4. **Regra de fundos:** nenhuma seção clara em branco puro seguida de outra branca. As claras alternam entre **branco** e **rosado** (`--grad-rosa`, com manchas de vinho visíveis). Vale para todas as seções que ainda vão ser construídas (mapa abaixo).
 5. **Animação:** H2 palavra por palavra saindo do desfoque; cartões com `appear` em stagger e contador; foto com revelação por máscara de baixo para cima e parallax interno leve; os dois flutuantes entram 0,2s depois da foto e depois flutuam devagar (`y ±6px`).
 
+### Ajustes 4 — foto natural e seção das fotos espalhadas (10/11/2026) — têm prioridade sobre o `DESIGN.md`
+1. **Foto do `#contexto` nas cores originais:** sem o tingimento vinho do §6.18 (exceção; as outras fotos continuam tingidas). `TintedPhoto natural`.
+2. **`#pessoas` com fundo próprio e divisória:** shell rosado recuado (`mx-3 md:mx-4`, raio 32px), com borda clara entre as seções; o fundo não esmaece mais no branco.
+3. **Mais fotos em `#pessoas`:** 11 fotos pequenas (eram 8) + a central. As de baixo passam pelas laterais, fora da largura da frase, para nunca cobrir o texto.
+
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |
 |---|---|---|
 | 1 | Hero | `--grad-hero` (dissolve no branco na base) |
 | 2 | Marquee | branco (fios `borda`) |
 | 3 | `#contexto` | branco (pedido do cliente; ver nota abaixo da tabela) |
-| 4 | `#pessoas` | branco no topo → nuvem rosada do palco |
+| 4 | `#pessoas` | **rosado** — shell `--grad-rosa` (mx-3 md:mx-4, raio 32px) com a nuvem do palco; divisória clara, sem esmaecer no branco |
 | 5 | `#dores` | `vinho-profundo` (escura) |
 | 6 | `#disfarce` | shell `vinho-profundo` (escura) sobre margem branca |
 | 7 | `#recursos` | branco |
@@ -86,7 +92,7 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 | 15 | Galeria + CTA | branco → shell `--grad-vinho` |
 | 16 | Rodapé | `vinho-profundo` |
 As seções 6 a 16 ainda são da rodada 1; o fundo da tabela entra quando cada uma for refeita.
-**Exceção aprovada:** marquee, `#contexto` e o topo de `#pessoas` ficam brancos em sequência, por decisão do cliente (o fundo rosado do `#contexto` foi retirado). A alternância vale do `#pessoas` (nuvem rosada) em diante.
+**Exceção aprovada:** marquee e `#contexto` ficam brancos em sequência, por decisão do cliente (o fundo rosado do `#contexto` foi retirado). A alternância vale do `#pessoas` (shell rosado) em diante.
 
 ## Ajustes pendentes (escreva aqui o que quer mudar nos itens 1–4)
 - [ESCREVA AQUI O QUE VOCÊ QUER AJUSTAR]

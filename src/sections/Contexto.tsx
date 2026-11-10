@@ -133,7 +133,8 @@ export function Contexto() {
                 <TintedPhoto
                   slot="numeros"
                   sizes="(min-width: 1024px) 40vw, 100vw"
-                  overlay="soft"
+                  overlay="none"
+                  natural
                   parallax
                   className="h-full rounded-card-lg"
                 />

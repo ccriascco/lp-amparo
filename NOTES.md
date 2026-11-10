@@ -257,3 +257,9 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
 - `#contexto` sem o shell rosado: `section` em `bg-branco`, `py-20 md:py-28` no container. Sobre branco, os cartões só com `--shadow-card` perdiam o contorno → voltou a borda 1px `borda` (Ajustes 2) junto da sombra suave.
 - Foto: `assets/fotos/Mulher concentrada no smartphone no sofá.png` renomeada para `assets/fotos/numeros.png` (convenção: a foto em uso tem o nome do slot) e movida de `PLACEHOLDERS` para `SLOTS`, recorte 4:5 (`top 30`, 1086×1357). Maior arquivo gerado: 85 KB. O slot `risco` continua com a foto provisória.
 - Regra de fundos: marquee, `#contexto` e o topo de `#pessoas` ficam brancos em sequência (exceção aprovada pelo cliente, anotada no PROGRESSO).
+
+### Ajustes 4 — foto natural e `#pessoas` com fundo próprio (10/11/2026, pedido do cliente)
+- **Foto do `#contexto`:** `TintedPhoto` ganhou a opção `natural` (classe `.tinted--natural`: sem `grayscale` na imagem e sem a camada `mix-blend-mode: color`); usada só nessa foto, com `overlay="none"`. É exceção ao §6.18; as outras fotos continuam tingidas.
+- **`#pessoas`:** o palco ficou dentro de um shell `--grad-rosa` (`mx-3 md:mx-4`, raio 24px no celular e 32px a partir de 768px). Saiu a máscara que esmaecia o topo da nuvem. O shell usa `overflow-clip` (com `overflow-hidden` o `sticky` do palco deixaria de funcionar).
+- **Fotos:** +3 no desktop (`risco`, `comecar-2`, `comecar-3`), total 11 + a central. Não há outras fotos distintas além dessas (as restantes repetem imagens da seção ou são placeholders). No celular continuam 5 + a central (a `comecar-2` cairia sobre a central).
+- **Crítica:** no fim do palco, `comecar-2` e `direitos-4` subiam por trás de "O Amparo" e "para ela" e atrapalhavam a leitura → movidas para as laterais (`right 4% / top 84%` e `left 4% / top 90%`), fora da largura da frase. Conferido em 0, 50% e 100% do palco.
