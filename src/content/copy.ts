@@ -193,11 +193,57 @@ export const dores = {
   button: { label: 'Conheça a leitura de risco', href: '#leitura-risco' },
 }
 
-// 3.7 (`#leitura-risco`) — por ora só o cabeçalho; o resto entra quando a seção for construída.
+// 3.7 (`#leitura-risco`)
 export const leituraRisco = {
   chip: 'Inteligência artificial',
   h2: 'Uma IA que apoia, sem decidir por você.',
   sub: 'A partir dos seus registros e dos acionamentos do SOS, o Amparo faz uma leitura do seu risco e adapta o que mostra para você. Você sempre pode ver o porquê.',
+  /** Pílulas que orbitam a IA. */
+  fontes: ['Seus registros', 'Acionamentos do SOS', 'Sinais de risco oficiais'],
+  fonar: 'Sinais inspirados no Formulário Nacional de Avaliação de Risco (Lei nº 14.149/2021).',
+  resultado: {
+    title: 'Leitura de risco',
+    /** Selo da tela do app. */
+    badge: 'IA',
+    levels: ['Baixo', 'Médio', 'Alto'],
+    /** Começa em Médio. */
+    initial: 1,
+    comoChegamos: 'Ver como chegamos nisso',
+    /** Microtexto (NOTES): marca os sinais como exemplo. */
+    exemplo: 'Exemplo',
+    sinais: [
+      'Ameaças registradas nas últimas semanas',
+      'Aumento na frequência de registros',
+      'SOS acionado recentemente',
+    ],
+    privacidade: 'Nada disso é enviado para ninguém.',
+  },
+  adapta: {
+    title: 'Como o app se adapta',
+    levels: [
+      { label: 'Baixo', text: 'Tudo tranquilo. O acompanhamento discreto segue ativo.' },
+      {
+        label: 'Médio',
+        text: 'O app prepara um aviso discreto para a sua rede, enviado só se você confirmar.',
+      },
+      {
+        label: 'Alto',
+        text: 'Os caminhos de ajuda aparecem primeiro: Ligue 180, 190 e a delegacia mais próxima.',
+      },
+    ],
+  },
+  /** Pedaços da interface do app dentro dos cartões (textos do cliente, prompt da seção 7). */
+  telas: {
+    tranquilo: 'Tudo por aqui está tranquilo',
+    enviarAviso: 'Enviar aviso à minha rede',
+    acoes: ['Ligar 180', 'Ligar 190', 'Delegacia mais próxima'],
+  },
+  principios: [
+    { title: 'Apoia, não decide', text: 'A sugestão é sua para seguir ou ignorar.' },
+    { title: 'Transparente', text: 'Você sempre vê quais sinais levaram à leitura.' },
+    { title: 'Privada', text: 'A leitura fica só com você, no seu aparelho e na sua conta.' },
+  ],
+  nota: 'Protótipo acadêmico: o modelo foi treinado com dados sintéticos. A validação com dados reais é a próxima etapa.',
 }
 
 // 3.8 (a construir: textos revisados contra o COPY 3.8 na construção)
