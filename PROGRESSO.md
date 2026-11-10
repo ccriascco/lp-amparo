@@ -24,7 +24,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 4 | Dores (`QuestionStage`, padrão Gardance) | `c481b47` |
 | 1c | Ajustes do hero e do header (logo alinhado, central reto, telas Rede/Ocorrências/home-sos, sem onda, celulares inteiros flutuando, base dissolvendo) — screenshots em `./screenshots/ajustes-hero/` | `5ee052a` |
 | 1d/2b | Ajustes 2: logo oficial (PNG recortado), círculos por cima da moldura, marquee antes dos números e sem pausa, números em cartões, fonte no rodapé — screenshots em `./screenshots/ajustes-2/` | `911c220` |
-| 2c/3b | Ajustes 3: números + contexto numa seção `#contexto` (shell rosado, bento com foto e flutuantes); fotos espalhadas viram `#pessoas`; token `--grad-rosa`; regra de fundos — screenshots em `./screenshots/ajustes-3/` | (este commit) |
+| 2c/3b | Ajustes 3: números + contexto numa seção `#contexto` (shell rosado, bento com foto e flutuantes); fotos espalhadas viram `#pessoas`; token `--grad-rosa`; regra de fundos — screenshots em `./screenshots/ajustes-3/` | `adb7e93` |
+| 3c | Ajustes 3b: `#contexto` com fundo branco (sem shell) e foto definitiva `numeros` — screenshots em `./screenshots/ajustes-3b/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -60,8 +61,8 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 
 ### Ajustes 3 — números + contexto e cor da home (10/11/2026) — têm prioridade sobre o `DESIGN.md`
 1. **Uma seção só, `#contexto`:** junta a faixa de números e o cabeçalho do contexto. **Sem** o título "Por que o Amparo existe"; usa o H2 e o texto do COPY 3.2c. A parte das fotos espalhadas (`PeopleScatter`, frase "Por trás de cada número…") vem logo depois, como seção própria (`#pessoas`).
-2. **Layout (Finexa "About" + bento, ref-03):** cabeçalho em duas colunas (H2 em 7 col, no máximo 2 linhas a 1440; texto em 5 col; alinhados pela base). Abaixo, grid 12 col: cartões de número 2×2 em 7 col (ícone, número, rótulo; 101.656 em `--grad-vinho`; padding 32px; número maior; rótulo até 2 linhas) e foto vertical `numeros.jpg` (`TintedPhoto`, raio 20px) em 5 col, com a altura do 2×2. Sobre a foto, saindo levemente pelas bordas, com `shadow-float`: cartão de vidro "Ligue 180 · Gratuito, sigiloso, 24 horas" (link `tel:180`) no canto inferior esquerdo e `NotificationCard` "Alerta enviado · Sua rede foi avisada · agora" no superior direito. Celular: cabeçalho empilhado, foto 4:5 primeiro (flutuantes por dentro), depois o 2×2. `numeros.jpg` é placeholder do §8 até a foto chegar.
-3. **Shell colorido:** `mx-3 md:mx-4`, raio 32px, fundo `--grad-rosa` (manchas grandes de vinho 22–30% e vinho-profundo 10% sobre `#F3EDEF`, claramente rosado). Cartões brancos com sombra suave `0 12px 32px -16px rgb(75 42 63 / .18)` (`--shadow-card`) no lugar da borda.
+2. **Layout (Finexa "About" + bento, ref-03):** cabeçalho em duas colunas (H2 em 7 col, no máximo 2 linhas a 1440; texto em 5 col; alinhados pela base). Abaixo, grid 12 col: cartões de número 2×2 em 7 col (ícone, número, rótulo; 101.656 em `--grad-vinho`; padding 32px; número maior; rótulo até 2 linhas) e foto vertical `numeros.jpg` (`TintedPhoto`, raio 20px) em 5 col, com a altura do 2×2. Sobre a foto, saindo levemente pelas bordas, com `shadow-float`: cartão de vidro "Ligue 180 · Gratuito, sigiloso, 24 horas" (link `tel:180`) no canto inferior esquerdo e `NotificationCard` "Alerta enviado · Sua rede foi avisada · agora" no superior direito. Celular: cabeçalho empilhado, foto 4:5 primeiro (flutuantes por dentro), depois o 2×2. Foto: `assets/fotos/numeros.png` (mulher concentrada no celular, no sofá), recorte 4:5.
+3. ~~Shell colorido rosado~~ — **revogado** (10/11/2026): a pedido do cliente, `#contexto` fica com **fundo branco**, sem shell. Cartões brancos com borda 1px `borda` + sombra suave `--shadow-card` (só a sombra não separava o cartão do fundo branco). O token `--grad-rosa` continua disponível para as seções rosadas da tabela abaixo.
 4. **Regra de fundos:** nenhuma seção clara em branco puro seguida de outra branca. As claras alternam entre **branco** e **rosado** (`--grad-rosa`, com manchas de vinho visíveis). Vale para todas as seções que ainda vão ser construídas (mapa abaixo).
 5. **Animação:** H2 palavra por palavra saindo do desfoque; cartões com `appear` em stagger e contador; foto com revelação por máscara de baixo para cima e parallax interno leve; os dois flutuantes entram 0,2s depois da foto e depois flutuam devagar (`y ±6px`).
 
@@ -70,7 +71,7 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 |---|---|---|
 | 1 | Hero | `--grad-hero` (dissolve no branco na base) |
 | 2 | Marquee | branco (fios `borda`) |
-| 3 | `#contexto` | **rosado** — shell `--grad-rosa` sobre margem branca |
+| 3 | `#contexto` | branco (pedido do cliente; ver nota abaixo da tabela) |
 | 4 | `#pessoas` | branco no topo → nuvem rosada do palco |
 | 5 | `#dores` | `vinho-profundo` (escura) |
 | 6 | `#disfarce` | shell `vinho-profundo` (escura) sobre margem branca |
@@ -85,6 +86,7 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 | 15 | Galeria + CTA | branco → shell `--grad-vinho` |
 | 16 | Rodapé | `vinho-profundo` |
 As seções 6 a 16 ainda são da rodada 1; o fundo da tabela entra quando cada uma for refeita.
+**Exceção aprovada:** marquee, `#contexto` e o topo de `#pessoas` ficam brancos em sequência, por decisão do cliente (o fundo rosado do `#contexto` foi retirado). A alternância vale do `#pessoas` (nuvem rosada) em diante.
 
 ## Ajustes pendentes (escreva aqui o que quer mudar nos itens 1–4)
 - [ESCREVA AQUI O QUE VOCÊ QUER AJUSTAR]

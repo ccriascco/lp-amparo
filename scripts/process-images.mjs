@@ -60,6 +60,8 @@ const SLOTS = [
     file: 'cta-final.png',
     crop: { left: 900, top: 0, width: 753, height: 941 },
   },
+  // 4:5 — foto vertical de #contexto: mulher concentrada no celular, no sofá (1086×1448)
+  { slot: 'numeros', file: 'numeros.png', crop: { left: 0, top: 30, width: 1086, height: 1357 } },
   // ── PROVISÓRIAS (ver NOTES.md): alternativas de assets/fotos até as fotos definitivas chegarem ──
   // sos: mulher com o celular junto à janela, espelhada para a figura ficar no terço esquerdo.
   // O recorte é feito antes do espelho: o mobile pega o lado direito do original (onde está a figura).
@@ -112,8 +114,6 @@ const PLACEHOLDERS = [
   { slot: 'cofre-mobile', width: 1080, height: 1350 },
   { slot: 'comecar-1', width: 1600, height: 900 },
   { slot: 'comecar-4', width: 1600, height: 900 },
-  // Foto vertical da seção #contexto (ajustes 3, 10/11/2026); trocar pela definitiva quando chegar
-  { slot: 'numeros', width: 1080, height: 1350 },
 ]
 
 async function placeholderSource(width, height) {

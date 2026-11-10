@@ -32,7 +32,7 @@ export function StatsBand({ stats, icons, highlight, className }: StatsBandProps
               className={clsx(
                 'flex h-full min-h-[200px] flex-col justify-between gap-8 rounded-card-lg p-5 sm:p-8 md:min-h-[230px]',
                 'transition-[translate,box-shadow] duration-300 ease-amparo hover:-translate-y-1 hover:shadow-float',
-                hi ? 'text-white' : 'bg-white shadow-[var(--shadow-card)]',
+                hi ? 'text-white' : 'border border-borda bg-white shadow-[var(--shadow-card)]',
               )}
               style={hi ? { background: 'var(--grad-vinho)' } : undefined}
             >

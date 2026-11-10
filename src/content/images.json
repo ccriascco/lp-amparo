@@ -75,6 +75,15 @@
       753
     ]
   },
+  "numeros": {
+    "width": 1086,
+    "height": 1357,
+    "widths": [
+      640,
+      1080,
+      1086
+    ]
+  },
   "sos": {
     "width": 1672,
     "height": 941,
@@ -168,15 +177,6 @@
       640,
       1080,
       1600
-    ],
-    "placeholder": true
-  },
-  "numeros": {
-    "width": 1080,
-    "height": 1350,
-    "widths": [
-      640,
-      1080
     ],
     "placeholder": true
   }

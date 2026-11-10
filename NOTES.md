@@ -252,3 +252,8 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
 - **Movimento:** H2 palavra por palavra (`data-words`); cartões com `appear` em stagger + contador; foto `clip-path inset(100% 0 0 0) → inset(0)` (1,1s, `expo.inOut`) + parallax interno ±6% (±3% no celular); flutuantes entram em 0,9s (≈0,2s depois de a foto estar praticamente aberta — com 0,2s a partir do início, ficavam pairando sobre a foto fechada) e depois balançam `y ±6px` (4,5s e 5,8s, `sine.inOut`). Conferido em quadros no Chrome.
 - **Revisão `web-design-guidelines`:** ✓ link `tel:` com texto e 44px, notificação repetida `aria-hidden`, foto `alt=""`, H2 em cada seção, só `transform`/`opacity`/`clip-path`, reduzido = estado final, sem scroll horizontal. Não aplicado: flutuação contínua decorativa sem pausa (pedido do cliente).
 - **Regra de fundos (item 4):** ver PROGRESSO.md, "Fundos das seções".
+
+### Ajustes 3b — fundo branco e foto definitiva no `#contexto` (10/11/2026, pedido do cliente)
+- `#contexto` sem o shell rosado: `section` em `bg-branco`, `py-20 md:py-28` no container. Sobre branco, os cartões só com `--shadow-card` perdiam o contorno → voltou a borda 1px `borda` (Ajustes 2) junto da sombra suave.
+- Foto: `assets/fotos/Mulher concentrada no smartphone no sofá.png` renomeada para `assets/fotos/numeros.png` (convenção: a foto em uso tem o nome do slot) e movida de `PLACEHOLDERS` para `SLOTS`, recorte 4:5 (`top 30`, 1086×1357). Maior arquivo gerado: 85 KB. O slot `risco` continua com a foto provisória.
+- Regra de fundos: marquee, `#contexto` e o topo de `#pessoas` ficam brancos em sequência (exceção aprovada pelo cliente, anotada no PROGRESSO).

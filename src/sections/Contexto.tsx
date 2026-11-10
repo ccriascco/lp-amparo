@@ -13,7 +13,7 @@ const ICONS = [Ribbon, House, UsersRound, ShieldOff]
 
 /**
  * `#contexto` — números + cabeçalho do contexto numa só seção (ajustes 3 do cliente, 10/11/2026;
- * padrão Finexa "About" + bento, ref-03). Shell rosado recuado; H2 e texto do COPY 3.2c em duas
+ * padrão Finexa "About" + bento, ref-03). Fundo branco (o shell rosado saiu a pedido do cliente); H2 e texto do COPY 3.2c em duas
  * colunas; abaixo, os 4 cartões de número em 2×2 (7 col) e uma foto vertical (5 col) com o
  * "Ligue 180" e uma notificação flutuando pelas bordas. As fotos espalhadas (`PeopleScatter`)
  * vêm logo depois, como seção própria (`Pessoas`).
@@ -101,12 +101,10 @@ export function Contexto() {
   const alerta = hero.notifications[0]
 
   return (
-    <section ref={root} id="contexto" aria-labelledby="contexto-title" className="py-3 md:py-4">
-      <div
-        className="mx-3 overflow-hidden rounded-[24px] md:mx-4 md:rounded-shell"
-        style={{ background: 'var(--grad-rosa)' }}
-      >
-        <Container className="py-16 md:py-24">
+    <section ref={root} id="contexto" aria-labelledby="contexto-title" className="bg-branco">
+      {/* Fundo branco (pedido do cliente, 10/11/2026: substitui o shell rosado dos Ajustes 3) */}
+      <div>
+        <Container className="py-20 md:py-28">
           {/* Cabeçalho em duas colunas, alinhado pela base */}
           <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
             <div className="lg:col-span-7">
