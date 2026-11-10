@@ -2,12 +2,12 @@
 
 > Leia este arquivo antes de qualquer coisa. Ele diz onde o trabalho parou. Detalhes de cada decisão estão no `NOTES.md`.
 
-Última atualização: 10/11/2026 · Repositório: https://github.com/ccriascco/lp-amparo (branch `main`)
+Última atualização: 10/11/2026 (fim da sessão) · Repositório: https://github.com/ccriascco/lp-amparo (branch `main`)
 
 ---
 
 ## Situação atual
-**Fonte da verdade dos textos e da estrutura: `COPY.md` (versão final, §3).** Onde ele contradisser o `DESIGN.md` ou o plano antigo deste arquivo, vale o `COPY.md`.
+**Fonte da verdade dos textos e da estrutura: `COPY.md` (versão final, §3).** Onde ele contradisser o `DESIGN.md` ou o plano antigo deste arquivo, vale o `COPY.md` — exceto onde houver uma decisão do cliente registrada em "Decisões aprovadas" (essas valem sobre os dois).
 
 ### Mapa da página (COPY §3.00)
 | # | Seção | Âncora | Status |
@@ -17,16 +17,27 @@
 | 2 | Faixa de recursos (marquee) | — | ✅ pronta |
 | 3 | Contexto + números | `#contexto` | ✅ pronta |
 | 4 | Manifesto (fotos espalhadas) | `#pessoas` | ✅ pronta |
-| 5 | Benefícios | `#beneficios` | ✅ pronta |
+| 5 | Benefícios | `#beneficios` | ✅ pronta (etiqueta branca, confirmada) |
 | 6 | Dores: banner + lista com celular | `#como-funciona` (itens `#dor-disfarce`, `#dor-cofre`, `#dor-rede`, `#dor-risco`, `#dor-direitos`) | ✅ pronta |
-| 7 | Leitura de risco com IA | `#leitura-risco` | ✅ pronta |
+| 7 | Leitura de risco com IA | `#leitura-risco` | ✅ pronta — aguardando revisão do cliente (commit `9ef496e`) |
 | 8 | Como começar | `#comecar` | ⏳ a construir (versão da rodada 1 no lugar) |
 | 9 | FAQ + emergência | `#faq` | ⏳ a construir (versão da rodada 1 no lugar) |
 | 10 | CTA final | `#cta` | ⏳ a construir (versão da rodada 1 no lugar) |
 | 11 | Rodapé | — | ⏳ a construir (versão da rodada 1, já com os links e textos do COPY 3.11) |
 
 ### Fora do plano (não serão construídas)
-Removidas do código e do `copy.ts` em 10/11/2026: **Modo Disfarce** como seção própria (`StepShowcase`), **Recursos** (`FeatureStack`/bento), os pilares **SOS, Cofre, Rede e Risco** como seções separadas, as **demos "Experimente"** (SOSDemo, HashScramble, RiskLevels, InteractiveCalculator, NetworkGraph, DisguisePhone), **Seus direitos**, **Mitos e verdades**, **Segurança**, **Cartão de acesso**, **Para quem quer ajudar** (e o botão "Copiar link") e a **Galeria antes do CTA**. O que esses recursos mostravam agora vive nos itens das Dores (§3.6) e na Leitura de risco (§3.7).
+Removidas do código e do `copy.ts` em 10/11/2026: **Modo Disfarce** como seção própria (`StepShowcase`), **Recursos** (`FeatureStack`/bento), os pilares **SOS, Cofre, Rede e Risco** como seções separadas, as **demos "Experimente"**, **Seus direitos**, **Mitos e verdades**, **Segurança**, **Cartão de acesso**, **Para quem quer ajudar** e a **Galeria antes do CTA**. O que esses recursos mostravam agora vive nos itens das Dores (§3.6) e na Leitura de risco (§3.7).
+
+### Seção 7 — Leitura de risco com IA: estado
+O último pedido do cliente para a seção 7 está **todo implementado** (commit `9ef496e`); falta só a revisão do cliente. Pronto:
+- [x] Esfera de partículas 3D com three 0.187 + @react-three/fiber 9.8 (`src/components/three/AiSphere.tsx`): 7.000 pontos (3.000 no celular) em Fibonacci, ShaderMaterial com ruído simplex 3D, atenuação por distância, degradê vinho → rosé, opacidade por profundidade; rotação Y de 40s + inclinação de até 8° pelo mouse.
+- [x] 3 anéis de luz finos com "cometa" (TubeGeometry + shader de gradiente) e halo rosé/vinho pulsando atrás.
+- [x] 7 pílulas de vidro em duas órbitas (28s e 40s, sentidos opostos) com profundidade (atrás: scale 0.85, opacidade 0.35, blur 1px); 5 pílulas numa órbita no celular.
+- [x] 12 partículas soltas em órbitas lentas.
+- [x] Embaixo, só "Como o app se adapta ao seu risco" (3 cartões iguais, pílula do nível no topo, hover/foco sobe 4px + borda vinho), princípios e nota. **Sem** seletor Baixo/Médio/Alto, **sem** "Ver como chegamos nisso", **sem** legenda do FONAR, sem linha de luz e sem absorção no scroll.
+- [x] Desempenho: dpr ≤ 1.5, render pausado fora da tela, 3D em `React.lazy` carregado só perto da seção (não entra no carregamento inicial), CPU 4× com mediana de 60fps.
+- [x] Fallback sem WebGL / movimento reduzido: `public/images/ai-sphere.png` + pílulas paradas.
+- [ ] Revisão do cliente (prints e GIF em `screenshots/leitura-risco-2/`).
 
 ## Itens concluídos
 | Item | O que é | Commit |
@@ -62,20 +73,34 @@ Removidas do código e do `copy.ts` em 10/11/2026: **Modo Disfarce** como seçã
 | 5 | Troca para o `COPY.md` final: mapa novo, seções fora do plano removidas, navegação e âncoras (`#como-funciona`, `#leitura-risco`, `#dor-*`), links dos Benefícios, esqueleto de `#leitura-risco` — prints em `./screenshots/copy-final/` | c21768b |
 | 5b | Benefícios no COPY 3.5 (padrão Gardance): etiqueta de vidro, cartão ativo cresce e abre texto + link, fotos enquadradas no rosto — prints em `./screenshots/beneficios-final/` | 37f0740 |
 | 7 | Seção 7 — Leitura de risco com IA: orbe em CSS, fontes em órbita absorvidas ao rolar, cartão de resultado com níveis e "Ver como chegamos nisso", cartões de adaptação, princípios e nota — prints em `./screenshots/leitura-risco/` | 61eefc3 |
-| 5c | Benefícios de volta à versão anterior (etiqueta branca sempre aberta, hover só levanta) — revoga o item 5b | (este commit) |
-| 7b | Seção 7 — ajustes 2: esfera da IA em partículas 3D (three + R3F, carregada só perto da tela), 7 pílulas em duas órbitas com profundidade, partículas soltas, cartões de adaptação sem seletor; removidos o cartão de resultado, a legenda do FONAR, a linha de luz e a absorção — prints e GIF em `./screenshots/leitura-risco-2/` | (este commit) |
+| 5c | Benefícios de volta à versão anterior (etiqueta branca sempre aberta, hover só levanta) — revoga o item 5b | 9ef496e |
+| 7b | Seção 7 — ajustes 2: esfera da IA em partículas 3D (three + R3F, carregada só perto da tela), 7 pílulas em duas órbitas com profundidade, partículas soltas, cartões de adaptação sem seletor; removidos o cartão de resultado, a legenda do FONAR, a linha de luz e a absorção — prints e GIF em `./screenshots/leitura-risco-2/` | 9ef496e |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
 ## Próximo passo
-1. **Revisão do cliente** da seção 7 com a esfera 3D (`screenshots/leitura-risco-2/`, incluindo `esfera-animada.gif`).
-2. Depois, na ordem: **8 Como começar**, **9 FAQ**, **10 CTA final**, **11 Rodapé**, cada uma com os textos do COPY §3.8–§3.11 (os objetos `comecar`, `faq` e `ctaFinal` do `copy.ts` ainda têm os textos antigos e serão revisados quando cada seção for construída). Em seguida, Fase 5 (revisão completa).
+1. **Revisão do cliente da seção 7** (`screenshots/leitura-risco-2/`, incluindo `esfera-animada.gif`) e ajustes que ela pedir.
+2. Depois, na ordem, sempre com os textos do `COPY.md` e a rotina de 5 passos do CLAUDE.md:
+   - **8 Como começar** (`#comecar`, COPY §3.8);
+   - **9 FAQ + emergência** (`#faq`, COPY §3.9);
+   - **10 CTA final** (`#cta`, COPY §3.10);
+   - **11 Rodapé** (COPY §3.11).
+   Os objetos `comecar`, `faq` e `ctaFinal` do `copy.ts` ainda têm os textos antigos: trocar pelos do COPY ao construir cada seção.
+3. Fase 5 (revisão completa: build, `web-design-guidelines`, verificações da `design-taste-frontend`, textos palavra por palavra, 360px, teclado, movimento reduzido).
 
-Pendências conhecidas: aviso "chunk > 500 kB" no build (Fase 5). As imagens das seções removidas (direitos, rede, comecar etc.) continuam em `public/images` e no `process-images.mjs`; serão limpas quando as seções 8–11 definirem quais fotos usam.
+Pendências conhecidas: aviso "chunk > 500 kB" do pacote principal no build (Fase 5; o 3D já está num pacote separado). Fotos sem uso e placeholders: ver "Fotos" abaixo.
 
 ## Decisões aprovadas pelo cliente
-- **Benefícios (10/11/2026):** fica a versão com etiqueta **branca** sempre aberta (tópico, texto e link) e hover que só levanta a etiqueta. A versão Gardance com etiqueta de vidro que abre no cartão ativo foi revogada.
-- **Seção 7 (10/11/2026, prioridade sobre o COPY §3.7):** sem o cartão "Leitura de risco" (seletor Baixo/Médio/Alto e "Ver como chegamos nisso"), sem a legenda do FONAR, sem linha de luz e sem absorção no scroll. No lugar do orbe em CSS, esfera de partículas 3D com anéis de luz; 7 pílulas (5 no celular) orbitando continuamente; "Como o app se adapta ao seu risco" com os 3 cartões iguais, sem seletor.
+### Resumo das decisões vigentes (10/11/2026) — valem sobre o `DESIGN.md` e o `COPY.md`
+- **`COPY.md` (versão final) é a fonte da verdade** dos textos e da estrutura; textos novos do cliente ficam no `copy.ts` e no `NOTES.md`.
+- **Grid responsivo (confirmado pelo cliente):** `--grid` = **1280px** até 1599px de tela (inclui 1440) e **1440px** a partir de 1600px (inclui 1920). Todo conteúdo e o cartão das Dores usam `max-w-(--grid)`. Padding interno do cartão das Dores: 96px a partir de 1600px.
+- **Cartão único das Dores** (padrão NextPay): fundo branco, um cartão com margem de 16px (12px no celular), raio 24px, degradê `#4B2A3F` → `#954B6E`, **foto do banner em cores naturais** dissolvendo por máscara; título "Pedir ajuda / não deveria ser um risco." em duas linhas inteiras (até 108px); lista em vidro claro com o celular sticky.
+- **Celular das Dores com ~300px** fixo, cortado pela base de um painel de no máximo 560px.
+- **Benefícios (confirmado pelo cliente):** etiqueta **branca** sempre aberta (tópico, texto e link → `#dor-rede`, `#dor-cofre`, `#leitura-risco`); hover só levanta a etiqueta (zoom leve da foto). A versão com etiqueta de vidro no padrão Gardance (`37f0740`) foi descartada.
+- **Seção 7:** esfera de partículas 3D com anéis de luz e pílulas orbitando; sem seletor de nível, sem "Ver como chegamos nisso", sem legenda do FONAR (detalhes em "Seção 7 — estado").
+- **Navegação:** header e rodapé com Como funciona (`#como-funciona`), Leitura de risco (`#leitura-risco`), Como começar (`#comecar`), Dúvidas (`#faq`); rodapé + "Voltar ao topo". Pílula "SOS silencioso" do hero → `#como-funciona`.
+
+### Decisões anteriores (histórico, na ordem em que foram tomadas)
 - **Pílula do header com 920px** (o §7.11 diz 880px; com 880 "Como funciona" e "Seus direitos" quebravam em duas linhas).
 - **Header sempre visível** (não some ao rolar; vira pílula compacta a partir de 80px, como na Gardance).
 - **H1 do hero com ~32px no celular**, mantendo uma linha. **Aplicado:** `clamp(1.625rem, 8.4vw, 4.75rem)` → 32,8px em 390, 30,2px em 360, 26,9px em 320 (o `8.2vw` com mínimo de 1.75rem estourava em 320px).
@@ -160,7 +185,7 @@ Pendências conhecidas: aviso "chunk > 500 kB" no build (Fase 5). As imagens das
 3. **Grid responsivo em todo o site:** todo conteúdo dentro de `max-w-(--grid)` — 1280px até 1599px de tela (inclui 1440) e 1440px a partir de 1600px (inclui 1920) —, `px-5` (celular) / `px-8` (desktop). O cartão das Dores também segue o `--grid` (nunca ocupa a tela toda). Só os fundos vão de ponta a ponta (gradiente do hero, fios do marquee). Verificar com `node scripts/check-grid.mjs <url> 1440,1920`.
 4. **Celular da lista das Dores:** 300px fixo, cortado pela base de um painel com no máximo 560px de altura e 7 colunas; mesmo tamanho em 1440/1920/2560.
 5. **Tela branca do celular:** proteção contra escala 0 no `PhoneFrame` e estado inicial explícito das telas.
-6. **Cartão das Dores com 1440px sem contar a margem** (a margem de 16px vem por fora) — antes 1408px e 1216px (bordas iguais às dos cartões dos Benefícios), centralizado, sem crescer em telas largas; título do banner até 5.25rem, cada linha inteira.
+6. ~~Cartão das Dores com 1440px fixo~~ — **substituído** pelo grid responsivo (item 3): o cartão segue o `--grid` (1280px até 1599px de tela, 1440px a partir de 1600px), com padding interno de 96px a partir de 1600px.
 
 ### ~~`#beneficios` — cartões no padrão Gardance~~ — **revogado** (10/11/2026): voltou à versão anterior (etiqueta branca), sem os pedaços de notificação sobre as fotos
 - Sem selo no topo; etiqueta de vidro na base (ícone vinho 32px + tópico). Aberta: texto + link para `#rede`, `#cofre`, `#risco`.
@@ -176,28 +201,35 @@ Pendências conhecidas: aviso "chunk > 500 kB" no build (Fase 5). As imagens das
 ### Fotos dos Benefícios (10/11/2026)
 - Novas fotos, com luz natural parecida nas três: sofá com celular (tranquilidade), escrevendo na cozinha (controle), na janela com o celular (confiança).
 
-### Fundos das seções (regra dos Ajustes 3)
+### Fundos das seções (regra dos Ajustes 3, com o mapa novo)
 | # | Seção | Fundo |
 |---|---|---|
 | 1 | Hero | `--grad-hero` (dissolve no branco na base) |
 | 2 | Marquee | branco (fios `borda`) |
-| 3 | `#contexto` | branco (pedido do cliente; ver nota abaixo da tabela) |
-| 4 | `#pessoas` | **rosado** — `--grad-rosa` em tela cheia e parado; divisória reta e clara, sem esmaecer no branco |
-| 4b | `#beneficios` | branco |
-| 5 | `#dores` | branco, com um cartão único em degradê `#4B2A3F` → `#954B6E` (escuro) |
-| 6 | `#disfarce` | shell `vinho-profundo` (escura) sobre margem branca |
-| 7 | `#recursos` | branco |
-| 8 | `#direitos` | **rosado** (`--grad-rosa`) |
-| 9 | `#mitos` | branco |
-| 10 | `#seguranca` | `vinho-profundo` (escura) |
-| 11 | `#comecar` | branco (palco com foto) |
-| 12 | `#acesso` | **rosado** (`--grad-rosa`) — no DESIGN era branco; muda para não ficar branco + branco depois de `#comecar` |
-| 13 | `#ajudar` | branco |
-| 14 | `#faq` | **rosado** (`--grad-rosa`) |
-| 15 | Galeria + CTA | branco → shell `--grad-vinho` |
-| 16 | Rodapé | `vinho-profundo` |
-As seções 6 a 16 ainda são da rodada 1; o fundo da tabela entra quando cada uma for refeita.
-**Exceção aprovada:** marquee e `#contexto` ficam brancos em sequência, por decisão do cliente (o fundo rosado do `#contexto` foi retirado). A alternância vale do `#pessoas` (shell rosado) em diante.
+| 3 | `#contexto` | branco (exceção aprovada pelo cliente) |
+| 4 | `#pessoas` (Manifesto) | **rosado** — `--grad-rosa` em tela cheia e parado |
+| 5 | `#beneficios` | branco |
+| 6 | `#como-funciona` (Dores) | branco, com o cartão único escuro (`#4B2A3F` → `#954B6E`) |
+| 7 | `#leitura-risco` | branco (grade de pontos + halo atrás da esfera) |
+| 8 | `#comecar` | sugestão: **rosado** (`--grad-rosa`) — a confirmar ao construir |
+| 9 | `#faq` | sugestão: branco |
+| 10 | `#cta` | sugestão: shell `--grad-vinho` sobre margem branca |
+| 11 | Rodapé | `vinho-profundo` |
+
+## Fotos
+Originais em `assets/fotos/` e arquivos gerados em `public/images/` (`npm run images` → `<slot>-<largura>.avif|webp` + `.jpg`). **Tudo versionado no git.**
+
+**Definitivas, em uso:** `numeros` (#contexto), `contexto` (centro do Manifesto), `pessoas-janela`, `rede-duas-mulheres`, `direitos-1` a `direitos-4` (Manifesto), `beneficio-tranquilidade`, `beneficio-controle`, `beneficio-confianca` (Benefícios), `dores-banner` (Dores), `ai-sphere.png` (fallback da esfera, gerado do próprio canvas).
+
+**Provisórias, em uso** (alternativas de `assets/fotos/` até chegarem as definitivas): `sos-mobile` (espelhada), `risco` e `comecar-2` — as três no Manifesto.
+
+**Da rodada 1, em uso até a seção ser refeita:** `cta-final` e `cta-final-mobile` (CTA final, seção 10).
+
+**Placeholders** (degradê vinho + gota, gerados pelo script): `cofre`, `cofre-mobile`, `comecar-1`, `comecar-4` — **sem uso hoje** (a seção do Cofre saiu; Como começar será refeita). Só vão precisar de foto real se a seção 8 nova usar fotos.
+
+**Sem uso** (podem sair do `process-images.mjs` na Fase 5): `ajudar`, `comecar-3`, `comecar-3-mobile`, `sos` (só no `/#kit`), `risco-mobile` e os originais soltos `mulher-*` em `assets/fotos/`.
+
+Para trocar uma foto: coloque o arquivo em `assets/fotos/` com o nome do slot, ajuste o recorte em `scripts/process-images.mjs` (lista `SLOTS`; se era placeholder, tire da lista `PLACEHOLDERS`) e rode `npm run images`.
 
 ## Ajustes pendentes (escreva aqui o que quer mudar nos itens 1–4)
 - [ESCREVA AQUI O QUE VOCÊ QUER AJUSTAR]
