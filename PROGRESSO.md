@@ -36,7 +36,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 4e | `#dores` ajustes 4: cartão único (banner + lista no mesmo fundo), foto natural dissolvendo, transição NextPay — screenshots em `./screenshots/dores-4/` | `09bb215` |
 | 3h | `#pessoas`: foto central em movimento, sem ficar colada na base — screenshots em `./screenshots/pessoas-centro/` | `5725147` |
 | 4f | Seção nova `#beneficios` (Gardance + NextPay) e foto no vão acima da frase em `#pessoas` — screenshots em `./screenshots/beneficios/` | `339d31d` |
-| 4g | Ajustes 4 (geral): fotos dos Benefícios, Manifesto sem degradê, grid de 1280px, celular das Dores 300px, correção da tela branca — screenshots em `./screenshots/ajustes-4/` | (este commit) |
+| 4g | Ajustes 4 (geral): fotos dos Benefícios, Manifesto sem degradê, grid de 1280px, celular das Dores 300px, correção da tela branca — screenshots em `./screenshots/ajustes-4/` | `686d159` |
+| 4h | Cartão das Dores com largura máxima de 1216px — screenshots em `./screenshots/ajustes-4b/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -133,6 +134,7 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 3. **Grid de 1280px em todo o site:** todo conteúdo dentro de `max-w-[1280px]`, `px-5` (celular) / `px-8` (desktop). Só os fundos vão de ponta a ponta (gradiente do hero, cartão das Dores com a foto, fios do marquee). Verificar com `node scripts/check-grid.mjs <url> 1920,2560`.
 4. **Celular da lista das Dores:** 300px fixo, cortado pela base de um painel com no máximo 560px de altura e 7 colunas; mesmo tamanho em 1440/1920/2560.
 5. **Tela branca do celular:** proteção contra escala 0 no `PhoneFrame` e estado inicial explícito das telas.
+6. **Cartão das Dores com largura máxima de 1216px** (bordas iguais às dos cartões dos Benefícios), centralizado, sem crescer em telas largas; título do banner até 5.25rem, cada linha inteira.
 
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |
