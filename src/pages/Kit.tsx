@@ -5,7 +5,17 @@ import homePng from '../assets/app-screens/inicio-celular.png'
 import homeSosPng from '../assets/app-screens/home-sos.png'
 import ocorrPng from '../assets/app-screens/ocorrencias.png'
 import redePng from '../assets/app-screens/rede-de-apoio.png'
-import { HomeSosScreen, OcorrenciasScreen, RedeScreen } from '../components/phone/AppScreens'
+import {
+  DireitosScreen,
+  HomeRiscoScreen,
+  HomeSosScreen,
+  OcorrenciasScreen,
+  ProvaScreen,
+  RedeScreen,
+} from '../components/phone/AppScreens'
+import direitosPng from '../assets/app-screens/conteudo-direitos.png'
+import riscoPng from '../assets/app-screens/home-leitura-risco.png'
+import provaPng from '../assets/app-screens/prova-verificada.png'
 import simbolo from '../assets/brand/amparo-simbolo.svg'
 import { Button } from '../components/ui/Button'
 import { Chip } from '../components/ui/Chip'
@@ -178,6 +188,9 @@ export default function Kit() {
                 [HomeSosScreen, homeSosPng, 'HomeSosScreen'],
                 [RedeScreen, redePng, 'RedeScreen'],
                 [OcorrenciasScreen, ocorrPng, 'OcorrenciasScreen'],
+                [ProvaScreen, provaPng, 'ProvaScreen'],
+                [HomeRiscoScreen, riscoPng, 'HomeRiscoScreen'],
+                [DireitosScreen, direitosPng, 'DireitosScreen'],
               ] as const
             ).map(([S, png, name]) => (
               <Pair

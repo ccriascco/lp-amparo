@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'on-dark' | 'ghost'
+type Variant = 'primary' | 'secondary' | 'secondary-dark' | 'on-dark' | 'ghost'
 type Size = 'md' | 'sm'
 
 type Common = {
@@ -32,6 +32,9 @@ const sizes: Record<Size, string> = {
 const variants: Record<Variant, string> = {
   primary: 'bg-vinho text-white hover:bg-vinho-profundo',
   secondary: 'border-[1.5px] border-vinho bg-transparent text-vinho hover:bg-superficie',
+  // Secundário sobre fundo escuro (#dores): contorno e texto brancos.
+  'secondary-dark':
+    'border-[1.5px] border-white/40 bg-transparent text-white hover:border-white/70 hover:bg-white/10',
   'on-dark': 'bg-white text-vinho-profundo hover:bg-superficie',
   ghost: '',
 }

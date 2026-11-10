@@ -107,34 +107,49 @@ export const contexto = {
 // 3.3
 export const dores = {
   h2: 'Pedir ajuda não deveria ser mais um risco.',
-  intro: 'Sabemos o que impede tantas mulheres de buscar apoio:',
+  /** Texto do cliente (refação de #dores, 10/11/2026), com ponto final no lugar dos dois-pontos. */
+  intro: 'Sabemos o que impede tantas mulheres de buscar apoio.',
+  /**
+   * Cada dor com o recurso que responde a ela (refação de #dores no padrão NextPay, 10/11/2026):
+   * chip = recurso; title = a dor (COPY 3.3); answer = como o Amparo responde (texto do cliente).
+   */
   items: [
     {
+      chip: 'Modo Disfarce',
       title: 'Ele pode ver o seu celular.',
-      text: 'Um app de proteção visível na tela pode virar motivo de briga ou de ameaça.',
+      answer: 'Por fora, o Amparo é uma calculadora. A área protegida só abre com o seu código.',
+      href: '#disfarce',
     },
     {
+      chip: 'Cofre de provas',
       title: 'Medo de não ter provas.',
-      text: 'Fotos e áudios se perdem, são apagados ou têm a veracidade questionada.',
+      answer:
+        'Cada registro guarda data, hora, local e um código que mostra que nada foi alterado.',
+      href: '#cofre',
     },
     {
+      chip: 'Rede de apoio',
       title: 'Denunciar parece um passo grande demais.',
-      text: 'Nem toda mulher está pronta para ir à delegacia, e tudo bem.',
+      answer:
+        'Você pode pedir ajuda a quem confia, sem boletim de ocorrência e sem medida protetiva.',
+      href: '#rede',
     },
     {
+      chip: 'Leitura de risco',
       title: 'Não saber se é grave.',
-      text: 'Quando a violência vira rotina, fica difícil perceber que o risco está aumentando.',
+      answer: 'A IA mostra se o risco está baixo, médio ou alto, e você sempre vê o porquê.',
+      href: '#risco',
     },
     {
+      chip: 'Seus direitos',
       title: 'Não saber quais são seus direitos.',
-      text: 'A lei protege, mas a informação nem sempre chega em linguagem simples.',
+      answer: 'A Lei Maria da Penha explicada em linguagem simples, dentro do app.',
+      href: '#direitos',
     },
   ],
-  /** Link em cada cartão de dor e o destino de cada um (COPY 3.3). */
+  /** Link em cada cartão (COPY 3.3). */
   link: 'Como o Amparo ajuda',
-  linkTargets: ['#disfarce', '#cofre', '#rede', '#risco', '#direitos'],
-  fecho: 'O Amparo foi desenhado a partir de cada uma dessas barreiras.',
-  fechoButton: { label: 'Conheça os recursos', href: '#recursos' },
+  button: { label: 'Conheça os recursos', href: '#recursos' },
 }
 
 // 3.4
@@ -644,6 +659,44 @@ export const app = {
     ],
     ultimos: 'Últimos registros',
     registro: { title: 'Ocorrência registrada', date: '14/03', time: '21:47' },
+  },
+  /** home-leitura-risco.png (#dores, item "Leitura de risco"). */
+  homeRisco: {
+    greeting: 'Olá, Marina',
+    subtitle: 'Como podemos te ajudar hoje?',
+    quickTitle: 'Ações rápidas',
+    quick: [
+      'Registrar prova',
+      'Adicionar guardião',
+      'Ver minhas ocorrências',
+      'Delegacias próximas',
+    ],
+    cardTitle: 'Tudo por aqui está tranquilo',
+    cardText:
+      'O acompanhamento discreto segue ativo. Nada novo foi registrado nos últimos 12 dias.',
+    cardLink: 'Ver como chegamos nisso',
+    atalhos: ['Como funcionam as ocorrências', 'Central de Conteúdo e Direitos'],
+  },
+  /** conteudo-direitos.png (#dores, item "Seus direitos"). */
+  direitosTela: {
+    title: 'Conteúdo e direitos',
+    subtitle: 'O que a lei garante para você, em linguagem simples.',
+    lerMais: 'Ler mais',
+    cards: [
+      {
+        title: 'Lei Maria da Penha, explicada',
+        text: 'Entenda o que a lei garante e os 5 tipos de violência que ela reconhece.',
+      },
+      {
+        title: 'Como pedir uma Medida Protetiva',
+        text: 'O passo a passo, sem precisar de advogado, e sem custo nenhum.',
+      },
+      {
+        title: 'Monitoramento eletrônico do agressor',
+        /** Na tela, o texto continua escondido atrás da barra; só a 1ª linha aparece. */
+        text: 'Desde 2026, isso já pode ser aplicado',
+      },
+    ],
   },
   /** alerta-enviado.png */
   alerta: {

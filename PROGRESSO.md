@@ -9,7 +9,7 @@
 ## Situação atual
 Estamos na **rodada 2**: a página está sendo refeita seção por seção, de cima para baixo, seguindo o `DESIGN.md` (§2.1 e §9) e o `COPY.md` revisados, com base nos 5 sites de referência (Gaia, Gardance, Eduzz, NextPay, FitPay).
 
-Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → marquee → `#contexto` → `#pessoas` → `#dores`). Da seção `#disfarce` para baixo ainda são as seções da rodada 1 (bento, pilares separados etc.), que serão substituídas uma a uma.
+Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → marquee → `#contexto` → `#pessoas` → `#dores`, esta no padrão NextPay). Da seção `#disfarce` para baixo ainda são as seções da rodada 1 (bento, pilares separados etc.), que serão substituídas uma a uma.
 
 **Parado para revisão do cliente ao final do item 4.**
 
@@ -29,7 +29,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 3d | Ajustes 4: foto do `#contexto` sem tingimento; `#pessoas` em shell rosado com divisória e 11 fotos — screenshots em `./screenshots/ajustes-4/` | `a192110` |
 | 3e | Ajustes 5: fundo de `#pessoas` abrindo até a tela cheia (sem bordas laterais); 2 fotos a menos — screenshots em `./screenshots/ajustes-5/` | `8150b21` |
 | 3f | Ajustes 6: fundo de `#pessoas` parado em tela cheia (sem `clip-path` e sem parallax da nuvem); fotos em camada própria — screenshots em `./screenshots/ajustes-6/` | `f62c3b0` |
-| 1e/3g | Ajustes 7: central do hero com `inicio-celular`, 3 celulares no celular, `#contexto` texto → cartões → foto, fotos de `#pessoas` naturais e com movimento no celular — screenshots em `./screenshots/ajustes-7/` | (este commit) |
+| 1e/3g | Ajustes 7: central do hero com `inicio-celular`, 3 celulares no celular, `#contexto` texto → cartões → foto, fotos de `#pessoas` naturais e com movimento no celular — screenshots em `./screenshots/ajustes-7/` | `4e143c2` |
+| 4b | `#dores` refeita no padrão NextPay (itens à esquerda + painel fixo com o celular trocando de tela) — screenshots em `./screenshots/dores/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -80,6 +81,14 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 2. **Hero no celular com os 3 celulares**, os laterais menores (176px) e cortados pela borda da tela. A pílula "Modo Disfarce" desce para a parte de baixo do celular esquerdo (no topo ela cobria o círculo do celular).
 3. **`#contexto` no celular:** texto → cartões → foto (a foto vem depois dos cartões, como no desktop).
 4. **`#pessoas`:** todas as fotos nas **cores originais** (sem o tingimento vinho); a foto `sos` usa o recorte 4:5 centrado na mulher; no celular a foto do canto superior esquerdo fica mais para dentro, há fotos desfocadas ao fundo e as fotos se movem (parallax com amplitude menor, sem palco fixo).
+
+### `#dores` refeita no padrão NextPay "Vantagens do App" (10/11/2026) — prioridade sobre o `DESIGN.md` §6.32
+- **Sai o `QuestionStage`** (pergunta fixa com cartões flutuando) e o fecho antigo. Fundo `vinho-profundo` com brilho `vinho/25` atrás do painel, emendando na seção de cima.
+- **Desktop:** H2 + subtítulo ("Sabemos o que impede tantas mulheres de buscar apoio.") à esquerda no topo; abaixo, os 5 itens em 5 col rolando normalmente e, em 7 col, um painel `sticky` (top 15vh, raio 20px, gradiente vinho → vinho-profundo, linhas diagonais finas num canto) com um celular cortado na base.
+- **Itens** (cartão de vidro escuro: chip do recurso, título = a dor, 1 linha = como o Amparo responde, link "Como o Amparo ajuda"): Modo Disfarce → calculadora → `#disfarce`; Cofre de provas → Prova verificada → `#cofre`; Rede de apoio → Rede de apoio → `#rede`; Leitura de risco → tela `home-leitura-risco.png` → `#risco`; Seus direitos → Conteúdo e direitos → `#direitos`. Telas em código, fiéis a `assets/app-screens/`.
+- **Movimento:** o item mais próximo do centro fica ativo (opacidade 1, borda `white/20`; os outros 0,4); a tela do celular troca com crossfade de 0,5s e deslize vertical; o chip do recurso aparece num cartão flutuante ao lado do celular. Movimento reduzido: estático, na primeira tela.
+- **Celular:** sem sticky; cada item com o cartão e, embaixo, a tela num celular de ~240px. Botão secundário "Conheça os recursos" centralizado no fim (→ `#recursos`).
+- **Atenção:** a `home-leitura-risco.png` mostra o card "Tudo por aqui está tranquilo" (nível baixo), não "Médio"; a tela foi feita fiel à imagem.
 
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |

@@ -1,24 +1,31 @@
 import clsx from 'clsx'
 import {
+  ArrowRight,
   Bell,
+  BookOpen,
   Calculator,
   CalendarDays,
   Camera,
   Check,
+  ChevronLeft,
   Clock,
   EyeOff,
+  FileCheck2,
   FileText,
   FolderLock,
   Heart,
   Lock,
   MapPin,
   NotebookPen,
+  Radar,
   Scale,
   Send,
   Settings,
+  ShieldCheck,
   Trash2,
   TriangleAlert,
   UserPlus,
+  X,
   type LucideIcon,
 } from 'lucide-react'
 import type { ReactNode } from 'react'
@@ -33,19 +40,34 @@ import { AppNav } from './AppChrome'
  */
 
 /** Cabeçalho em gradiente com a foto da Marina e os 3 ícones (bell, calculadora, ajustes). */
-function PhotoHeader({ height, children }: { height: number; children: ReactNode }) {
+function PhotoHeader({
+  height,
+  children,
+  close,
+}: {
+  height: number
+  children?: ReactNode
+  /** Botão "X" no lugar da foto (telas abertas por cima, como Conteúdo e direitos). */
+  close?: boolean
+}) {
   return (
     <header
       className="absolute inset-x-0 top-0 rounded-b-[22px] text-white"
       style={{ background: 'var(--grad-vinho)', height }}
     >
-      <img
-        src={avatar}
-        alt=""
-        width={45}
-        height={45}
-        className="absolute top-[45px] left-[34px] size-[45px] rounded-full"
-      />
+      {close ? (
+        <span className="absolute top-[45px] left-[34px] grid size-[46px] place-items-center rounded-full bg-white/20">
+          <X className="size-[22px]" strokeWidth={2.2} />
+        </span>
+      ) : (
+        <img
+          src={avatar}
+          alt=""
+          width={45}
+          height={45}
+          className="absolute top-[45px] left-[34px] size-[45px] rounded-full"
+        />
+      )}
       <div className="absolute top-[48px] right-[34px] flex gap-[12px]">
         {[Bell, Calculator, Settings].map((Icon, i) => (
           <span key={i} className="grid size-[38px] place-items-center rounded-full bg-white/20">
@@ -57,7 +79,7 @@ function PhotoHeader({ height, children }: { height: number; children: ReactNode
           </span>
         ))}
       </div>
-      <div className="absolute top-[104px] right-[34px] left-[34px]">{children}</div>
+      {children && <div className="absolute top-[104px] right-[34px] left-[34px]">{children}</div>}
     </header>
   )
 }
@@ -286,6 +308,152 @@ export function OcorrenciasScreen() {
         </span>
       </div>
       <div className={clsx('absolute top-[745px] right-[34px] left-[34px] h-[80px]', card)} />
+      <AppNav />
+    </Screen>
+  )
+}
+
+/** Prova verificada (`prova-verificada.png`). */
+export function ProvaScreen() {
+  const t = app.prova
+  const greenCard = 'rounded-[12px] border border-confirma/25 bg-white'
+  return (
+    <Screen>
+      <PhotoHeader height={121} />
+      <ChevronLeft
+        className="absolute top-[150px] left-[30px] size-[26px] text-vinho"
+        strokeWidth={2}
+      />
+      <p className="absolute top-[193px] left-[34px] text-[22.5px] leading-tight font-bold text-texto">
+        {t.title}
+      </p>
+      <p className="absolute top-[230px] left-[34px] text-[13px] text-[#3b3b3b]">{t.date}</p>
+
+      <div className={clsx('absolute top-[273px] right-[34px] left-[34px] h-[159px]', greenCard)}>
+        <span className="absolute top-[24px] left-[24px] grid size-[38px] place-items-center rounded-full bg-confirma/12 text-confirma">
+          <Lock className="size-[17px]" strokeWidth={2} />
+        </span>
+        <p className="absolute top-[72px] left-[24px] text-[19px] leading-tight font-semibold text-texto">
+          {t.guardado}
+        </p>
+        <p className="absolute top-[100px] right-[24px] left-[24px] text-[13px] leading-[1.45] text-[#3b3b3b]">
+          {t.guardadoText}
+        </p>
+      </div>
+
+      <div className={clsx('absolute top-[449px] right-[34px] left-[34px] h-[250px]', greenCard)}>
+        <span className="absolute top-[24px] left-[24px] grid size-[38px] place-items-center rounded-full bg-confirma/12 text-confirma">
+          <ShieldCheck className="size-[18px]" strokeWidth={2} />
+        </span>
+        <p className="absolute top-[72px] left-[24px] text-[19px] leading-tight font-semibold text-texto">
+          {t.verificada}
+        </p>
+        <p className="absolute top-[100px] right-[22px] left-[24px] text-[13px] leading-[1.45] text-[#3b3b3b]">
+          {t.verificadaText}
+        </p>
+        <div className="absolute top-[147px] right-[24px] left-[24px] h-[80px] rounded-[10px] bg-superficie/70 px-[16px] pt-[12px]">
+          <p className="text-[11.5px] leading-none text-texto-secundario">{t.hashLabel}</p>
+          <p className="mt-[8px] text-[13px] leading-none text-texto tabular-nums">
+            a3f9c2e7 · 8b41d05a · 6ec73912
+          </p>
+          <p className="mt-[9px] text-[11.5px] leading-none text-texto-secundario">
+            {t.registrado}
+          </p>
+        </div>
+      </div>
+      <AppNav />
+    </Screen>
+  )
+}
+
+/** Tela inicial com a leitura de risco (`home-leitura-risco.png`). */
+export function HomeRiscoScreen() {
+  const t = app.homeRisco
+  const icons = [Camera, UserPlus, FolderLock, MapPin]
+  return (
+    <Screen>
+      <PhotoHeader height={183}>
+        <p className="text-[21px] leading-tight font-bold">{t.greeting}</p>
+        <p className="mt-[4px] text-[13px] leading-snug text-white/85">{t.subtitle}</p>
+      </PhotoHeader>
+      <p className="absolute top-[186px] left-[34px] text-[13px] text-[#3b3b3b]">{t.quickTitle}</p>
+      <QuickRow top={218} items={t.quick.map((label, i) => ({ icon: icons[i], label }))} />
+      <Dots top={336} />
+
+      <div className={clsx('absolute top-[366px] right-[34px] left-[34px] h-[189px]', card)}>
+        <span className="absolute top-[24px] left-[24px] grid size-[38px] place-items-center rounded-full bg-superficie text-vinho">
+          <ShieldCheck className="size-[18px]" strokeWidth={2} />
+        </span>
+        <p className="absolute top-[74px] left-[24px] text-[19.5px] leading-tight font-bold text-texto">
+          {t.cardTitle}
+        </p>
+        <p className="absolute top-[102px] right-[20px] left-[24px] text-[13px] leading-[1.45] text-[#3b3b3b]">
+          {t.cardText}
+        </p>
+        <p className="absolute top-[150px] left-[24px] text-[13px] font-bold text-vinho">
+          {t.cardLink}
+        </p>
+      </div>
+
+      {/* Atalhos em cartões (o 3º é cortado pela borda, como no app) */}
+      {[...t.atalhos, ''].map((label, i) => {
+        const Icon = [FolderLock, BookOpen, FileText][i]
+        return (
+          <div
+            key={i}
+            className={clsx('absolute top-[583px] h-[120px] w-[154px] px-[16px] pt-[16px]', card)}
+            style={{ left: 34 + i * 167 }}
+          >
+            <span className="grid size-[34px] place-items-center rounded-full bg-superficie text-vinho">
+              <Icon className="size-[16px]" strokeWidth={2} />
+            </span>
+            <p className="mt-[10px] max-w-[110px] text-[13px] leading-[1.3] text-texto">{label}</p>
+            {label && (
+              <ArrowRight className="absolute right-[16px] bottom-[14px] size-[14px] text-vinho" />
+            )}
+          </div>
+        )
+      })}
+      <Dots top={720} />
+      <AppNav />
+    </Screen>
+  )
+}
+
+/** Central de conteúdo e direitos (`conteudo-direitos.png`). */
+export function DireitosScreen() {
+  const t = app.direitosTela
+  const icons = [Scale, FileCheck2, Radar]
+  const tops = [213, 402, 613]
+  const heights = [176, 198, 200]
+  return (
+    <Screen>
+      <PhotoHeader height={190} close>
+        <p className="text-[22.5px] leading-tight font-bold">{t.title}</p>
+        <p className="mt-[8px] text-[13px] leading-[1.45] text-white/85">{t.subtitle}</p>
+      </PhotoHeader>
+      {t.cards.map((c, i) => {
+        const Icon = icons[i]
+        return (
+          <div
+            key={c.title}
+            className={clsx('absolute right-[34px] left-[34px] px-[24px] pt-[24px]', card)}
+            style={{ top: tops[i], height: heights[i] }}
+          >
+            <span className="grid size-[38px] place-items-center rounded-full bg-superficie text-vinho">
+              <Icon className="size-[18px]" strokeWidth={2} />
+            </span>
+            <p className="mt-[14px] text-[18.5px] leading-[1.25] font-semibold whitespace-pre-line text-texto">
+              {/* quebras nos mesmos pontos da tela do app */}
+              {c.title.replace('uma ', 'uma\n').replace('eletrônico ', 'eletrônico\n')}
+            </p>
+            <p className="mt-[6px] text-[13px] leading-[1.45] text-[#3b3b3b]">{c.text}</p>
+            {i < 2 && <p className="mt-[4px] text-[13px] font-bold text-vinho">{t.lerMais}</p>}
+          </div>
+        )
+      })}
+      {/* O 3º cartão some sob a barra, como no app */}
+      <div className="absolute inset-x-0 bottom-0 h-[150px] bg-gradient-to-t from-white via-white/90 to-transparent" />
       <AppNav />
     </Screen>
   )
