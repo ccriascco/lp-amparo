@@ -347,3 +347,10 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
 ### Benefícios de volta à versão anterior e cartão das Dores com 1440px (10/11/2026, pedido do cliente)
 - `#beneficios`: voltou à versão de `5495701` (3 cartões 4:5 iguais, foto natural, etiqueta branca na base, revelação por máscara, parallax, hover com zoom e etiqueta subindo) **sem** os pedaços de interface/notificação sobre as fotos. A interação Gardance (`f8ba90d`) foi descartada. Os links dos cartões continuam em `copy.ts` sem uso.
 - `#dores`: cartão de `max-w-[1216px]` para `max-w-[1408px]` — com a margem de 16px, o bloco tem 1440px. Conteúdo do banner segue com `lg:px-12` dentro do cartão; cada linha do título continua inteira.
+
+### `#dores` — ajustes 5 (10/11/2026, pedido do cliente)
+- Cartão com `max-w-[1440px]` (1440px sem contar a margem; os 16px vêm por fora, no padding da seção). Em telas até ~1472px continua com a margem de 16px.
+- Título: "Pedir ajuda" à esquerda; à direita, em duas linhas, "não deveria" / "ser um risco." (`copy.ts → dores.banner.line2` virou lista). No celular as três linhas ficam à esquerda.
+- Subtítulo novo (texto do cliente): "Cada recurso do Amparo nasceu de uma barreira real: o medo de ser vista, a falta de provas e a dúvida sobre o que fazer. Aqui, pedir ajuda é discreto, seguro e no seu tempo." (`max-w-[44ch]`).
+- Lista: blocos de cada item de `72vh` para `48vh` (menos espaço entre os cartões; a troca de tela pelo centro continua igual).
+- **Fotos dos Benefícios:** conferido no navegador — nenhuma tem filtro, véu ou tingimento. A diferença é das fotos originais (média R/G/B: tranquilidade 165/132/102 e controle 192/156/124, luz dourada; confiança 141/125/112, mais escura e neutra).

@@ -238,7 +238,7 @@ export function Dores() {
           overflow-clip (não hidden) para os cantos sem quebrar o sticky do celular. */}
       <div
         data-header-dark
-        className="on-dark relative mx-auto max-w-[1408px] overflow-clip rounded-[24px]"
+        className="on-dark relative mx-auto max-w-[1440px] overflow-clip rounded-[24px]"
         style={{ background: CARD_BG }}
       >
         {/* ── Banner ── */}
@@ -260,7 +260,7 @@ export function Dores() {
           {/* Só o necessário para o texto: véu suave atrás do título e do subtítulo */}
           <div aria-hidden className="pointer-events-none absolute inset-0" style={TEXT_SCRIM} />
 
-          <div className="relative z-10 mx-auto -mt-28 flex flex-col gap-10 px-5 pb-4 md:px-8 lg:mt-0 lg:px-12 lg:h-full lg:justify-between lg:gap-0 lg:pt-28 lg:pb-14">
+          <div className="relative z-10 mx-auto -mt-28 flex flex-col gap-10 px-5 pb-4 md:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:px-12 lg:pt-28 lg:pb-14">
             <span
               data-banner-appear
               className="inline-flex w-max items-center rounded-full px-4 py-2 caption text-white glass"
@@ -271,13 +271,17 @@ export function Dores() {
             <div data-banner-title>
               <h2
                 id="dores-title"
-                className="flex flex-col font-display text-[clamp(2.75rem,6.6vw,5.25rem)] leading-[0.98] lg:whitespace-nowrap font-medium tracking-[-0.03em]"
+                className="flex flex-col font-display text-[clamp(2.75rem,6.6vw,5.25rem)] leading-[0.98] font-medium tracking-[-0.03em] lg:whitespace-nowrap"
               >
                 <span data-banner-line="1" className="text-borda">
                   {b.line1}
                 </span>
                 <span data-banner-line="2" className="text-white lg:self-end lg:text-right">
-                  {b.line2}
+                  {b.line2.map((l) => (
+                    <span key={l} className="block">
+                      {l}
+                    </span>
+                  ))}
                 </span>
               </h2>
             </div>
@@ -285,7 +289,7 @@ export function Dores() {
             <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <p
                 data-banner-appear
-                className="max-w-[30ch] text-[1.25rem] leading-snug text-pretty text-white/80"
+                className="max-w-[44ch] text-[1.25rem] leading-snug text-pretty text-white/80"
               >
                 {b.sub}
               </p>
@@ -316,7 +320,7 @@ export function Dores() {
                     key={d.title}
                     data-dor-item
                     data-appear
-                    className="lg:flex lg:min-h-[72vh] lg:items-center"
+                    className="lg:flex lg:min-h-[48vh] lg:items-center"
                   >
                     <article
                       data-dor-card
