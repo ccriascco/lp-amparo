@@ -26,7 +26,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 1d/2b | Ajustes 2: logo oficial (PNG recortado), círculos por cima da moldura, marquee antes dos números e sem pausa, números em cartões, fonte no rodapé — screenshots em `./screenshots/ajustes-2/` | `911c220` |
 | 2c/3b | Ajustes 3: números + contexto numa seção `#contexto` (shell rosado, bento com foto e flutuantes); fotos espalhadas viram `#pessoas`; token `--grad-rosa`; regra de fundos — screenshots em `./screenshots/ajustes-3/` | `adb7e93` |
 | 3c | Ajustes 3b: `#contexto` com fundo branco (sem shell) e foto definitiva `numeros` — screenshots em `./screenshots/ajustes-3b/` | `be4cb8e` |
-| 3d | Ajustes 4: foto do `#contexto` sem tingimento; `#pessoas` em shell rosado com divisória e 11 fotos — screenshots em `./screenshots/ajustes-4/` | (este commit) |
+| 3d | Ajustes 4: foto do `#contexto` sem tingimento; `#pessoas` em shell rosado com divisória e 11 fotos — screenshots em `./screenshots/ajustes-4/` | `a192110` |
+| 3e | Ajustes 5: fundo de `#pessoas` abrindo até a tela cheia (sem bordas laterais); 2 fotos a menos — screenshots em `./screenshots/ajustes-5/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -69,8 +70,8 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 
 ### Ajustes 4 — foto natural e seção das fotos espalhadas (10/11/2026) — têm prioridade sobre o `DESIGN.md`
 1. **Foto do `#contexto` nas cores originais:** sem o tingimento vinho do §6.18 (exceção; as outras fotos continuam tingidas). `TintedPhoto natural`.
-2. **`#pessoas` com fundo próprio e divisória:** shell rosado recuado (`mx-3 md:mx-4`, raio 32px), com borda clara entre as seções; o fundo não esmaece mais no branco.
-3. **Mais fotos em `#pessoas`:** 11 fotos pequenas (eram 8) + a central. As de baixo passam pelas laterais, fora da largura da frase, para nunca cobrir o texto.
+2. **`#pessoas` com fundo próprio e divisória:** fundo rosado com borda clara entre as seções (não esmaece no branco). **Revisto:** o fundo entra recuado (16px nas laterais, raio 32px; 12px/24px no celular) e se abre com o scroll até ocupar a tela inteira — no desktop termina quando o palco fixa, no celular quando o topo da seção chega a 35% da tela. Sem bordas sobrando nas laterais. Movimento reduzido: já em tela cheia.
+3. **Fotos de `#pessoas`:** 9 fotos pequenas + a central (eram 8; foram a 11 e o cliente pediu para tirar 2 — saíram `ajudar` e `comecar-3`). As de baixo passam pelas laterais, fora da largura da frase, para nunca cobrir o texto.
 
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |
@@ -78,7 +79,7 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 | 1 | Hero | `--grad-hero` (dissolve no branco na base) |
 | 2 | Marquee | branco (fios `borda`) |
 | 3 | `#contexto` | branco (pedido do cliente; ver nota abaixo da tabela) |
-| 4 | `#pessoas` | **rosado** — shell `--grad-rosa` (mx-3 md:mx-4, raio 32px) com a nuvem do palco; divisória clara, sem esmaecer no branco |
+| 4 | `#pessoas` | **rosado** — `--grad-rosa` que abre das margens até a tela cheia; divisória clara, sem esmaecer no branco |
 | 5 | `#dores` | `vinho-profundo` (escura) |
 | 6 | `#disfarce` | shell `vinho-profundo` (escura) sobre margem branca |
 | 7 | `#recursos` | branco |
