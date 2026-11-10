@@ -9,7 +9,7 @@
 ## Situação atual
 Estamos na **rodada 2**: a página está sendo refeita seção por seção, de cima para baixo, seguindo o `DESIGN.md` (§2.1 e §9) e o `COPY.md` revisados, com base nos 5 sites de referência (Gaia, Gardance, Eduzz, NextPay, FitPay).
 
-Do preloader até `#dores` já está tudo na rodada 2. Da seção `#disfarce` para baixo ainda são as seções da rodada 1 (bento, pilares separados etc.), que serão substituídas uma a uma.
+Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → marquee → `#contexto` → `#pessoas` → `#dores`). Da seção `#disfarce` para baixo ainda são as seções da rodada 1 (bento, pilares separados etc.), que serão substituídas uma a uma.
 
 **Parado para revisão do cliente ao final do item 4.**
 
@@ -23,7 +23,8 @@ Do preloader até `#dores` já está tudo na rodada 2. Da seção `#disfarce` pa
 | 3 | Manifesto (`PeopleScatter`, padrão Gaia) | `e1447b7` |
 | 4 | Dores (`QuestionStage`, padrão Gardance) | `c481b47` |
 | 1c | Ajustes do hero e do header (logo alinhado, central reto, telas Rede/Ocorrências/home-sos, sem onda, celulares inteiros flutuando, base dissolvendo) — screenshots em `./screenshots/ajustes-hero/` | `5ee052a` |
-| 1d/2b | Ajustes 2: logo oficial (PNG recortado), círculos por cima da moldura, marquee antes dos números e sem pausa, números em cartões, fonte no rodapé — screenshots em `./screenshots/ajustes-2/` | (este commit) |
+| 1d/2b | Ajustes 2: logo oficial (PNG recortado), círculos por cima da moldura, marquee antes dos números e sem pausa, números em cartões, fonte no rodapé — screenshots em `./screenshots/ajustes-2/` | `911c220` |
+| 2c/3b | Ajustes 3: números + contexto numa seção `#contexto` (shell rosado, bento com foto e flutuantes); fotos espalhadas viram `#pessoas`; token `--grad-rosa`; regra de fundos — screenshots em `./screenshots/ajustes-3/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -54,8 +55,36 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 1. **Logo do header = arquivo oficial:** `src/assets/brand/amparo-logo-horizontal-vinho.png` (e `-branco.png` sobre fundo escuro), com as margens transparentes recortadas (`*-recortado.png`, 112px de altura). **Nunca** recriar o logo com texto em Quicksand. Altura de 28px no header normal e 24px no compacto.
 2. **Círculos rosa com ícone dos celulares laterais por cima de tudo** (acima do `PhoneFrame`), sobrepondo a borda superior do celular, como na Task.io.
 3. **Marquee logo depois do hero, antes da faixa de números**, passando infinito e contínuo: **sem botão de pausa e sem pausar no hover**. Parado só com `prefers-reduced-motion`. Itens e gotas mantidos.
-4. **Faixa de números em cartões** (substitui as colunas com divisória do §6.24): 4 cartões lado a lado (2×2 no celular), fundo branco, borda 1px `borda`, raio 20px, padding 28–32px (20px abaixo de 640px, para caber em 320px), mesma altura; ícone lucide num círculo vinho de 40px com ícone branco no topo; número grande Quicksand `tabular-nums` com contador e rótulo embaixo; **101.656 em destaque** (`--grad-vinho`, textos brancos); hover sobe 4px com `shadow-float`; entrada com `appear` em stagger. Título "Por que o Amparo existe" à esquerda, acima.
+4. **Faixa de números em cartões** (substitui as colunas com divisória do §6.24; **layout revisto nos Ajustes 3**): 4 cartões lado a lado (2×2 no celular), fundo branco, borda 1px `borda`, raio 20px, padding 28–32px (20px abaixo de 640px, para caber em 320px), mesma altura; ícone lucide num círculo vinho de 40px com ícone branco no topo; número grande Quicksand `tabular-nums` com contador e rótulo embaixo; **101.656 em destaque** (`--grad-vinho`, textos brancos); hover sobe 4px com `shadow-float`; entrada com `appear` em stagger. Título "Por que o Amparo existe" à esquerda, acima.
 5. **Fonte dos números no rodapé:** "Dados: 19º Anuário Brasileiro de Segurança Pública, FBSP, 2025", em texto pequeno junto do texto legal. Saiu da faixa de números.
+
+### Ajustes 3 — números + contexto e cor da home (10/11/2026) — têm prioridade sobre o `DESIGN.md`
+1. **Uma seção só, `#contexto`:** junta a faixa de números e o cabeçalho do contexto. **Sem** o título "Por que o Amparo existe"; usa o H2 e o texto do COPY 3.2c. A parte das fotos espalhadas (`PeopleScatter`, frase "Por trás de cada número…") vem logo depois, como seção própria (`#pessoas`).
+2. **Layout (Finexa "About" + bento, ref-03):** cabeçalho em duas colunas (H2 em 7 col, no máximo 2 linhas a 1440; texto em 5 col; alinhados pela base). Abaixo, grid 12 col: cartões de número 2×2 em 7 col (ícone, número, rótulo; 101.656 em `--grad-vinho`; padding 32px; número maior; rótulo até 2 linhas) e foto vertical `numeros.jpg` (`TintedPhoto`, raio 20px) em 5 col, com a altura do 2×2. Sobre a foto, saindo levemente pelas bordas, com `shadow-float`: cartão de vidro "Ligue 180 · Gratuito, sigiloso, 24 horas" (link `tel:180`) no canto inferior esquerdo e `NotificationCard` "Alerta enviado · Sua rede foi avisada · agora" no superior direito. Celular: cabeçalho empilhado, foto 4:5 primeiro (flutuantes por dentro), depois o 2×2. `numeros.jpg` é placeholder do §8 até a foto chegar.
+3. **Shell colorido:** `mx-3 md:mx-4`, raio 32px, fundo `--grad-rosa` (manchas grandes de vinho 22–30% e vinho-profundo 10% sobre `#F3EDEF`, claramente rosado). Cartões brancos com sombra suave `0 12px 32px -16px rgb(75 42 63 / .18)` (`--shadow-card`) no lugar da borda.
+4. **Regra de fundos:** nenhuma seção clara em branco puro seguida de outra branca. As claras alternam entre **branco** e **rosado** (`--grad-rosa`, com manchas de vinho visíveis). Vale para todas as seções que ainda vão ser construídas (mapa abaixo).
+5. **Animação:** H2 palavra por palavra saindo do desfoque; cartões com `appear` em stagger e contador; foto com revelação por máscara de baixo para cima e parallax interno leve; os dois flutuantes entram 0,2s depois da foto e depois flutuam devagar (`y ±6px`).
+
+### Fundos das seções (regra dos Ajustes 3)
+| # | Seção | Fundo |
+|---|---|---|
+| 1 | Hero | `--grad-hero` (dissolve no branco na base) |
+| 2 | Marquee | branco (fios `borda`) |
+| 3 | `#contexto` | **rosado** — shell `--grad-rosa` sobre margem branca |
+| 4 | `#pessoas` | branco no topo → nuvem rosada do palco |
+| 5 | `#dores` | `vinho-profundo` (escura) |
+| 6 | `#disfarce` | shell `vinho-profundo` (escura) sobre margem branca |
+| 7 | `#recursos` | branco |
+| 8 | `#direitos` | **rosado** (`--grad-rosa`) |
+| 9 | `#mitos` | branco |
+| 10 | `#seguranca` | `vinho-profundo` (escura) |
+| 11 | `#comecar` | branco (palco com foto) |
+| 12 | `#acesso` | **rosado** (`--grad-rosa`) — no DESIGN era branco; muda para não ficar branco + branco depois de `#comecar` |
+| 13 | `#ajudar` | branco |
+| 14 | `#faq` | **rosado** (`--grad-rosa`) |
+| 15 | Galeria + CTA | branco → shell `--grad-vinho` |
+| 16 | Rodapé | `vinho-profundo` |
+As seções 6 a 16 ainda são da rodada 1; o fundo da tabela entra quando cada uma for refeita.
 
 ## Ajustes pendentes (escreva aqui o que quer mudar nos itens 1–4)
 - [ESCREVA AQUI O QUE VOCÊ QUER AJUSTAR]

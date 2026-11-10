@@ -112,6 +112,8 @@ const PLACEHOLDERS = [
   { slot: 'cofre-mobile', width: 1080, height: 1350 },
   { slot: 'comecar-1', width: 1600, height: 900 },
   { slot: 'comecar-4', width: 1600, height: 900 },
+  // Foto vertical da seção #contexto (ajustes 3, 10/11/2026); trocar pela definitiva quando chegar
+  { slot: 'numeros', width: 1080, height: 1350 },
 ]
 
 async function placeholderSource(width, height) {

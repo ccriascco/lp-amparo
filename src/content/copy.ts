@@ -515,6 +515,9 @@ export const emergencia = {
     number: '180',
     after: ': gratuito, sigiloso, 24 horas.',
   },
+  /** Cartão flutuante sobre a foto de #contexto (texto do cliente, ajustes 3, 10/11/2026). */
+  ligue180: 'Ligue 180',
+  info180: 'Gratuito, sigiloso, 24 horas',
 }
 
 // 3.18

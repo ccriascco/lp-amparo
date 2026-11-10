@@ -57,6 +57,15 @@
   --grad-secao:
     radial-gradient(50% 60% at 100% 0%, rgb(149 75 110 / 0.14) 0%, transparent 70%),
     radial-gradient(45% 55% at 0% 100%, rgb(75 42 63 / 0.08) 0%, transparent 70%), #f3edef;
+  /* Fundo rosado das seções claras alternadas (ajustes 3, 10/11/2026): manchas grandes de vinho
+     a 22–30% e vinho-profundo a 10% sobre a superfície. Claramente rosado, nunca branco. */
+  --grad-rosa:
+    radial-gradient(85% 75% at 8% 12%, rgb(149 75 110 / 0.3) 0%, transparent 75%),
+    radial-gradient(75% 70% at 94% 8%, rgb(149 75 110 / 0.24) 0%, transparent 75%),
+    radial-gradient(90% 80% at 78% 96%, rgb(149 75 110 / 0.28) 0%, transparent 75%),
+    radial-gradient(70% 60% at 45% 55%, rgb(149 75 110 / 0.22) 0%, transparent 80%),
+    radial-gradient(60% 60% at 22% 92%, rgb(75 42 63 / 0.1) 0%, transparent 72%), #f3edef;
+  --shadow-card: 0 12px 32px -16px rgb(75 42 63 / 0.18);
   --grad-painel:
     radial-gradient(80% 80% at 20% 10%, rgb(149 75 110 / 0.3) 0%, transparent 65%),
     linear-gradient(160deg, #f3edef 0%, rgb(149 75 110 / 0.22) 100%);

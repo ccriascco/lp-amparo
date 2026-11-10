@@ -73,6 +73,8 @@ const CENTER_START = 340
 type PeopleScatterProps = {
   phrase: string
   centerSlot: ImageSlot
+  /** `id` do H2 (a frase), para o `aria-labelledby` da seção. */
+  headingId: string
 }
 
 /**
@@ -80,7 +82,7 @@ type PeopleScatterProps = {
  * fotos sobem em velocidades diferentes e a foto central diminui enquanto o palco entra.
  * < 1024px: sem sticky, composição estática com `appear`. Movimento reduzido: estado final.
  */
-export function PeopleScatter({ phrase, centerSlot }: PeopleScatterProps) {
+export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterProps) {
   const root = useRef<HTMLDivElement>(null)
 
   useGSAP(
@@ -187,8 +189,9 @@ export function PeopleScatter({ phrase, centerSlot }: PeopleScatterProps) {
             )
           })}
 
-          {/* Frase de fecho (COPY 3.2c) */}
-          <p
+          {/* Frase de fecho (COPY 3.2c): é o título da seção das fotos espalhadas */}
+          <h2
+            id={headingId}
             data-words
             className="relative z-10 max-w-[16ch] text-center display-l text-balance text-texto lg:max-w-[24ch]"
           >
@@ -198,7 +201,7 @@ export function PeopleScatter({ phrase, centerSlot }: PeopleScatterProps) {
                 {s}{' '}
               </span>
             ))}
-          </p>
+          </h2>
 
           {/* Foto central: a mulher na janela (slot `contexto`) */}
           <div

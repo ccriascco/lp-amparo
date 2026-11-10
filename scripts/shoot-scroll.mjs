@@ -60,6 +60,13 @@ for (const w of widths) {
   }
 
   if (full) {
+    // Rola pela seção inteira antes (dispara contadores e entradas), depois volta ao topo dela.
+    const box = await page.evaluate((sel) => {
+      const r = document.querySelector(sel).getBoundingClientRect()
+      return { top: r.top + scrollY, h: r.height }
+    }, sel)
+    await scrollTo(box.top + box.h)
+    await scrollTo(box.top)
     await page.locator(sel).first().scrollIntoViewIfNeeded()
     await page.waitForTimeout(wait)
     await page.locator(sel).first().screenshot({ path: path.join(outDir, `${w}-${tag}-full.png`) })
