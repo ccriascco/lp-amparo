@@ -1,7 +1,7 @@
 import { useGSAP } from '@gsap/react'
 import clsx from 'clsx'
 import { useRef, type CSSProperties } from 'react'
-import { gsap, MQ } from '../../lib/gsap'
+import { gsap, MQ, ScrollTrigger } from '../../lib/gsap'
 import { TintedPhoto, type ImageSlot } from './TintedPhoto'
 
 type Floating = {
@@ -113,11 +113,18 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
           scrollTrigger: { trigger: el, start: 'top 85%', end: 'top top', scrub: true },
         })
 
-        // Nuvem do fundo fica para trás.
-        gsap.to('[data-scatter-cloud]', {
-          yPercent: -12,
-          ease: 'none',
-          scrollTrigger: range,
+        // A nuvem do fundo fica parada (pedido do cliente: o parallax do fundo travava a rolagem).
+
+        // Camada própria para cada foto que se move, só enquanto a seção está na tela (§7.10):
+        // sem isso o tingimento (mix-blend-mode) e o blur das fotos "ao fundo" eram refeitos a
+        // cada quadro.
+        const movers = gsap.utils.toArray<HTMLElement>('[data-speed], [data-scatter-center]', el)
+        ScrollTrigger.create({
+          trigger: el,
+          start: 'top bottom',
+          end: 'bottom top',
+          onToggle: (self) =>
+            gsap.set(movers, { willChange: self.isActive ? 'transform' : 'auto' }),
         })
       })
       return () => mm.revert()
