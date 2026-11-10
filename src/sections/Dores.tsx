@@ -3,10 +3,10 @@ import clsx from 'clsx'
 import { BookOpen, Calculator, FolderLock, Gauge, UsersRound, type LucideIcon } from 'lucide-react'
 import { useRef, type CSSProperties, type ReactNode } from 'react'
 import {
-  ComoChegamosScreen,
   DireitosScreen,
   OcorrenciasScreen,
   RedeScreen,
+  RiscoFocoScreen,
 } from '../components/phone/AppScreens'
 import { CalculatorScreen } from '../components/phone/CalculatorScreen'
 import { Button } from '../components/ui/Button'
@@ -22,22 +22,24 @@ const SCREENS: (() => ReactNode)[] = [
   () => <CalculatorScreen mode="auto" />,
   () => <OcorrenciasScreen />,
   () => <RedeScreen />,
-  () => <ComoChegamosScreen />,
+  // tela inicial já rolada até a leitura de risco; o destaque do card é animado no desktop
+  () => <RiscoFocoScreen />,
   () => <DireitosScreen />,
 ]
 
 /**
- * Painel claro atrás do celular (pedido do cliente: o vinho se confundia com o fundo da seção):
- * #F3EDEF com mancha radial vinho 22% num canto e linhas diagonais finas vinho 10% no oposto.
+ * Painel atrás do celular (ajustes 3 do cliente): vinho #954B6E, mais claro e vivo que o fundo da
+ * seção (como o azul claro da NextPay), brilho branco 12% num canto, linhas brancas 8% no oposto.
  */
 const PANEL: CSSProperties = {
   background:
-    'radial-gradient(70% 70% at 0% 0%, rgb(149 75 110 / 0.22) 0%, transparent 70%), #f3edef',
-  boxShadow: '0 40px 80px -30px rgb(0 0 0 / 0.45)',
+    'radial-gradient(70% 70% at 0% 0%, rgb(255 255 255 / 0.12) 0%, transparent 70%), #954b6e',
+  border: '1px solid rgb(255 255 255 / 0.1)',
+  boxShadow: '0 40px 80px -30px rgb(0 0 0 / 0.5)',
 }
 const PANEL_LINES: CSSProperties = {
   background:
-    'repeating-linear-gradient(-45deg, rgb(149 75 110 / 0.1) 0 1px, transparent 1px 12px)',
+    'repeating-linear-gradient(-45deg, rgb(255 255 255 / 0.08) 0 1px, transparent 1px 12px)',
   maskImage: 'radial-gradient(70% 70% at 100% 100%, #000 0%, transparent 70%)',
   WebkitMaskImage: 'radial-gradient(70% 70% at 100% 100%, #000 0%, transparent 70%)',
 }
@@ -155,6 +157,22 @@ export function Dores() {
             { autoAlpha: 0, yPercent: 6 },
             { autoAlpha: 1, yPercent: 0, duration: 0.5, ease: 'power2.inOut', overwrite: 'auto' },
           )
+          // Card da leitura de risco: contorno vinho suave + leve zoom quando o item 4 fica ativo.
+          const risk = screens[3]?.querySelector('[data-risk-card]')
+          if (risk) {
+            gsap.to(risk, {
+              scale: i === 3 ? 1.03 : 1,
+              borderColor: i === 3 ? 'rgb(149 75 110 / 0.45)' : 'rgb(228 211 217 / 0.7)',
+              boxShadow:
+                i === 3
+                  ? '0 10px 30px -12px rgb(149 75 110 / 0.45)'
+                  : '0 4px 14px -8px rgb(75 42 63 / 0.18)',
+              duration: 0.6,
+              delay: i === 3 ? 0.35 : 0,
+              ease: 'power2.out',
+              overwrite: 'auto',
+            })
+          }
           gsap.to(chips[prev], {
             autoAlpha: 0,
             y: -10,
@@ -201,10 +219,10 @@ export function Dores() {
       id="dores"
       aria-labelledby="dores-title"
       data-header-dark
-      className="on-dark relative bg-vinho-profundo"
+      className="on-dark relative overflow-x-clip bg-vinho-profundo"
     >
       {/* ── Banner: margem igual nos 4 lados (12px celular, 16px desktop), raio 24px ── */}
-      <div className="p-3 md:p-4">
+      <div className="bg-branco p-3 md:p-4">
         <div
           data-banner-card
           className="relative h-[80svh] overflow-hidden rounded-[24px] lg:h-[min(88vh,820px)]"
@@ -261,6 +279,16 @@ export function Dores() {
           </div>
         </div>
       </div>
+
+      {/* Transição suave do branco para o vinho-profundo, sem linha marcada */}
+      <div
+        aria-hidden
+        className="h-32 md:h-44"
+        style={{
+          background:
+            'linear-gradient(180deg, #ffffff 0%, rgb(75 42 63 / 0.35) 40%, rgb(75 42 63 / 0.8) 70%, #4b2a3f 100%)',
+        }}
+      />
 
       {/* ── Lista com o celular ── */}
       <Container className="pt-8 pb-24 lg:pt-0 lg:pb-28">
@@ -337,7 +365,7 @@ export function Dores() {
                         data-dor-screen
                         className={clsx('absolute inset-0', i > 0 && 'invisible opacity-0')}
                       >
-                        {SCREENS[i]()}
+                        {i === 3 ? <RiscoFocoScreen highlight={false} /> : SCREENS[i]()}
                       </div>
                     ))}
                   </div>

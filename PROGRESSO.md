@@ -31,7 +31,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 3f | Ajustes 6: fundo de `#pessoas` parado em tela cheia (sem `clip-path` e sem parallax da nuvem); fotos em camada própria — screenshots em `./screenshots/ajustes-6/` | `f62c3b0` |
 | 1e/3g | Ajustes 7: central do hero com `inicio-celular`, 3 celulares no celular, `#contexto` texto → cartões → foto, fotos de `#pessoas` naturais e com movimento no celular — screenshots em `./screenshots/ajustes-7/` | `4e143c2` |
 | 4b | `#dores` refeita no padrão NextPay (itens à esquerda + painel fixo com o celular trocando de tela) — screenshots em `./screenshots/dores/` | `97acd68` |
-| 4c | `#dores` ajustes 2: banner com foto no topo, painel claro, telas Ocorrências e "Como chegamos nesta leitura" — screenshots em `./screenshots/dores-2/` | (este commit) |
+| 4c | `#dores` ajustes 2: banner com foto no topo, painel claro, telas Ocorrências e "Como chegamos nesta leitura" — screenshots em `./screenshots/dores-2/` | `3902727` |
+| 4d | `#dores` ajustes 3: margem branca do banner, banner sem emenda, painel vinho vivo, leitura de risco na tela inicial rolada — screenshots em `./screenshots/dores-3/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -97,6 +98,12 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 3. **Banner no topo da seção** (NextPay "Uma experiência. Controle total."): cartão com margem igual nos 4 lados (12px celular, 16px desktop), raio 24px, `min(88vh, 820px)` / `80svh`; foto `dores-banner` com vinho a 75% e escurecimento vinho-profundo 85% (base e esquerda) / 35% (resto); chip "Feito para a sua realidade"; título "Pedir ajuda" (`#E4D3D9`, esquerda) / "não deveria ser um risco." (branco, direita; celular à esquerda), Quicksand 500 `clamp(2.75rem, 7vw, 6.5rem)`; subtítulo "Cada recurso do Amparo nasceu de uma barreira real."; pílulas "Parece uma calculadora" · "Provas protegidas" · "Ajuda sem precisar denunciar". Saem o H2 e o subtítulo que ficavam acima da lista.
 4. **Animação do banner:** abre das margens (`clip-path` 6% → 0, scrub); foto com zoom 1.12 → 1; linha 1 da esquerda e linha 2 da direita (`x ±80`, desfoque 12px → 0, 1s, `expo.out`, uma vez); chip, subtítulo e pílulas em stagger. Movimento reduzido: estado final.
 - Foto do banner: `assets/fotos/dores-banner.png` (era "Retrato em Luz Dourada e Sombras.png").
+
+### `#dores` — ajustes 3 (10/11/2026) — prioridade sobre o `DESIGN.md`
+1. **Margem do banner branca:** o banner fica num bloco próprio com fundo `#FFFFFF` (16px desktop, 12px celular); o vinho-profundo da lista começa depois, com uma passagem em degradê branco → vinho, sem linha marcada.
+2. **Banner sem emenda:** a foto cobre o cartão inteiro e o escurecimento é em degradê suave com várias paradas (a "risca" vinha do fim linear do degradê, não da foto).
+3. **Painel atrás do celular vinho vivo** (substitui o painel claro dos ajustes 2): base `#954B6E`, brilho radial branco 12% no canto superior esquerdo, linhas diagonais brancas 8% no oposto, borda `white/10`, raio 20px, sombra `0 40px 80px -30px rgb(0 0 0 / .5)`.
+4. **Leitura de risco = tela inicial já rolada até o card** (`home-leitura-risco.png`): header compacto, Baixo / **Médio** / Alto, link "Ver como chegamos nisso"; o card ganha contorno vinho suave e `scale 1.03` quando o item fica ativo. **Não usar** a tela "Como chegamos nisso" nem o topo da tela inicial igual ao do hero.
 
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |

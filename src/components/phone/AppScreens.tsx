@@ -540,3 +540,111 @@ export function ComoChegamosScreen() {
     </Screen>
   )
 }
+
+/**
+ * Tela inicial (`home-leitura-risco.png`) já rolada até a leitura de risco (#dores, item 4; pedido
+ * do cliente): header compacto, fim das ações rápidas, card "Leitura de risco" em Médio com o link
+ * "Ver como chegamos nisso", atalhos e barra. O card leva `data-risk-card` para o destaque animado
+ * (contorno vinho + scale 1.03) quando o item fica ativo; `highlight` deixa o destaque fixo
+ * (celular e movimento reduzido).
+ */
+export function RiscoFocoScreen({ highlight = true }: { highlight?: boolean }) {
+  const t = app.comoChegamos
+  const h = app.homeRisco
+  const icons = [Camera, UserPlus, FolderLock, MapPin]
+  return (
+    <Screen>
+      {/* Header compacto (a tela rolou) */}
+      <header
+        className="absolute inset-x-0 top-0 z-10 flex h-[112px] items-end justify-between rounded-b-[22px] px-[34px] pb-[18px] text-white"
+        style={{ background: 'var(--grad-vinho)' }}
+      >
+        <img src={avatar} alt="" width={40} height={40} className="size-[40px] rounded-full" />
+        <div className="flex gap-[12px]">
+          {[Bell, Calculator, Settings].map((Icon, i) => (
+            <span key={i} className="grid size-[36px] place-items-center rounded-full bg-white/20">
+              <Icon
+                className="size-[17px]"
+                strokeWidth={i === 1 ? 2.4 : 2}
+                fill={i === 1 ? 'none' : 'currentColor'}
+              />
+            </span>
+          ))}
+        </div>
+      </header>
+
+      {/* Fim das ações rápidas, saindo por baixo do header */}
+      <QuickRow top={66} items={h.quick.map((label, i) => ({ icon: icons[i], label }))} />
+      <Dots top={184} />
+
+      {/* Card de leitura de risco em Médio */}
+      <section
+        data-risk-card
+        className={clsx(
+          'absolute top-[214px] right-[34px] left-[34px] h-[212px] origin-center rounded-[14px] border-[1.5px] bg-white px-[22px] pt-[22px]',
+          highlight
+            ? 'border-vinho/45 shadow-[0_10px_30px_-12px_rgb(149_75_110/0.45)]'
+            : 'border-borda/70 shadow-[0_4px_14px_-8px_rgb(75_42_63/0.18)]',
+        )}
+      >
+        <div className="flex items-center gap-[12px]">
+          <span className="grid size-[36px] place-items-center rounded-full bg-superficie text-vinho">
+            <TriangleAlert className="size-[17px]" strokeWidth={2} />
+          </span>
+          <p className="text-[20px] leading-none font-semibold text-texto">{t.riscoTitle}</p>
+          <span className="rounded-full bg-superficie px-[8px] py-[3px] text-[11px] leading-none font-bold text-vinho">
+            {t.riscoBadge}
+          </span>
+        </div>
+        <div className="mt-[22px] grid grid-cols-3 gap-[8px]">
+          {t.levels.map((l, i) => {
+            const on = i === t.active
+            return (
+              <div key={l} className="flex flex-col items-center">
+                <span
+                  className={clsx(
+                    'text-[14px] leading-none',
+                    on ? 'font-bold text-vinho uppercase' : 'text-texto',
+                  )}
+                >
+                  {l}
+                </span>
+                <span
+                  className={clsx(
+                    'mt-[10px] w-full rounded-full',
+                    on ? 'h-[7px] bg-vinho' : 'h-[3.5px] bg-superficie',
+                  )}
+                />
+              </div>
+            )
+          })}
+        </div>
+        <p className="mt-[20px] text-[13px] leading-[1.45] text-[#3b3b3b]">{t.medioText}</p>
+        <p className="mt-[14px] text-[13px] font-bold text-vinho">{h.cardLink}</p>
+      </section>
+
+      {/* Atalhos em cartões (o 3º cortado pela borda) */}
+      {[...h.atalhos, ''].map((label, i) => {
+        const Icon = [FolderLock, BookOpen, FileText][i]
+        return (
+          <div
+            key={i}
+            className={clsx('absolute top-[452px] h-[120px] w-[154px] px-[16px] pt-[16px]', card)}
+            style={{ left: 34 + i * 167 }}
+          >
+            <span className="grid size-[34px] place-items-center rounded-full bg-superficie text-vinho">
+              <Icon className="size-[16px]" strokeWidth={2} />
+            </span>
+            <p className="mt-[10px] max-w-[110px] text-[13px] leading-[1.3] text-texto">{label}</p>
+            {label && (
+              <ArrowRight className="absolute right-[16px] bottom-[14px] size-[14px] text-vinho" />
+            )}
+          </div>
+        )
+      })}
+      <Dots top={590} />
+      <div className={clsx('absolute top-[620px] right-[34px] left-[34px] h-[140px]', card)} />
+      <AppNav />
+    </Screen>
+  )
+}

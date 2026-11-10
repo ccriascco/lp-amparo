@@ -704,6 +704,9 @@ export const app = {
     outro:
       'Nada disso é enviado para ninguém, e o SOS continua disponível do mesmo jeito em qualquer leitura. Você pode ignorar essa sugestão quando quiser — ela apoia a sua leitura, não decide por você.',
     button: 'Entendi',
+    /** Texto do nível Médio (COPY 3.9), no card da tela inicial focada na leitura de risco. */
+    medioText:
+      'O app prepara um aviso discreto para a sua rede, que só é enviado se você confirmar.',
   },
   /** conteudo-direitos.png (#dores, item "Seus direitos"). */
   direitosTela: {
