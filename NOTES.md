@@ -172,3 +172,18 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
 - Corrigido de passagem: chave duplicada `#faq` no rodapé da rodada 1 (erro de console).
 - **Pendente (rodada 1):** em 320px a página tem 23px de scroll horizontal vindo do bento de Recursos (`min-h-[420px]` com a mini tela do app). Some quando o `FeatureStack` (item 6) substituir o bento.
 - `scripts/shoot-scroll.mjs`: screenshots de uma seção em pontos do scroll (`--sel`, `--at=0,0.5,1`), pulando o preloader. Em dev, o Lenis fica em `window.__lenis` para o script rolar.
+
+### Item 2 — Números + Marquee
+- **Wireframe:** §9 "Faixa de números" (`StatsBand` §6.24, `py-16`, fundo `branco`) + "Marquee" (§6.25, 64px, bordas `borda`, gota `vinho` entre os itens). Contadores §7.3.
+- **Referências (capturadas a 1440px):** FitPay — 4 números centralizados em linha logo abaixo do visual do hero e, colado, o marquee com as pontas esmaecendo (máscara); Eduzz — número + rótulo curto, muito ar, sem ícone gigante.
+- **Memorável:** os quatro números contam juntos em vinho, com `tabular-nums` (a largura não "dança" enquanto contam), e logo abaixo a faixa dos recursos do Amparo passa como uma esteira contínua que acelera quando a pessoa rola e para quando o mouse pousa. O número é a manchete; o rótulo é a frase do anuário, sem enfeite.
+- **Revisão contra o brief:** "número grande + rótulo pequeno" é o padrão genérico que a `frontend-design` aponta, mas aqui é exigência do §6.24 e da referência. O que evita o template: sem cartões, sem ícones, sem sombra — só colunas separadas por fios verticais `borda` alinhados ao container; título pequeno à esquerda e fonte à direita (assimetria do §6.24), e o marquee com as gotas da marca no lugar de logos. Nada de destaque de palavra. O bento de números da rodada 1 (em `#contexto`) sai, para os números não aparecerem duas vezes.
+- **Tamanho do número:** o `numero` do §4 (até 5,5rem) não cabe "101.656" numa coluna de 1/4 do container (≈3,9em de largura). Usado `clamp(2rem,10vw,2.75rem)` no 2×2 do celular e `clamp(2.25rem,5vw,4rem)` a partir de 768px, conferido sem quebra em 320–1440.
+- **Construído:** `StatsBand` (lista `ul`, número `vinho` com `tabular-nums` e contador §7.3, colunas com `data-appear-stagger`), `Marquee` (3 cópias do grupo, a 1ª acessível; `xPercent -100` em 35s; impulso de 1 a 4× pela velocidade do scroll, voltando em 1,2s; para no hover; parado fora da tela). Seções `Numeros` e `MarqueeBand`. O bento de números saiu do `#contexto`.
+- **Movimento conferido (Chrome):** contadores em pt-BR a meio caminho (`1.118`, `48,2`) e no fim (`1.492`, `64,3`, `8`, `101.656`); marquee ~57 px/s, ~130 px/s logo após um giro de roda; para no hover e com o botão.
+- **Crítica (1440/390/320):** espaço até o marquee reduzido (`pb-12 md:pb-14`); rótulos com `text-pretty` e 28ch no desktop (o de "101.656" ia a 3 linhas); "ex-companheiros" quebrava no hífen → hífen não separável (U+2011) só na renderização, o texto do COPY é o mesmo.
+- **Revisão `web-design-guidelines` (StatsBand, Marquee, Numeros, MarqueeBand):**
+  - **Corrigido:** movimento automático > 5s sem controle para teclado/toque → botão de pausar (44px, `aria-pressed`) à direita do marquee; some com movimento reduzido.
+  - **Corrigido:** leitor de tela podia ler a contagem → número animado `aria-hidden` + valor final em `sr-only`.
+  - ✓ `tabular-nums`, `Intl.NumberFormat`, gotas decorativas `aria-hidden`, cópias do loop `aria-hidden`, `transition` com propriedades listadas, movimento reduzido (loop não é criado).
+- **Microtexto novo (para o cliente revisar):** `aria-label` "Pausar a faixa de recursos" (botão do marquee) e "Recursos do Amparo" (nome da lista do marquee).

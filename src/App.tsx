@@ -13,6 +13,8 @@ import { Faq } from './sections/Faq'
 import { Footer } from './sections/Footer'
 import { Header } from './sections/Header'
 import { Hero } from './sections/Hero'
+import { MarqueeBand } from './sections/MarqueeBand'
+import { Numeros } from './sections/Numeros'
 import { Cofre, Rede, Risco, Sos } from './sections/Pilares'
 import { Recursos } from './sections/Recursos'
 import { Seguranca } from './sections/Seguranca'
@@ -63,6 +65,8 @@ function Landing() {
       <Header />
       <main>
         <Hero />
+        <Numeros />
+        <MarqueeBand />
         <Contexto />
         <Dores />
         <Disfarce />
