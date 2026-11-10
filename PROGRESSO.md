@@ -59,12 +59,13 @@ Removidas do código e do `copy.ts` em 10/11/2026: **Modo Disfarce** como seçã
 | 4l | Título em uma linha e maior, espaço da lista em telas baixas, fotos novas dos Benefícios, correção do chip errado e da faixa branca no celular — screenshots em `./screenshots/ajustes-7b/` | 597c925 |
 | 4m | Grid responsivo: 1280px até 1599px de tela (inclui 1440), 1440px a partir de 1600px (inclui 1920); cartão das Dores acompanha o grid — screenshots em `./screenshots/grid-responsivo/` | 8707d9f |
 | 4n | Padding interno do cartão das Dores de 96px em telas a partir de 1600px (grid 1440) — prints `padding-*` em `./screenshots/grid-responsivo/` | e5a33ef |
-| 5 | Troca para o `COPY.md` final: mapa novo, seções fora do plano removidas, navegação e âncoras (`#como-funciona`, `#leitura-risco`, `#dor-*`), links dos Benefícios, esqueleto de `#leitura-risco` — prints em `./screenshots/copy-final/` | (este commit) |
+| 5 | Troca para o `COPY.md` final: mapa novo, seções fora do plano removidas, navegação e âncoras (`#como-funciona`, `#leitura-risco`, `#dor-*`), links dos Benefícios, esqueleto de `#leitura-risco` — prints em `./screenshots/copy-final/` | c21768b |
+| 5b | Benefícios no COPY 3.5 (padrão Gardance): etiqueta de vidro, cartão ativo cresce e abre texto + link, fotos enquadradas no rosto — prints em `./screenshots/beneficios-final/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
 ## Próximo passo
-1. **Revisão do cliente** da troca para o `COPY.md` final (navegação, âncoras, links dos Benefícios e das Dores).
+1. **Revisão do cliente** dos Benefícios no padrão Gardance (`screenshots/beneficios-final/`).
 2. **Seção 7 — Leitura de risco com IA** (`#leitura-risco`, COPY §3.7), substituindo o esqueleto atual.
 3. Depois, na ordem: **8 Como começar**, **9 FAQ**, **10 CTA final**, **11 Rodapé**, cada uma com os textos do COPY §3.8–§3.11 (os objetos `comecar`, `faq` e `ctaFinal` do `copy.ts` ainda têm os textos antigos e serão revisados quando cada seção for construída). Em seguida, Fase 5 (revisão completa).
 

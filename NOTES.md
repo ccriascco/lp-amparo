@@ -379,3 +379,12 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
   - **Links dos Benefícios:** a versão aprovada dos cartões não mostrava link. Entraram dentro da etiqueta branca, abaixo do texto, como link com sublinhado (44px de área de toque), sem mudar o resto do layout. O COPY 3.5 descreve "etiqueta de vidro, texto e link só no cartão ativo"; não mudei para isso porque o pedido foi não mexer no layout — **fica para o cliente decidir**.
 - **Diferença mantida de propósito:** "ex‑companheiros" nos cartões do `#contexto` usa hífen que não quebra linha (U+2011), para a palavra não partir no fim da linha; visualmente é igual ao COPY.
 - **Textos das seções 0–6 conferidos** contra o COPY §3.01–§3.6 a partir do texto renderizado: todos iguais (exceto o hífen acima). Prints em `screenshots/copy-final/`.
+
+## Benefícios no COPY 3.5 / padrão Gardance (10/11/2026, aprovado pelo cliente)
+- **Etiqueta de vidro** na base de cada foto: `bg-white/70`, `backdrop-blur-[16px]`, `border-white/60`, raio 16px; sem selo no topo. Fechada: ícone em círculo vinho + tópico. Aberta: + texto + link com seta. Ícones (lucide): `Users` (rede de apoio), `FolderLock` (cofre), `Gauge` (leitura de risco) — o mesmo destino de cada link.
+- **Desktop:** 3 cartões em flex com altura `clamp(480px, 36vw, 580px)` (518px em 1440, 580px em 1920); o ativo cresce (`flexGrow` 1.6, GSAP 0.6s `expo.out`) → 523/327/327px em 1440, 594/371/371 em 1920. O 1º começa ativo; `pointerenter` e `focusin` ativam; ao sair fica o último ativo. Etiqueta abre com altura `auto` (0.5s `expo.out`, 0.1s de atraso) e fecha em 0.3s.
+- **Bug evitado:** cada troca chama `gsap.killTweensOf` nas etiquetas — sem isso, Tab/mouse rápidos reabriam a etiqueta anterior (abertura ainda no atraso não é pega pelo `overwrite: 'auto'`). Testado: Tab ida e volta e 5 hovers a cada 60ms terminam com só o cartão certo aberto.
+- **Teclado:** o link das etiquetas fechadas continua no Tab (só opacidade 0); ao receber foco, o cartão abre. Contorno de foco com folga dentro da etiqueta (antes era cortado pelo `overflow-hidden`).
+- **Fotos:** `object-position` por foto (`48% 12%`, `60% 18%`, `40% 16%`): rosto centrado no cartão estreito e no largo, acima da etiqueta aberta.
+- **Celular:** carrossel com scroll-snap (85vw, máx. 420px), todas as etiquetas abertas. **Movimento reduzido:** larguras iguais e etiquetas abertas (estado do HTML; o GSAP não roda).
+- Prints em `screenshots/beneficios-final/` (1440 com cada cartão ativo, foco pelo teclado, movimento reduzido, 1920, 390 início e fim do carrossel).
