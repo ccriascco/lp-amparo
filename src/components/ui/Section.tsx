@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import type { ReactNode } from 'react'
 import { Chip } from './Chip'
 
-/** Container padrão (DESIGN.md §5): 1280px, gutter 20/32px. Bordas iguais em todas as seções. */
+/** Container padrão (DESIGN.md §5): largura `--grid` (1280px; 1440px a partir de 1600px de tela), gutter 20/32px. */
 export function Container({ className, children }: { className?: string; children: ReactNode }) {
   return (
-    <div className={clsx('mx-auto w-full max-w-[1280px] px-5 md:px-8', className)}>{children}</div>
+    <div className={clsx('mx-auto w-full max-w-(--grid) px-5 md:px-8', className)}>{children}</div>
   )
 }
 

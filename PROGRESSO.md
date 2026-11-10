@@ -41,7 +41,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 4i | `#beneficios` no padrão Gardance (cartão ativo cresce e abre a etiqueta de vidro) — screenshots em `./screenshots/beneficios-3/` | `f8ba90d` (revogado) |
 | 4j | Benefícios na versão anterior sem notificações; cartão das Dores com 1440px — screenshots em `./screenshots/ajustes-5b/` | `3f4d408` |
 | 4k | `#dores` ajustes 5: cartão 1440px + margem, título em 3 linhas, subtítulo novo, lista mais compacta — screenshots em `./screenshots/ajustes-6b/` | `31db80d` |
-| 4l | Título em uma linha e maior, espaço da lista em telas baixas, fotos novas dos Benefícios, correção do chip errado e da faixa branca no celular — screenshots em `./screenshots/ajustes-7b/` | (este commit) |
+| 4l | Título em uma linha e maior, espaço da lista em telas baixas, fotos novas dos Benefícios, correção do chip errado e da faixa branca no celular — screenshots em `./screenshots/ajustes-7b/` | 597c925 |
+| 4m | Grid responsivo: 1280px até 1599px de tela (inclui 1440), 1440px a partir de 1600px (inclui 1920); cartão das Dores acompanha o grid — screenshots em `./screenshots/grid-responsivo/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -135,7 +136,7 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 ### Ajustes 4 (geral) — 10/11/2026 — prioridade sobre o `DESIGN.md`
 1. **Fotos dos Benefícios** aplicadas: `beneficio-tranquilidade` (sofá), `beneficio-controle` (caderno), `beneficio-confianca` (janela), cores naturais.
 2. **Manifesto sem o degradê** na base: termina como antes e os Benefícios começam no branco.
-3. **Grid de 1280px em todo o site:** todo conteúdo dentro de `max-w-[1280px]`, `px-5` (celular) / `px-8` (desktop). Só os fundos vão de ponta a ponta (gradiente do hero, cartão das Dores com a foto, fios do marquee). Verificar com `node scripts/check-grid.mjs <url> 1920,2560`.
+3. **Grid responsivo em todo o site:** todo conteúdo dentro de `max-w-(--grid)` — 1280px até 1599px de tela (inclui 1440) e 1440px a partir de 1600px (inclui 1920) —, `px-5` (celular) / `px-8` (desktop). O cartão das Dores também segue o `--grid` (nunca ocupa a tela toda). Só os fundos vão de ponta a ponta (gradiente do hero, fios do marquee). Verificar com `node scripts/check-grid.mjs <url> 1440,1920`.
 4. **Celular da lista das Dores:** 300px fixo, cortado pela base de um painel com no máximo 560px de altura e 7 colunas; mesmo tamanho em 1440/1920/2560.
 5. **Tela branca do celular:** proteção contra escala 0 no `PhoneFrame` e estado inicial explícito das telas.
 6. **Cartão das Dores com 1440px sem contar a margem** (a margem de 16px vem por fora) — antes 1408px e 1216px (bordas iguais às dos cartões dos Benefícios), centralizado, sem crescer em telas largas; título do banner até 5.25rem, cada linha inteira.

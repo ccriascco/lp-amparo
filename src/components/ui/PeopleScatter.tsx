@@ -201,7 +201,7 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
           }}
         />
 
-        <div className="relative mx-auto grid min-h-[620px] max-w-[1280px] place-items-center px-5 pt-40 pb-20 md:px-8 md:pt-44 lg:h-full lg:min-h-0 lg:py-0">
+        <div className="relative mx-auto grid min-h-[620px] max-w-(--grid) place-items-center px-5 pt-40 pb-20 md:px-8 md:pt-44 lg:h-full lg:min-h-0 lg:py-0">
           {/* Fotos pequenas */}
           {PHOTOS.map((p) => {
             const back = p.speed < 0.8 && !p.sharp

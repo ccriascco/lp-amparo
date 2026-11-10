@@ -247,7 +247,7 @@ export function Dores() {
           overflow-clip (não hidden) para os cantos sem quebrar o sticky do celular. */}
       <div
         data-header-dark
-        className="on-dark relative mx-auto max-w-[1440px] overflow-clip rounded-[24px]"
+        className="on-dark relative mx-auto max-w-(--grid) overflow-clip rounded-[24px]"
         style={{ background: CARD_BG }}
       >
         {/* ── Banner ── */}

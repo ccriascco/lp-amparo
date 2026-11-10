@@ -63,8 +63,8 @@ export function Marquee({ items, label }: MarqueeProps) {
 
   return (
     <div ref={root} className="relative h-16 overflow-hidden border-y border-borda bg-branco">
-      {/* Itens dentro do grid de 1280px; só os fios de borda vão de ponta a ponta */}
-      <div className="mx-auto flex h-full max-w-[1280px] items-center overflow-hidden mask-[linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+      {/* Itens dentro do grid (`--grid`); só os fios de borda vão de ponta a ponta */}
+      <div className="mx-auto flex h-full max-w-(--grid) items-center overflow-hidden mask-[linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
         {Array.from({ length: COPIES }, (_, c) => (
           <ul
             key={c}

@@ -73,6 +73,14 @@
     radial-gradient(70% 90% at 80% 10%, rgb(149 75 110 / 0.14) 0%, transparent 60%),
     radial-gradient(60% 80% at 10% 90%, rgb(75 42 63 / 0.08) 0%, transparent 60%), #ffffff;
   --shadow-sos: 0 0 0 12px rgb(198 40 40 / 0.12), 0 0 0 28px rgb(198 40 40 / 0.06);
+  /* Grid do site (pedido do cliente): 1280px até 1600px de tela (inclui 1440) e 1440px a partir
+     de 1600px (inclui 1920). Todo o conteúdo e o cartão das Dores usam esta largura. */
+  --grid: 1280px;
+}
+@media (min-width: 1600px) {
+  :root {
+    --grid: 1440px;
+  }
 }
 
 @layer base {

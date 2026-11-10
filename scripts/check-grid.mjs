@@ -19,7 +19,8 @@ for (const w of widthsArg.split(',').map(Number)) {
     await page.evaluate((y) => window.__lenis?.scrollTo(y, { immediate: true, force: true }) ?? scrollTo(0, y), y)
     await page.waitForTimeout(250)
     const hits = await page.evaluate(() => {
-      const min = (innerWidth - 1280) / 2 - 1
+      const g = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--grid')) || 1280
+      const min = (innerWidth - g) / 2 - 1
       const max = innerWidth - min
       const out = []
       for (const el of document.querySelectorAll('main *, footer *')) {
@@ -51,7 +52,7 @@ for (const w of widthsArg.split(',').map(Number)) {
     })
     hits.forEach((h) => found.set(h.replace(/\[.*\]/, ''), h))
   }
-  console.log(`\n${w}px — faixa ${(w - 1280) / 2}–${(w + 1280) / 2}px: ${found.size} fora`)
+  console.log(`\n${w}px: ${found.size} elementos de conteúdo fora do --grid`)
   ;[...found.values()].slice(0, 40).forEach((h) => console.log('  ' + h))
   await page.close()
 }

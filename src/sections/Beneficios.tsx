@@ -98,7 +98,7 @@ export function Beneficios() {
           data-ben-list
           tabIndex={0}
           aria-label="Benefícios do Amparo"
-          className="mx-auto no-scrollbar flex max-w-[1280px] snap-x snap-mandatory scroll-px-5 gap-5 overflow-x-auto px-5 pb-2 md:px-8 lg:grid lg:grid-cols-3 lg:overflow-visible"
+          className="mx-auto no-scrollbar flex max-w-(--grid) snap-x snap-mandatory scroll-px-5 gap-5 overflow-x-auto px-5 pb-2 md:px-8 lg:grid lg:grid-cols-3 lg:overflow-visible"
         >
           {b.cards.map((c) => (
             <li
@@ -114,15 +114,7 @@ export function Beneficios() {
   )
 }
 
-function BenefitCard({
-  slot,
-  title,
-  text,
-}: {
-  slot: ImageSlot
-  title: string
-  text: string
-}) {
+function BenefitCard({ slot, title, text }: { slot: ImageSlot; title: string; text: string }) {
   return (
     <article
       data-ben-card
