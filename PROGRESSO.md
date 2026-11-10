@@ -61,17 +61,21 @@ Removidas do código e do `copy.ts` em 10/11/2026: **Modo Disfarce** como seçã
 | 4n | Padding interno do cartão das Dores de 96px em telas a partir de 1600px (grid 1440) — prints `padding-*` em `./screenshots/grid-responsivo/` | e5a33ef |
 | 5 | Troca para o `COPY.md` final: mapa novo, seções fora do plano removidas, navegação e âncoras (`#como-funciona`, `#leitura-risco`, `#dor-*`), links dos Benefícios, esqueleto de `#leitura-risco` — prints em `./screenshots/copy-final/` | c21768b |
 | 5b | Benefícios no COPY 3.5 (padrão Gardance): etiqueta de vidro, cartão ativo cresce e abre texto + link, fotos enquadradas no rosto — prints em `./screenshots/beneficios-final/` | 37f0740 |
-| 7 | Seção 7 — Leitura de risco com IA: orbe em CSS, fontes em órbita absorvidas ao rolar, cartão de resultado com níveis e "Ver como chegamos nisso", cartões de adaptação, princípios e nota — prints em `./screenshots/leitura-risco/` | (este commit) |
+| 7 | Seção 7 — Leitura de risco com IA: orbe em CSS, fontes em órbita absorvidas ao rolar, cartão de resultado com níveis e "Ver como chegamos nisso", cartões de adaptação, princípios e nota — prints em `./screenshots/leitura-risco/` | 61eefc3 |
+| 5c | Benefícios de volta à versão anterior (etiqueta branca sempre aberta, hover só levanta) — revoga o item 5b | (este commit) |
+| 7b | Seção 7 — ajustes 2: esfera da IA em partículas 3D (three + R3F, carregada só perto da tela), 7 pílulas em duas órbitas com profundidade, partículas soltas, cartões de adaptação sem seletor; removidos o cartão de resultado, a legenda do FONAR, a linha de luz e a absorção — prints e GIF em `./screenshots/leitura-risco-2/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
 ## Próximo passo
-1. **Revisão do cliente** da seção 7 (`screenshots/leitura-risco/`).
+1. **Revisão do cliente** da seção 7 com a esfera 3D (`screenshots/leitura-risco-2/`, incluindo `esfera-animada.gif`).
 2. Depois, na ordem: **8 Como começar**, **9 FAQ**, **10 CTA final**, **11 Rodapé**, cada uma com os textos do COPY §3.8–§3.11 (os objetos `comecar`, `faq` e `ctaFinal` do `copy.ts` ainda têm os textos antigos e serão revisados quando cada seção for construída). Em seguida, Fase 5 (revisão completa).
 
 Pendências conhecidas: aviso "chunk > 500 kB" no build (Fase 5). As imagens das seções removidas (direitos, rede, comecar etc.) continuam em `public/images` e no `process-images.mjs`; serão limpas quando as seções 8–11 definirem quais fotos usam.
 
 ## Decisões aprovadas pelo cliente
+- **Benefícios (10/11/2026):** fica a versão com etiqueta **branca** sempre aberta (tópico, texto e link) e hover que só levanta a etiqueta. A versão Gardance com etiqueta de vidro que abre no cartão ativo foi revogada.
+- **Seção 7 (10/11/2026, prioridade sobre o COPY §3.7):** sem o cartão "Leitura de risco" (seletor Baixo/Médio/Alto e "Ver como chegamos nisso"), sem a legenda do FONAR, sem linha de luz e sem absorção no scroll. No lugar do orbe em CSS, esfera de partículas 3D com anéis de luz; 7 pílulas (5 no celular) orbitando continuamente; "Como o app se adapta ao seu risco" com os 3 cartões iguais, sem seletor.
 - **Pílula do header com 920px** (o §7.11 diz 880px; com 880 "Como funciona" e "Seus direitos" quebravam em duas linhas).
 - **Header sempre visível** (não some ao rolar; vira pílula compacta a partir de 80px, como na Gardance).
 - **H1 do hero com ~32px no celular**, mantendo uma linha. **Aplicado:** `clamp(1.625rem, 8.4vw, 4.75rem)` → 32,8px em 390, 30,2px em 360, 26,9px em 320 (o `8.2vw` com mínimo de 1.75rem estourava em 320px).

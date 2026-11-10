@@ -198,28 +198,22 @@ export const leituraRisco = {
   chip: 'Inteligência artificial',
   h2: 'Uma IA que apoia, sem decidir por você.',
   sub: 'A partir dos seus registros e dos acionamentos do SOS, o Amparo faz uma leitura do seu risco e adapta o que mostra para você. Você sempre pode ver o porquê.',
-  /** Pílulas que orbitam a IA. */
-  fontes: ['Seus registros', 'Acionamentos do SOS', 'Sinais de risco oficiais'],
-  fonar: 'Sinais inspirados no Formulário Nacional de Avaliação de Risco (Lei nº 14.149/2021).',
-  resultado: {
-    title: 'Leitura de risco',
-    /** Selo da tela do app. */
-    badge: 'IA',
-    levels: ['Baixo', 'Médio', 'Alto'],
-    /** Começa em Médio. */
-    initial: 1,
-    comoChegamos: 'Ver como chegamos nisso',
-    /** Microtexto (NOTES): marca os sinais como exemplo. */
-    exemplo: 'Exemplo',
-    sinais: [
-      'Ameaças registradas nas últimas semanas',
-      'Aumento na frequência de registros',
-      'SOS acionado recentemente',
-    ],
-    privacidade: 'Nada disso é enviado para ninguém.',
-  },
+  /**
+   * Pílulas que orbitam a esfera (ajustes da seção 7, pedido do cliente): o que a IA considera.
+   * As 5 primeiras também aparecem no celular.
+   */
+  fontes: [
+    'Seus registros',
+    'Acionamentos do SOS',
+    'Sinais de risco oficiais',
+    'Frequência dos registros',
+    'Ameaças relatadas',
+    'Tipo de violência',
+    'Histórico recente',
+  ],
   adapta: {
-    title: 'Como o app se adapta',
+    /** Texto do cliente (ajustes da seção 7). */
+    title: 'Como o app se adapta ao seu risco',
     levels: [
       { label: 'Baixo', text: 'Tudo tranquilo. O acompanhamento discreto segue ativo.' },
       {
@@ -448,30 +442,16 @@ export const app = {
     cardLink: 'Ver como chegamos nisso',
     atalhos: ['Como funcionam as ocorrências', 'Central de Conteúdo e Direitos'],
   },
-  /**
-   * home-como-chegamos.png (#dores, item "Leitura de risco"), com o pedido do cliente (10/11/2026):
-   * leitura em "Médio" (na imagem é "baixo") e os três sinais em lista (na imagem, num parágrafo).
-   * Os sinais e o resto do texto são os da tela.
-   */
+  /** Card de leitura de risco da tela inicial focada no risco (#dores, item 4): nível "Médio". */
   comoChegamos: {
     riscoTitle: 'Leitura de risco',
     riscoBadge: 'IA',
     levels: ['Baixo', 'Médio', 'Alto'],
     active: 1,
-    title: 'Como chegamos nesta leitura',
-    intro: 'A leitura de hoje é risco médio. Ela vem de três sinais:',
-    sinais: [
-      'quantas ocorrências você registrou nos últimos 30 dias;',
-      'com que frequência o SOS foi acionado;',
-      'há quanto tempo foi o último registro.',
-    ],
-    outro:
-      'Nada disso é enviado para ninguém, e o SOS continua disponível do mesmo jeito em qualquer leitura. Você pode ignorar essa sugestão quando quiser — ela apoia a sua leitura, não decide por você.',
-    button: 'Entendi',
-    /** Texto do nível Médio (COPY 3.9), no card da tela inicial focada na leitura de risco. */
-    medioText:
-      'O app prepara um aviso discreto para a sua rede, que só é enviado se você confirmar.',
+    /** Texto do nível Médio (COPY 3.7). */
+    medioText: 'O app prepara um aviso discreto para a sua rede, enviado só se você confirmar.',
   },
+
   /** conteudo-direitos.png (#dores, item "Seus direitos"). */
   direitosTela: {
     title: 'Conteúdo e direitos',

@@ -1,195 +1,218 @@
-import { useGSAP } from '@gsap/react'
 import clsx from 'clsx'
 import {
-  ChevronDown,
+  Activity,
   ClipboardList,
   Eye,
   FolderLock,
   HeartHandshake,
+  History,
   LockKeyhole,
   MapPin,
+  MessageSquareWarning,
   Phone,
   ShieldCheck,
   Siren,
+  Tags,
   type LucideIcon,
 } from 'lucide-react'
-import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
-import { AiOrb } from '../components/ui/AiOrb'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Chip } from '../components/ui/Chip'
 import { Container, SECTION_Y, SectionHeading } from '../components/ui/Section'
 import { app, leituraRisco } from '../content/copy'
-import { gsap, MQ } from '../lib/gsap'
+import { gsap } from '../lib/gsap'
+import { useReducedMotion } from '../lib/useReducedMotion'
+
+const AiSphere = lazy(() => import('../components/three/AiSphere'))
 
 const L = leituraRisco
-const R = L.resultado
-const FONTE_ICONS: LucideIcon[] = [FolderLock, Siren, ClipboardList]
+const FONTE_ICONS: LucideIcon[] = [
+  FolderLock,
+  Siren,
+  ClipboardList,
+  Activity,
+  MessageSquareWarning,
+  Tags,
+  History,
+]
 const PRINCIPIO_ICONS: LucideIcon[] = [HeartHandshake, Eye, LockKeyhole]
-/** Barras dos níveis, só em tons de vinho (nunca semáforo, DESIGN.md §6.13). */
-const LEVEL_BAR = ['bg-vinho/30', 'bg-vinho', 'bg-vinho-profundo']
+/** Pílula do nível no topo de cada cartão — só tons de vinho (nunca semáforo). */
+const LEVEL_PILL = [
+  'bg-superficie text-vinho',
+  'bg-vinho text-white',
+  'bg-vinho-profundo text-white',
+]
+const DESKTOP = '(min-width: 1024px)'
+const DEG = Math.PI / 180
 
-/** Órbita elíptica das pílulas (desktop). */
-const RX = 330
-const RY = 215
-/** Ângulos de partida (graus): uma pílula em cima à esquerda, uma à direita, uma embaixo. */
-const START = [-150, -20, 100]
-const polar = (deg: number, rx: number, ry: number) => {
-  const a = (deg * Math.PI) / 180
-  return { x: Math.cos(a) * rx, y: Math.sin(a) * ry, s: 0.94 + 0.06 * Math.sin(a) }
+/** Órbitas das pílulas (px). `tilt`: inclinação do plano; `roll`: giro na tela; `dir`: sentido. */
+type Orbit = { r: number; tilt: number; roll: number; period: number; dir: 1 | -1 }
+const ORBITS_DESKTOP: Orbit[] = [
+  { r: 400, tilt: 13, roll: -6, period: 28, dir: 1 },
+  { r: 262, tilt: 44, roll: 16, period: 40, dir: -1 },
+]
+/** Pílula i → órbita (desktop: 4 na primeira, 3 na segunda). */
+const ORBIT_OF = [0, 1, 0, 1, 0, 1, 0]
+
+/** Partículas soltas: raio, inclinação, giro, período, tamanho, fase, opacidade (fixos, sem sorteio). */
+const DOTS = [
+  [210, 30, 10, 46, 4, 0.1, 0.7],
+  [250, 62, -20, 58, 3, 0.35, 0.5],
+  [285, 15, 25, 39, 5, 0.6, 0.6],
+  [320, 48, -8, 64, 3, 0.85, 0.45],
+  [230, 75, 40, 52, 6, 0.2, 0.55],
+  [300, 25, -35, 70, 4, 0.5, 0.65],
+  [265, 55, 18, 44, 3, 0.75, 0.5],
+  [340, 38, -15, 61, 5, 0.05, 0.4],
+  [195, 68, -42, 49, 4, 0.45, 0.6],
+  [310, 10, 30, 55, 3, 0.9, 0.55],
+  [240, 42, 5, 67, 6, 0.3, 0.45],
+  [355, 58, -28, 42, 4, 0.65, 0.5],
+] as const
+
+/** Posição na tela de um ponto da órbita + profundidade (0 = atrás, 1 = na frente). */
+function project(o: Orbit, theta: number, scale = 1) {
+  const r = o.r * scale
+  const x = Math.cos(theta) * r
+  const z = Math.sin(theta) * r
+  const y = z * Math.sin(o.tilt * DEG)
+  const c = Math.cos(o.roll * DEG)
+  const s = Math.sin(o.roll * DEG)
+  return { x: x * c - y * s, y: x * s + y * c, front: (Math.sin(theta) + 1) / 2 }
+}
+
+/** WebGL disponível? (sem ele, a esfera vira a imagem estática). */
+function hasWebGL() {
+  try {
+    const c = document.createElement('canvas')
+    return !!(c.getContext('webgl2') || c.getContext('webgl'))
+  } catch {
+    return false
+  }
 }
 
 /**
- * `#leitura-risco` (COPY 3.7). O orbe da IA no centro; as 3 fontes orbitam, são "absorvidas" ao
- * rolar (scrub), o orbe pulsa e uma linha de luz entrega o cartão de resultado. O nível escolhido
- * acende o cartão de adaptação correspondente e muda o tom do orbe.
- * Movimento reduzido: orbe parado, pílulas paradas em volta, tudo visível.
+ * `#leitura-risco` (COPY 3.7 + ajustes do cliente): esfera da IA em partículas 3D (three + R3F,
+ * carregada só perto da tela), cercada por pílulas de vidro em duas órbitas com profundidade e por
+ * partículas soltas, tudo passando continuamente. Abaixo, "Como o app se adapta ao seu risco",
+ * princípios e a nota do protótipo. Sem WebGL ou com movimento reduzido: imagem estática da esfera
+ * e pílulas paradas.
  */
 export function LeituraRisco() {
-  const root = useRef<HTMLElement>(null)
-  const [level, setLevel] = useState<number>(R.initial)
-  const [open, setOpen] = useState(false)
-  const tabs = useRef<(HTMLButtonElement | null)[]>([])
-  const id = useId()
-
-  // Manchas do orbe e órbita só rodam com a seção visível (CSS lê `data-visible`).
-  useEffect(() => {
-    const el = root.current
-    if (!el) return
-    const io = new IntersectionObserver(([e]) => {
-      el.dataset.visible = String(e.isIntersecting)
-      el.dispatchEvent(new CustomEvent('lr-visible', { detail: e.isIntersecting }))
-    })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
-  useGSAP(
-    () => {
-      const el = root.current!
-      const q = gsap.utils.selector(root)
-      const mm = gsap.matchMedia()
-      const orb = q('[data-lr-orb]')[0]
-      const core = q('[data-orb-core]')[0]
-      const flash = q('[data-orb-flash]')[0]
-      const line = q('[data-lr-line]')[0]
-      const card = q('[data-lr-card]')[0]
-      const pills = q('[data-lr-pill]')
-
-      // Pulso do orbe, linha de luz e cartão: iguais no desktop e no celular.
-      const finale = (tl: gsap.core.Timeline) =>
-        tl
-          .to(core, { scale: 1.08, duration: 0.8, ease: 'power2.out' }, '-=0.5')
-          .to(flash, { opacity: 1, duration: 0.8, ease: 'power2.out' }, '<')
-          .to(core, { scale: 1, duration: 1, ease: 'power2.inOut' })
-          .to(flash, { opacity: 0, duration: 1, ease: 'power2.inOut' }, '<')
-          .fromTo(line, { scaleY: 0 }, { scaleY: 1, duration: 1.2, ease: 'none' }, '<0.1')
-          .fromTo(
-            card,
-            { opacity: 0, y: 40 },
-            { opacity: 1, y: 0, duration: 1.2, ease: 'power2.out' },
-            '-=0.5',
-          )
-
-      mm.add(MQ.desktop, () => {
-        const st = { angle: 0, absorb: 0 }
-        const render = () =>
-          pills.forEach((p, i) => {
-            const { x, y, s } = polar(START[i] + st.angle, RX, RY)
-            const k = 1 - st.absorb
-            gsap.set(p, {
-              xPercent: -50,
-              yPercent: -50,
-              x: x * k,
-              y: y * k,
-              scale: s * (1 - 0.75 * st.absorb),
-              opacity: Math.max(0, 1 - st.absorb * 1.15),
-            })
-          })
-        render()
-
-        // Órbita: uma volta em 30s, em loop, só com a seção visível.
-        const orbit = gsap.to(st, {
-          angle: 360,
-          duration: 30,
-          ease: 'none',
-          repeat: -1,
-          paused: el.dataset.visible !== 'true',
-          onUpdate: render,
-        })
-        const onVis = (e: Event) =>
-          (e as CustomEvent<boolean>).detail ? orbit.play() : orbit.pause()
-        el.addEventListener('lr-visible', onVis)
-
-        const tl = gsap.timeline({
-          defaults: { overwrite: 'auto' },
-          scrollTrigger: { trigger: orb, start: 'center 80%', end: 'center 20%', scrub: 0.6 },
-        })
-        tl.to(st, { absorb: 1, duration: 3, ease: 'power2.in', onUpdate: render })
-        finale(tl)
-        // Depois da leitura, as fontes voltam a orbitar.
-        tl.to(st, { absorb: 0, duration: 2, ease: 'power2.out', onUpdate: render }, '+=0.3')
-
-        return () => {
-          el.removeEventListener('lr-visible', onVis)
-          orbit.kill()
-        }
-      })
-
-      mm.add(MQ.mobile, () => {
-        // Pílulas paradas acima do orbe; na absorção descem até o centro dele.
-        const delta = (p: Element, axis: 'x' | 'y') => {
-          const a = p.getBoundingClientRect()
-          const b = orb.getBoundingClientRect()
-          const cur = Number(gsap.getProperty(p, axis))
-          return axis === 'x'
-            ? b.left + b.width / 2 - (a.left + a.width / 2 - cur)
-            : b.top + b.height / 2 - (a.top + a.height / 2 - cur)
-        }
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: orb,
-            start: 'center 85%',
-            end: 'center 25%',
-            scrub: 0.6,
-            invalidateOnRefresh: true,
-          },
-        })
-        tl.to(pills, {
-          x: (_i, p) => delta(p, 'x'),
-          y: (_i, p) => delta(p, 'y'),
-          scale: 0.25,
-          opacity: 0,
-          duration: 3,
-          ease: 'power2.in',
-          stagger: 0.15,
-        })
-        finale(tl)
-        tl.to(pills, { x: 0, y: 0, scale: 1, opacity: 1, duration: 2, ease: 'power2.out' }, '+=0.3')
-      })
-
-      return () => mm.revert()
-    },
-    { scope: root },
+  const stage = useRef<HTMLDivElement>(null)
+  const reduced = useReducedMotion()
+  const [near, setNear] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const [webgl] = useState(() => typeof window !== 'undefined' && hasWebGL())
+  const [desktop, setDesktop] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(DESKTOP).matches,
   )
 
-  const select = (i: number, focus = false) => {
-    setLevel(i)
-    if (focus) tabs.current[i]?.focus()
-  }
-  const onKeyDown = (e: KeyboardEvent) => {
-    const n = R.levels.length
-    if (e.key === 'ArrowRight') select((level + 1) % n, true)
-    else if (e.key === 'ArrowLeft') select((level - 1 + n) % n, true)
-    else if (e.key === 'Home') select(0, true)
-    else if (e.key === 'End') select(n - 1, true)
-    else return
-    e.preventDefault()
-  }
+  useEffect(() => {
+    const mq = window.matchMedia(DESKTOP)
+    const on = () => setDesktop(mq.matches)
+    mq.addEventListener('change', on)
+    return () => mq.removeEventListener('change', on)
+  }, [])
 
-  const active = L.adapta.levels[level]
+  // Perto da tela (carrega o 3D) e visível (anima).
+  useEffect(() => {
+    const el = stage.current
+    if (!el) return
+    const ioNear = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), {
+      rootMargin: '800px 0px',
+    })
+    const ioVis = new IntersectionObserver(([e]) => setVisible(e.isIntersecting))
+    ioNear.observe(el)
+    ioVis.observe(el)
+    return () => {
+      ioNear.disconnect()
+      ioVis.disconnect()
+    }
+  }, [])
+
+  // Pílulas e partículas em órbita (só com a seção visível; paradas com movimento reduzido).
+  const fontes = desktop ? L.fontes : L.fontes.slice(0, 5)
+  useEffect(() => {
+    const el = stage.current
+    if (!el) return
+    const pills = Array.from(el.querySelectorAll<HTMLElement>('[data-lr-pill]'))
+    const dots = Array.from(el.querySelectorAll<HTMLElement>('[data-lr-dot]'))
+    const k = desktop ? 1 : 0.5
+    // A órbita de fora encolhe em telas estreitas para as pílulas não saírem do palco.
+    const fit = Math.min(1, (el.offsetWidth / 2 - 125) / ORBITS_DESKTOP[0].r)
+    const orbits: Orbit[] = desktop
+      ? ORBITS_DESKTOP.map((o, i) => (i === 0 ? { ...o, r: o.r * fit } : o))
+      : [{ r: Math.min(el.offsetWidth / 2 - 70, 150), tilt: 64, roll: -10, period: 28, dir: 1 }]
+    const slot = pills.map((_, i) => {
+      const oi = desktop ? ORBIT_OF[i] : 0
+      const same = desktop ? ORBIT_OF.filter((v) => v === oi).length : pills.length
+      const idx = desktop ? ORBIT_OF.slice(0, i).filter((v) => v === oi).length : i
+      return { o: orbits[oi], base: (idx / same) * Math.PI * 2 + oi * 0.6 }
+    })
+
+    const place = (t: number) => {
+      pills.forEach((p, i) => {
+        const { o, base } = slot[i]
+        const theta = base + o.dir * ((t / o.period) * Math.PI * 2)
+        const { x, y, front } = project(o, theta)
+        const f = reduced ? 1 : front
+        p.style.transform = `translate(-50%, -50%) translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) scale(${(0.85 + 0.15 * f).toFixed(3)})`
+        p.style.opacity = (0.35 + 0.65 * f).toFixed(3)
+        p.style.filter = f < 0.5 ? `blur(${((0.5 - f) * 2).toFixed(2)}px)` : 'none'
+        p.style.zIndex = f >= 0.5 ? '30' : '5'
+      })
+      dots.forEach((d, i) => {
+        const [r, tilt, roll, period, , phase, alpha] = DOTS[i]
+        const o: Orbit = { r, tilt, roll, period, dir: i % 2 ? -1 : 1 }
+        const theta = phase * Math.PI * 2 + o.dir * ((t / period) * Math.PI * 2)
+        const { x, y, front } = project(o, theta, k)
+        d.style.transform = `translate(-50%, -50%) translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
+        d.style.opacity = (alpha * (0.4 + 0.6 * front)).toFixed(3)
+        d.style.zIndex = front >= 0.5 ? '30' : '5'
+      })
+    }
+
+    if (reduced) {
+      // Movimento reduzido: pílulas paradas em volta da esfera, todas nítidas. Desktop: numa elipse
+      // larga; celular: empilhadas no centro, duas acima e três abaixo da esfera.
+      const rx = Math.min(400, el.offsetWidth / 2 - 125)
+      const MOBILE_Y = [-200, -160, 125, 165, 205]
+      pills.forEach((p, i) => {
+        const a = -Math.PI / 2 + (i / pills.length) * Math.PI * 2
+        const x = desktop ? Math.cos(a) * rx : 0
+        const y = desktop ? Math.sin(a) * 255 : MOBILE_Y[i]
+        p.style.transform = `translate(-50%, -50%) translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`
+        p.style.opacity = '1'
+        p.style.filter = 'none'
+        p.style.zIndex = '30'
+      })
+      dots.forEach((d) => (d.style.opacity = '0'))
+      return
+    }
+    if (!visible) {
+      place(0)
+      return
+    }
+    const start = performance.now() / 1000
+    const tick = () => place(performance.now() / 1000 - start)
+    gsap.ticker.add(tick)
+    return () => gsap.ticker.remove(tick)
+  }, [desktop, reduced, visible, fontes.length])
+
+  const sphereImg = (
+    <img
+      src="/images/ai-sphere.png"
+      alt=""
+      width={780}
+      height={780}
+      loading="lazy"
+      decoding="async"
+      className="size-full object-contain"
+    />
+  )
 
   return (
     <section
-      ref={root}
       id="leitura-risco"
       aria-labelledby="leitura-risco-title"
       className={clsx('relative overflow-x-clip bg-branco', SECTION_Y)}
@@ -197,7 +220,7 @@ export function LeituraRisco() {
       {/* Grade de pontos sutil que some nas bordas */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[1300px] bg-[radial-gradient(rgb(149_75_110/0.06)_1.5px,transparent_1.5px)] mask-[radial-gradient(ellipse_55%_50%_at_50%_45%,#000_30%,transparent_100%)] bg-size-[24px_24px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[1100px] bg-[radial-gradient(rgb(149_75_110/0.06)_1.5px,transparent_1.5px)] mask-[radial-gradient(ellipse_55%_50%_at_50%_50%,#000_30%,transparent_100%)] bg-size-[24px_24px]"
       />
 
       <Container className="relative">
@@ -214,196 +237,91 @@ export function LeituraRisco() {
           </p>
         </div>
 
-        {/* Palco: orbe + fontes em órbita */}
-        <div data-lr-stage className="relative mt-12 lg:mt-6">
-          {/* Brilho radial grande atrás do orbe */}
+        {/* Palco: esfera + pílulas e partículas em órbita */}
+        <div
+          ref={stage}
+          data-lr-stage
+          className="relative mx-auto mt-6 grid h-[440px] place-items-center lg:mt-2 lg:h-[620px]"
+        >
+          {/* Halo que pulsa atrás da esfera */}
           <div
             aria-hidden
-            className="pointer-events-none absolute top-[calc(50%+24px)] left-1/2 size-[640px] -translate-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(149_75_110/0.18),rgb(149_75_110/0))] lg:top-1/2 lg:size-[980px]"
+            className="lr-halo pointer-events-none absolute top-1/2 left-1/2 size-[380px] rounded-full lg:size-[680px]"
           />
-          <div className="relative flex flex-col items-center gap-10 lg:h-[500px] lg:justify-center">
-            <ul
-              aria-label="O que a IA considera"
-              className="relative z-10 flex flex-wrap justify-center gap-2 lg:absolute lg:inset-0 lg:block"
-            >
-              {L.fontes.map((f, i) => {
-                const Icon = FONTE_ICONS[i]
-                const p = polar(START[i], RX, RY)
-                return (
-                  <li
-                    key={f}
-                    data-lr-pill
-                    style={{ ['--px' as string]: `${p.x}px`, ['--py' as string]: `${p.y}px` }}
-                    className="shadow-card flex items-center gap-2.5 rounded-full py-1.5 pr-4 pl-1.5 whitespace-nowrap glass-light lg:absolute lg:top-1/2 lg:left-1/2 lg:transform-[translate(calc(-50%+var(--px)),calc(-50%+var(--py)))]"
-                  >
-                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-vinho text-white">
-                      <Icon className="size-4" strokeWidth={1.75} aria-hidden />
-                    </span>
-                    <span className="text-[0.9375rem] font-bold text-texto">{f}</span>
-                  </li>
-                )
-              })}
-            </ul>
-            <div data-lr-orb className="relative">
-              <AiOrb level={level} className="w-[240px] lg:w-[360px]" />
-            </div>
+          <div aria-hidden className="relative z-10 size-[300px] lg:size-[520px]">
+            {/* Sem WebGL ou com movimento reduzido: imagem estática (gerada do próprio canvas).
+                Com WebGL, o 3D só carrega perto da tela; até lá, o lugar fica vazio. */}
+            {reduced || !webgl ? (
+              sphereImg
+            ) : near ? (
+              <Suspense fallback={null}>
+                <AiSphere active={visible} count={desktop ? 7000 : 3000} />
+              </Suspense>
+            ) : null}
           </div>
 
-          <p className="mx-auto mt-10 max-w-[46ch] text-center caption font-normal text-texto-secundario lg:mt-4">
-            {L.fonar}
-          </p>
-
-          {/* Linha de luz que sai do orbe */}
-          <div
-            aria-hidden
-            data-lr-line
-            className="mx-auto mt-6 h-20 w-0.5 origin-top rounded-full bg-[linear-gradient(to_bottom,rgb(149_75_110/0),#954b6e_40%,rgb(149_75_110/0.15))] shadow-[0_0_12px_rgb(149_75_110/0.6)] md:h-24"
-          />
-
-          {/* Cartão de resultado */}
-          <div
-            data-lr-card
-            className="relative mx-auto mt-4 max-w-[520px] rounded-[20px] border border-borda/70 bg-white p-6 shadow-float md:p-7"
-          >
-            <div className="flex items-center gap-3">
-              <h3 className="font-display text-[1.375rem] leading-tight font-semibold tracking-[-0.01em] text-texto">
-                {R.title}
-              </h3>
-              <span className="rounded-full bg-superficie px-2.5 py-1 text-xs leading-none font-bold text-vinho">
-                {R.badge}
-              </span>
-            </div>
-
-            <div
-              role="tablist"
-              aria-label="Nível de risco"
-              onKeyDown={onKeyDown}
-              className="mt-5 grid grid-cols-3 gap-1 rounded-full border border-borda bg-white p-1"
-            >
-              {R.levels.map((l, i) => (
-                <button
-                  key={l}
-                  ref={(b) => {
-                    tabs.current[i] = b
-                  }}
-                  role="tab"
-                  type="button"
-                  id={`${id}-t${i}`}
-                  aria-selected={i === level}
-                  aria-controls={`${id}-p`}
-                  tabIndex={i === level ? 0 : -1}
-                  onClick={() => select(i)}
-                  className={clsx(
-                    'h-11 rounded-full text-[0.9375rem] font-bold transition-[background-color,color] duration-300',
-                    i === level ? 'bg-vinho text-white' : 'text-texto-secundario hover:text-vinho',
-                  )}
+          <ul aria-label="O que a IA considera" className="absolute inset-0">
+            {fontes.map((f, i) => {
+              const Icon = FONTE_ICONS[i]
+              return (
+                <li
+                  key={f}
+                  data-lr-pill
+                  className="shadow-card absolute top-1/2 left-1/2 flex items-center gap-2 rounded-full py-1 pr-3 pl-1 whitespace-nowrap glass-light lg:gap-2.5 lg:py-1.5 lg:pr-4 lg:pl-1.5"
+                  style={{ transform: 'translate(-50%, -50%)', opacity: 0 }}
                 >
-                  {l}
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-5 grid grid-cols-3 gap-2" aria-hidden>
-              {R.levels.map((l, i) => (
-                <span
-                  key={l}
-                  className={clsx(
-                    'h-1.5 rounded-full transition-colors duration-500',
-                    i <= level ? LEVEL_BAR[level] : 'bg-superficie',
-                  )}
-                />
-              ))}
-            </div>
-
-            <button
-              type="button"
-              aria-expanded={open}
-              aria-controls={`${id}-como`}
-              onClick={() => setOpen((o) => !o)}
-              className="group mt-4 -mb-2 inline-flex min-h-11 items-center gap-1.5 rounded-md text-[0.9375rem] font-bold text-vinho"
-            >
-              {R.comoChegamos}
-              <ChevronDown
-                aria-hidden
-                className={clsx(
-                  'size-4 transition-transform duration-300 ease-amparo motion-reduce:transition-none',
-                  open && 'rotate-180',
-                )}
-              />
-            </button>
-            <div
-              id={`${id}-como`}
-              className={clsx(
-                'grid transition-[grid-template-rows,opacity] duration-500 ease-amparo motion-reduce:transition-none',
-                open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
-              )}
-              inert={!open}
-            >
-              <div className="overflow-hidden">
-                <div className="mt-3 rounded-card bg-superficie p-4">
-                  <span className="inline-block rounded-full border border-borda bg-white px-2.5 py-1 text-xs leading-none font-bold text-texto-secundario">
-                    {R.exemplo}
+                  <span className="grid size-6 shrink-0 place-items-center rounded-full bg-vinho text-white lg:size-8">
+                    <Icon className="size-3.5 lg:size-4" strokeWidth={1.75} aria-hidden />
                   </span>
-                  <ul className="mt-3 flex flex-col gap-2">
-                    {R.sinais.map((s) => (
-                      <li key={s} className="flex gap-2.5 text-[0.9375rem] text-texto">
-                        <span
-                          aria-hidden
-                          className="mt-[0.55em] size-1.5 shrink-0 rounded-full bg-vinho"
-                        />
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-3 flex items-center gap-2 text-small font-semibold text-vinho-profundo">
-                    <LockKeyhole className="size-4 shrink-0" strokeWidth={1.75} aria-hidden />
-                    {R.privacidade}
-                  </p>
-                </div>
-              </div>
-            </div>
+                  <span className="text-[0.8125rem] font-bold text-texto lg:text-[0.9375rem]">
+                    {f}
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            {DOTS.map((d, i) => (
+              <span
+                key={i}
+                data-lr-dot
+                className="absolute top-1/2 left-1/2 rounded-full bg-vinho"
+                style={{ width: d[4], height: d[4], opacity: 0 }}
+              />
+            ))}
           </div>
         </div>
 
-        {/* Como o app se adapta */}
-        <div className="mt-20 md:mt-24">
+        {/* Como o app se adapta ao seu risco */}
+        <div className="mt-10 md:mt-14">
           <h3
             data-appear
-            className="text-center font-display text-[1.625rem] leading-tight font-semibold tracking-[-0.015em] text-texto md:text-[2rem]"
+            className="text-center font-display text-[1.375rem] leading-tight font-semibold tracking-[-0.01em] text-texto md:text-[1.625rem]"
           >
             {L.adapta.title}
           </h3>
-          <p aria-live="polite" className="sr-only">
-            {`${active.label}: ${active.text}`}
-          </p>
-          <div
-            id={`${id}-p`}
-            role="tabpanel"
-            aria-labelledby={`${id}-t${level}`}
-            data-appear-stagger
-            className="mt-10 grid gap-5 lg:grid-cols-3"
-          >
+          <ul data-appear-stagger className="mt-8 grid gap-5 lg:mt-10 lg:grid-cols-3">
             {L.adapta.levels.map((a, i) => (
-              <div key={a.label} className="flex">
-                <article
-                  data-on={i === level}
-                  onClick={() => select(i)}
-                  className="flex w-full cursor-pointer flex-col rounded-card-lg border-[1.5px] border-borda bg-white p-6 opacity-45 transition-[opacity,transform,border-color,box-shadow] duration-500 ease-amparo data-[on=true]:scale-[1.02] data-[on=true]:border-vinho data-[on=true]:opacity-100 data-[on=true]:shadow-float motion-reduce:transition-none"
-                >
-                  <p className="flex items-center gap-2.5 font-display text-xl font-semibold text-texto">
-                    <span aria-hidden className={clsx('size-2.5 rounded-full', LEVEL_BAR[i])} />
+              <li key={a.label} className="flex">
+                <article className="flex w-full flex-col rounded-card-lg border-[1.5px] border-borda bg-white p-6 transition-[transform,border-color,box-shadow] duration-300 ease-amparo focus-within:-translate-y-1 focus-within:border-vinho hover:-translate-y-1 hover:border-vinho hover:shadow-float motion-reduce:transition-none">
+                  <span
+                    className={clsx(
+                      'w-max rounded-full px-3.5 py-1.5 text-[0.9375rem] leading-none font-bold',
+                      LEVEL_PILL[i],
+                    )}
+                  >
                     {a.label}
-                  </p>
-                  <p className="mt-2 text-[0.9375rem] text-pretty text-texto-secundario">
+                  </span>
+                  <p className="mt-4 text-[0.9375rem] text-pretty text-texto-secundario">
                     {a.text}
                   </p>
                   <div aria-hidden className="mt-5 flex-1 rounded-card bg-superficie p-3">
                     <AdaptaTela i={i} />
                   </div>
                 </article>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         {/* Princípios */}
