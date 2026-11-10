@@ -33,7 +33,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 4b | `#dores` refeita no padrão NextPay (itens à esquerda + painel fixo com o celular trocando de tela) — screenshots em `./screenshots/dores/` | `97acd68` |
 | 4c | `#dores` ajustes 2: banner com foto no topo, painel claro, telas Ocorrências e "Como chegamos nesta leitura" — screenshots em `./screenshots/dores-2/` | `3902727` |
 | 4d | `#dores` ajustes 3: margem branca do banner, banner sem emenda, painel vinho vivo, leitura de risco na tela inicial rolada — screenshots em `./screenshots/dores-3/` | `ab4d548` |
-| 4e | `#dores` ajustes 4: cartão único (banner + lista no mesmo fundo), foto natural dissolvendo, transição NextPay — screenshots em `./screenshots/dores-4/` | (este commit) |
+| 4e | `#dores` ajustes 4: cartão único (banner + lista no mesmo fundo), foto natural dissolvendo, transição NextPay — screenshots em `./screenshots/dores-4/` | `09bb215` |
+| 3h | `#pessoas`: foto central em movimento, sem ficar colada na base — screenshots em `./screenshots/pessoas-centro/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -113,6 +114,9 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 4. **Lista dentro do cartão:** cartões em vidro claro `white/8` + borda `white/15` (ativo `white/14` + `white/25`); painel `#954B6E` com brilho branco 14%, linhas brancas 8%, borda `white/12`, sombra `0 40px 80px -30px rgb(0 0 0 / .45)`. Celular sticky e telas como antes.
 5. **Transição ao rolar:** a foto sobe mais devagar (`yPercent 0 → 15`) e escurece no fundo; o título sobe e perde opacidade; cartões e painel entram com `appear` em seguida. Sem abertura por `clip-path` nem zoom. Movimento reduzido: estático.
 6. **Celular:** o mesmo cartão (12px); foto no topo dissolvendo para baixo, depois o texto do banner e os itens com o celular menor.
+
+### `#pessoas` — foto central (10/11/2026)
+- A foto central também se move (sobe um pouco com o scroll e flutua devagar) e não fica colada na base do palco; o movimento é limitado para nunca cobrir a frase.
 
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |

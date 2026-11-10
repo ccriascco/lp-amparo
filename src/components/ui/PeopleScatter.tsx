@@ -132,12 +132,37 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
           })
         }
 
+        // Foto central também se move (pedido do cliente): depois de encolher, sobe devagar
+        // enquanto o palco está fixo, em vez de ficar parada encostada na base.
+        gsap.fromTo(
+          '[data-center-drift]',
+          { y: desktop ? 24 : 20 },
+          {
+            y: desktop ? -16 : -14,
+            ease: 'none',
+            scrollTrigger: desktop
+              ? { trigger: el, start: 'top top', end: 'bottom bottom', scrub: true }
+              : range,
+          },
+        )
+        // + flutuação lenta contínua (±8px); a soma nunca alcança a frase.
+        gsap.to('[data-center-drift] > *', {
+          y: -8,
+          duration: 5,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+        })
+
         // A nuvem do fundo fica parada (pedido do cliente: o parallax do fundo travava a rolagem).
 
         // Camada própria para cada foto que se move, só enquanto a seção está na tela (§7.10):
         // sem isso o tingimento (mix-blend-mode) e o blur das fotos "ao fundo" eram refeitos a
         // cada quadro.
-        const movers = gsap.utils.toArray<HTMLElement>('[data-speed], [data-scatter-center]', el)
+        const movers = gsap.utils.toArray<HTMLElement>(
+          '[data-speed], [data-scatter-center], [data-center-drift]',
+          el,
+        )
         ScrollTrigger.create({
           trigger: el,
           start: 'top bottom',
@@ -239,13 +264,16 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
             className="relative z-20 mx-auto mt-10 w-[136px] origin-bottom lg:absolute lg:top-[calc(50%+130px)] lg:left-1/2 lg:mt-0 lg:-ml-[75px] lg:w-[150px]"
           >
             <div data-appear="float" className="lg:contents">
-              <TintedPhoto
-                slot={centerSlot}
-                sizes={`${CENTER_START}px`}
-                overlay="none"
-                natural
-                className="aspect-[4/5] rounded-card shadow-float"
-              />
+              {/* Invólucro próprio para a subida contínua (não disputa o encolhimento da entrada) */}
+              <div data-center-drift>
+                <TintedPhoto
+                  slot={centerSlot}
+                  sizes={`${CENTER_START}px`}
+                  overlay="none"
+                  natural
+                  className="aspect-[4/5] rounded-card shadow-float"
+                />
+              </div>
             </div>
           </div>
         </div>

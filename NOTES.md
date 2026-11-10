@@ -311,3 +311,7 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
 - **Lista:** cartões `white/8` + borda `white/15`; ativo (só desktop) `white/14` + borda `white/25`. Painel `#954B6E` + brilho branco 14% + linhas brancas 8% + borda `white/12` + sombra `0 40px 80px -30px rgb(0 0 0 / .45)`; entra com `appear` (visual).
 - **Transição:** com o banner saindo (`top top → bottom top`, scrub), a foto vai a `yPercent 15` (8 no celular) e opacidade 0,35 (escurece no fundo); o bloco do título sobe 90px (40 no celular) e vai a 15% de opacidade. Saíram a abertura do cartão por `clip-path` e o zoom da foto. Movimento reduzido: estático.
 - **Fluidez (build de produção, CPU 4×):** 1440px mediana 16,8 ms, p95 33,5 ms, 6 quadros > 50 ms; 390px mediana 16,7 ms, 0 > 50 ms.
+
+### `#pessoas` — foto central em movimento (10/11/2026, pedido do cliente)
+- A foto central (mulher na janela) só encolhia na entrada e depois ficava parada logo abaixo da frase, encostada na base do palco. Agora tem um invólucro próprio (`data-center-drift`, sem disputar o encolhimento): sobe de `y +24px` para `−16px` enquanto o palco está fixo (celular: `+20 → −14px` com a seção na tela) e flutua devagar (`y −8px`, 5s, `sine.inOut`, yoyo).
+- **Crítica:** uma primeira versão subia 30% da altura da tela e cobria a frase no fim do palco; a amplitude foi limitada para a soma (rolagem + flutuação) nunca alcançar o texto. Conferido em 30%, 60% e 95% do palco, em 1440 e 390.
