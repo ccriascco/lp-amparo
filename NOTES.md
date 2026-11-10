@@ -343,3 +343,7 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
 - **Enquadramento:** a etiqueta aberta cobria o rosto. A imagem passou a ocupar uma área maior que o cartão, deslocada para cima (desktop `top −38%`, `h 150%`; celular `top −55%`, `h 165%`), alinhada pela base, com o x centrado no rosto de cada foto (`--face`: 45 / 58 / 60%). Assim o rosto fica na metade de cima e não é cortado quando o cartão estreita.
 - **Celular:** carrossel com snap (85vw), todas as etiquetas abertas. **Movimento reduzido:** 3 larguras iguais (392px) e etiquetas abertas.
 - **Revisão `web-design-guidelines`:** ✓ `h3` com ícone `aria-hidden`, link real com 44px, foco por teclado ativa o cartão, `transition` listada, sem scroll horizontal.
+
+### Benefícios de volta à versão anterior e cartão das Dores com 1440px (10/11/2026, pedido do cliente)
+- `#beneficios`: voltou à versão de `5495701` (3 cartões 4:5 iguais, foto natural, etiqueta branca na base, revelação por máscara, parallax, hover com zoom e etiqueta subindo) **sem** os pedaços de interface/notificação sobre as fotos. A interação Gardance (`f8ba90d`) foi descartada. Os links dos cartões continuam em `copy.ts` sem uso.
+- `#dores`: cartão de `max-w-[1216px]` para `max-w-[1408px]` — com a margem de 16px, o bloco tem 1440px. Conteúdo do banner segue com `lg:px-12` dentro do cartão; cada linha do título continua inteira.
