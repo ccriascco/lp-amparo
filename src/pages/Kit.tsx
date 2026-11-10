@@ -2,6 +2,10 @@ import { ArrowDown, Check, ShieldCheck, Smartphone } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import calcPng from '../assets/app-screens/modo-disfarce-calculadora.png'
 import homePng from '../assets/app-screens/inicio-celular.png'
+import homeSosPng from '../assets/app-screens/home-sos.png'
+import ocorrPng from '../assets/app-screens/ocorrencias.png'
+import redePng from '../assets/app-screens/rede-de-apoio.png'
+import { HomeSosScreen, OcorrenciasScreen, RedeScreen } from '../components/phone/AppScreens'
 import simbolo from '../assets/brand/amparo-simbolo.svg'
 import { Button } from '../components/ui/Button'
 import { Chip } from '../components/ui/Chip'
@@ -167,6 +171,30 @@ export default function Kit() {
               }
               caption="HomeScreen"
             />
+          </div>
+          <div data-kit-hero-screens className="mt-12 grid gap-10">
+            {(
+              [
+                [HomeSosScreen, homeSosPng, 'HomeSosScreen'],
+                [RedeScreen, redePng, 'RedeScreen'],
+                [OcorrenciasScreen, ocorrPng, 'OcorrenciasScreen'],
+              ] as const
+            ).map(([S, png, name]) => (
+              <Pair
+                key={name}
+                code={
+                  <div className="w-[280px] overflow-hidden rounded-[24px] border border-borda">
+                    <div className="[container-type:inline-size] aspect-[390/845] w-full">
+                      <div className="h-[845px] w-[390px] origin-top-left scale-[0.718]">
+                        <S />
+                      </div>
+                    </div>
+                  </div>
+                }
+                original={<img src={png} alt="" className="w-[280px] rounded-[24px]" />}
+                caption={name}
+              />
+            ))}
           </div>
           <div className="mt-12 flex flex-wrap items-end gap-6">
             {[320, 260, 200].map((w) => (

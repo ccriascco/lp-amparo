@@ -3,17 +3,16 @@ import {
   ArrowDown,
   Calculator,
   Check,
-  MapPin,
+  FolderLock,
   MousePointer2,
   ShieldCheck,
   Siren,
   Smartphone,
+  UsersRound,
 } from 'lucide-react'
 import { useRef, type CSSProperties, type ReactNode } from 'react'
-import { AlertScreen } from '../components/phone/AlertScreen'
+import { HomeSosScreen, OcorrenciasScreen, RedeScreen } from '../components/phone/AppScreens'
 import { CalculatorScreen, type CalculatorHandle } from '../components/phone/CalculatorScreen'
-import { HomeScreen } from '../components/phone/HomeScreen'
-import { ProofScreen } from '../components/phone/ProofScreen'
 import { Button } from '../components/ui/Button'
 import { Chip } from '../components/ui/Chip'
 import { CircularBadge } from '../components/ui/CircularBadge'
@@ -43,19 +42,17 @@ export function Hero() {
       id="inicio"
       aria-labelledby="hero-title"
       data-hero
-      className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-white md:min-h-[920px]"
+      className="relative isolate flex min-h-[100svh] flex-col overflow-x-clip bg-white pb-16 md:pb-20"
     >
-      {/* Véu: gradiente do hero + anéis, revelado em onda a partir do "=". */}
+      {/* Fundo: gradiente do hero + anéis, visíveis desde o carregamento (ajuste do cliente).
+          Recortado nesta camada e dissolvido no branco nos últimos 200px, sem linha na base. */}
       <div
-        data-hero-veil
         aria-hidden
-        className="absolute inset-0 -z-10"
-        style={{
-          background: 'var(--grad-hero)',
-          clipPath: 'circle(var(--r, 150%) at var(--x, 50%) var(--y, 80%))',
-        }}
+        className="absolute inset-0 -z-10 overflow-hidden mask-[linear-gradient(180deg,#000_calc(100%-200px),transparent)]"
       >
-        <HeroRings />
+        <div data-hero-veil className="absolute inset-0" style={{ background: 'var(--grad-hero)' }}>
+          <HeroRings />
+        </div>
       </div>
 
       <Container className="relative z-10 pt-32 text-center md:pt-40">
@@ -90,10 +87,10 @@ export function Hero() {
         </div>
       </Container>
 
-      {/* Palco dos celulares, cortado pela base do hero */}
+      {/* Palco dos celulares: os 3 aparecem inteiros (altura = celular + leque + flutuação) */}
       <div
         data-hero-stage
-        className="relative mt-12 h-[420px] shrink-0 grow [perspective:1200px] md:mt-14 md:h-[470px] lg:h-[500px]"
+        className="relative mt-12 h-[560px] shrink-0 md:mt-14 md:h-[690px] lg:h-[730px]"
       >
         <div
           data-hero-side="left"
@@ -101,10 +98,12 @@ export function Hero() {
           style={{ transform: 'rotate(-12deg)' }}
         >
           <div data-hero-side-inner className="relative">
-            <IconBubble icon={<MapPin />} className="-top-7 left-[58%]" />
-            <PhoneFrame decorative>
-              <AlertScreen />
-            </PhoneFrame>
+            <div data-hero-float className="relative">
+              <IconBubble icon={<UsersRound />} className="-top-7 left-[58%]" />
+              <PhoneFrame decorative>
+                <RedeScreen />
+              </PhoneFrame>
+            </div>
           </div>
         </div>
         <div
@@ -113,28 +112,42 @@ export function Hero() {
           style={{ transform: 'rotate(12deg)' }}
         >
           <div data-hero-side-inner className="relative">
-            <IconBubble icon={<ShieldCheck />} className="-top-7 left-[22%]" flip />
-            <PhoneFrame decorative>
-              <ProofScreen />
-            </PhoneFrame>
+            <div data-hero-float className="relative">
+              <IconBubble icon={<FolderLock />} className="-top-7 left-[22%]" flip />
+              <PhoneFrame decorative>
+                <OcorrenciasScreen />
+              </PhoneFrame>
+            </div>
           </div>
         </div>
 
-        {/* Celular central: calculadora → tela inicial. Gira/inclina ao sair (§7.9). */}
+        {/* Celular central: calculadora → tela inicial. Reto e centralizado; ao rolar só sobe. */}
         <div
           data-hero-phone
           className="absolute top-0 left-1/2 z-[5] w-[248px] -translate-x-1/2 md:w-[300px] lg:w-[320px]"
         >
-          <PhoneFrame screenClassName="bg-black" label={a11y.altHome}>
-            <div className="relative h-full w-full">
-              <div data-hero-home className="absolute inset-0">
-                <HomeScreen />
+          <div data-hero-float>
+            <PhoneFrame screenClassName="bg-black" label={a11y.altHome}>
+              <div className="relative h-full w-full">
+                <div data-hero-home className="absolute inset-0">
+                  <HomeSosScreen />
+                </div>
+                <div data-hero-calc className="absolute inset-0 opacity-0">
+                  <CalculatorScreen mode="auto" compact ref={calc} />
+                </div>
+                {/* Pulso de luz no "=" (centro medido na tecla durante a timeline) */}
+                <div
+                  data-hero-glow
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 opacity-0"
+                  style={{
+                    background:
+                      'radial-gradient(70% 45% at var(--gx, 75%) var(--gy, 85%), rgb(255 255 255 / 0.9) 0%, rgb(149 75 110 / 0.4) 40%, transparent 72%)',
+                  }}
+                />
               </div>
-              <div data-hero-calc className="absolute inset-0 opacity-0">
-                <CalculatorScreen mode="auto" compact ref={calc} />
-              </div>
-            </div>
-          </PhoneFrame>
+            </PhoneFrame>
+          </div>
           <button
             type="button"
             data-hero-replay
@@ -200,7 +213,7 @@ function HeroRings() {
       data-rings
       aria-hidden
       viewBox={`${-max - 2} ${-max - 2} ${max * 2 + 4} ${max * 2 + 4}`}
-      className="pointer-events-none absolute top-[calc(100%-210px)] left-1/2 h-[2600px] w-[2600px] -translate-x-1/2 -translate-y-1/2"
+      className="pointer-events-none absolute top-[calc(100%-370px)] left-1/2 h-[2600px] w-[2600px] -translate-x-1/2 -translate-y-1/2 md:top-[calc(100%-460px)] lg:top-[calc(100%-480px)]"
       fill="none"
     >
       {rings.map((r, i) => (

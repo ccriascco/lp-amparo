@@ -88,7 +88,10 @@ for (const [suffix, fill] of [
   const capH = CAP.base - CAP.top
   const s = (2.42 * capH) / SIM.h
   const gap = 0.32 * capH
-  const symBottom = CAP.base + 0.32 * capH
+  // Centro da gota alinhado ao meio da altura das letras (altura-x do "mparo": y 655,3 → 745,9,
+  // medida no vetor). Pedido do cliente: o nome ficava mais baixo que o símbolo.
+  const X_MID = (655.3 + 745.9) / 2
+  const symBottom = X_MID + (SIM.h * s) / 2
   const tx = WORD.x - gap - SIM.w * s - SIM.x * s
   const ty = symBottom - (SIM.y + SIM.h) * s
   const left = WORD.x - gap - SIM.w * s

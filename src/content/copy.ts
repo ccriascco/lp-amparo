@@ -589,6 +589,57 @@ export const app = {
     quickTitle: 'Ações rápidas',
     quick: ['Registrar prova', 'Delegacias próximas', 'Ativar Modo Disfarce', 'Adicionar guardião'],
   },
+  /** home-sos.png (celular central do hero, depois do desbloqueio). */
+  homeSos: {
+    greeting: 'Olá, Marina',
+    subtitle: 'Como podemos te ajudar hoje?',
+    ocorrencias: 'Ocorrências',
+    periodo: 'Últimos 7 dias',
+    days: ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+    /** Dias com registro (barras em vinho). */
+    marked: [1, 3, 4, 5],
+    ajudaTitle: 'Está precisando de ajuda?',
+    ajudaText:
+      'Toque e segure o botão abaixo por alguns segundos para acionar uma emergência silenciosa.',
+    sos: 'SOS',
+    quickTitle: 'Ações rápidas',
+    quick: [
+      'Registrar prova',
+      'Adicionar guardião',
+      'Ver minhas ocorrências',
+      'Delegacias próximas',
+    ],
+  },
+  /** rede-de-apoio.png (celular esquerdo do hero). */
+  redeTela: {
+    title: 'Rede de apoio',
+    subtitle: 'Pessoas de confiança que podem ser avisadas em situações de risco.',
+    button: 'Adicionar guardião',
+    quick: [
+      ['Como funciona', 'o convite'],
+      ['Se ela não', 'responder'],
+      ['Sua privacidade', ''],
+      ['Trocar guardiã', 'principal'],
+    ],
+  },
+  /** ocorrencias.png (celular direito do hero). */
+  ocorrenciasTela: {
+    title: 'Ocorrências',
+    subtitle: 'O que você guardou fica em um cofre que só você abre.',
+    count: '7',
+    countTitle: 'Ocorrências registradas',
+    countText:
+      'Criptografado e guardado só no seu aparelho. Só você tem a chave que abre esse cofre.',
+    button: 'Registrar nova ocorrência',
+    quick: [
+      'Isso vira prova legal?',
+      'Quem pode ver isso',
+      'Por que registrar mesmo sem denunciar',
+      'Posso apagar uma ocorrência depois?',
+    ],
+    ultimos: 'Últimos registros',
+    registro: { title: 'Ocorrência registrada', date: '14/03', time: '21:47' },
+  },
   /** alerta-enviado.png */
   alerta: {
     sair: 'Sair rápido',

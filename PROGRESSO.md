@@ -21,7 +21,8 @@ Do preloader até `#dores` já está tudo na rodada 2. Da seção `#disfarce` pa
 | 1b | H1 do hero com ~32px no celular (`clamp(1.625rem, 8.4vw, 4.75rem)`) | `81288e3` |
 | 2 | Números + Marquee (`StatsBand`, `Marquee` com botão de pausa) | `a1d140c` |
 | 3 | Manifesto (`PeopleScatter`, padrão Gaia) | `e1447b7` |
-| 4 | Dores (`QuestionStage`, padrão Gardance) | (este commit) |
+| 4 | Dores (`QuestionStage`, padrão Gardance) | `c481b47` |
+| 1c | Ajustes do hero e do header (logo alinhado, central reto, telas Rede/Ocorrências/home-sos, sem onda, celulares inteiros flutuando, base dissolvendo) — screenshots em `./screenshots/ajustes-hero/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -39,7 +40,14 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 - **H1 do hero com ~32px no celular**, mantendo uma linha. **Aplicado:** `clamp(1.625rem, 8.4vw, 4.75rem)` → 32,8px em 390, 30,2px em 360, 26,9px em 320 (o `8.2vw` com mínimo de 1.75rem estourava em 320px).
 - **Fotos provisórias** (alternativas de `assets/fotos/`): `sos` (espelhada), `risco`, `comecar-2`, `comecar-3` (recortada acima do crachá "Ampore", que não existe nos arquivos gerados).
 - **Placeholders** (`--grad-vinho` + gota): `cofre`, `comecar-1`, `comecar-4`. Para trocar: coloque a foto em `assets/fotos/` com o nome do slot, ajuste o recorte em `scripts/process-images.mjs` (lista `SLOTS`, removendo da lista `PLACEHOLDERS`) e rode `npm run images`.
-- **Inclinação 3D do celular do hero** (§7.9) liberada pelo cliente, apesar do §11 genérico.
+- ~~Inclinação 3D do celular do hero~~ — **revogada** pelos ajustes de 10/11/2026 abaixo.
+
+### Ajustes do hero e do header (10/11/2026) — têm prioridade sobre o `DESIGN.md`
+1. **Logo do header:** o meio da altura das letras de "Amparo" (altura-x do "mparo") fica alinhado ao meio da gota. Feito no próprio SVG horizontal (`scripts/build-logos.mjs` → `npm run logos`), vale para o header normal e o compacto.
+2. **Celular central reto e centralizado o tempo todo:** sem rotação nem inclinação 3D. Ao rolar, só sobe um pouco (`yPercent 0 → −6`). **Substitui a linha "Celular central do hero" do §7.9.** Os laterais continuam abrindo o leque.
+3. **Telas dos celulares do hero, todas em código e fiéis a `assets/app-screens/`:** central = calculadora → tela inicial (`home-sos.png`); esquerdo = Rede de apoio (`rede-de-apoio.png`); direito = Ocorrências (`ocorrencias.png`). Saem as telas "Alerta enviado" e "Prova verificada" dos celulares; as notificações flutuantes continuam.
+4. **Desbloqueio sem a onda:** o fundo rosa (`--grad-hero`) e os anéis ficam visíveis desde o carregamento. Removida a revelação em onda com `clip-path` do §7.1. No "=", só a tela do celular muda (crossfade para a tela inicial) com um pulso suave de luz dentro da tela, saindo da tecla "=".
+5. **Base do hero sem corte:** os 3 celulares aparecem inteiros (sem `overflow-hidden` cortando); depois de abertos flutuam devagar (`y ±10px`, 5–7s, `sine.inOut`, `yoyo`, cada um num ritmo); o fundo do hero se dissolve no branco da seção seguinte num degradê de 200px, sem linha ou borda; o hero ficou mais alto para caber os celulares.
 
 ## Ajustes pendentes (escreva aqui o que quer mudar nos itens 1–4)
 - [ESCREVA AQUI O QUE VOCÊ QUER AJUSTAR]

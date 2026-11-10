@@ -10,9 +10,13 @@ const STACK_S = [1, 0.94, 0.88]
 const STACK_O = [1, 0.75, 0.45]
 
 /**
- * Hero "Desbloqueio" (DESIGN §7.1) + parallax do hero (§7.9).
- * Começa quando o preloader inicia o fade (ou direto, sem preloader). Com movimento reduzido nada
- * roda e o hero fica no estado final do markup.
+ * Hero "Desbloqueio" (DESIGN §7.1, com os ajustes aprovados pelo cliente em 10/11/2026) + parallax.
+ * - Fundo (--grad-hero) e anéis visíveis desde o carregamento: sem a onda de clip-path.
+ * - No "=", só a tela do celular muda (crossfade calculadora → tela inicial) com um pulso de luz.
+ * - Celular central reto; ao rolar só sobe (yPercent 0 → −6). Laterais abrem o leque.
+ * - Depois de abertos, os 3 celulares flutuam devagar (y ±10px, 5–7s, cada um no seu ritmo).
+ * Começa quando o preloader inicia o fade (ou direto). Com movimento reduzido nada roda e o hero
+ * fica no estado final do markup.
  */
 export function useHeroMotion(
   root: RefObject<HTMLElement | null>,
@@ -33,23 +37,25 @@ export function useHeroMotion(
         const phone = q('[data-hero-phone]')[0]
         const calcLayer = q('[data-hero-calc]')[0]
         const homeLayer = q('[data-hero-home]')[0]
+        const glow = q('[data-hero-glow]')[0]
         const sides = q('[data-hero-side]')
         const sideInners = q('[data-hero-side-inner]')
+        const floats = q('[data-hero-float]')
         const pops = q('[data-hero-pop]').filter((p) => !p.hasAttribute('data-hero-notifs'))
         const notifs = q('[data-hero-notifs] [data-notif]')
         const notifBox = q('[data-hero-notifs]')[0]
-        const rings = q('[data-hero-veil] [data-ring]')
         const ringsSvg = q('[data-hero-veil] [data-rings]')[0]
         const replayBtn = q('[data-hero-replay]')[0]
         const eqKey = q('[data-hero-calc] [data-key="="]')[0]
         const blur = (px: number) => `blur(${px}px)`
 
-        const aimAtEquals = () => {
-          const r = el.getBoundingClientRect()
+        // Centro do pulso de luz = tecla "=" (medida no instante, imune a mudanças de layout).
+        const aimGlow = () => {
+          const s = glow.getBoundingClientRect()
           const k = eqKey.getBoundingClientRect()
-          gsap.set(veil, {
-            '--x': `${k.left + k.width / 2 - r.left}px`,
-            '--y': `${k.top + k.height / 2 - r.top}px`,
+          gsap.set(glow, {
+            '--gx': `${((k.left + k.width / 2 - s.left) / s.width) * 100}%`,
+            '--gy': `${((k.top + k.height / 2 - s.top) / s.height) * 100}%`,
           })
         }
 
@@ -59,11 +65,10 @@ export function useHeroMotion(
         const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } })
         tlRef.current = tl
 
-        // Estado inicial: fundo branco, sem véu e sem anéis, só texto e celular central.
-        tl.set(veil, { '--r': '0%' })
-          .set(calcLayer, { autoAlpha: 1 })
+        // Estado inicial: fundo e anéis já visíveis; texto e celular central com a calculadora.
+        tl.set(calcLayer, { autoAlpha: 1 })
           .set(homeLayer, { autoAlpha: 0 })
-          .set(rings, { drawSVG: '0%' })
+          .set(glow, { autoAlpha: 0, scale: 0.6 })
           .set(sideInners, { y: 120, autoAlpha: 0 })
           .set(sideInners[0] ?? {}, { rotation: 12 })
           .set(sideInners[1] ?? {}, { rotation: -12 })
@@ -103,7 +108,7 @@ export function useHeroMotion(
           )
         })
 
-        // 4–5. "=", onda do gradiente + anéis a partir da tecla, tela vira a HomeScreen.
+        // 4–5. "=" e a tela troca: crossfade para a tela inicial com um pulso suave de luz.
         tl.fromTo(
           eqKey,
           { scale: 1, filter: 'brightness(1)' },
@@ -118,11 +123,11 @@ export function useHeroMotion(
           },
           2.2,
         )
-          .call(aimAtEquals, undefined, 2.3)
-          .to(veil, { '--r': '150%', duration: 1, ease: 'expo.inOut' }, 2.35)
-          .to(calcLayer, { autoAlpha: 0, duration: 0.45, ease: 'power2.inOut' }, 2.4)
-          .to(homeLayer, { autoAlpha: 1, duration: 0.45, ease: 'power2.inOut' }, 2.4)
-          .to(rings, { drawSVG: '100%', duration: 1.1, stagger: 0.08, ease: 'power2.out' }, 2.4)
+          .call(aimGlow, undefined, 2.3)
+          .to(glow, { autoAlpha: 1, scale: 1.15, duration: 0.35, ease: 'power2.out' }, 2.32)
+          .to(calcLayer, { autoAlpha: 0, duration: 0.5, ease: 'power2.inOut' }, 2.4)
+          .to(homeLayer, { autoAlpha: 1, duration: 0.5, ease: 'power2.inOut' }, 2.4)
+          .to(glow, { autoAlpha: 0, scale: 1.5, duration: 0.8, ease: 'power2.inOut' }, 2.67)
           // 6. Celulares laterais em leque.
           .to(sideInners, { y: 0, rotation: 0, autoAlpha: 1, duration: 0.9 }, 2.9)
           // 7. Pílulas, ícones e selo; notificações chegando uma a uma (Eduzz).
@@ -139,7 +144,6 @@ export function useHeroMotion(
         order.forEach((n, i) => {
           const t = 3.3 + i * 0.35
           tl.to(n, { autoAlpha: 1, y: 0, scale: 1, filter: blur(0), duration: 0.6 }, t)
-          // as que já chegaram descem um degrau na pilha
           order.slice(0, i).forEach((prev, j) => {
             const depth = i - j
             tl.to(
@@ -151,16 +155,41 @@ export function useHeroMotion(
         })
         tl.set(notifs, { clearProps: 'filter' })
 
+        // Flutuação depois de abertos: y ±10px, 5–7s, sine.inOut, cada celular no seu ritmo.
+        // Fica num invólucro próprio, sem disputar a entrada nem o parallax.
+        const FLOAT = [
+          { y: -10, duration: 6 }, // esquerdo
+          { y: 10, duration: 7 }, // direito
+          { y: -10, duration: 5 }, // central
+        ]
+        let floating: gsap.core.Tween[] = []
+        const startFloat = () => {
+          if (floating.length) return
+          floating = floats.map((f, i) => {
+            const cfg = FLOAT[i % FLOAT.length]
+            return gsap.fromTo(
+              f,
+              { y: 0 },
+              { y: cfg.y, duration: cfg.duration, ease: 'sine.inOut', yoyo: true, repeat: -1 },
+            )
+          })
+        }
+        tl.call(startFloat, undefined, 3.8)
+
         void introStart.then(() => tl.play(0))
 
         // will-change só enquanto o hero está na tela (§7.10).
-        const layers = [phone, ...sides, ...pops, notifBox, ringsSvg, veil].filter(Boolean)
+        const layers = [phone, ...sides, ...floats, ...pops, notifBox, ringsSvg, veil].filter(
+          Boolean,
+        )
         ScrollTrigger.create({
           trigger: el,
           start: 'top bottom',
           end: 'bottom top',
-          onToggle: (self) =>
-            gsap.set(layers, { willChange: self.isActive ? 'transform' : 'auto' }),
+          onToggle: (self) => {
+            gsap.set(layers, { willChange: self.isActive ? 'transform' : 'auto' })
+            floating.forEach((t) => (self.isActive ? t.resume() : t.pause()))
+          },
         })
 
         // Parallax (§7.9), metade das amplitudes no mobile.
@@ -168,16 +197,16 @@ export function useHeroMotion(
         const st = { trigger: el, start: 'top top', end: 'bottom top', scrub: true }
         gsap.to(veil, { yPercent: 15 * amp, ease: 'none', scrollTrigger: st })
         if (ringsSvg) gsap.to(ringsSvg, { scale: 1 + 0.15 * amp, ease: 'none', scrollTrigger: st })
-        // Celular central sobe mais rápido e gira/inclina ao sair (Gardance).
-        gsap.to(phone, {
-          y: () => -0.14 * amp * phone.offsetHeight,
-          rotation: -8 * amp,
-          rotationX: 12 * amp,
-          scale: 1 - 0.08 * amp,
-          transformOrigin: '50% 30%',
-          ease: 'none',
-          scrollTrigger: st,
-        })
+        // Celular central: reto, só sobe um pouco (ajuste do cliente, substitui a linha do §7.9).
+        gsap.fromTo(
+          phone,
+          { y: 0 },
+          {
+            y: () => -0.06 * phone.offsetHeight,
+            ease: 'none',
+            scrollTrigger: { ...st, invalidateOnRefresh: true },
+          },
+        )
         sides.forEach((s, i) => {
           const dir = i === 0 ? -1 : 1
           gsap.to(s, {
