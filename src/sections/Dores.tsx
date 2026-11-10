@@ -156,6 +156,15 @@ export function Dores() {
           if (i === current) return
           const prev = current
           current = i
+          // Trocas rápidas: cancela tudo o que estava agendado (a entrada do chip tem atraso e
+          // "ressuscitava" um chip antigo) e esconde na hora o que não é o anterior nem o novo.
+          gsap.killTweensOf([...screens, ...chips])
+          screens.forEach(
+            (s, j) => j !== i && j !== prev && gsap.set(s, { autoAlpha: 0, yPercent: 0 }),
+          )
+          chips.forEach(
+            (c, j) => j !== i && j !== prev && gsap.set(c, { autoAlpha: 0, y: 0, scale: 1 }),
+          )
           cards.forEach((c, j) => c.setAttribute('data-active', String(j === i)))
           gsap.to(cards, {
             opacity: (j: number) => (j === i ? 1 : 0.4),
@@ -271,17 +280,13 @@ export function Dores() {
             <div data-banner-title>
               <h2
                 id="dores-title"
-                className="flex flex-col font-display text-[clamp(2.75rem,6.6vw,5.25rem)] leading-[0.98] font-medium tracking-[-0.03em] lg:whitespace-nowrap"
+                className="flex flex-col font-display text-[clamp(2.75rem,7.4vw,6.75rem)] leading-[0.98] font-medium tracking-[-0.03em] lg:whitespace-nowrap"
               >
                 <span data-banner-line="1" className="text-borda">
                   {b.line1}
                 </span>
                 <span data-banner-line="2" className="text-white lg:self-end lg:text-right">
-                  {b.line2.map((l) => (
-                    <span key={l} className="block">
-                      {l}
-                    </span>
-                  ))}
+                  {b.line2}
                 </span>
               </h2>
             </div>
@@ -320,7 +325,7 @@ export function Dores() {
                     key={d.title}
                     data-dor-item
                     data-appear
-                    className="lg:flex lg:min-h-[48vh] lg:items-center"
+                    className="lg:flex lg:min-h-[max(48vh,520px)] lg:items-center"
                   >
                     <article
                       data-dor-card

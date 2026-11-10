@@ -86,9 +86,12 @@ function ScaledScreen({ children }: { children: ReactNode }) {
     if (!el || !target) return
     // Nunca aplica escala 0: medida com a moldura escondida (display:none) deixava a tela branca
     // ("tela toda branca" no celular das Dores). Reaplica também quando a moldura entra na tela.
+    // Largura com casas decimais (clientWidth arredonda) + 1px de folga: sem isso sobrava uma fresta
+    // do fundo branco na borda direita, visível como faixa clara em telas com zoom/escala (125%).
+    // O excesso fica escondido pelo overflow da moldura.
     const apply = () => {
-      const w = el.clientWidth || el.getBoundingClientRect().width
-      if (w > 0) target.style.transform = `scale(${w / SCREEN_W})`
+      const w = el.offsetWidth ? parseFloat(getComputedStyle(el).width) : 0
+      if (w > 0) target.style.transform = `scale(${(w + 1) / SCREEN_W})`
     }
     apply()
     const ro = new ResizeObserver(apply)

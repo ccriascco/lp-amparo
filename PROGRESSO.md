@@ -40,7 +40,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 4h | Cartão das Dores com largura máxima de 1216px — screenshots em `./screenshots/ajustes-4b/` | `5495701` |
 | 4i | `#beneficios` no padrão Gardance (cartão ativo cresce e abre a etiqueta de vidro) — screenshots em `./screenshots/beneficios-3/` | `f8ba90d` (revogado) |
 | 4j | Benefícios na versão anterior sem notificações; cartão das Dores com 1440px — screenshots em `./screenshots/ajustes-5b/` | `3f4d408` |
-| 4k | `#dores` ajustes 5: cartão 1440px + margem, título em 3 linhas, subtítulo novo, lista mais compacta — screenshots em `./screenshots/ajustes-6b/` | (este commit) |
+| 4k | `#dores` ajustes 5: cartão 1440px + margem, título em 3 linhas, subtítulo novo, lista mais compacta — screenshots em `./screenshots/ajustes-6b/` | `31db80d` |
+| 4l | Título em uma linha e maior, espaço da lista em telas baixas, fotos novas dos Benefícios, correção do chip errado e da faixa branca no celular — screenshots em `./screenshots/ajustes-7b/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -146,9 +147,12 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 - Tópicos longos quebram em 2 linhas no cartão estreito (em vez de reticências).
 
 ### `#dores` — ajustes 5 (10/11/2026)
-- Título: "Pedir ajuda" à esquerda; "não deveria" / "ser um risco." à direita, em duas linhas.
+- ~~Título em três linhas~~ — **revogado**: "não deveria ser um risco." de volta a uma linha, com fonte maior (até 108px).
 - Subtítulo: "Cada recurso do Amparo nasceu de uma barreira real: o medo de ser vista, a falta de provas e a dúvida sobre o que fazer. Aqui, pedir ajuda é discreto, seguro e no seu tempo."
-- Menos espaço entre os cartões da lista.
+- Espaço entre os cartões da lista: no mínimo 520px por item (o de 1920×1080) em qualquer altura de tela.
+
+### Fotos dos Benefícios (10/11/2026)
+- Novas fotos, com luz natural parecida nas três: sofá com celular (tranquilidade), escrevendo na cozinha (controle), na janela com o celular (confiança).
 
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |

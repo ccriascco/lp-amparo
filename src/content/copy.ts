@@ -178,8 +178,7 @@ export const dores = {
   banner: {
     chip: 'Feito para a sua realidade',
     line1: 'Pedir ajuda',
-    /** À direita, em duas linhas (pedido do cliente). */
-    line2: ['não deveria', 'ser um risco.'],
+    line2: 'não deveria ser um risco.',
     sub: 'Cada recurso do Amparo nasceu de uma barreira real: o medo de ser vista, a falta de provas e a dúvida sobre o que fazer. Aqui, pedir ajuda é discreto, seguro e no seu tempo.',
     pills: ['Parece uma calculadora', 'Provas protegidas', 'Ajuda sem precisar denunciar'],
   },
