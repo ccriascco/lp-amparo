@@ -199,7 +199,10 @@ export function Hero() {
         </div>
       </div>
 
-      <div data-hero-pop className="absolute bottom-8 left-8 z-10 hidden lg:block">
+      <div
+        data-hero-pop
+        className="absolute bottom-8 left-[max(2rem,calc(50%-640px+2rem))] z-10 hidden lg:block"
+      >
         <CircularBadge />
       </div>
     </section>

@@ -147,6 +147,8 @@ export function Dores() {
         const screens = q('[data-dor-screen]')
         const chips = q('[data-dor-chip]')
         let current = 0
+        gsap.set(screens, { autoAlpha: (i: number) => (i === 0 ? 1 : 0), yPercent: 0 })
+        gsap.set(chips, { autoAlpha: (i: number) => (i === 0 ? 1 : 0), y: 0, scale: 1 })
 
         gsap.set(cards, { opacity: (i: number) => (i === 0 ? 1 : 0.4) })
 
@@ -258,7 +260,7 @@ export function Dores() {
           {/* Só o necessário para o texto: véu suave atrás do título e do subtítulo */}
           <div aria-hidden className="pointer-events-none absolute inset-0" style={TEXT_SCRIM} />
 
-          <div className="relative z-10 -mt-28 flex flex-col gap-10 px-6 pb-4 sm:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:p-14">
+          <div className="relative z-10 mx-auto -mt-28 flex max-w-[1280px] flex-col gap-10 px-5 pb-4 md:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:pt-28 lg:pb-14">
             <span
               data-banner-appear
               className="inline-flex w-max items-center rounded-full px-4 py-2 caption text-white glass"
@@ -355,7 +357,7 @@ export function Dores() {
 
             {/* Direita: painel claro fixo com o celular (desktop) */}
             <div aria-hidden className="hidden lg:col-span-7 lg:block">
-              <div className="sticky top-[15vh] h-[70vh]">
+              <div className="sticky top-[15vh] h-[min(70vh,560px)]">
                 {/* Brilho vinho a 25% atrás do painel */}
                 <div
                   className="pointer-events-none absolute -inset-24"
@@ -372,7 +374,7 @@ export function Dores() {
                   <div className="absolute inset-0" style={PANEL_LINES} />
                   <PhoneFrame
                     decorative
-                    className="absolute top-[12%] left-1/2 w-[min(300px,44%)] -translate-x-1/2"
+                    className="absolute top-12 left-1/2 w-[300px] -translate-x-1/2"
                   >
                     <div className="relative h-full w-full">
                       {dores.items.map((d, i) => (
@@ -388,7 +390,7 @@ export function Dores() {
                   </PhoneFrame>
 
                   {/* Chip do recurso num cartão branco flutuando ao lado do celular */}
-                  <div className="absolute top-[42%] left-[calc(50%-min(150px,22%)-170px)] z-10">
+                  <div className="absolute top-[42%] left-[calc(50%-320px)] z-10">
                     {dores.items.map((d, i) => {
                       const Icon = ICONS[i]
                       return (

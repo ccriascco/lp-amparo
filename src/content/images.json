@@ -102,6 +102,33 @@
       1024
     ]
   },
+  "beneficio-tranquilidade": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      640,
+      1080,
+      1122
+    ]
+  },
+  "beneficio-controle": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      640,
+      1080,
+      1122
+    ]
+  },
+  "beneficio-confianca": {
+    "width": 1122,
+    "height": 1402,
+    "widths": [
+      640,
+      1080,
+      1122
+    ]
+  },
   "sos": {
     "width": 1672,
     "height": 941,
@@ -195,33 +222,6 @@
       640,
       1080,
       1600
-    ],
-    "placeholder": true
-  },
-  "beneficio-tranquilidade": {
-    "width": 1080,
-    "height": 1350,
-    "widths": [
-      640,
-      1080
-    ],
-    "placeholder": true
-  },
-  "beneficio-controle": {
-    "width": 1080,
-    "height": 1350,
-    "widths": [
-      640,
-      1080
-    ],
-    "placeholder": true
-  },
-  "beneficio-confianca": {
-    "width": 1080,
-    "height": 1350,
-    "widths": [
-      640,
-      1080
     ],
     "placeholder": true
   }

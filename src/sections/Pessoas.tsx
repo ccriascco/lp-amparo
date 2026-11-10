@@ -12,16 +12,6 @@ export function Pessoas() {
     <section id="pessoas" aria-labelledby="pessoas-title" className="bg-branco pt-3 md:pt-4">
       <div className="relative overflow-clip" style={{ background: 'var(--grad-rosa)' }}>
         <PeopleScatter phrase={contexto.fecho} centerSlot="contexto" headingId="pessoas-title" />
-        {/* A base do Manifesto se dissolve no branco dos Benefícios (~160px), por cima do palco,
-            para não sobrar a borda da nuvem rosada */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-40"
-          style={{
-            background:
-              'linear-gradient(180deg, rgb(255 255 255 / 0) 0%, rgb(255 255 255 / 0.55) 45%, rgb(255 255 255 / 0.9) 75%, #ffffff 100%)',
-          }}
-        />
       </div>
     </section>
   )

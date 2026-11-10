@@ -70,6 +70,12 @@ const SLOTS = [
     file: 'mulher-janela-sorrindo-celular.png',
     crop: { left: 0, top: 0, width: 1024, height: 1024 },
   },
+  // 4:5 — cartões de #beneficios (originais 1122×1402, já 4:5)
+  ...['tranquilidade', 'controle', 'confianca'].map((n) => ({
+    slot: `beneficio-${n}`,
+    file: `beneficio-${n}.png`,
+    crop: { left: 0, top: 0, width: 1122, height: 1402 },
+  })),
   // ── PROVISÓRIAS (ver NOTES.md): alternativas de assets/fotos até as fotos definitivas chegarem ──
   // sos: mulher com o celular junto à janela, espelhada para a figura ficar no terço esquerdo.
   // O recorte é feito antes do espelho: o mobile pega o lado direito do original (onde está a figura).
@@ -122,10 +128,6 @@ const PLACEHOLDERS = [
   { slot: 'cofre-mobile', width: 1080, height: 1350 },
   { slot: 'comecar-1', width: 1600, height: 900 },
   { slot: 'comecar-4', width: 1600, height: 900 },
-  // #beneficios (10/11/2026): 4:5, trocar pelas fotos definitivas quando chegarem
-  { slot: 'beneficio-tranquilidade', width: 1080, height: 1350 },
-  { slot: 'beneficio-controle', width: 1080, height: 1350 },
-  { slot: 'beneficio-confianca', width: 1080, height: 1350 },
 ]
 
 async function placeholderSource(width, height) {

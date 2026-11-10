@@ -84,13 +84,21 @@ function ScaledScreen({ children }: { children: ReactNode }) {
     const el = outer.current
     const target = inner.current
     if (!el || !target) return
+    // Nunca aplica escala 0: medida com a moldura escondida (display:none) deixava a tela branca
+    // ("tela toda branca" no celular das Dores). Reaplica também quando a moldura entra na tela.
     const apply = () => {
-      target.style.transform = `scale(${el.clientWidth / SCREEN_W})`
+      const w = el.clientWidth || el.getBoundingClientRect().width
+      if (w > 0) target.style.transform = `scale(${w / SCREEN_W})`
     }
     apply()
     const ro = new ResizeObserver(apply)
     ro.observe(el)
-    return () => ro.disconnect()
+    const io = new IntersectionObserver(apply)
+    io.observe(el)
+    return () => {
+      ro.disconnect()
+      io.disconnect()
+    }
   }, [])
 
   return (
