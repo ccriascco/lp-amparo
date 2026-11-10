@@ -12,7 +12,7 @@ import { CalculatorScreen } from '../components/phone/CalculatorScreen'
 import { Button } from '../components/ui/Button'
 import { PhoneFrame } from '../components/ui/PhoneFrame'
 import { Container } from '../components/ui/Section'
-import { TintedPhoto } from '../components/ui/TintedPhoto'
+import { Picture } from '../components/ui/TintedPhoto'
 import { dores } from '../content/copy'
 import { gsap, MQ, ScrollTrigger } from '../lib/gsap'
 
@@ -33,10 +33,38 @@ const SCREENS: (() => ReactNode)[] = [
  */
 const PANEL: CSSProperties = {
   background:
-    'radial-gradient(70% 70% at 0% 0%, rgb(255 255 255 / 0.12) 0%, transparent 70%), #954b6e',
-  border: '1px solid rgb(255 255 255 / 0.1)',
-  boxShadow: '0 40px 80px -30px rgb(0 0 0 / 0.5)',
+    'radial-gradient(70% 70% at 0% 0%, rgb(255 255 255 / 0.14) 0%, transparent 70%), #954b6e',
+  border: '1px solid rgb(255 255 255 / 0.12)',
+  boxShadow: '0 40px 80px -30px rgb(0 0 0 / 0.45)',
 }
+/**
+ * Fundo do cartão único: degradê vertical só com as cores do app, #4B2A3F no topo (atrás da foto)
+ * até #954B6E na base. As paradas seguram o tom escuro por mais tempo, para o painel do celular
+ * (#954B6E com brilho) continuar mais claro que o fundo durante quase toda a lista.
+ */
+const CARD_BG =
+  'linear-gradient(180deg, #4b2a3f 0%, #4b2a3f 18%, #5e3350 50%, #7a3f60 85%, #954b6e 100%)'
+
+/** A foto some na base (últimos ~45%) e na esquerda (primeiros ~35%), em curva suave. */
+const MASK_V =
+  'linear-gradient(180deg, #000 0%, #000 55%, rgb(0 0 0 / 0.7) 66%, rgb(0 0 0 / 0.35) 78%, rgb(0 0 0 / 0.1) 90%, transparent 100%)'
+const MASK_H =
+  'linear-gradient(90deg, transparent 0%, rgb(0 0 0 / 0.1) 10%, rgb(0 0 0 / 0.4) 20%, rgb(0 0 0 / 0.75) 29%, #000 35%)'
+const PHOTO_MASK: CSSProperties = {
+  maskImage: `${MASK_V}, ${MASK_H}`,
+  WebkitMaskImage: `${MASK_V}, ${MASK_H}`,
+  maskComposite: 'intersect',
+  WebkitMaskComposite: 'source-in',
+}
+
+/** Véu #4B2A3F 60% só atrás do título e do subtítulo, sem bordas. */
+const TEXT_SCRIM: CSSProperties = {
+  background: [
+    'radial-gradient(60% 38% at 55% 52%, rgb(75 42 63 / 0.6) 0%, rgb(75 42 63 / 0.3) 45%, transparent 75%)',
+    'radial-gradient(45% 30% at 18% 88%, rgb(75 42 63 / 0.6) 0%, rgb(75 42 63 / 0.25) 50%, transparent 80%)',
+  ].join(','),
+}
+
 const PANEL_LINES: CSSProperties = {
   background:
     'repeating-linear-gradient(-45deg, rgb(255 255 255 / 0.08) 0 1px, transparent 1px 12px)',
@@ -45,7 +73,8 @@ const PANEL_LINES: CSSProperties = {
 }
 
 /**
- * `#dores` (refação pedida pelo cliente em 10/11/2026, padrão NextPay; substitui o §6.32).
+ * `#dores` (refação pedida pelo cliente em 10/11/2026, padrão NextPay; substitui o §6.32). Seção branca
+ * com um único cartão (banner + lista no mesmo fundo vinho em degradê, sem divisão).
  * 1) Banner no topo (NextPay "Uma experiência. Controle total."): foto em tela cheia num cartão com
  *    margem igual nos 4 lados, título gigante em duas linhas desencontradas, subtítulo e pílulas.
  * 2) Lista: as 5 dores à esquerda rolam normalmente; à direita, um painel claro fixo com o celular
@@ -62,50 +91,38 @@ export function Dores() {
       const q = gsap.utils.selector(root)
 
       // ── Banner (desktop e celular) ───────────────────────────────
-      mm.add(`${MQ.desktop}, ${MQ.mobile}`, () => {
-        const card = q('[data-banner-card]')[0]
-        // Cartão abre das margens (clip-path 6% → 0) com scrub.
-        gsap.fromTo(
-          card,
-          { clipPath: 'inset(6% 6% 6% 6% round 24px)' },
-          {
-            clipPath: 'inset(0% 0% 0% 0% round 24px)',
-            ease: 'none',
-            scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 25%', scrub: true },
-          },
-        )
-        // Zoom lento da foto (1.12 → 1) enquanto o banner passa pela tela.
-        gsap.fromTo(
-          q('[data-banner-photo]'),
-          { scale: 1.12 },
-          {
-            scale: 1,
-            ease: 'none',
-            scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true },
-          },
-        )
-        // Título: linha 1 vem da esquerda, linha 2 da direita; depois chip, subtítulo e pílulas.
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: card, start: 'top 70%', once: true },
+      mm.add({ desktop: MQ.desktop, mobile: MQ.mobile }, (ctx) => {
+        const { desktop } = ctx.conditions as { desktop: boolean }
+        const banner = q('[data-banner]')[0]
+        const leave = { trigger: banner, start: 'top top', end: 'bottom top', scrub: true }
+        // Enquanto o banner sai: a foto sobe mais devagar que o texto e escurece, dissolvendo no
+        // fundo do cartão; o título sobe e perde opacidade aos poucos (padrão NextPay).
+        gsap.to(q('[data-banner-photo]'), {
+          yPercent: desktop ? 15 : 8,
+          opacity: 0.35,
+          ease: 'none',
+          scrollTrigger: leave,
         })
+        gsap.to(q('[data-banner-title]'), {
+          y: desktop ? -90 : -40,
+          opacity: 0.15,
+          ease: 'none',
+          scrollTrigger: leave,
+        })
+        // Entrada: linha 1 vem da esquerda, linha 2 da direita; depois chip, subtítulo e pílulas.
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: banner, start: 'top 70%', once: true },
+        })
+        const blurIn = { duration: 1, ease: 'expo.out', clearProps: 'filter' }
         tl.from(q('[data-banner-line="1"]'), {
           x: -80,
           autoAlpha: 0,
           filter: 'blur(12px)',
-          duration: 1,
-          ease: 'expo.out',
-          clearProps: 'filter',
+          ...blurIn,
         })
           .from(
             q('[data-banner-line="2"]'),
-            {
-              x: 80,
-              autoAlpha: 0,
-              filter: 'blur(12px)',
-              duration: 1,
-              ease: 'expo.out',
-              clearProps: 'filter',
-            },
+            { x: 80, autoAlpha: 0, filter: 'blur(12px)', ...blurIn },
             0.12,
           )
           .from(
@@ -214,30 +231,34 @@ export function Dores() {
   const b = dores.banner
 
   return (
-    <section
-      ref={root}
-      id="dores"
-      aria-labelledby="dores-title"
-      data-header-dark
-      className="on-dark relative overflow-x-clip bg-vinho-profundo"
-    >
-      {/* ── Banner: margem igual nos 4 lados (12px celular, 16px desktop), raio 24px ── */}
-      <div className="bg-branco p-3 md:p-4">
-        <div
-          data-banner-card
-          className="relative h-[80svh] overflow-hidden rounded-[24px] lg:h-[min(88vh,820px)]"
-        >
-          <div data-banner-photo className="absolute inset-0">
-            <TintedPhoto
+    <section ref={root} id="dores" aria-labelledby="dores-title" className="bg-branco p-3 md:p-4">
+      {/* Cartão único (padrão NextPay): banner e lista no mesmo fundo, sem divisão.
+          overflow-clip (não hidden) para os cantos sem quebrar o sticky do celular. */}
+      <div
+        data-header-dark
+        className="on-dark relative overflow-clip rounded-[24px]"
+        style={{ background: CARD_BG }}
+      >
+        {/* ── Banner ── */}
+        <div data-banner className="relative lg:h-[min(90vh,860px)]">
+          {/* Foto em cores naturais, dissolvendo no fundo do cartão (base e esquerda) */}
+          <div
+            data-banner-photo
+            aria-hidden
+            className="relative h-[58svh] lg:absolute lg:inset-0 lg:h-full"
+            style={PHOTO_MASK}
+          >
+            <Picture
               slot="dores-banner"
               sizes="100vw"
-              overlay="none"
-              position="66% 40%"
-              className="tinted--banner h-full"
+              position="66% 35%"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
+          {/* Só o necessário para o texto: véu suave atrás do título e do subtítulo */}
+          <div aria-hidden className="pointer-events-none absolute inset-0" style={TEXT_SCRIM} />
 
-          <div className="relative z-10 flex h-full flex-col justify-between p-6 sm:p-8 lg:p-14">
+          <div className="relative z-10 -mt-28 flex flex-col gap-10 px-6 pb-4 sm:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:p-14">
             <span
               data-banner-appear
               className="inline-flex w-max items-center rounded-full px-4 py-2 caption text-white glass"
@@ -245,17 +266,19 @@ export function Dores() {
               {b.chip}
             </span>
 
-            <h2
-              id="dores-title"
-              className="flex flex-col font-display text-[clamp(2.75rem,7vw,6.5rem)] leading-[0.98] font-medium tracking-[-0.03em]"
-            >
-              <span data-banner-line="1" className="text-borda">
-                {b.line1}
-              </span>
-              <span data-banner-line="2" className="text-white lg:self-end lg:text-right">
-                {b.line2}
-              </span>
-            </h2>
+            <div data-banner-title>
+              <h2
+                id="dores-title"
+                className="flex flex-col font-display text-[clamp(2.75rem,7vw,6.5rem)] leading-[0.98] font-medium tracking-[-0.03em]"
+              >
+                <span data-banner-line="1" className="text-borda">
+                  {b.line1}
+                </span>
+                <span data-banner-line="2" className="text-white lg:self-end lg:text-right">
+                  {b.line2}
+                </span>
+              </h2>
+            </div>
 
             <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <p
@@ -278,133 +301,127 @@ export function Dores() {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Transição suave do branco para o vinho-profundo, sem linha marcada */}
-      <div
-        aria-hidden
-        className="h-32 md:h-44"
-        style={{
-          background:
-            'linear-gradient(180deg, #ffffff 0%, rgb(75 42 63 / 0.35) 40%, rgb(75 42 63 / 0.8) 70%, #4b2a3f 100%)',
-        }}
-      />
-
-      {/* ── Lista com o celular ── */}
-      <Container className="pt-8 pb-24 lg:pt-0 lg:pb-28">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-          {/* Esquerda: as 5 dores, rolando normalmente */}
-          <ul className="flex flex-col gap-14 pt-12 lg:col-span-5 lg:gap-0 lg:pt-0">
-            {dores.items.map((d, i) => {
-              const Icon = ICONS[i]
-              return (
-                <li
-                  key={d.title}
-                  data-dor-item
-                  data-appear
-                  className="lg:flex lg:min-h-[72vh] lg:items-center"
-                >
-                  <article
-                    data-dor-card
-                    data-active={i === 0}
-                    className="rounded-card-lg border border-white/10 bg-white/5 p-6 transition-[border-color] duration-300 focus-within:opacity-100! data-[active=true]:border-white/20 sm:p-8"
+        {/* ── Lista com o celular ── */}
+        <Container className="pt-8 pb-24 lg:pt-0 lg:pb-28">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+            {/* Esquerda: as 5 dores, rolando normalmente */}
+            <ul className="flex flex-col gap-14 pt-12 lg:col-span-5 lg:gap-0 lg:pt-0">
+              {dores.items.map((d, i) => {
+                const Icon = ICONS[i]
+                return (
+                  <li
+                    key={d.title}
+                    data-dor-item
+                    data-appear
+                    className="lg:flex lg:min-h-[72vh] lg:items-center"
                   >
-                    <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 caption text-white">
-                      <Icon className="size-4" strokeWidth={1.75} aria-hidden />
-                      {d.chip}
-                    </span>
-                    <h3 className="mt-5 font-display text-[1.625rem] leading-tight font-semibold tracking-[-0.02em] text-balance text-white">
-                      {d.title}
-                    </h3>
-                    <p className="mt-3 text-pretty text-white/70">{d.answer}</p>
-                    <Button variant="ghost" href={d.href} className="mt-4 text-white">
-                      {dores.link}
-                    </Button>
-                  </article>
-
-                  {/* Celular: a tela do item logo abaixo, num celular menor, sobre o painel claro */}
-                  <div
-                    aria-hidden
-                    className="relative mt-4 h-[380px] overflow-hidden rounded-card-lg lg:hidden"
-                    style={PANEL}
-                  >
-                    <div className="absolute inset-0" style={PANEL_LINES} />
-                    <PhoneFrame
-                      decorative
-                      className="absolute top-8 left-1/2 w-[240px] -translate-x-1/2"
+                    <article
+                      data-dor-card
+                      data-active={i === 0}
+                      className="rounded-card-lg border border-white/15 bg-white/8 p-6 transition-[border-color,background-color] duration-300 focus-within:opacity-100! sm:p-8 lg:data-[active=true]:border-white/25 lg:data-[active=true]:bg-white/14"
                     >
-                      {SCREENS[i]()}
-                    </PhoneFrame>
-                  </div>
-                </li>
-              )
-            })}
-          </ul>
+                      <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 caption text-white">
+                        <Icon className="size-4" strokeWidth={1.75} aria-hidden />
+                        {d.chip}
+                      </span>
+                      <h3 className="mt-5 font-display text-[1.625rem] leading-tight font-semibold tracking-[-0.02em] text-balance text-white">
+                        {d.title}
+                      </h3>
+                      <p className="mt-3 text-pretty text-white/70">{d.answer}</p>
+                      <Button variant="ghost" href={d.href} className="mt-4 text-white">
+                        {dores.link}
+                      </Button>
+                    </article>
 
-          {/* Direita: painel claro fixo com o celular (desktop) */}
-          <div aria-hidden className="hidden lg:col-span-7 lg:block">
-            <div className="sticky top-[15vh] h-[70vh]">
-              {/* Brilho vinho a 25% atrás do painel */}
-              <div
-                className="pointer-events-none absolute -inset-24"
-                style={{
-                  background:
-                    'radial-gradient(50% 50% at 50% 50%, rgb(149 75 110 / 0.25) 0%, transparent 70%)',
-                }}
-              />
-              <div className="relative h-full overflow-hidden rounded-card-lg" style={PANEL}>
-                <div className="absolute inset-0" style={PANEL_LINES} />
-                <PhoneFrame
-                  decorative
-                  className="absolute top-[12%] left-1/2 w-[min(300px,44%)] -translate-x-1/2"
+                    {/* Celular: a tela do item logo abaixo, num celular menor, sobre o painel claro */}
+                    <div
+                      aria-hidden
+                      className="relative mt-4 h-[380px] overflow-hidden rounded-card-lg lg:hidden"
+                      style={PANEL}
+                    >
+                      <div className="absolute inset-0" style={PANEL_LINES} />
+                      <PhoneFrame
+                        decorative
+                        className="absolute top-8 left-1/2 w-[240px] -translate-x-1/2"
+                      >
+                        {SCREENS[i]()}
+                      </PhoneFrame>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+
+            {/* Direita: painel claro fixo com o celular (desktop) */}
+            <div aria-hidden className="hidden lg:col-span-7 lg:block">
+              <div className="sticky top-[15vh] h-[70vh]">
+                {/* Brilho vinho a 25% atrás do painel */}
+                <div
+                  className="pointer-events-none absolute -inset-24"
+                  style={{
+                    background:
+                      'radial-gradient(50% 50% at 50% 50%, rgb(149 75 110 / 0.25) 0%, transparent 70%)',
+                  }}
+                />
+                <div
+                  data-appear="visual"
+                  className="relative h-full overflow-hidden rounded-card-lg"
+                  style={PANEL}
                 >
-                  <div className="relative h-full w-full">
-                    {dores.items.map((d, i) => (
-                      <div
-                        key={d.chip}
-                        data-dor-screen
-                        className={clsx('absolute inset-0', i > 0 && 'invisible opacity-0')}
-                      >
-                        {i === 3 ? <RiscoFocoScreen highlight={false} /> : SCREENS[i]()}
-                      </div>
-                    ))}
-                  </div>
-                </PhoneFrame>
+                  <div className="absolute inset-0" style={PANEL_LINES} />
+                  <PhoneFrame
+                    decorative
+                    className="absolute top-[12%] left-1/2 w-[min(300px,44%)] -translate-x-1/2"
+                  >
+                    <div className="relative h-full w-full">
+                      {dores.items.map((d, i) => (
+                        <div
+                          key={d.chip}
+                          data-dor-screen
+                          className={clsx('absolute inset-0', i > 0 && 'invisible opacity-0')}
+                        >
+                          {i === 3 ? <RiscoFocoScreen highlight={false} /> : SCREENS[i]()}
+                        </div>
+                      ))}
+                    </div>
+                  </PhoneFrame>
 
-                {/* Chip do recurso num cartão branco flutuando ao lado do celular */}
-                <div className="absolute top-[42%] left-[calc(50%-min(150px,22%)-170px)] z-10">
-                  {dores.items.map((d, i) => {
-                    const Icon = ICONS[i]
-                    return (
-                      <div
-                        key={d.chip}
-                        data-dor-chip
-                        className={clsx(
-                          'absolute top-0 left-0 flex w-max items-center gap-3 rounded-card bg-white py-3 pr-5 pl-3 shadow-float',
-                          i > 0 && 'invisible opacity-0',
-                        )}
-                      >
-                        <span className="grid size-9 place-items-center rounded-full bg-vinho text-white">
-                          <Icon className="size-[18px]" strokeWidth={1.75} />
-                        </span>
-                        <span className="font-display text-base font-bold text-texto">
-                          {d.chip}
-                        </span>
-                      </div>
-                    )
-                  })}
+                  {/* Chip do recurso num cartão branco flutuando ao lado do celular */}
+                  <div className="absolute top-[42%] left-[calc(50%-min(150px,22%)-170px)] z-10">
+                    {dores.items.map((d, i) => {
+                      const Icon = ICONS[i]
+                      return (
+                        <div
+                          key={d.chip}
+                          data-dor-chip
+                          className={clsx(
+                            'absolute top-0 left-0 flex w-max items-center gap-3 rounded-card bg-white py-3 pr-5 pl-3 shadow-float',
+                            i > 0 && 'invisible opacity-0',
+                          )}
+                        >
+                          <span className="grid size-9 place-items-center rounded-full bg-vinho text-white">
+                            <Icon className="size-[18px]" strokeWidth={1.75} />
+                          </span>
+                          <span className="font-display text-base font-bold text-texto">
+                            {d.chip}
+                          </span>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="mt-16 flex justify-center lg:mt-8">
-          <Button variant="secondary-dark" href={dores.button.href}>
-            {dores.button.label}
-          </Button>
-        </div>
-      </Container>
+          <div className="mt-16 flex justify-center lg:mt-8">
+            <Button variant="secondary-dark" href={dores.button.href}>
+              {dores.button.label}
+            </Button>
+          </div>
+        </Container>
+      </div>
     </section>
   )
 }

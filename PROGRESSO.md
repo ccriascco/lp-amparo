@@ -32,7 +32,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 1e/3g | Ajustes 7: central do hero com `inicio-celular`, 3 celulares no celular, `#contexto` texto → cartões → foto, fotos de `#pessoas` naturais e com movimento no celular — screenshots em `./screenshots/ajustes-7/` | `4e143c2` |
 | 4b | `#dores` refeita no padrão NextPay (itens à esquerda + painel fixo com o celular trocando de tela) — screenshots em `./screenshots/dores/` | `97acd68` |
 | 4c | `#dores` ajustes 2: banner com foto no topo, painel claro, telas Ocorrências e "Como chegamos nesta leitura" — screenshots em `./screenshots/dores-2/` | `3902727` |
-| 4d | `#dores` ajustes 3: margem branca do banner, banner sem emenda, painel vinho vivo, leitura de risco na tela inicial rolada — screenshots em `./screenshots/dores-3/` | (este commit) |
+| 4d | `#dores` ajustes 3: margem branca do banner, banner sem emenda, painel vinho vivo, leitura de risco na tela inicial rolada — screenshots em `./screenshots/dores-3/` | `ab4d548` |
+| 4e | `#dores` ajustes 4: cartão único (banner + lista no mesmo fundo), foto natural dissolvendo, transição NextPay — screenshots em `./screenshots/dores-4/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -105,6 +106,14 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 3. **Painel atrás do celular vinho vivo** (substitui o painel claro dos ajustes 2): base `#954B6E`, brilho radial branco 12% no canto superior esquerdo, linhas diagonais brancas 8% no oposto, borda `white/10`, raio 20px, sombra `0 40px 80px -30px rgb(0 0 0 / .5)`.
 4. **Leitura de risco = tela inicial já rolada até o card** (`home-leitura-risco.png`): header compacto, Baixo / **Médio** / Alto, link "Ver como chegamos nisso"; o card ganha contorno vinho suave e `scale 1.03` quando o item fica ativo. **Não usar** a tela "Como chegamos nisso" nem o topo da tela inicial igual ao do hero.
 
+### `#dores` — ajustes 4: cartão único (10/11/2026) — prioridade sobre os ajustes anteriores de `#dores`
+1. **Um só cartão como na NextPay:** a seção tem fundo branco; dentro, um cartão com margem igual (16px desktop, 12px celular), raio 24px, `overflow: clip`, fundo em degradê vertical `#4B2A3F` (topo) → `#954B6E` (base). Banner e lista no mesmo fundo, sem divisão. **Substitui** o bloco branco separado e a passagem branco → vinho dos ajustes 3.
+2. **Foto do banner em cores naturais** (sem `TintedPhoto`), no topo do cartão (~90vh), dissolvendo no fundo por `mask-image` (some nos últimos ~45% da altura e nos primeiros ~35% da largura); só um véu `#4B2A3F` 60% suave atrás do título e do subtítulo. Nenhuma borda ou emenda.
+3. Texto do banner igual (chip, título em duas linhas desencontradas, subtítulo, 3 pílulas).
+4. **Lista dentro do cartão:** cartões em vidro claro `white/8` + borda `white/15` (ativo `white/14` + `white/25`); painel `#954B6E` com brilho branco 14%, linhas brancas 8%, borda `white/12`, sombra `0 40px 80px -30px rgb(0 0 0 / .45)`. Celular sticky e telas como antes.
+5. **Transição ao rolar:** a foto sobe mais devagar (`yPercent 0 → 15`) e escurece no fundo; o título sobe e perde opacidade; cartões e painel entram com `appear` em seguida. Sem abertura por `clip-path` nem zoom. Movimento reduzido: estático.
+6. **Celular:** o mesmo cartão (12px); foto no topo dissolvendo para baixo, depois o texto do banner e os itens com o celular menor.
+
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |
 |---|---|---|
@@ -112,7 +121,7 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 | 2 | Marquee | branco (fios `borda`) |
 | 3 | `#contexto` | branco (pedido do cliente; ver nota abaixo da tabela) |
 | 4 | `#pessoas` | **rosado** — `--grad-rosa` em tela cheia e parado; divisória reta e clara, sem esmaecer no branco |
-| 5 | `#dores` | `vinho-profundo` (escura) |
+| 5 | `#dores` | branco, com um cartão único em degradê `#4B2A3F` → `#954B6E` (escuro) |
 | 6 | `#disfarce` | shell `vinho-profundo` (escura) sobre margem branca |
 | 7 | `#recursos` | branco |
 | 8 | `#direitos` | **rosado** (`--grad-rosa`) |
