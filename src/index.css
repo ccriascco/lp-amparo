@@ -244,6 +244,21 @@ section[id] {
   .tinted--none::after {
     background: none;
   }
+  /* Banner de #dores: vinho a 75% (guarda um pouco do calor da luz original) e escurecimento
+     vinho-profundo a 85% na base e na esquerda (texto) e a 35% no resto. */
+  .tinted--banner::before {
+    opacity: 0.75;
+  }
+  /* Sem o cinza total do .tinted: os 25% que sobram do vinho deixam passar a luz dourada. */
+  .tinted--banner img {
+    filter: grayscale(0.35) contrast(1.05);
+  }
+  .tinted--banner::after {
+    background:
+      linear-gradient(0deg, rgb(75 42 63 / 0.85) 0%, rgb(75 42 63 / 0) 55%),
+      linear-gradient(90deg, rgb(75 42 63 / 0.85) 0%, rgb(75 42 63 / 0) 60%),
+      rgb(75 42 63 / 0.35);
+  }
   /* Foto nas cores originais, sem o tingimento vinho (pedido do cliente: foto de #contexto). */
   .tinted--natural img {
     filter: none;

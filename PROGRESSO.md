@@ -30,7 +30,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 3e | Ajustes 5: fundo de `#pessoas` abrindo até a tela cheia (sem bordas laterais); 2 fotos a menos — screenshots em `./screenshots/ajustes-5/` | `8150b21` |
 | 3f | Ajustes 6: fundo de `#pessoas` parado em tela cheia (sem `clip-path` e sem parallax da nuvem); fotos em camada própria — screenshots em `./screenshots/ajustes-6/` | `f62c3b0` |
 | 1e/3g | Ajustes 7: central do hero com `inicio-celular`, 3 celulares no celular, `#contexto` texto → cartões → foto, fotos de `#pessoas` naturais e com movimento no celular — screenshots em `./screenshots/ajustes-7/` | `4e143c2` |
-| 4b | `#dores` refeita no padrão NextPay (itens à esquerda + painel fixo com o celular trocando de tela) — screenshots em `./screenshots/dores/` | (este commit) |
+| 4b | `#dores` refeita no padrão NextPay (itens à esquerda + painel fixo com o celular trocando de tela) — screenshots em `./screenshots/dores/` | `97acd68` |
+| 4c | `#dores` ajustes 2: banner com foto no topo, painel claro, telas Ocorrências e "Como chegamos nesta leitura" — screenshots em `./screenshots/dores-2/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -89,6 +90,13 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 - **Movimento:** o item mais próximo do centro fica ativo (opacidade 1, borda `white/20`; os outros 0,4); a tela do celular troca com crossfade de 0,5s e deslize vertical; o chip do recurso aparece num cartão flutuante ao lado do celular. Movimento reduzido: estático, na primeira tela.
 - **Celular:** sem sticky; cada item com o cartão e, embaixo, a tela num celular de ~240px. Botão secundário "Conheça os recursos" centralizado no fim (→ `#recursos`).
 - **Atenção:** a `home-leitura-risco.png` mostra o card "Tudo por aqui está tranquilo" (nível baixo), não "Médio"; a tela foi feita fiel à imagem.
+
+### `#dores` — ajustes 2 (10/11/2026) — prioridade sobre o `DESIGN.md` e o `COPY.md`
+1. **Telas:** Cofre de provas → tela de Ocorrências (`ocorrencias.png`); Leitura de risco → "Como chegamos nesta leitura" (`home-como-chegamos.png`) com o card em **Médio** e os sinais em lista. Nenhuma tela desta seção repete a tela inicial do hero.
+2. **Painel atrás do celular claro:** `#F3EDEF`, mancha radial vinho 22% num canto, linhas diagonais vinho 10% no oposto, raio 20px, sombra `0 40px 80px -30px rgb(0 0 0 / .45)`. Cartão flutuante do recurso continua branco com `shadow-float`.
+3. **Banner no topo da seção** (NextPay "Uma experiência. Controle total."): cartão com margem igual nos 4 lados (12px celular, 16px desktop), raio 24px, `min(88vh, 820px)` / `80svh`; foto `dores-banner` com vinho a 75% e escurecimento vinho-profundo 85% (base e esquerda) / 35% (resto); chip "Feito para a sua realidade"; título "Pedir ajuda" (`#E4D3D9`, esquerda) / "não deveria ser um risco." (branco, direita; celular à esquerda), Quicksand 500 `clamp(2.75rem, 7vw, 6.5rem)`; subtítulo "Cada recurso do Amparo nasceu de uma barreira real."; pílulas "Parece uma calculadora" · "Provas protegidas" · "Ajuda sem precisar denunciar". Saem o H2 e o subtítulo que ficavam acima da lista.
+4. **Animação do banner:** abre das margens (`clip-path` 6% → 0, scrub); foto com zoom 1.12 → 1; linha 1 da esquerda e linha 2 da direita (`x ±80`, desfoque 12px → 0, 1s, `expo.out`, uma vez); chip, subtítulo e pílulas em stagger. Movimento reduzido: estado final.
+- Foto do banner: `assets/fotos/dores-banner.png` (era "Retrato em Luz Dourada e Sombras.png").
 
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |

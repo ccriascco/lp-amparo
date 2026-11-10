@@ -106,9 +106,8 @@ export const contexto = {
 
 // 3.3
 export const dores = {
-  h2: 'Pedir ajuda não deveria ser mais um risco.',
-  /** Texto do cliente (refação de #dores, 10/11/2026), com ponto final no lugar dos dois-pontos. */
-  intro: 'Sabemos o que impede tantas mulheres de buscar apoio.',
+  /* O H2 e o subtítulo acima da lista saíram (ajustes 2 de #dores, 10/11/2026): o título agora é o
+     do banner (`dores.banner`). */
   /**
    * Cada dor com o recurso que responde a ela (refação de #dores no padrão NextPay, 10/11/2026):
    * chip = recurso; title = a dor (COPY 3.3); answer = como o Amparo responde (texto do cliente).
@@ -147,6 +146,14 @@ export const dores = {
       href: '#direitos',
     },
   ],
+  /** Banner no topo da seção (texto do cliente, 10/11/2026; padrão NextPay "Uma experiência. Controle total."). */
+  banner: {
+    chip: 'Feito para a sua realidade',
+    line1: 'Pedir ajuda',
+    line2: 'não deveria ser um risco.',
+    sub: 'Cada recurso do Amparo nasceu de uma barreira real.',
+    pills: ['Parece uma calculadora', 'Provas protegidas', 'Ajuda sem precisar denunciar'],
+  },
   /** Link em cada cartão (COPY 3.3). */
   link: 'Como o Amparo ajuda',
   button: { label: 'Conheça os recursos', href: '#recursos' },
@@ -676,6 +683,27 @@ export const app = {
       'O acompanhamento discreto segue ativo. Nada novo foi registrado nos últimos 12 dias.',
     cardLink: 'Ver como chegamos nisso',
     atalhos: ['Como funcionam as ocorrências', 'Central de Conteúdo e Direitos'],
+  },
+  /**
+   * home-como-chegamos.png (#dores, item "Leitura de risco"), com o pedido do cliente (10/11/2026):
+   * leitura em "Médio" (na imagem é "baixo") e os três sinais em lista (na imagem, num parágrafo).
+   * Os sinais e o resto do texto são os da tela.
+   */
+  comoChegamos: {
+    riscoTitle: 'Leitura de risco',
+    riscoBadge: 'IA',
+    levels: ['Baixo', 'Médio', 'Alto'],
+    active: 1,
+    title: 'Como chegamos nesta leitura',
+    intro: 'A leitura de hoje é risco médio. Ela vem de três sinais:',
+    sinais: [
+      'quantas ocorrências você registrou nos últimos 30 dias;',
+      'com que frequência o SOS foi acionado;',
+      'há quanto tempo foi o último registro.',
+    ],
+    outro:
+      'Nada disso é enviado para ninguém, e o SOS continua disponível do mesmo jeito em qualquer leitura. Você pode ignorar essa sugestão quando quiser — ela apoia a sua leitura, não decide por você.',
+    button: 'Entendi',
   },
   /** conteudo-direitos.png (#dores, item "Seus direitos"). */
   direitosTela: {

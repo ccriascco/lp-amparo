@@ -62,6 +62,8 @@ const SLOTS = [
   },
   // 4:5 — foto vertical de #contexto: mulher concentrada no celular, no sofá (1086×1448)
   { slot: 'numeros', file: 'numeros.png', crop: { left: 0, top: 30, width: 1086, height: 1357 } },
+  // 16:9 — banner de #dores: rosto em luz dourada à direita, sombra à esquerda para o texto
+  { slot: 'dores-banner', file: 'dores-banner.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
   // ── PROVISÓRIAS (ver NOTES.md): alternativas de assets/fotos até as fotos definitivas chegarem ──
   // sos: mulher com o celular junto à janela, espelhada para a figura ficar no terço esquerdo.
   // O recorte é feito antes do espelho: o mobile pega o lado direito do original (onde está a figura).

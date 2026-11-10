@@ -16,6 +16,8 @@ type TintedPhotoProps = {
   priority?: boolean
   /** Cores originais da foto, sem o tingimento vinho (exceção pedida pelo cliente). */
   natural?: boolean
+  /** `object-position` da imagem (ex.: manter um rosto no recorte vertical do celular). */
+  position?: string
   className?: string
   /** Conteúdo sobre a foto (texto branco). */
   children?: ReactNode
@@ -36,7 +38,8 @@ export function Picture({
   sizes,
   priority,
   className,
-}: Pick<TintedPhotoProps, 'slot' | 'alt' | 'sizes' | 'priority' | 'className'>) {
+  position,
+}: Pick<TintedPhotoProps, 'slot' | 'alt' | 'sizes' | 'priority' | 'className' | 'position'>) {
   const meta = images[slot]
   const set = (ext: string) =>
     meta.widths.map((w) => `/images/${slot}-${w}.${ext} ${w}w`).join(', ')
@@ -54,6 +57,7 @@ export function Picture({
         decoding="async"
         draggable={false}
         className={className}
+        style={position ? { objectPosition: position } : undefined}
       />
     </picture>
   )
@@ -68,6 +72,7 @@ export function TintedPhoto({
   parallax,
   priority,
   natural,
+  position,
   className,
   children,
 }: TintedPhotoProps) {
@@ -78,6 +83,7 @@ export function TintedPhoto({
         alt={alt}
         sizes={sizes}
         priority={priority}
+        position={position}
         className={parallax ? 'parallax-img' : 'absolute inset-0 h-full w-full object-cover'}
       />
       {children && <div className="relative z-10 h-full">{children}</div>}
