@@ -242,7 +242,12 @@ export function Dores() {
   const b = dores.banner
 
   return (
-    <section ref={root} id="dores" aria-labelledby="dores-title" className="bg-branco p-3 md:p-4">
+    <section
+      ref={root}
+      id="como-funciona"
+      aria-labelledby="dores-title"
+      className="bg-branco p-3 md:p-4"
+    >
       {/* Cartão único (padrão NextPay): banner e lista no mesmo fundo, sem divisão.
           overflow-clip (não hidden) para os cantos sem quebrar o sticky do celular. */}
       <div
@@ -322,7 +327,8 @@ export function Dores() {
                 const Icon = ICONS[i]
                 return (
                   <li
-                    key={d.title}
+                    key={d.id}
+                    id={d.id}
                     data-dor-item
                     data-appear
                     className="lg:flex lg:min-h-[max(48vh,520px)] lg:items-center"
@@ -340,9 +346,11 @@ export function Dores() {
                         {d.title}
                       </h3>
                       <p className="mt-3 text-pretty text-white/70">{d.answer}</p>
-                      <Button variant="ghost" href={d.href} className="mt-4 text-white">
-                        {dores.link}
-                      </Button>
+                      {d.link && (
+                        <Button variant="ghost" href={d.link.href} className="mt-4 text-white">
+                          {d.link.label}
+                        </Button>
+                      )}
                     </article>
 
                     {/* Celular: a tela do item logo abaixo, num celular menor, sobre o painel claro */}

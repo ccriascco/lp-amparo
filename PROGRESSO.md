@@ -7,11 +7,26 @@
 ---
 
 ## Situação atual
-Estamos na **rodada 2**: a página está sendo refeita seção por seção, de cima para baixo, seguindo o `DESIGN.md` (§2.1 e §9) e o `COPY.md` revisados, com base nos 5 sites de referência (Gaia, Gardance, Eduzz, NextPay, FitPay).
+**Fonte da verdade dos textos e da estrutura: `COPY.md` (versão final, §3).** Onde ele contradisser o `DESIGN.md` ou o plano antigo deste arquivo, vale o `COPY.md`.
 
-Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → marquee → `#contexto` → `#pessoas` → `#dores`, esta no padrão NextPay). Da seção `#disfarce` para baixo ainda são as seções da rodada 1 (bento, pilares separados etc.), que serão substituídas uma a uma.
+### Mapa da página (COPY §3.00)
+| # | Seção | Âncora | Status |
+|---|---|---|---|
+| 0 | Tela de abertura | — | ✅ pronta |
+| 1 | Header + Hero | `#inicio` | ✅ pronta |
+| 2 | Faixa de recursos (marquee) | — | ✅ pronta |
+| 3 | Contexto + números | `#contexto` | ✅ pronta |
+| 4 | Manifesto (fotos espalhadas) | `#pessoas` | ✅ pronta |
+| 5 | Benefícios | `#beneficios` | ✅ pronta |
+| 6 | Dores: banner + lista com celular | `#como-funciona` (itens `#dor-disfarce`, `#dor-cofre`, `#dor-rede`, `#dor-risco`, `#dor-direitos`) | ✅ pronta |
+| 7 | Leitura de risco com IA | `#leitura-risco` | ⏳ a construir (hoje só um esqueleto com chip, H2 e subtítulo, para a âncora existir) |
+| 8 | Como começar | `#comecar` | ⏳ a construir (versão da rodada 1 no lugar) |
+| 9 | FAQ + emergência | `#faq` | ⏳ a construir (versão da rodada 1 no lugar) |
+| 10 | CTA final | `#cta` | ⏳ a construir (versão da rodada 1 no lugar) |
+| 11 | Rodapé | — | ⏳ a construir (versão da rodada 1, já com os links e textos do COPY 3.11) |
 
-**Parado para revisão do cliente ao final do item 4.**
+### Fora do plano (não serão construídas)
+Removidas do código e do `copy.ts` em 10/11/2026: **Modo Disfarce** como seção própria (`StepShowcase`), **Recursos** (`FeatureStack`/bento), os pilares **SOS, Cofre, Rede e Risco** como seções separadas, as **demos "Experimente"** (SOSDemo, HashScramble, RiskLevels, InteractiveCalculator, NetworkGraph, DisguisePhone), **Seus direitos**, **Mitos e verdades**, **Segurança**, **Cartão de acesso**, **Para quem quer ajudar** (e o botão "Copiar link") e a **Galeria antes do CTA**. O que esses recursos mostravam agora vive nos itens das Dores (§3.6) e na Leitura de risco (§3.7).
 
 ## Itens concluídos
 | Item | O que é | Commit |
@@ -43,17 +58,17 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 4k | `#dores` ajustes 5: cartão 1440px + margem, título em 3 linhas, subtítulo novo, lista mais compacta — screenshots em `./screenshots/ajustes-6b/` | `31db80d` |
 | 4l | Título em uma linha e maior, espaço da lista em telas baixas, fotos novas dos Benefícios, correção do chip errado e da faixa branca no celular — screenshots em `./screenshots/ajustes-7b/` | 597c925 |
 | 4m | Grid responsivo: 1280px até 1599px de tela (inclui 1440), 1440px a partir de 1600px (inclui 1920); cartão das Dores acompanha o grid — screenshots em `./screenshots/grid-responsivo/` | 8707d9f |
-| 4n | Padding interno do cartão das Dores de 96px em telas a partir de 1600px (grid 1440) — prints `padding-*` em `./screenshots/grid-responsivo/` | (este commit) |
+| 4n | Padding interno do cartão das Dores de 96px em telas a partir de 1600px (grid 1440) — prints `padding-*` em `./screenshots/grid-responsivo/` | e5a33ef |
+| 5 | Troca para o `COPY.md` final: mapa novo, seções fora do plano removidas, navegação e âncoras (`#como-funciona`, `#leitura-risco`, `#dor-*`), links dos Benefícios, esqueleto de `#leitura-risco` — prints em `./screenshots/copy-final/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
 ## Próximo passo
-1. **Revisão do cliente** dos itens 2, 3 e 4 (screenshots em `./screenshots/rodada-2/item-2/`, `item-3/` e `item-4/`, incluindo `reduce/` com movimento reduzido). Aplicar os ajustes pedidos antes de seguir.
-2. **Item 5 — Modo Disfarce** (`StepShowcase` §6.28b + §7.2, padrão Gaia 01/04).
+1. **Revisão do cliente** da troca para o `COPY.md` final (navegação, âncoras, links dos Benefícios e das Dores).
+2. **Seção 7 — Leitura de risco com IA** (`#leitura-risco`, COPY §3.7), substituindo o esqueleto atual.
+3. Depois, na ordem: **8 Como começar**, **9 FAQ**, **10 CTA final**, **11 Rodapé**, cada uma com os textos do COPY §3.8–§3.11 (os objetos `comecar`, `faq` e `ctaFinal` do `copy.ts` ainda têm os textos antigos e serão revisados quando cada seção for construída). Em seguida, Fase 5 (revisão completa).
 
-Pendências conhecidas: em 320px a página tem 23px de scroll horizontal vindo do bento de Recursos da rodada 1 (some no item 6, com o `FeatureStack`); aviso "chunk > 500 kB" no build (Fase 5).
-
-Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, Mitos e verdades, Segurança, Como começar (`PhotoStage`), Cartão de acesso, Para quem quer ajudar, FAQ, Galeria + CTA final, Rodapé e passada final (parallax, performance com CPU 4×, movimento reduzido). Depois, Fase 5 (revisão completa).
+Pendências conhecidas: aviso "chunk > 500 kB" no build (Fase 5). As imagens das seções removidas (direitos, rede, comecar etc.) continuam em `public/images` e no `process-images.mjs`; serão limpas quando as seções 8–11 definirem quais fotos usam.
 
 ## Decisões aprovadas pelo cliente
 - **Pílula do header com 920px** (o §7.11 diz 880px; com 880 "Como funciona" e "Seus direitos" quebravam em duas linhas).

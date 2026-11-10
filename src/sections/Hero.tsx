@@ -20,7 +20,7 @@ import { CircularBadge } from '../components/ui/CircularBadge'
 import { NotificationCard } from '../components/ui/NotificationCard'
 import { PhoneFrame } from '../components/ui/PhoneFrame'
 import { Container } from '../components/ui/Section'
-import { a11y, cta, hero, recursos, ui } from '../content/copy'
+import { a11y, cta, hero, ui } from '../content/copy'
 import { APP_URL } from '../lib/config'
 import { useHeroMotion } from '../motion/useHeroMotion'
 
@@ -72,8 +72,8 @@ export function Hero() {
               <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
                 {cta.acessar}
               </Button>
-              <Button variant="secondary" href="#disfarce" icon={<ArrowDown />}>
-                {hero.ctaSecondary}
+              <Button variant="secondary" href={hero.ctaSecondary.href} icon={<ArrowDown />}>
+                {hero.ctaSecondary.label}
               </Button>
             </div>
             <ul className="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-small text-texto-secundario sm:flex-row sm:flex-wrap">
@@ -162,17 +162,17 @@ export function Hero() {
         </div>
 
         <Pill
-          href="#disfarce"
+          href={hero.pills[0].href}
           depth={-60}
           icon={<Calculator />}
-          label={recursos.items[5].title}
+          label={hero.pills[0].label}
           className="bottom-24 left-[2%] -rotate-6 md:-top-4 md:bottom-auto md:left-[4%] lg:left-[calc(50%-560px)]"
         />
         <Pill
-          href="#sos"
+          href={hero.pills[1].href}
           depth={-110}
           icon={<Siren />}
-          label={recursos.items[0].title}
+          label={hero.pills[1].label}
           className="-top-4 right-[calc(50%-570px)] hidden rotate-6 lg:flex"
         />
 

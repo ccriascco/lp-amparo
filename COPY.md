@@ -33,7 +33,7 @@ Levar a visitante a **abrir o Amparo** (web app hospedado na Netlify) e criar a 
 - Termos fixos: *Modo Disfarce*, *SOS*, *guardiãs*, *rede de apoio*, *cofre*, *ocorrência*, *leitura de risco*. Guardiãs podem ser qualquer pessoa de confiança; quando precisar ser inclusivo, use "pessoas de confiança".
 
 ### Honestidade (obrigatório)
-- O Amparo é um **projeto de TCC** em desenvolvimento. A página mostra isso no rodapé.
+- O Amparo é um **projeto de TCC** em desenvolvimento. A página mostra isso no rodapé e na nota da seção de IA.
 - O app **não substitui** a polícia nem os canais oficiais. O 190 e o 180 aparecem na página.
 
 ---
@@ -50,271 +50,142 @@ lang: pt-BR
 
 ---
 
-## 3. Copy por seção (na ordem da página)
+## 3. Copy por seção (versão final — reflete a página construída)
 
-### 3.00 Mapa da página (ordem final)
-Estrutura baseada nos sites de referência do cliente (ver `DESIGN.md` §2.1). Seções marcadas com ★ são novas.
-
-| # | Seção | Âncora | Copy |
+### 3.00 Mapa da página
+| # | Seção | Âncora | Status |
 |---|---|---|---|
-| 0 | ★ Tela de abertura (preloader) | — | 3.01 |
-| 1 | Header | — | 3.0 |
-| 2 | Hero | `#inicio` | 3.1 |
-| 3 | ★ Faixa de números | `#numeros` | 3.2a |
-| 4 | ★ Faixa de recursos (marquee) | — | 3.2b |
-| 5 | Manifesto (fotos de pessoas em volta da frase) | `#contexto` | 3.2c |
-| 6 | Dores (pergunta fixa com cartões flutuando) | `#dores` | 3.3 |
-| 7 | Modo Disfarce | `#disfarce` | 3.4 |
-| 8 | Recursos em 4 cartões grandes com foto (SOS, Cofre, Rede, Leitura de risco) | `#recursos`, `#sos`, `#cofre`, `#rede`, `#risco` | 3.5 a 3.9 |
-| 9 | Seus direitos | `#direitos` | 3.10 |
-| 10 | ★ Mitos e verdades (carrossel) | `#mitos` | 3.10b |
-| 11 | Segurança | `#seguranca` | 3.11 |
-| 12 | Como começar (palco fixo com fotos) | `#comecar` | 3.12 |
-| 13 | ★ Cartão de acesso gratuito | `#acesso` | 3.12b |
-| 14 | Para quem quer ajudar | `#ajudar` | 3.13 |
-| 15 | FAQ | `#faq` | 3.15 |
-| 16 | Galeria de fotos + CTA final | `#cta` | 3.16 |
-| 17 | Rodapé (com faixa de emergência) | — | 3.17, 3.18 |
+| 0 | Tela de abertura | — | pronta |
+| 1 | Header + Hero | `#inicio` | pronta |
+| 2 | Faixa de recursos (marquee) | — | pronta |
+| 3 | Contexto + números | `#contexto` | pronta |
+| 4 | Manifesto (fotos espalhadas) | — | pronta |
+| 5 | Benefícios | `#beneficios` | pronta |
+| 6 | Dores: banner + lista com celular | `#como-funciona` (itens: `#dor-disfarce`, `#dor-cofre`, `#dor-rede`, `#dor-risco`, `#dor-direitos`) | pronta |
+| 7 | Leitura de risco com IA | `#leitura-risco` | a construir |
+| 8 | Como começar | `#comecar` | a construir |
+| 9 | FAQ + emergência | `#faq` | a construir |
+| 10 | CTA final | `#cta` | a construir |
+| 11 | Rodapé | — | a construir |
+
+**Fora da página** (não construir): Recursos/FeatureStack, demos "Experimente", Seus direitos, Mitos e verdades, Segurança, Cartão de acesso, Para quem quer ajudar, Galeria antes do CTA.
+
+**Regras de texto:** título com no máximo 8 palavras, apoio com no máximo 3 linhas, nada de listas com mais de 3 itens dentro de um cartão.
 
 ---
 
-### 3.01 Tela de abertura (preloader) ★
-- Logo vertical branco no centro (a gota se desenhando) + contador grande **0 → 100** no canto inferior direito, com um "%" pequeno ao lado.
-- Linha no canto inferior esquerdo (pequena): **Preparando um lugar seguro para você**
-- Sem botão. Dura no máximo ~2s e só aparece na primeira visita da sessão.
+### 3.01 Tela de abertura
+- Logo vertical branco no centro + contador grande **0 → 100** no canto inferior direito.
+- Linha pequena no canto inferior esquerdo: **Preparando um lugar seguro para você**
 
----
-
-### 3.0 Navegação (`<Header>`)
-- Logo (horizontal vinho; versão branca sobre fundos escuros)
-- Links: **Como funciona** (`#disfarce`) · **Recursos** (`#recursos`) · **Segurança** (`#seguranca`) · **Seus direitos** (`#direitos`) · **Dúvidas** (`#faq`)
-- Link de texto (antes do botão): **Entrar** (abre `VITE_APP_URL`)
+### 3.0 Header
+- Links: **Como funciona** (`#como-funciona`) · **Leitura de risco** (`#leitura-risco`) · **Como começar** (`#comecar`) · **Dúvidas** (`#faq`)
+- Link de texto: **Entrar** (abre `VITE_APP_URL`)
 - CTA: **Acessar o Amparo**
-
----
 
 ### 3.1 Hero (`#inicio`)
-- Chip acima do H1: **Proteção discreta para mulheres**
+- Chip: **Proteção discreta para mulheres**
 - H1: **Você não está sozinha.**
 - Subtítulo: Um app que parece uma calculadora, avisa quem você confia com um toque e guarda suas provas num cofre que só você abre.
-- CTA primário: **Acessar o Amparo**
-- CTA secundário: **Ver como funciona** ↓
-- Microcopy abaixo dos botões (3 itens, cada um com ícone de check): Gratuito / Funciona no navegador do celular / Seus dados protegidos pela LGPD
-- Notificações flutuantes (estilo "notificação do app", aparecem em sequência):
-  - **Alerta enviado** · Sua rede foi avisada · agora
-  - **Ana Beatriz confirmou** · Está a caminho · 12:31
-  - **Prova verificada** · Arquivo sem alterações · 21:47
-- Visual: celular mostrando a **calculadora**. Animação: digita `1 9 0 7`, toca `=`, a calculadora se dissolve e revela a tela inicial do Amparo ("Olá, Marina").
+- CTAs: **Acessar o Amparo** · **Ver como funciona** ↓
+- Checks: Gratuito / Funciona no navegador do celular / Seus dados protegidos pela LGPD
+- Pílulas: **Modo Disfarce** · **SOS silencioso**
+- Notificações: **Alerta enviado** · Sua rede foi avisada · agora / **Ana Beatriz confirmou** · Está a caminho · 12:31 / **Prova verificada** · Arquivo sem alterações · 21:47
+- Celulares: tela inicial (centro), Rede de apoio (esquerda), Ocorrências (direita)
 
----
+### 3.2 Faixa de recursos (marquee)
+**Modo Disfarce** · **SOS silencioso** · **Cofre de provas** · **Rede de apoio** · **Leitura de risco** · **Seus direitos** · **Feito para o celular** · **Protegido pela LGPD**
 
-### 3.2a Faixa de números (`#numeros`) ★
-- Título curto (à esquerda, pequeno): **Por que o Amparo existe**
-
-| Número | Rótulo |
-|---|---|
-| **1.492** | feminicídios em 2024, o maior número já registrado no Brasil |
-| **64,3%** | das vítimas foram mortas dentro da própria casa |
-| **8 em 10** | autores eram companheiros ou ex-companheiros |
-| **101.656** | medidas protetivas descumpridas pelo agressor em 2024 |
-
-- Fonte (texto pequeno): Fonte: 19º Anuário Brasileiro de Segurança Pública (FBSP, 2025).
-
-### 3.2b Faixa de recursos (marquee) ★
-Itens separados pelo símbolo da gota: **Modo Disfarce** · **SOS silencioso** · **Cofre de provas** · **Rede de apoio** · **Leitura de risco** · **Seus direitos** · **Feito para o celular** · **Protegido pela LGPD**
-
-### 3.2c Manifesto + mosaico (`#contexto`)
+### 3.3 Contexto + números (`#contexto`)
 - H2: **Na maioria dos casos, o perigo está dentro de casa.**
-- Texto: A violência doméstica cresce em silêncio. Muitas mulheres convivem com quem as agride, dividem o mesmo teto e, muitas vezes, o mesmo celular. Pedir ajuda pode ser arriscado.
-- Frase de fecho do mosaico: **Por trás de cada número, existe uma mulher. O Amparo foi feito para ela.**
+- Subtítulo: A violência doméstica cresce em silêncio. Muitas mulheres convivem com quem as agride, dividem o mesmo teto e, muitas vezes, o mesmo celular. Pedir ajuda pode ser arriscado.
+- Cartões:
+  - **1.492** · feminicídios em 2024, o maior número já registrado no Brasil
+  - **64,3%** · das vítimas foram mortas dentro da própria casa
+  - **8 em 10** · autores eram companheiros ou ex-companheiros
+  - **101.656** · medidas protetivas descumpridas pelo agressor em 2024
+- Na foto: **Ligue 180** · Gratuito, sigiloso, 24 horas (`tel:180`) e a notificação **Alerta enviado** · Sua rede foi avisada · agora
+- Fonte dos números: só no rodapé.
 
----
+### 3.4 Manifesto
+- Frase: **Por trás de cada número, existe uma mulher. O Amparo foi feito para ela.**
 
-### 3.3 Dores (`#dores`)
-- H2: **Pedir ajuda não deveria ser mais um risco.**
-- Intro: Sabemos o que impede tantas mulheres de buscar apoio:
+### 3.5 Benefícios (`#beneficios`)
+- Chip: **Benefícios**
+- H2 (2 linhas): **Mais que um app de proteção.** / **Um amparo no seu dia a dia.** (2ª linha em vinho)
+- Botão: **Acessar o Amparo**
+- Cartões (etiqueta de vidro: tópico sempre visível; texto e link aparecem no cartão ativo):
+  1. **Mais tranquilidade** · Sua rede de apoio fica a um toque, mesmo em silêncio. · **Conheça a rede de apoio** → `#dor-rede`
+  2. **Sua história, suas escolhas** · Registre agora e decida depois o que fazer, sem pressão. · **Conheça o cofre de provas** → `#dor-cofre`
+  3. **Decida com informação** · Entenda seus direitos e acompanhe como está o seu risco. · **Conheça a leitura de risco** → `#leitura-risco`
 
-Cards (ícone + título + texto):
-1. **Ele pode ver o seu celular.** Um app de proteção visível na tela pode virar motivo de briga ou de ameaça.
-2. **Medo de não ter provas.** Fotos e áudios se perdem, são apagados ou têm a veracidade questionada.
-3. **Denunciar parece um passo grande demais.** Nem toda mulher está pronta para ir à delegacia, e tudo bem.
-4. **Não saber se é grave.** Quando a violência vira rotina, fica difícil perceber que o risco está aumentando.
-5. **Não saber quais são seus direitos.** A lei protege, mas a informação nem sempre chega em linguagem simples.
+### 3.6 Dores (`#como-funciona`)
+**Banner (dentro do cartão vinho):**
+- Chip: **Feito para a sua realidade**
+- Título: **Pedir ajuda** / **não deveria ser um risco.**
+- Subtítulo: Cada recurso do Amparo nasceu de uma barreira real: o medo de ser vista, a falta de provas e a dúvida sobre o que fazer. Aqui, pedir ajuda é discreto, seguro e no seu tempo.
+- Pílulas: **Parece uma calculadora** · **Provas protegidas** · **Ajuda sem precisar denunciar**
 
-- Link em cada cartão de dor: **Como o Amparo ajuda** (1 → `#disfarce`, 2 → `#cofre`, 3 → `#rede`, 4 → `#risco`, 5 → `#direitos`)
-- Fecho: **O Amparo foi desenhado a partir de cada uma dessas barreiras.** (botão: Conheça os recursos)
+**Lista com celular** (chip / título / resposta / tela):
+1. `#dor-disfarce` · **Modo Disfarce** / Ele pode ver o seu celular. / Por fora, o Amparo é uma calculadora. A área protegida só abre com o seu código. / Calculadora
+2. `#dor-cofre` · **Cofre de provas** / Medo de não ter provas. / Cada registro guarda data, hora, local e um código que mostra que nada foi alterado. / Ocorrências
+3. `#dor-rede` · **Rede de apoio** / Denunciar parece um passo grande demais. / Você pode pedir ajuda a quem confia, sem boletim de ocorrência e sem medida protetiva. / Rede de apoio
+4. `#dor-risco` · **Leitura de risco** / Não saber se é grave. / A IA mostra se o risco está baixo, médio ou alto, e você sempre vê o porquê. / Tela inicial focada na leitura de risco · link **Como o Amparo ajuda** → `#leitura-risco`
+5. `#dor-direitos` · **Seus direitos** / Não saber quais são seus direitos. / A Lei Maria da Penha explicada em linguagem simples, dentro do app. / Central de direitos
+- Só o item 4 tem link. Botão ao final da seção: **Conheça a leitura de risco** → `#leitura-risco`
 
----
+### 3.7 Leitura de risco com IA (`#leitura-risco`)
+- Chip: **Inteligência artificial**
+- H2: **Uma IA que apoia, sem decidir por você.**
+- Subtítulo: A partir dos seus registros e dos acionamentos do SOS, o Amparo faz uma leitura do seu risco e adapta o que mostra para você. Você sempre pode ver o porquê.
+- Pílulas que orbitam a IA: **Seus registros** · **Acionamentos do SOS** · **Sinais de risco oficiais**
+  - Legenda pequena: Sinais inspirados no Formulário Nacional de Avaliação de Risco (Lei nº 14.149/2021).
+- Resultado: **Leitura de risco** · Baixo / Médio / Alto
+- Como o app se adapta:
+  - **Baixo** · Tudo tranquilo. O acompanhamento discreto segue ativo.
+  - **Médio** · O app prepara um aviso discreto para a sua rede, enviado só se você confirmar.
+  - **Alto** · Os caminhos de ajuda aparecem primeiro: Ligue 180, 190 e a delegacia mais próxima.
+- **Ver como chegamos nisso** (sinais de exemplo, marcados como exemplo): Ameaças registradas nas últimas semanas / Aumento na frequência de registros / SOS acionado recentemente · *Nada disso é enviado para ninguém.*
+- Princípios:
+  - **Apoia, não decide** · A sugestão é sua para seguir ou ignorar.
+  - **Transparente** · Você sempre vê quais sinais levaram à leitura.
+  - **Privada** · A leitura fica só com você, no seu aparelho e na sua conta.
+- Nota pequena: Protótipo acadêmico: o modelo foi treinado com dados sintéticos. A validação com dados reais é a próxima etapa.
 
-### 3.4 Modo Disfarce (`#disfarce`)
-- H2: **Para todo mundo, é só uma calculadora.**
-- Texto: Com o Modo Disfarce, o Amparo ganha o ícone e o nome de uma calculadora, e ela funciona de verdade. Só quando você digita o seu código secreto e toca em **=**, a sua área protegida se abre.
-
-Passos (com contador **01/04** … **04/04**):
-1. **Ícone e nome de calculadora** na tela do celular.
-2. **Faz contas de verdade.** Qualquer outra sequência é só um cálculo.
-3. **Seu código, seu acesso.** 4 números que só você sabe, seguidos de "=".
-4. **Nem a tela de apps abertos entrega.** Na multitarefa aparece apenas a calculadora.
-
-- Interação: mini calculadora funcional. Dica: *Experimente: digite 1907 e toque em =* (código de demonstração).
-- Nota: Você pode ligar ou desligar o disfarce e trocar o código quando quiser.
-
----
-
-### 3.5 Recursos em cartões (`#recursos`)
-- H2: **Tudo o que você precisa, num só lugar.**
-- Sub: Quatro recursos pensados para proteger, documentar, conectar e informar.
-- Barra de navegação fixa (rótulos): **SOS silencioso** · **Cofre de provas** · **Rede de apoio** · **Leitura de risco**
-- Cada cartão mostra o conteúdo de 3.6 a 3.9 (chip do pilar, título, texto, bullets e a interação no cartão de UI).
-
-### 3.6 Cartão: SOS silencioso (`#sos`)
-- Chip do pilar: **Proteger**
-- Título: **Um toque longo. Nenhum barulho.**
-- Texto: Toque e segure o botão SOS por alguns segundos. Sem som e sem alarde, o Amparo envia a sua localização em tempo real para a sua rede de apoio e continua atualizando enquanto o alerta estiver ativo.
-- Bullets:
-  - **Localização a cada 30 segundos** enquanto o aviso estiver ativo
-  - **Veja quem já confirmou** que recebeu o seu pedido
-  - **Segurar evita disparos sem querer**
-  - **Cancele quando quiser**, com um toque
-- Interação: botão SOS demonstrativo. Label: **Segure para testar**. Ao completar: *Demonstração concluída — nada foi enviado.*
-- Visual: tela "Alerta enviado" com *Quem foi avisada* (Ana Beatriz — Confirmou · 12:31 / Lúcia — Aguardando / Rafaela — Aguardando).
-
-### 3.7 Cartão: Cofre de provas (`#cofre`)
-- Chip do pilar: **Documentar**
-- Título: **O que você guarda continua sendo verdade.**
-- Texto: Registre o que aconteceu do seu jeito, com texto, foto, áudio ou vídeo. Data, hora e local entram sozinhos e não podem ser alterados. Cada prova recebe uma assinatura digital que mostra que o arquivo não foi modificado desde o registro.
-- Bullets:
-  - **Escolha o tipo de violência:** física, psicológica, sexual ou patrimonial
-  - **Só você abre o cofre.** Ninguém mais vê os seus registros
-  - **Prova verificada:** um código de integridade (hash SHA-256) acompanha cada arquivo
-  - **Registrar não é denunciar.** Você guarda agora e decide depois o que fazer
-- Visual: card "Prova verificada", com hash `a3f9c2e7 · 8b41d05a · 6ec73912` animado.
-
-### 3.8 Cartão: Rede de apoio (`#rede`)
-- Chip do pilar: **Conectar**
-- Título: **Quem cuida de você, por perto quando precisar.**
-- Texto: Escolha de uma a cinco pessoas de confiança: suas guardiãs. Elas só recebem um aviso quando você aciona o pedido de ajuda. Não é preciso ter feito denúncia nem ter medida protetiva.
-- Bullets:
-  - **Até 5 guardiãs**, com uma principal, que é avisada primeiro
-  - **Convite discreto pelo WhatsApp**, sem revelar o motivo nem o nome do app
-  - **O seu CPF nunca aparece** para as guardiãs
-- Visual: foto + rede de avatares ligados ao símbolo do Amparo.
-
-### 3.9 Cartão: Leitura de risco (`#risco`)
-- Chip do pilar: **Transformar**
-- Título: **Uma leitura do risco que apoia você, sem decidir por você.**
-- Texto: A partir dos seus registros e dos acionamentos do SOS, uma inteligência artificial indica se o seu risco está **baixo**, **médio** ou **alto** e adapta o que o app mostra para você.
-- Três níveis:
-  - **Baixo** · *Tudo por aqui está tranquilo.* O acompanhamento discreto segue ativo.
-  - **Médio** · O app prepara um aviso discreto para a sua rede, que só é enviado se você confirmar.
-  - **Alto** · Os caminhos de ajuda aparecem primeiro: Ligue 180, 190 e a delegacia especializada mais próxima.
-- Destaque: **"Ver como chegamos nisso."** Você sempre pode ver quais sinais levaram àquela leitura. Nada disso é enviado para ninguém.
-- Nota pequena: Os sinais considerados foram inspirados no Formulário Nacional de Avaliação de Risco (Lei nº 14.149/2021).
-
----
-
-### 3.10 Seus direitos (`#direitos`)
-- H2: **O que a lei garante para você, sem juridiquês.**
-- Texto: Na Central de Conteúdo e Direitos do app, você encontra explicações curtas e claras para entender o que está acontecendo e quais caminhos existem.
-- Cards:
-  - **Lei Maria da Penha, explicada** · O que a lei garante e os 5 tipos de violência que ela reconhece.
-  - **Como pedir uma medida protetiva** · O passo a passo, sem precisar de advogado e sem custo.
-  - **Monitoramento eletrônico do agressor** · Desde 2026, pode ser aplicado como medida protetiva por si só.
-  - **Sinais de relacionamento abusivo** · Como reconhecer quando o controle vira violência.
-- Faixa "5 formas de violência" (chips): Física · Psicológica · Sexual · Patrimonial · Moral
-
-### 3.10b Mitos e verdades (`#mitos`) ★
-Ocupa o lugar dos "depoimentos" dos sites de referência. **Não usar depoimentos inventados.**
-- H2: **Informação também protege.**
-- Sub: Algumas ideias erradas ainda afastam mulheres da ajuda de que precisam.
-- Cartões (carrossel com contador 1/5):
-  1. **Mito:** "Só é violência se deixar marca." · **Verdade:** A Lei Maria da Penha reconhece cinco formas de violência: física, psicológica, sexual, patrimonial e moral.
-  2. **Mito:** "Para ter medida protetiva, preciso de boletim de ocorrência." · **Verdade:** Desde 2023 (Lei nº 14.550), a medida protetiva pode ser concedida mesmo sem boletim de ocorrência, inquérito ou processo.
-  3. **Mito:** "Preciso de advogado para pedir proteção." · **Verdade:** O pedido de medida protetiva pode ser feito sem advogado e sem custo.
-  4. **Mito:** "O Ligue 180 serve só para denunciar." · **Verdade:** O 180 também orienta sobre direitos e serviços. É gratuito, sigiloso e funciona 24 horas.
-  5. **Mito:** "Se ele nunca me bateu, não estou em risco." · **Verdade:** Ameaças, controle e isolamento também são sinais de risco e fazem parte da avaliação oficial de risco.
-
----
-
-### 3.11 Segurança e privacidade (`#seguranca`)
-- H2: **A sua segurança vem antes de qualquer recurso.**
-- Texto: Antes de entrar no app, cada funcionalidade passa por uma pergunta: *ela continua segura se o agressor pegar o seu celular?*
-- Itens:
-  - **Localização só quando você aciona.** Nunca em segundo plano sem o seu consentimento.
-  - **Notificações discretas.** Nada aparece na tela bloqueada.
-  - **Senhas e código protegidos.** Guardados apenas de forma criptografada (bcrypt).
-  - **Conexão segura.** Todo o tráfego passa por HTTPS.
-  - **Seus dados, suas regras.** Em conformidade com a LGPD: você pode acessar, corrigir e apagar.
-  - **Apagamento rápido.** Quando precisar, você apaga seus registros em poucos toques.
-
----
-
-### 3.12 Como começar (`#comecar`)
+### 3.8 Como começar (`#comecar`)
 - H2: **Comece em poucos minutos.**
-- Rótulos da barra de progresso: **1. Crie sua conta** · **2. Modo Disfarce** · **3. Rede de apoio** · **4. Pronto**
-- Passos:
-  1. **Crie sua conta.** Use um e-mail ao qual só você tenha acesso.
-  2. **Escolha o Modo Disfarce** e crie o seu código de 4 números.
-  3. **Adicione sua rede de apoio.** Pelo menos uma pessoa de confiança.
-  4. **Pronto.** O Amparo fica com você, discreto, até você precisar.
-- CTA: **Acessar o Amparo**
+- Barra de progresso: **1. Crie sua conta** · **2. Modo Disfarce** · **3. Rede de apoio** · **4. Pronto**
+- Passos (título + 1 linha + cartão do app):
+  1. **Crie sua conta** · Use um e-mail ao qual só você tenha acesso. · campo de e-mail
+  2. **Ative o Modo Disfarce** · Escolha um código de 4 números que só você sabe. · teclado de código
+  3. **Adicione sua rede** · Convide pelo menos uma pessoa de confiança. · "Adicionar guardiã"
+  4. **Pronto** · O Amparo fica com você, discreto, até você precisar. · selo "Tudo pronto"
+- CTA depois do palco: **Acessar o Amparo**
 
-### 3.12b Cartão de acesso gratuito (`#acesso`) ★
-Ocupa o lugar do "preço" dos sites de referência.
-- Chip: **Acesso gratuito**
-- Título do cartão: **Tudo isso, sem pagar nada.**
-- Texto: Sem loja de aplicativos e sem instalação complicada. Abra no navegador do celular e comece.
-- Lista (com check): Modo Disfarce / SOS silencioso / Cofre de provas com integridade verificável / Rede de até 5 guardiãs / Leitura de risco / Central de direitos
-- CTA: **Acessar o Amparo**
-
----
-
-### 3.13 Para quem quer ajudar (`#ajudar`)
-- H2: **Conhece alguém que pode precisar?**
-- Texto: Você pode ser a guardiã de alguém. Compartilhe o Amparo com cuidado: em uma conversa a sós, num momento seguro, sem pressionar.
-- CTA: **Copiar link do Amparo** (feedback: *Link copiado*)
-- Dica pequena: Evite enviar o link para um celular que outra pessoa possa ver.
-
----
-
-### 3.15 FAQ (`#faq`)
+### 3.9 FAQ (`#faq`)
 - H2: **Perguntas frequentes**
-- Sub: Respostas rápidas para as dúvidas mais comuns.
-1. **O Amparo é gratuito?** Sim.
-2. **Preciso baixar em alguma loja?** Não. O Amparo funciona direto no navegador do seu celular. É só acessar.
-3. **Preciso ter feito denúncia ou ter medida protetiva?** Não. Você pode usar o Amparo em qualquer momento, inclusive antes de decidir denunciar.
-4. **As minhas guardiãs vão saber que eu uso o Amparo?** Elas recebem um convite discreto, que não revela o motivo nem o nome do app, e só são avisadas quando você aciona o pedido de ajuda.
-5. **E se ele pegar o meu celular?** Com o Modo Disfarce, ele vai ver uma calculadora que funciona normalmente. A área protegida só abre com o seu código.
-6. **Os registros valem como prova?** Cada registro guarda data, hora, local e um código de integridade que mostra que o arquivo não foi alterado. Isso fortalece o valor do registro, e a decisão de usá-lo é sempre sua.
-7. **A inteligência artificial decide o que eu devo fazer?** Não. Ela oferece uma leitura do risco para apoiar você. Você pode ver como ela chegou nisso e ignorar a sugestão quando quiser.
-8. **O Amparo substitui a polícia?** Não. Em perigo imediato, ligue **190**. Para orientação, ligue **180**: é gratuito, sigiloso e funciona 24 horas.
+- Subtítulo: Respostas rápidas para as dúvidas mais comuns.
+- Faixa de emergência: **Em perigo agora? Ligue 190.** · **Precisa de orientação? Ligue 180**: gratuito, sigiloso, 24 horas.
+1. **O Amparo é gratuito? Preciso baixar em alguma loja?** É gratuito e funciona direto no navegador do celular. É só acessar.
+2. **Preciso ter feito denúncia ou ter medida protetiva?** Não. Você pode usar o Amparo a qualquer momento, inclusive antes de decidir denunciar.
+3. **E se ele pegar o meu celular?** Ele vai ver uma calculadora que funciona normalmente. A área protegida só abre com o seu código.
+4. **Meus dados estão seguros?** Senhas e código são guardados com criptografia, a conexão é segura e a localização só é usada quando você aciona o SOS. Você pode apagar seus registros quando quiser, como garante a LGPD.
+5. **O app explica os meus direitos?** Sim. A Central de Direitos explica a Lei Maria da Penha, as medidas protetivas e os sinais de um relacionamento abusivo em linguagem simples.
+6. **Conheço alguém que pode precisar. Como indico?** Compartilhe o link com cuidado, numa conversa a sós e num momento seguro, de preferência num celular que só ela usa.
+7. **O Amparo substitui a polícia?** Não. Em perigo imediato, ligue **190**. Para orientação, ligue **180**.
 
----
-
-### 3.16 CTA final (`#cta`)
+### 3.10 CTA final (`#cta`)
 - H2: **Você merece se sentir segura.**
-- Texto: O primeiro passo pode ser pequeno e discreto.
+- Texto: Gratuito, discreto e direto no navegador do celular. O primeiro passo pode ser pequeno.
 - CTA: **Acessar o Amparo**
-- Cartão "Hoje" ao lado (linha do tempo de exemplo no app):
-  - 09:12 · **Registro salvo no cofre**
-  - 18:40 · **Alerta enviado à sua rede**
-  - 18:41 · **Ana Beatriz confirmou**
+- Cartão "Hoje": 09:12 · **Registro salvo no cofre** / 18:40 · **Alerta enviado à sua rede** / 18:41 · **Ana Beatriz confirmou**
 
----
-
-### 3.17 Faixa de emergência (acima do rodapé; versão compacta no FAQ)
-**Em perigo agora? Ligue 190.** · **Precisa de orientação? Ligue 180**: gratuito, sigiloso, 24 horas.
-(Os números são links `tel:190` e `tel:180`.)
-
-### 3.18 Rodapé
-- Banner superior: **Proteção que cabe no seu celular.** · Discreta, segura e sempre com você.
-- 3 selos: **100% no navegador** / **Dados protegidos (LGPD)** / **Modo Disfarce**
-- Colunas de links:
-  - **Recursos:** Modo Disfarce, SOS silencioso, Cofre de provas, Rede de apoio, Leitura de risco
-  - **Informação:** Seus direitos, Mitos e verdades, Segurança, Perguntas frequentes
-  - **Ajuda agora:** Ligue 190, Ligue 180
-- Link: **Voltar ao topo**
+### 3.11 Rodapé
+- Logo branco + **Você não está sozinha.**
+- Links: Como funciona · Leitura de risco · Como começar · Dúvidas · **Voltar ao topo**
+- Emergência: **Ligue 190** · **Ligue 180**
 - Texto legal: Amparo é um projeto acadêmico (TCC — Ciência da Computação, UNIRP, 2026) em desenvolvimento. Não substitui os serviços oficiais de segurança e atendimento à mulher.
+- Dados: 19º Anuário Brasileiro de Segurança Pública (FBSP, 2025).
 - © 2026 Amparo
 
 ---

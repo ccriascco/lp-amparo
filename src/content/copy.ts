@@ -33,10 +33,9 @@ export const preloader = {
 // 3.0
 export const nav = {
   links: [
-    { label: 'Como funciona', href: '#disfarce' },
-    { label: 'Recursos', href: '#recursos' },
-    { label: 'Segurança', href: '#seguranca' },
-    { label: 'Seus direitos', href: '#direitos' },
+    { label: 'Como funciona', href: '#como-funciona' },
+    { label: 'Leitura de risco', href: '#leitura-risco' },
+    { label: 'Como começar', href: '#comecar' },
     { label: 'Dúvidas', href: '#faq' },
   ],
   /** Link de texto antes do botão (abre VITE_APP_URL). */
@@ -48,8 +47,13 @@ export const hero = {
   chip: 'Proteção discreta para mulheres',
   h1: 'Você não está sozinha.',
   sub: 'Um app que parece uma calculadora, avisa quem você confia com um toque e guarda suas provas num cofre que só você abre.',
-  ctaSecondary: 'Ver como funciona',
+  ctaSecondary: { label: 'Ver como funciona', href: '#como-funciona' },
   checks: ['Gratuito', 'Funciona no navegador do celular', 'Seus dados protegidos pela LGPD'],
+  /** Pílulas flutuantes. O SOS não tem item próprio nas Dores: leva ao início da seção. */
+  pills: [
+    { label: 'Modo Disfarce', href: '#dor-disfarce' },
+    { label: 'SOS silencioso', href: '#como-funciona' },
+  ],
   /** Notificações flutuantes (aparecem em sequência, a mais nova em cima). */
   notifications: [
     { title: 'Alerta enviado', text: 'Sua rede foi avisada', time: 'agora' },
@@ -58,7 +62,6 @@ export const hero = {
   ],
 }
 
-// 3.2a
 export type Stat = {
   value: number
   decimals?: number
@@ -67,8 +70,8 @@ export type Stat = {
   label: string
 }
 
+// 3.3 (cartões de números dentro de #contexto)
 export const numeros = {
-  title: 'Por que o Amparo existe',
   stats: [
     { value: 1492, label: 'feminicídios em 2024, o maior número já registrado no Brasil' },
     {
@@ -80,10 +83,9 @@ export const numeros = {
     { value: 8, suffix: ' em 10', label: 'autores eram companheiros ou ex-companheiros' },
     { value: 101656, label: 'medidas protetivas descumpridas pelo agressor em 2024' },
   ] satisfies Stat[],
-  source: 'Fonte: 19º Anuário Brasileiro de Segurança Pública (FBSP, 2025).',
 }
 
-// 3.2b
+// 3.2
 export const marquee = {
   items: [
     'Modo Disfarce',
@@ -97,14 +99,14 @@ export const marquee = {
   ],
 }
 
-// 3.2c
+// 3.3 e 3.4 (a frase do Manifesto é `fecho`)
 export const contexto = {
   h2: 'Na maioria dos casos, o perigo está dentro de casa.',
   text: 'A violência doméstica cresce em silêncio. Muitas mulheres convivem com quem as agride, dividem o mesmo teto e, muitas vezes, o mesmo celular. Pedir ajuda pode ser arriscado.',
   fecho: 'Por trás de cada número, existe uma mulher. O Amparo foi feito para ela.',
 }
 
-// Benefícios (seção nova entre o Manifesto e as Dores; textos do cliente, 10/11/2026)
+// 3.5
 export const beneficios = {
   chip: 'Benefícios',
   h2a: 'Mais que um app de proteção.',
@@ -115,66 +117,71 @@ export const beneficios = {
       slot: 'beneficio-tranquilidade',
       title: 'Mais tranquilidade',
       text: 'Sua rede de apoio fica a um toque, mesmo em silêncio.',
-      link: { label: 'Conheça a rede de apoio', href: '#rede' },
+      link: { label: 'Conheça a rede de apoio', href: '#dor-rede' },
     },
     {
       slot: 'beneficio-controle',
       title: 'Sua história, suas escolhas',
       text: 'Registre agora e decida depois o que fazer, sem pressão.',
-      link: { label: 'Conheça o cofre de provas', href: '#cofre' },
+      link: { label: 'Conheça o cofre de provas', href: '#dor-cofre' },
     },
     {
       slot: 'beneficio-confianca',
       title: 'Decida com informação',
       text: 'Entenda seus direitos e acompanhe como está o seu risco.',
-      link: { label: 'Conheça a leitura de risco', href: '#risco' },
+      link: { label: 'Conheça a leitura de risco', href: '#leitura-risco' },
     },
   ],
 } as const
 
-// 3.3
+// 3.6 (`#como-funciona`)
 export const dores = {
-  /* O H2 e o subtítulo acima da lista saíram (ajustes 2 de #dores, 10/11/2026): o título agora é o
-     do banner (`dores.banner`). */
   /**
-   * Cada dor com o recurso que responde a ela (refação de #dores no padrão NextPay, 10/11/2026):
-   * chip = recurso; title = a dor (COPY 3.3); answer = como o Amparo responde (texto do cliente).
+   * Cada dor com o recurso que responde a ela (padrão NextPay). chip = recurso; title = a dor;
+   * answer = como o Amparo responde; id = âncora do item. Só o item 4 tem link (COPY 3.6).
    */
   items: [
     {
+      id: 'dor-disfarce',
       chip: 'Modo Disfarce',
       title: 'Ele pode ver o seu celular.',
       answer: 'Por fora, o Amparo é uma calculadora. A área protegida só abre com o seu código.',
-      href: '#disfarce',
     },
     {
+      id: 'dor-cofre',
       chip: 'Cofre de provas',
       title: 'Medo de não ter provas.',
       answer:
         'Cada registro guarda data, hora, local e um código que mostra que nada foi alterado.',
-      href: '#cofre',
     },
     {
+      id: 'dor-rede',
       chip: 'Rede de apoio',
       title: 'Denunciar parece um passo grande demais.',
       answer:
         'Você pode pedir ajuda a quem confia, sem boletim de ocorrência e sem medida protetiva.',
-      href: '#rede',
     },
     {
+      id: 'dor-risco',
       chip: 'Leitura de risco',
       title: 'Não saber se é grave.',
       answer: 'A IA mostra se o risco está baixo, médio ou alto, e você sempre vê o porquê.',
-      href: '#risco',
+      link: { label: 'Como o Amparo ajuda', href: '#leitura-risco' },
     },
     {
+      id: 'dor-direitos',
       chip: 'Seus direitos',
       title: 'Não saber quais são seus direitos.',
       answer: 'A Lei Maria da Penha explicada em linguagem simples, dentro do app.',
-      href: '#direitos',
     },
-  ],
-  /** Banner no topo da seção (texto do cliente, 10/11/2026; padrão NextPay "Uma experiência. Controle total."). */
+  ] as {
+    id: string
+    chip: string
+    title: string
+    answer: string
+    link?: { label: string; href: string }
+  }[],
+  /** Banner no topo da seção, dentro do cartão vinho. */
   banner: {
     chip: 'Feito para a sua realidade',
     line1: 'Pedir ajuda',
@@ -182,275 +189,18 @@ export const dores = {
     sub: 'Cada recurso do Amparo nasceu de uma barreira real: o medo de ser vista, a falta de provas e a dúvida sobre o que fazer. Aqui, pedir ajuda é discreto, seguro e no seu tempo.',
     pills: ['Parece uma calculadora', 'Provas protegidas', 'Ajuda sem precisar denunciar'],
   },
-  /** Link em cada cartão (COPY 3.3). */
-  link: 'Como o Amparo ajuda',
-  button: { label: 'Conheça os recursos', href: '#recursos' },
+  /** Botão ao final da seção. */
+  button: { label: 'Conheça a leitura de risco', href: '#leitura-risco' },
 }
 
-// 3.4
-export const disfarce = {
-  h2: 'Para todo mundo, é só uma calculadora.',
-  text: [
-    'Com o Modo Disfarce, o Amparo ganha o ícone e o nome de uma calculadora, e ela funciona de verdade. Só quando você digita o seu código secreto e toca em ',
-    { strong: '=' },
-    ', a sua área protegida se abre.',
-  ] satisfies Rich,
-  steps: [
-    { strong: 'Ícone e nome de calculadora', rest: ' na tela do celular.' },
-    { strong: 'Faz contas de verdade.', rest: ' Qualquer outra sequência é só um cálculo.' },
-    { strong: 'Seu código, seu acesso.', rest: ' 4 números que só você sabe, seguidos de “=”.' },
-    {
-      strong: 'Nem a tela de apps abertos entrega.',
-      rest: ' Na multitarefa aparece apenas a calculadora.',
-    },
-  ] satisfies Lead[],
-  hint: 'Experimente: digite 1907 e toque em =',
-  note: 'Você pode ligar ou desligar o disfarce e trocar o código quando quiser.',
+// 3.7 (`#leitura-risco`) — por ora só o cabeçalho; o resto entra quando a seção for construída.
+export const leituraRisco = {
+  chip: 'Inteligência artificial',
+  h2: 'Uma IA que apoia, sem decidir por você.',
+  sub: 'A partir dos seus registros e dos acionamentos do SOS, o Amparo faz uma leitura do seu risco e adapta o que mostra para você. Você sempre pode ver o porquê.',
 }
 
-// 3.5
-export const recursos = {
-  h2: 'Tudo o que você precisa, num só lugar.',
-  sub: 'Quatro recursos pensados para proteger, documentar, conectar e informar.',
-  items: [
-    {
-      id: 'sos',
-      title: 'SOS silencioso',
-      text: 'Toque e segure. Sua localização vai para quem você confia.',
-      href: '#sos',
-    },
-    {
-      id: 'cofre',
-      title: 'Cofre de provas',
-      text: 'Registros com data, hora e local que não podem ser alterados.',
-      href: '#cofre',
-    },
-    {
-      id: 'rede',
-      title: 'Rede de apoio',
-      text: 'Até 5 pessoas de confiança, avisadas só quando você pedir.',
-      href: '#rede',
-    },
-    {
-      id: 'risco',
-      title: 'Leitura de risco',
-      text: 'Uma IA que ajuda você a enxergar quando o risco aumenta.',
-      href: '#risco',
-    },
-    {
-      id: 'direitos',
-      title: 'Seus direitos',
-      text: 'A Lei Maria da Penha explicada em linguagem simples.',
-      href: '#direitos',
-    },
-    {
-      id: 'disfarce',
-      title: 'Modo Disfarce',
-      text: 'Por fora, uma calculadora comum.',
-      href: '#disfarce',
-    },
-  ],
-}
-
-// 3.6
-export const sos = {
-  pillar: 'Proteger',
-  h2: 'Um toque longo. Nenhum barulho.',
-  text: 'Toque e segure o botão SOS por alguns segundos. Sem som e sem alarde, o Amparo envia a sua localização em tempo real para a sua rede de apoio e continua atualizando enquanto o alerta estiver ativo.',
-  bullets: [
-    { strong: 'Localização a cada 30 segundos', rest: ' enquanto o aviso estiver ativo' },
-    { strong: 'Veja quem já confirmou', rest: ' que recebeu o seu pedido' },
-    { strong: 'Segurar evita disparos sem querer', rest: '' },
-    { strong: 'Cancele quando quiser', rest: ', com um toque' },
-  ] satisfies Lead[],
-  demoLabel: 'Segure para testar',
-  demoDone: 'Demonstração concluída — nada foi enviado.',
-  demoAria: 'Demonstração do botão SOS. Segure para testar. Nada será enviado.',
-  avisadasTitle: 'Quem foi avisada',
-  avisadas: [
-    { name: 'Ana Beatriz', status: 'Confirmou · 12:31', confirmed: true },
-    { name: 'Lúcia', status: 'Aguardando', confirmed: false },
-    { name: 'Rafaela', status: 'Aguardando', confirmed: false },
-  ],
-}
-
-// 3.7
-export const cofre = {
-  pillar: 'Documentar',
-  h2: 'O que você guarda continua sendo verdade.',
-  text: 'Registre o que aconteceu do seu jeito, com texto, foto, áudio ou vídeo. Data, hora e local entram sozinhos e não podem ser alterados. Cada prova recebe uma assinatura digital que mostra que o arquivo não foi modificado desde o registro.',
-  bullets: [
-    {
-      strong: 'Escolha o tipo de violência:',
-      rest: ' física, psicológica, sexual ou patrimonial',
-    },
-    { strong: 'Só você abre o cofre.', rest: ' Ninguém mais vê os seus registros' },
-    {
-      strong: 'Prova verificada:',
-      rest: ' um código de integridade (hash SHA-256) acompanha cada arquivo',
-    },
-    {
-      strong: 'Registrar não é denunciar.',
-      rest: ' Você guarda agora e decide depois o que fazer',
-    },
-  ] satisfies Lead[],
-  hash: 'a3f9c2e7 · 8b41d05a · 6ec73912',
-  badge: 'Prova verificada',
-}
-
-// 3.8
-export const rede = {
-  pillar: 'Conectar',
-  h2: 'Quem cuida de você, por perto quando precisar.',
-  text: 'Escolha de uma a cinco pessoas de confiança: suas guardiãs. Elas só recebem um aviso quando você aciona o pedido de ajuda. Não é preciso ter feito denúncia nem ter medida protetiva.',
-  bullets: [
-    { strong: 'Até 5 guardiãs', rest: ', com uma principal, que é avisada primeiro' },
-    {
-      strong: 'Convite discreto pelo WhatsApp',
-      rest: ', sem revelar o motivo nem o nome do app',
-    },
-    { strong: 'O seu CPF nunca aparece', rest: ' para as guardiãs' },
-  ] satisfies Lead[],
-}
-
-// 3.9
-export const risco = {
-  pillar: 'Transformar',
-  h2: 'Uma leitura do risco que apoia você, sem decidir por você.',
-  text: [
-    'A partir dos seus registros e dos acionamentos do SOS, uma inteligência artificial indica se o seu risco está ',
-    { strong: 'baixo' },
-    ', ',
-    { strong: 'médio' },
-    ' ou ',
-    { strong: 'alto' },
-    ' e adapta o que o app mostra para você.',
-  ] satisfies Rich,
-  levels: [
-    {
-      id: 'baixo',
-      label: 'Baixo',
-      text: [
-        { em: 'Tudo por aqui está tranquilo.' },
-        ' O acompanhamento discreto segue ativo.',
-      ] satisfies Rich,
-    },
-    {
-      id: 'medio',
-      label: 'Médio',
-      text: [
-        'O app prepara um aviso discreto para a sua rede, que só é enviado se você confirmar.',
-      ] satisfies Rich,
-    },
-    {
-      id: 'alto',
-      label: 'Alto',
-      text: [
-        'Os caminhos de ajuda aparecem primeiro: Ligue 180, 190 e a delegacia especializada mais próxima.',
-      ] satisfies Rich,
-    },
-  ],
-  highlight: {
-    strong: '“Ver como chegamos nisso.”',
-    rest: ' Você sempre pode ver quais sinais levaram àquela leitura. Nada disso é enviado para ninguém.',
-  } satisfies Lead,
-  note: 'Os sinais considerados foram inspirados no Formulário Nacional de Avaliação de Risco (Lei nº 14.149/2021).',
-}
-
-// 3.10
-export const direitos = {
-  h2: 'O que a lei garante para você, sem juridiquês.',
-  text: 'Na Central de Conteúdo e Direitos do app, você encontra explicações curtas e claras para entender o que está acontecendo e quais caminhos existem.',
-  cards: [
-    {
-      title: 'Lei Maria da Penha, explicada',
-      text: 'O que a lei garante e os 5 tipos de violência que ela reconhece.',
-      image: 'direitos-1',
-    },
-    {
-      title: 'Como pedir uma medida protetiva',
-      text: 'O passo a passo, sem precisar de advogado e sem custo.',
-      image: 'direitos-2',
-    },
-    {
-      title: 'Monitoramento eletrônico do agressor',
-      text: 'Desde 2026, pode ser aplicado como medida protetiva por si só.',
-      image: 'direitos-3',
-    },
-    {
-      title: 'Sinais de relacionamento abusivo',
-      text: 'Como reconhecer quando o controle vira violência.',
-      image: 'direitos-4',
-    },
-  ],
-  violenciasLabel: '5 formas de violência',
-  violencias: ['Física', 'Psicológica', 'Sexual', 'Patrimonial', 'Moral'],
-}
-
-// 3.10b — no lugar dos depoimentos (nada de depoimento inventado)
-export const mitos = {
-  h2: 'Informação também protege.',
-  sub: 'Algumas ideias erradas ainda afastam mulheres da ajuda de que precisam.',
-  mitoLabel: 'Mito',
-  verdadeLabel: 'Verdade',
-  items: [
-    {
-      mito: 'Só é violência se deixar marca.',
-      verdade:
-        'A Lei Maria da Penha reconhece cinco formas de violência: física, psicológica, sexual, patrimonial e moral.',
-    },
-    {
-      mito: 'Para ter medida protetiva, preciso de boletim de ocorrência.',
-      verdade:
-        'Desde 2023 (Lei nº 14.550), a medida protetiva pode ser concedida mesmo sem boletim de ocorrência, inquérito ou processo.',
-    },
-    {
-      mito: 'Preciso de advogado para pedir proteção.',
-      verdade: 'O pedido de medida protetiva pode ser feito sem advogado e sem custo.',
-    },
-    {
-      mito: 'O Ligue 180 serve só para denunciar.',
-      verdade:
-        'O 180 também orienta sobre direitos e serviços. É gratuito, sigiloso e funciona 24 horas.',
-    },
-    {
-      mito: 'Se ele nunca me bateu, não estou em risco.',
-      verdade:
-        'Ameaças, controle e isolamento também são sinais de risco e fazem parte da avaliação oficial de risco.',
-    },
-  ],
-}
-
-// 3.11
-export const seguranca = {
-  h2: 'A sua segurança vem antes de qualquer recurso.',
-  text: [
-    'Antes de entrar no app, cada funcionalidade passa por uma pergunta: ',
-    { em: 'ela continua segura se o agressor pegar o seu celular?' },
-  ] satisfies Rich,
-  items: [
-    {
-      title: 'Localização só quando você aciona.',
-      text: 'Nunca em segundo plano sem o seu consentimento.',
-    },
-    { title: 'Notificações discretas.', text: 'Nada aparece na tela bloqueada.' },
-    {
-      title: 'Senhas e código protegidos.',
-      text: 'Guardados apenas de forma criptografada (bcrypt).',
-    },
-    { title: 'Conexão segura.', text: 'Todo o tráfego passa por HTTPS.' },
-    {
-      title: 'Seus dados, suas regras.',
-      text: 'Em conformidade com a LGPD: você pode acessar, corrigir e apagar.',
-    },
-    {
-      title: 'Apagamento rápido.',
-      text: 'Quando precisar, você apaga seus registros em poucos toques.',
-    },
-  ],
-}
-
-// 3.12
+// 3.8 (a construir: textos revisados contra o COPY 3.8 na construção)
 export const comecar = {
   h2: 'Comece em poucos minutos.',
   /** Rótulos da barra de progresso do palco (COPY 3.12). */
@@ -463,33 +213,7 @@ export const comecar = {
   ] satisfies Lead[],
 }
 
-// 3.12b
-export const acesso = {
-  chip: 'Acesso gratuito',
-  title: 'Tudo isso, sem pagar nada.',
-  text: 'Sem loja de aplicativos e sem instalação complicada. Abra no navegador do celular e comece.',
-  list: [
-    'Modo Disfarce',
-    'SOS silencioso',
-    'Cofre de provas com integridade verificável',
-    'Rede de até 5 guardiãs',
-    'Leitura de risco',
-    'Central de direitos',
-  ],
-}
-
-// 3.13
-export const ajudar = {
-  h2: 'Conhece alguém que pode precisar?',
-  text: 'Você pode ser a guardiã de alguém. Compartilhe o Amparo com cuidado: em uma conversa a sós, num momento seguro, sem pressionar.',
-  cta: 'Copiar link do Amparo',
-  copied: 'Link copiado',
-  tip: 'Evite enviar o link para um celular que outra pessoa possa ver.',
-}
-
-// 3.14
-
-// 3.15
+// 3.9 (a construir: textos revisados contra o COPY 3.9 na construção)
 export const faq = {
   h2: 'Perguntas frequentes',
   sub: 'Respostas rápidas para as dúvidas mais comuns.',
@@ -544,7 +268,7 @@ export const faq = {
   ],
 }
 
-// 3.16
+// 3.10 (a construir: textos revisados contra o COPY 3.10 na construção)
 export const ctaFinal = {
   h2: 'Você merece se sentir segura.',
   text: 'O primeiro passo pode ser pequeno e discreto.',
@@ -557,7 +281,7 @@ export const ctaFinal = {
   ],
 }
 
-// 3.17 — os números viram links tel:
+// Faixa de emergência (3.9 e 3.11) — os números viram links tel:
 export const emergencia = {
   perigo: { before: 'Em perigo agora? Ligue ', number: '190', after: '.' },
   orientacao: {
@@ -570,48 +294,14 @@ export const emergencia = {
   info180: 'Gratuito, sigiloso, 24 horas',
 }
 
-// 3.18
+// 3.11 (links: `nav.links` + "Voltar ao topo")
 export const footer = {
-  banner: {
-    title: 'Proteção que cabe no seu celular.',
-    text: 'Discreta, segura e sempre com você.',
-  },
-  selos: ['100% no navegador', 'Dados protegidos (LGPD)', 'Modo Disfarce'],
-  columns: [
-    {
-      title: 'Recursos',
-      links: [
-        { label: 'Modo Disfarce', href: '#disfarce' },
-        { label: 'SOS silencioso', href: '#sos' },
-        { label: 'Cofre de provas', href: '#cofre' },
-        { label: 'Rede de apoio', href: '#rede' },
-        { label: 'Leitura de risco', href: '#risco' },
-      ],
-    },
-    {
-      title: 'Informação',
-      links: [
-        { label: 'Seus direitos', href: '#direitos' },
-        { label: 'Mitos e verdades', href: '#mitos' },
-        { label: 'Segurança', href: '#seguranca' },
-        { label: 'Perguntas frequentes', href: '#faq' },
-      ],
-    },
-    {
-      title: 'Ajuda agora',
-      links: [
-        { label: 'Ligue 190', href: 'tel:190' },
-        { label: 'Ligue 180', href: 'tel:180' },
-      ],
-    },
-  ],
   voltarTopo: 'Voltar ao topo',
   lema: 'Você não está sozinha.',
   legal:
     'Amparo é um projeto acadêmico (TCC — Ciência da Computação, UNIRP, 2026) em desenvolvimento. Não substitui os serviços oficiais de segurança e atendimento à mulher.',
+  dados: 'Dados: 19º Anuário Brasileiro de Segurança Pública (FBSP, 2025).',
   copyright: '© 2026 Amparo',
-  /** Fonte da faixa de números, movida para o rodapé (ajuste do cliente, 10/11/2026). */
-  dados: 'Dados: 19º Anuário Brasileiro de Segurança Pública, FBSP, 2025',
 }
 
 // §4
@@ -757,14 +447,6 @@ export const app = {
       },
     ],
   },
-  /** alerta-enviado.png */
-  alerta: {
-    sair: 'Sair rápido',
-    title: 'Alerta enviado',
-    text: 'Sua localização foi compartilhada com sua rede de guardiãs. Aguardando confirmação.',
-    reenvio: 'Sua localização é reenviada a cada 30 s enquanto o aviso estiver ativo.',
-    cancelar: 'Cancelar aviso',
-  },
   /** prova-verificada.png */
   prova: {
     title: 'Áudio · 2 min 14 s',
@@ -804,8 +486,6 @@ export const app = {
       principal: false,
     },
   ],
-  /** nova-ocorrencia.png */
-  tipos: ['Física', 'Psicológica', 'Sexual', 'Patrimonial'],
   /** Telas de cadastro (cadastro-*.png) e DESIGN.md §9 "Como começar". */
   cadastro: {
     etapas: ['Etapa 1', 'Etapa 2', 'Etapa 3', 'Etapa 4'],
@@ -817,17 +497,9 @@ export const app = {
     adicionarGuardia: 'Adicionar guardiã',
     pronto: 'Tudo pronto',
   },
-  /** Ícone da calculadora na tela de apps (Modo Disfarce, passo 1). */
-  calculadora: 'Calculadora',
 }
 
 /** Fragmentos de UI usados nos cartões flutuantes (DESIGN.md §6.6 e §9). */
 export const ui = {
-  alertaEnviado: { title: 'Alerta enviado', text: 'Sua rede foi avisada' },
-  provaVerificada: { title: 'Prova verificada', text: 'Arquivo sem alterações desde 14/03, 21:47' },
-  confirmou: { name: 'Ana Beatriz', initials: 'AB', status: 'Confirmou · 12:31' },
   verDeNovo: 'Ver de novo',
-  testarDeNovo: 'Testar de novo',
-  voltarCalculadora: 'Voltar à calculadora',
-  lerNoApp: 'Ler no Amparo',
 }

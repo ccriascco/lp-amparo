@@ -22,7 +22,7 @@ import { Chip } from '../components/ui/Chip'
 import { PhoneFrame } from '../components/ui/PhoneFrame'
 import { CalculatorScreen } from '../components/phone/CalculatorScreen'
 import { HomeScreen } from '../components/phone/HomeScreen'
-import { a11y, cta, disfarce, hero, risco, sos } from '../content/copy'
+import { a11y, contexto, cta, dores, hero, leituraRisco } from '../content/copy'
 import { APP_URL } from '../lib/config'
 import { formatNumber } from '../lib/format'
 import { Header } from '../sections/Header'
@@ -75,14 +75,14 @@ export default function Kit() {
         <Block title="Tipografia">
           <div className="space-y-6">
             <p className="display-xl">{hero.h1}</p>
-            <p className="max-w-[18ch] display-l">{disfarce.h2}</p>
-            <p className="display-m">{sos.h2}</p>
+            <p className="max-w-[18ch] display-l">{contexto.h2}</p>
+            <p className="display-m">{leituraRisco.h2}</p>
             <p className="numero">
               {formatNumber(1492)} · {formatNumber(64.3, 1)}%
             </p>
             <p className="max-w-[52ch] lead text-texto-secundario">{hero.sub}</p>
-            <p className="max-w-[62ch] text-body">{sos.text}</p>
-            <p className="text-small text-texto-secundario">{risco.note}</p>
+            <p className="max-w-[62ch] text-body">{contexto.text}</p>
+            <p className="text-small text-texto-secundario">{dores.banner.sub}</p>
             <p className="caption text-vinho">Caption · Nunito Sans 600</p>
           </div>
         </Block>
@@ -92,11 +92,11 @@ export default function Kit() {
             <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
               {cta.acessar}
             </Button>
-            <Button variant="secondary" href="#disfarce" icon={<ArrowDown />}>
-              {hero.ctaSecondary}
+            <Button variant="secondary" href="#como-funciona" icon={<ArrowDown />}>
+              {hero.ctaSecondary.label}
             </Button>
             <Button size="sm">{cta.acessar}</Button>
-            <Button variant="ghost" href="#recursos">
+            <Button variant="ghost" href="#leitura-risco">
               Conheça os recursos
             </Button>
           </div>
@@ -166,7 +166,7 @@ export default function Kit() {
                     Voltar para a calculadora
                   </button>
                 ) : (
-                  disfarce.hint
+                  'Digite 1907 e toque em ='
                 )
               }
             />

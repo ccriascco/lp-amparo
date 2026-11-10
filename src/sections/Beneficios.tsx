@@ -105,7 +105,7 @@ export function Beneficios() {
               key={c.title}
               className="w-[85vw] max-w-[420px] shrink-0 snap-start lg:w-auto lg:max-w-none"
             >
-              <BenefitCard slot={c.slot} title={c.title} text={c.text} />
+              <BenefitCard slot={c.slot} title={c.title} text={c.text} link={c.link} />
             </li>
           ))}
         </ul>
@@ -114,7 +114,14 @@ export function Beneficios() {
   )
 }
 
-function BenefitCard({ slot, title, text }: { slot: ImageSlot; title: string; text: string }) {
+type BenefitCardProps = {
+  slot: ImageSlot
+  title: string
+  text: string
+  link: { label: string; href: string }
+}
+
+function BenefitCard({ slot, title, text, link }: BenefitCardProps) {
   return (
     <article
       data-ben-card
@@ -138,6 +145,10 @@ function BenefitCard({ slot, title, text }: { slot: ImageSlot; title: string; te
           {title}
         </h3>
         <p className="mt-1.5 text-small text-pretty text-texto-secundario">{text}</p>
+        {/* Link para o recurso (COPY 3.5); área de toque de 44px */}
+        <Button variant="ghost" href={link.href} className="-mb-2 text-small">
+          {link.label}
+        </Button>
       </div>
     </article>
   )

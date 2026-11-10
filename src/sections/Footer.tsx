@@ -1,10 +1,10 @@
 import logoBranco from '../assets/brand/amparo-logo-horizontal-branco.svg'
 import { EmergencyBar } from '../components/ui/EmergencyBar'
 import { Container } from '../components/ui/Section'
-import { faq, footer, nav } from '../content/copy'
+import { footer, nav } from '../content/copy'
 
-// "Dúvidas" (nav) e "Perguntas frequentes" levam ao mesmo #faq: fica só o segundo (rodapé, COPY 3.18).
-const LINKS = [...nav.links.filter((l) => l.href !== '#faq'), { label: faq.h2, href: '#faq' }]
+// Mesmos links do header + "Voltar ao topo" (COPY 3.11).
+const LINKS = [...nav.links, { label: footer.voltarTopo, href: '#inicio' }]
 
 /** Rodapé (DESIGN.md §6.16): marca + links · EmergencyBar · texto legal. */
 export function Footer() {
