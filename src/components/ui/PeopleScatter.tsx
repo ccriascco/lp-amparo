@@ -15,6 +15,8 @@ type Floating = {
   /** Também aparece no celular (posição própria). */
   mobile?: CSSProperties
   ratio?: 'square' | 'portrait'
+  /** Fica nítida mesmo com velocidade baixa. */
+  sharp?: boolean
 }
 
 /** 9 fotos em volta da frase (§6.26; ajustadas a pedido do cliente). As de speed baixo ficam "ao fundo". */
@@ -64,6 +66,9 @@ const PHOTOS: Floating[] = [
     ratio: 'portrait',
   },
   { slot: 'cta-final', pos: { right: '21%', top: '90%' }, size: 108, speed: 0.55 },
+  // Vão acima da frase, um pouco à direita (pedido do cliente). Lenta (0.3) para ficar no vão
+  // durante todo o palco fixo; nítida mesmo sendo lenta.
+  { slot: 'pessoas-janela', pos: { left: '57%', top: '18%' }, size: 124, speed: 0.3, sharp: true },
   // Mais fotos (pedido do cliente, 10/11/2026), nos vãos que não cruzam a frase no estado parado
   {
     slot: 'risco',
@@ -199,7 +204,7 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
         <div className="relative mx-auto grid min-h-[620px] max-w-[1440px] place-items-center px-5 pt-40 pb-20 md:px-8 md:pt-44 lg:h-full lg:min-h-0 lg:py-0">
           {/* Fotos pequenas */}
           {PHOTOS.map((p) => {
-            const back = p.speed < 0.8
+            const back = p.speed < 0.8 && !p.sharp
             return (
               <div
                 key={p.slot}

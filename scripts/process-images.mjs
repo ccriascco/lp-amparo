@@ -64,6 +64,12 @@ const SLOTS = [
   { slot: 'numeros', file: 'numeros.png', crop: { left: 0, top: 30, width: 1086, height: 1357 } },
   // 16:9 — banner de #dores: rosto em luz dourada à direita, sombra à esquerda para o texto
   { slot: 'dores-banner', file: 'dores-banner.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
+  // 1:1 — #pessoas, vão acima da frase (pedido do cliente): mulher sorrindo para o celular na janela
+  {
+    slot: 'pessoas-janela',
+    file: 'mulher-janela-sorrindo-celular.png',
+    crop: { left: 0, top: 0, width: 1024, height: 1024 },
+  },
   // ── PROVISÓRIAS (ver NOTES.md): alternativas de assets/fotos até as fotos definitivas chegarem ──
   // sos: mulher com o celular junto à janela, espelhada para a figura ficar no terço esquerdo.
   // O recorte é feito antes do espelho: o mobile pega o lado direito do original (onde está a figura).
@@ -116,6 +122,10 @@ const PLACEHOLDERS = [
   { slot: 'cofre-mobile', width: 1080, height: 1350 },
   { slot: 'comecar-1', width: 1600, height: 900 },
   { slot: 'comecar-4', width: 1600, height: 900 },
+  // #beneficios (10/11/2026): 4:5, trocar pelas fotos definitivas quando chegarem
+  { slot: 'beneficio-tranquilidade', width: 1080, height: 1350 },
+  { slot: 'beneficio-controle', width: 1080, height: 1350 },
+  { slot: 'beneficio-confianca', width: 1080, height: 1350 },
 ]
 
 async function placeholderSource(width, height) {

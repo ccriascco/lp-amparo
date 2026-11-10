@@ -94,6 +94,14 @@
       1672
     ]
   },
+  "pessoas-janela": {
+    "width": 1024,
+    "height": 1024,
+    "widths": [
+      640,
+      1024
+    ]
+  },
   "sos": {
     "width": 1672,
     "height": 941,
@@ -187,6 +195,33 @@
       640,
       1080,
       1600
+    ],
+    "placeholder": true
+  },
+  "beneficio-tranquilidade": {
+    "width": 1080,
+    "height": 1350,
+    "widths": [
+      640,
+      1080
+    ],
+    "placeholder": true
+  },
+  "beneficio-controle": {
+    "width": 1080,
+    "height": 1350,
+    "widths": [
+      640,
+      1080
+    ],
+    "placeholder": true
+  },
+  "beneficio-confianca": {
+    "width": 1080,
+    "height": 1350,
+    "widths": [
+      640,
+      1080
     ],
     "placeholder": true
   }
