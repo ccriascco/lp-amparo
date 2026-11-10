@@ -15,6 +15,7 @@ import { Header } from './sections/Header'
 import { Hero } from './sections/Hero'
 import { MarqueeBand } from './sections/MarqueeBand'
 import { Pessoas } from './sections/Pessoas'
+import { Beneficios } from './sections/Beneficios'
 import { Cofre, Rede, Risco, Sos } from './sections/Pilares'
 import { Recursos } from './sections/Recursos'
 import { Seguranca } from './sections/Seguranca'
@@ -68,6 +69,7 @@ function Landing() {
         <MarqueeBand />
         <Contexto />
         <Pessoas />
+        <Beneficios />
         <Dores />
         <Disfarce />
         <Recursos />

@@ -166,7 +166,7 @@ export function Hero() {
           depth={-60}
           icon={<Calculator />}
           label={recursos.items[5].title}
-          className="bottom-24 left-[2%] -rotate-6 md:bottom-auto md:-top-4 md:left-[4%] lg:left-[calc(50%-560px)]"
+          className="bottom-24 left-[2%] -rotate-6 md:-top-4 md:bottom-auto md:left-[4%] lg:left-[calc(50%-560px)]"
         />
         <Pill
           href="#sos"

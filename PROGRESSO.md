@@ -34,7 +34,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 4c | `#dores` ajustes 2: banner com foto no topo, painel claro, telas Ocorrências e "Como chegamos nesta leitura" — screenshots em `./screenshots/dores-2/` | `3902727` |
 | 4d | `#dores` ajustes 3: margem branca do banner, banner sem emenda, painel vinho vivo, leitura de risco na tela inicial rolada — screenshots em `./screenshots/dores-3/` | `ab4d548` |
 | 4e | `#dores` ajustes 4: cartão único (banner + lista no mesmo fundo), foto natural dissolvendo, transição NextPay — screenshots em `./screenshots/dores-4/` | `09bb215` |
-| 3h | `#pessoas`: foto central em movimento, sem ficar colada na base — screenshots em `./screenshots/pessoas-centro/` | (este commit) |
+| 3h | `#pessoas`: foto central em movimento, sem ficar colada na base — screenshots em `./screenshots/pessoas-centro/` | `5725147` |
+| 4f | Seção nova `#beneficios` (Gardance + NextPay) e foto no vão acima da frase em `#pessoas` — screenshots em `./screenshots/beneficios/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -118,6 +119,13 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 ### `#pessoas` — foto central (10/11/2026)
 - A foto central também se move (sobe um pouco com o scroll e flutua devagar) e não fica colada na base do palco; o movimento é limitado para nunca cobrir a frase.
 
+### Seção nova: Benefícios `#beneficios` (10/11/2026)
+- Entre o Manifesto (`#pessoas`) e o cartão das Dores; padrão Gardance "O que você ganha…" + NextPay "Mais que um banco digital…". Fundo branco, `py-24 md:py-32`; a base do Manifesto se dissolve no branco (~160px).
+- Cabeçalho: chip "Benefícios" + H2 "Mais que um app de proteção." (texto) / "Um amparo no seu dia a dia." (vinho) à esquerda; botão "Acessar o Amparo" à direita, alinhado pela base.
+- 3 cartões 4:5 com foto natural, etiqueta branca na base e um pedaço da interface em vidro no terço superior: "Mais tranquilidade" (Rede ativa), "Sua história, suas escolhas" (Registro salvo no cofre), "Decida com informação" (Leitura de risco · Baixo). Fotos `beneficio-tranquilidade`, `beneficio-controle`, `beneficio-confianca` são **placeholders** até as fotos chegarem.
+- Movimento: H2 palavra por palavra, cartões por máscara de baixo para cima (stagger 0,12), parallax interno, interface entrando depois e flutuando; hover com zoom 1.04 na foto e etiqueta subindo. Celular: carrossel com snap (85vw).
+- `#pessoas` ganhou uma foto no vão acima da frase, um pouco à direita.
+
 ### Fundos das seções (regra dos Ajustes 3)
 | # | Seção | Fundo |
 |---|---|---|
@@ -125,6 +133,7 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 | 2 | Marquee | branco (fios `borda`) |
 | 3 | `#contexto` | branco (pedido do cliente; ver nota abaixo da tabela) |
 | 4 | `#pessoas` | **rosado** — `--grad-rosa` em tela cheia e parado; divisória reta e clara, sem esmaecer no branco |
+| 4b | `#beneficios` | branco |
 | 5 | `#dores` | branco, com um cartão único em degradê `#4B2A3F` → `#954B6E` (escuro) |
 | 6 | `#disfarce` | shell `vinho-profundo` (escura) sobre margem branca |
 | 7 | `#recursos` | branco |

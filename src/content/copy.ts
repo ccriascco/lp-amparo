@@ -104,6 +104,33 @@ export const contexto = {
   fecho: 'Por trás de cada número, existe uma mulher. O Amparo foi feito para ela.',
 }
 
+// Benefícios (seção nova entre o Manifesto e as Dores; textos do cliente, 10/11/2026)
+export const beneficios = {
+  chip: 'Benefícios',
+  h2a: 'Mais que um app de proteção.',
+  h2b: 'Um amparo no seu dia a dia.',
+  cards: [
+    {
+      slot: 'beneficio-tranquilidade',
+      title: 'Mais tranquilidade',
+      text: 'Sua rede de apoio fica a um toque, mesmo em silêncio.',
+      ui: { title: 'Rede ativa', text: '3 guardiãs prontas para ajudar' },
+    },
+    {
+      slot: 'beneficio-controle',
+      title: 'Sua história, suas escolhas',
+      text: 'Registre agora e decida depois o que fazer, sem pressão.',
+      ui: { title: 'Registro salvo no cofre', text: 'Hoje, 21:47' },
+    },
+    {
+      slot: 'beneficio-confianca',
+      title: 'Decida com informação',
+      text: 'Entenda seus direitos e acompanhe como está o seu risco.',
+      ui: { title: 'Leitura de risco', levels: ['Baixo', 'Médio', 'Alto'], active: 0 },
+    },
+  ],
+} as const
+
 // 3.3
 export const dores = {
   /* O H2 e o subtítulo acima da lista saíram (ajustes 2 de #dores, 10/11/2026): o título agora é o
