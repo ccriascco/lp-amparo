@@ -42,7 +42,8 @@ Do preloader até `#dores` já está tudo na rodada 2 (ordem atual: hero → mar
 | 4j | Benefícios na versão anterior sem notificações; cartão das Dores com 1440px — screenshots em `./screenshots/ajustes-5b/` | `3f4d408` |
 | 4k | `#dores` ajustes 5: cartão 1440px + margem, título em 3 linhas, subtítulo novo, lista mais compacta — screenshots em `./screenshots/ajustes-6b/` | `31db80d` |
 | 4l | Título em uma linha e maior, espaço da lista em telas baixas, fotos novas dos Benefícios, correção do chip errado e da faixa branca no celular — screenshots em `./screenshots/ajustes-7b/` | 597c925 |
-| 4m | Grid responsivo: 1280px até 1599px de tela (inclui 1440), 1440px a partir de 1600px (inclui 1920); cartão das Dores acompanha o grid — screenshots em `./screenshots/grid-responsivo/` | (este commit) |
+| 4m | Grid responsivo: 1280px até 1599px de tela (inclui 1440), 1440px a partir de 1600px (inclui 1920); cartão das Dores acompanha o grid — screenshots em `./screenshots/grid-responsivo/` | 8707d9f |
+| 4n | Padding interno do cartão das Dores de 96px em telas a partir de 1600px (grid 1440) — prints `padding-*` em `./screenshots/grid-responsivo/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 

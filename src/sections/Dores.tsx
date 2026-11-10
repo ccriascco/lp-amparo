@@ -269,7 +269,7 @@ export function Dores() {
           {/* Só o necessário para o texto: véu suave atrás do título e do subtítulo */}
           <div aria-hidden className="pointer-events-none absolute inset-0" style={TEXT_SCRIM} />
 
-          <div className="relative z-10 mx-auto -mt-28 flex flex-col gap-10 px-5 pb-4 md:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:px-12 lg:pt-28 lg:pb-14">
+          <div className="relative z-10 mx-auto -mt-28 flex flex-col gap-10 px-5 pb-4 md:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:px-12 lg:pt-28 lg:pb-14 min-[100rem]:px-24">
             <span
               data-banner-appear
               className="inline-flex w-max items-center rounded-full px-4 py-2 caption text-white glass"
@@ -314,7 +314,7 @@ export function Dores() {
         </div>
 
         {/* ── Lista com o celular ── */}
-        <Container className="pt-8 pb-24 lg:pt-0 lg:pb-28">
+        <Container className="pt-8 pb-24 lg:pt-0 lg:pb-28 min-[100rem]:px-24">
           <div className="lg:grid lg:grid-cols-12 lg:gap-12">
             {/* Esquerda: as 5 dores, rolando normalmente */}
             <ul className="flex flex-col gap-14 pt-12 lg:col-span-5 lg:gap-0 lg:pt-0">
