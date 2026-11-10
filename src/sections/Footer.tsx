@@ -32,7 +32,10 @@ export function Footer() {
         <EmergencyBar subtle className="mt-12" />
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-8 text-small text-white/60 md:flex-row md:justify-between md:gap-10">
-          <p className="max-w-[80ch]">{footer.legal}</p>
+          <div className="max-w-[80ch]">
+            <p>{footer.legal}</p>
+            <p className="mt-2 caption font-normal text-white/60">{footer.dados}</p>
+          </div>
           <p className="shrink-0">{footer.copyright}</p>
         </div>
       </Container>

@@ -98,9 +98,9 @@ export function Hero() {
           style={{ transform: 'rotate(-12deg)' }}
         >
           <div data-hero-side-inner className="relative">
-            <div data-hero-float className="relative">
+            <div data-hero-float className="relative isolate">
               <IconBubble icon={<UsersRound />} className="-top-7 left-[58%]" />
-              <PhoneFrame decorative>
+              <PhoneFrame decorative className="z-0">
                 <RedeScreen />
               </PhoneFrame>
             </div>
@@ -112,9 +112,9 @@ export function Hero() {
           style={{ transform: 'rotate(12deg)' }}
         >
           <div data-hero-side-inner className="relative">
-            <div data-hero-float className="relative">
+            <div data-hero-float className="relative isolate">
               <IconBubble icon={<FolderLock />} className="-top-7 left-[22%]" flip />
-              <PhoneFrame decorative>
+              <PhoneFrame decorative className="z-0">
                 <OcorrenciasScreen />
               </PhoneFrame>
             </div>
@@ -271,13 +271,13 @@ function IconBubble({
   flip?: boolean
 }) {
   return (
-    <span data-hero-pop className={clsx('absolute z-10 flex items-end gap-1', className)}>
+    <span data-hero-pop className={clsx('absolute z-20 flex items-end gap-1', className)}>
       <span className="grid size-14 place-items-center rounded-full border-4 border-white bg-vinho text-white shadow-float [&>svg]:size-5">
         {icon}
       </span>
       <MousePointer2
         aria-hidden
-        className={clsx('size-5 fill-vinho-profundo text-vinho-profundo', flip && '-scale-x-100')}
+        className={clsx('size-5 fill-vinho-profundo text-white', flip && '-scale-x-100')}
         strokeWidth={1.5}
       />
     </span>

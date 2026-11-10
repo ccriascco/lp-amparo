@@ -557,6 +557,8 @@ export const footer = {
   legal:
     'Amparo é um projeto acadêmico (TCC — Ciência da Computação, UNIRP, 2026) em desenvolvimento. Não substitui os serviços oficiais de segurança e atendimento à mulher.',
   copyright: '© 2026 Amparo',
+  /** Fonte da faixa de números, movida para o rodapé (ajuste do cliente, 10/11/2026). */
+  dados: 'Dados: 19º Anuário Brasileiro de Segurança Pública, FBSP, 2025',
 }
 
 // §4

@@ -19,10 +19,11 @@ Do preloader até `#dores` já está tudo na rodada 2. Da seção `#disfarce` pa
 | 0 | Base: tokens novos (raios, `--grad-hero/secao/painel`, `display-xl` em uma linha), `lib/appear.ts` (aparecer no scroll e títulos palavra por palavra), `copy.ts` do COPY novo, remoção de "O projeto", fotos novas/provisórias | `bc56f50` |
 | 1 | Preloader + Header + Hero (abertura, desbloqueio, notificações empilhadas, celular girando ao sair, header que vira pílula) | `9f9f0f8` |
 | 1b | H1 do hero com ~32px no celular (`clamp(1.625rem, 8.4vw, 4.75rem)`) | `81288e3` |
-| 2 | Números + Marquee (`StatsBand`, `Marquee` com botão de pausa) | `a1d140c` |
+| 2 | Números + Marquee (`StatsBand`, `Marquee`) — revisados nos Ajustes 2 | `a1d140c` |
 | 3 | Manifesto (`PeopleScatter`, padrão Gaia) | `e1447b7` |
 | 4 | Dores (`QuestionStage`, padrão Gardance) | `c481b47` |
-| 1c | Ajustes do hero e do header (logo alinhado, central reto, telas Rede/Ocorrências/home-sos, sem onda, celulares inteiros flutuando, base dissolvendo) — screenshots em `./screenshots/ajustes-hero/` | (este commit) |
+| 1c | Ajustes do hero e do header (logo alinhado, central reto, telas Rede/Ocorrências/home-sos, sem onda, celulares inteiros flutuando, base dissolvendo) — screenshots em `./screenshots/ajustes-hero/` | `5ee052a` |
+| 1d/2b | Ajustes 2: logo oficial (PNG recortado), círculos por cima da moldura, marquee antes dos números e sem pausa, números em cartões, fonte no rodapé — screenshots em `./screenshots/ajustes-2/` | (este commit) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -43,11 +44,18 @@ Depois (itens 5–16): Modo Disfarce, Recursos (`FeatureStack`), Seus direitos, 
 - ~~Inclinação 3D do celular do hero~~ — **revogada** pelos ajustes de 10/11/2026 abaixo.
 
 ### Ajustes do hero e do header (10/11/2026) — têm prioridade sobre o `DESIGN.md`
-1. **Logo do header:** o meio da altura das letras de "Amparo" (altura-x do "mparo") fica alinhado ao meio da gota. Feito no próprio SVG horizontal (`scripts/build-logos.mjs` → `npm run logos`), vale para o header normal e o compacto.
+1. ~~Logo do header alinhado no SVG gerado~~ — **substituído** pelo item 1 dos "Ajustes 2" abaixo (logo oficial em PNG).
 2. **Celular central reto e centralizado o tempo todo:** sem rotação nem inclinação 3D. Ao rolar, só sobe um pouco (`yPercent 0 → −6`). **Substitui a linha "Celular central do hero" do §7.9.** Os laterais continuam abrindo o leque.
 3. **Telas dos celulares do hero, todas em código e fiéis a `assets/app-screens/`:** central = calculadora → tela inicial (`home-sos.png`); esquerdo = Rede de apoio (`rede-de-apoio.png`); direito = Ocorrências (`ocorrencias.png`). Saem as telas "Alerta enviado" e "Prova verificada" dos celulares; as notificações flutuantes continuam.
 4. **Desbloqueio sem a onda:** o fundo rosa (`--grad-hero`) e os anéis ficam visíveis desde o carregamento. Removida a revelação em onda com `clip-path` do §7.1. No "=", só a tela do celular muda (crossfade para a tela inicial) com um pulso suave de luz dentro da tela, saindo da tecla "=".
 5. **Base do hero sem corte:** os 3 celulares aparecem inteiros (sem `overflow-hidden` cortando); depois de abertos flutuam devagar (`y ±10px`, 5–7s, `sine.inOut`, `yoyo`, cada um num ritmo); o fundo do hero se dissolve no branco da seção seguinte num degradê de 200px, sem linha ou borda; o hero ficou mais alto para caber os celulares.
+
+### Ajustes 2 — header, hero, marquee e números (10/11/2026) — têm prioridade sobre o `DESIGN.md`
+1. **Logo do header = arquivo oficial:** `src/assets/brand/amparo-logo-horizontal-vinho.png` (e `-branco.png` sobre fundo escuro), com as margens transparentes recortadas (`*-recortado.png`, 112px de altura). **Nunca** recriar o logo com texto em Quicksand. Altura de 28px no header normal e 24px no compacto.
+2. **Círculos rosa com ícone dos celulares laterais por cima de tudo** (acima do `PhoneFrame`), sobrepondo a borda superior do celular, como na Task.io.
+3. **Marquee logo depois do hero, antes da faixa de números**, passando infinito e contínuo: **sem botão de pausa e sem pausar no hover**. Parado só com `prefers-reduced-motion`. Itens e gotas mantidos.
+4. **Faixa de números em cartões** (substitui as colunas com divisória do §6.24): 4 cartões lado a lado (2×2 no celular), fundo branco, borda 1px `borda`, raio 20px, padding 28–32px (20px abaixo de 640px, para caber em 320px), mesma altura; ícone lucide num círculo vinho de 40px com ícone branco no topo; número grande Quicksand `tabular-nums` com contador e rótulo embaixo; **101.656 em destaque** (`--grad-vinho`, textos brancos); hover sobe 4px com `shadow-float`; entrada com `appear` em stagger. Título "Por que o Amparo existe" à esquerda, acima.
+5. **Fonte dos números no rodapé:** "Dados: 19º Anuário Brasileiro de Segurança Pública, FBSP, 2025", em texto pequeno junto do texto legal. Saiu da faixa de números.
 
 ## Ajustes pendentes (escreva aqui o que quer mudar nos itens 1–4)
 - [ESCREVA AQUI O QUE VOCÊ QUER AJUSTAR]

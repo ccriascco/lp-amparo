@@ -65,8 +65,8 @@ function Landing() {
       <Header />
       <main>
         <Hero />
-        <Numeros />
         <MarqueeBand />
+        <Numeros />
         <Contexto />
         <Dores />
         <Disfarce />

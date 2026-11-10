@@ -2,8 +2,9 @@ import { useGSAP } from '@gsap/react'
 import clsx from 'clsx'
 import { Menu, X } from 'lucide-react'
 import { useEffect, useId, useRef, useState } from 'react'
-import logoBranco from '../assets/brand/amparo-logo-horizontal-branco.svg'
-import logoVinho from '../assets/brand/amparo-logo-horizontal.svg'
+// Logo oficial (PNG do kit com as margens transparentes recortadas), ajuste do cliente 10/11/2026
+import logoBranco from '../assets/brand/amparo-logo-horizontal-branco-recortado.png'
+import logoVinho from '../assets/brand/amparo-logo-horizontal-vinho-recortado.png'
 import { Button } from '../components/ui/Button'
 import { cta, nav } from '../content/copy'
 import { APP_URL } from '../lib/config'
@@ -93,22 +94,22 @@ export function Header() {
           <img
             src={logoVinho}
             alt=""
-            width={90}
-            height={30}
+            width={98}
+            height={28}
             className={clsx(
               'w-auto transition-[height,opacity] duration-500 ease-amparo',
-              pill ? 'h-[26px]' : 'h-[30px]',
+              pill ? 'h-[24px]' : 'h-[28px]',
               dark && 'opacity-0',
             )}
           />
           <img
             src={logoBranco}
             alt=""
-            width={90}
-            height={30}
+            width={98}
+            height={28}
             className={clsx(
               'absolute top-1/2 left-0 w-auto -translate-y-1/2 transition-[height,opacity] duration-500 ease-amparo',
-              pill ? 'h-[26px]' : 'h-[30px]',
+              pill ? 'h-[24px]' : 'h-[28px]',
               !dark && 'opacity-0',
             )}
           />

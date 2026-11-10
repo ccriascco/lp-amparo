@@ -22,6 +22,8 @@ const at = opt('at', '0').split(',').map(Number)
 const wait = Number(opt('wait', '900'))
 const reduce = flags.includes('--reduce')
 const full = flags.includes('--full')
+const offset = Number(opt('offset', '0')) // px acima da seção (ex.: mostrar a faixa anterior)
+const selshot = opt('selshot', '') // fotografa só este elemento depois de rolar
 const CHROME = process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 
 await fs.mkdir(outDir, { recursive: true })
@@ -64,17 +66,18 @@ for (const w of widths) {
   } else {
     for (const p of at) {
       const y = await page.evaluate(
-        ([sel, p]) => {
+        ([sel, p, off]) => {
           const el = document.querySelector(sel)
           const r = el.getBoundingClientRect()
           const top = r.top + window.scrollY
-          return Math.max(0, top + (r.height - innerHeight) * p)
+          return Math.max(0, top + (r.height - innerHeight) * p - off)
         },
-        [sel, p],
+        [sel, p, offset],
       )
       await scrollTo(y)
       const file = path.join(outDir, `${w}-${tag}-${String(Math.round(p * 100)).padStart(3, '0')}.png`)
-      await page.screenshot({ path: file })
+      if (selshot) await page.locator(selshot).first().screenshot({ path: file })
+      else await page.screenshot({ path: file })
     }
   }
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)
