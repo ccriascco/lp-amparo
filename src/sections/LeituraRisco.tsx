@@ -4,10 +4,7 @@ import {
   ClipboardList,
   FolderLock,
   History,
-  MapPin,
   MessageSquareWarning,
-  Phone,
-  ShieldCheck,
   Siren,
   Tags,
   type LucideIcon,
@@ -15,7 +12,8 @@ import {
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Chip } from '../components/ui/Chip'
 import { Container, SECTION_Y, SectionHeading } from '../components/ui/Section'
-import { app, leituraRisco } from '../content/copy'
+import { RiskLevelCards } from '../components/ui/RiskLevelCards'
+import { leituraRisco } from '../content/copy'
 import { gsap } from '../lib/gsap'
 import { useReducedMotion } from '../lib/useReducedMotion'
 
@@ -30,12 +28,6 @@ const FONTE_ICONS: LucideIcon[] = [
   MessageSquareWarning,
   Tags,
   History,
-]
-/** Pílula do nível no topo de cada cartão — só tons de vinho (nunca semáforo). */
-const LEVEL_PILL = [
-  'bg-superficie text-vinho',
-  'bg-vinho text-white',
-  'bg-vinho-profundo text-white',
 ]
 const DESKTOP = '(min-width: 1024px)'
 const DEG = Math.PI / 180
@@ -90,7 +82,7 @@ function hasWebGL() {
  * `#leitura-risco` (COPY 3.7 + ajustes do cliente): esfera da IA em partículas 3D (three + R3F,
  * carregada só perto da tela), cercada por pílulas de vidro em duas órbitas com profundidade e por
  * partículas soltas, tudo passando continuamente. Abaixo, "Como o app se adapta ao seu risco",
- * princípios e a nota do protótipo. Sem WebGL ou com movimento reduzido: imagem estática da esfera
+ * e os cartões com ilustração (`RiskLevelCards`). Sem WebGL ou com movimento reduzido: imagem estática da esfera
  * e pílulas paradas.
  */
 export function LeituraRisco() {
@@ -317,33 +309,8 @@ export function LeituraRisco() {
           >
             {L.adapta.title}
           </h3>
-          <ul data-appear-stagger className="mt-8 grid gap-5 lg:mt-10 lg:grid-cols-3">
-            {L.adapta.levels.map((a, i) => (
-              <li key={a.label} className="flex">
-                <article className="flex w-full flex-col rounded-card-lg border-[1.5px] border-borda bg-white p-6 transition-[transform,border-color,box-shadow] duration-300 ease-amparo focus-within:-translate-y-1 focus-within:border-vinho hover:-translate-y-1 hover:border-vinho hover:shadow-float motion-reduce:transition-none">
-                  <span
-                    className={clsx(
-                      'w-max rounded-full px-3.5 py-1.5 text-[0.9375rem] leading-none font-bold',
-                      LEVEL_PILL[i],
-                    )}
-                  >
-                    {a.label}
-                  </span>
-                  <p className="mt-4 text-[0.9375rem] text-pretty text-texto-secundario">
-                    {a.text}
-                  </p>
-                  <div aria-hidden className="mt-5 flex-1 rounded-card bg-superficie p-3">
-                    <AdaptaTela i={i} />
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ul>
+          <RiskLevelCards />
         </div>
-
-        <p className="mx-auto mt-12 max-w-[60ch] md:mt-16 text-center caption font-normal text-texto-secundario">
-          {L.nota}
-        </p>
       </Container>
     </section>
   )
@@ -372,61 +339,5 @@ function StageRings() {
         />
       ))}
     </svg>
-  )
-}
-
-/** Pedaço da interface do app em cada nível (decorativo; o texto do cartão descreve o que é). */
-function AdaptaTela({ i }: { i: number }) {
-  const T = L.telas
-  if (i === 0)
-    return (
-      <div className="shadow-card flex h-full items-center gap-3 rounded-xl bg-white p-4">
-        <span className="grid size-10 shrink-0 place-items-center rounded-full bg-confirma/12 text-confirma">
-          <ShieldCheck className="size-5" strokeWidth={2} />
-        </span>
-        <p className="font-display text-[1.0625rem] leading-snug font-semibold text-texto">
-          {T.tranquilo}
-        </p>
-      </div>
-    )
-  if (i === 1)
-    return (
-      <div className="shadow-card flex h-full flex-col justify-between gap-4 rounded-xl bg-white p-4">
-        <div className="flex -space-x-2">
-          {app.rede.map((g) => (
-            <span
-              key={g.initials}
-              className="grid size-9 place-items-center rounded-full border-2 border-white bg-superficie text-xs font-bold text-vinho"
-            >
-              {g.initials}
-            </span>
-          ))}
-        </div>
-        <span className="flex h-11 items-center justify-center rounded-full bg-vinho px-4 text-[0.9375rem] font-bold text-white">
-          {T.enviarAviso}
-        </span>
-      </div>
-    )
-  const icons = [Phone, Phone, MapPin]
-  return (
-    <div className="flex h-full flex-col gap-2">
-      {T.acoes.map((a, j) => {
-        const Icon = icons[j]
-        return (
-          <span
-            key={a}
-            className={clsx(
-              'flex h-11 items-center gap-2.5 rounded-full px-4 text-[0.9375rem] font-bold',
-              j < 2
-                ? 'bg-vinho-profundo text-white'
-                : 'border-[1.5px] border-vinho-profundo/30 bg-white text-vinho-profundo',
-            )}
-          >
-            <Icon className="size-4" strokeWidth={2} />
-            {a}
-          </span>
-        )
-      })}
-    </div>
   )
 }

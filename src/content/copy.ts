@@ -214,25 +214,27 @@ export const leituraRisco = {
   adapta: {
     /** Texto do cliente (ajustes da seção 7). */
     title: 'Como o app se adapta ao seu risco',
+    /** Cartões com ilustração (ajustes 5 da seção 7, textos do cliente). */
     levels: [
-      { label: 'Baixo', text: 'Tudo tranquilo. O acompanhamento discreto segue ativo.' },
+      {
+        label: 'Baixo',
+        title: 'Tudo tranquilo',
+        text: 'O acompanhamento continua discreto, em segundo plano.',
+      },
       {
         label: 'Médio',
-        text: 'O app prepara um aviso discreto para a sua rede, enviado só se você confirmar.',
+        title: 'Mais atenção',
+        text: 'Os sinais de alerta aparecem e sua rede fica pronta, se você quiser.',
       },
       {
         label: 'Alto',
-        text: 'Os caminhos de ajuda aparecem primeiro: Ligue 180, 190 e a delegacia mais próxima.',
+        title: 'Ajuda em primeiro lugar',
+        text: 'Os canais de emergência ficam à frente: 180, 190 e a delegacia mais próxima.',
       },
     ],
+    /** Microtextos das ilustrações (decorativas, fora da árvore de acessibilidade). */
+    ilustracao: { pronta: 'Pronta para avisar', numeros: ['180', '190'] },
   },
-  /** Pedaços da interface do app dentro dos cartões (textos do cliente, prompt da seção 7). */
-  telas: {
-    tranquilo: 'Tudo por aqui está tranquilo',
-    enviarAviso: 'Enviar aviso à minha rede',
-    acoes: ['Ligar 180', 'Ligar 190', 'Delegacia mais próxima'],
-  },
-  nota: 'Protótipo acadêmico: o modelo foi treinado com dados sintéticos. A validação com dados reais é a próxima etapa.',
 }
 
 // 3.8 (a construir: textos revisados contra o COPY 3.8 na construção)
