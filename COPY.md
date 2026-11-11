@@ -63,12 +63,13 @@ lang: pt-BR
 | 5 | Benefícios | `#beneficios` | pronta |
 | 6 | Dores: banner + lista com celular | `#como-funciona` (itens: `#dor-disfarce`, `#dor-cofre`, `#dor-rede`, `#dor-risco`, `#dor-direitos`) | pronta |
 | 7 | Leitura de risco com IA | `#leitura-risco` | a construir |
-| 8 | Como começar | `#comecar` | a construir |
+| 8 | Como começar | `#comecar` | pronta |
+| 8.5 | Seus direitos (bento) | `#direitos` | pronta |
 | 9 | FAQ + emergência | `#faq` | a construir |
 | 10 | CTA final | `#cta` | a construir |
 | 11 | Rodapé | — | a construir |
 
-**Fora da página** (não construir): Recursos/FeatureStack, demos "Experimente", Seus direitos, Mitos e verdades, Segurança, Cartão de acesso, Para quem quer ajudar, Galeria antes do CTA.
+**Fora da página** (não construir): Recursos/FeatureStack, demos "Experimente", Mitos e verdades, Segurança (substituída por "Seus direitos" em 11/11/2026), Cartão de acesso, Para quem quer ajudar, Galeria antes do CTA.
 
 **Regras de texto:** título com no máximo 8 palavras, apoio com no máximo 3 linhas, nada de listas com mais de 3 itens dentro de um cartão.
 
@@ -161,6 +162,20 @@ lang: pt-BR
   3. **Adicione sua rede** · Convide pelo menos uma pessoa de confiança. · "Adicionar guardiã"
   4. **Pronto** · O Amparo fica com você, discreto, até você precisar. · selo "Tudo pronto"
 - CTA depois do palco: **Acessar o Amparo**
+
+### 3.85 Seus direitos (`#direitos`)
+- Chip: **Seus direitos**
+- H2: **O que a lei garante, sem juridiquês.**
+- Subtítulo: No app, a Central de Direitos explica cada passo em linguagem simples. Aqui vai um pouco do que você encontra lá.
+- Cartão central: celular com a tela "Conteúdo e direitos" do app.
+- **Violência não é só agressão física** · A Lei Maria da Penha reconhece diferentes formas de violência. · Física, Psicológica, Sexual, Patrimonial, Moral
+- **Sinais de um relacionamento abusivo** · Controlar o celular, isolar das amigas, ameaçar e humilhar também são sinais de alerta. · Controla o seu celular / Afasta você das amigas / Ameaça e humilha
+- **Medida protetiva sem boletim** · Desde 2023 (Lei 14.550), a medida protetiva pode ser concedida sem boletim de ocorrência, inquérito ou processo.
+- **Monitoramento do agressor** · Desde 2026 (Lei 15.383), o monitoramento eletrônico do agressor é uma medida protetiva própria.
+- **Pedido sem advogado e sem custo** · Você pode pedir a medida protetiva na delegacia, sem precisar de advogado e sem pagar nada. · Delegacia → Pedido → Proteção
+- **Ligue 180** · Gratuito, sigiloso e 24 horas, para orientação sobre seus direitos. · botão **Ligar 180** (tel:180)
+- Nota pequena: Conteúdo informativo, não substitui orientação jurídica. Em caso de dúvida, procure a Defensoria Pública.
+- Dores, item 5: link **Conheça seus direitos** → `#direitos`.
 
 ### 3.9 FAQ (`#faq`)
 - H2: **Perguntas frequentes**

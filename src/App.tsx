@@ -3,6 +3,7 @@ import { shouldShowPreloader, startIntro } from './lib/intro'
 import { Preloader } from './sections/Preloader'
 import { useSiteMotion } from './motion/useSiteMotion'
 import { Comecar } from './sections/Comecar'
+import { Direitos } from './sections/Direitos'
 import { Contexto } from './sections/Contexto'
 import { CtaFinal } from './sections/CtaFinal'
 import { Dores } from './sections/Dores'
@@ -68,6 +69,7 @@ function Landing() {
         <Dores />
         <LeituraRisco />
         <Comecar />
+        <Direitos />
         <Faq />
         <CtaFinal />
       </main>

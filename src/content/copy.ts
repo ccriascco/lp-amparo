@@ -170,6 +170,7 @@ export const dores = {
       chip: 'Seus direitos',
       title: 'Não saber quais são seus direitos.',
       answer: 'A Lei Maria da Penha explicada em linguagem simples, dentro do app.',
+      link: { label: 'Conheça seus direitos', href: '#direitos' },
     },
   ] as {
     id: string
@@ -231,6 +232,45 @@ export const leituraRisco = {
       },
     ],
   },
+}
+
+// 3.85 — Seus direitos (bento; pedido do cliente, 11/11/2026)
+export const direitos = {
+  chip: 'Seus direitos',
+  h2: 'O que a lei garante, sem juridiquês.',
+  sub: 'No app, a Central de Direitos explica cada passo em linguagem simples. Aqui vai um pouco do que você encontra lá.',
+  tipos: {
+    title: 'Violência não é só agressão física',
+    text: 'A Lei Maria da Penha reconhece diferentes formas de violência.',
+    chips: ['Física', 'Psicológica', 'Sexual', 'Patrimonial', 'Moral'],
+  },
+  sinais: {
+    title: 'Sinais de um relacionamento abusivo',
+    text: 'Controlar o celular, isolar das amigas, ameaçar e humilhar também são sinais de alerta.',
+    itens: ['Controla o seu celular', 'Afasta você das amigas', 'Ameaça e humilha'],
+  },
+  semBoletim: {
+    title: 'Medida protetiva sem boletim',
+    text: 'Desde 2023 (Lei 14.550), a medida protetiva pode ser concedida sem boletim de ocorrência, inquérito ou processo.',
+    doc: 'Medida protetiva',
+  },
+  monitoramento: {
+    title: 'Monitoramento do agressor',
+    text: 'Desde 2026 (Lei 15.383), o monitoramento eletrônico do agressor é uma medida protetiva própria.',
+  },
+  pedido: {
+    title: 'Pedido sem advogado e sem custo',
+    text: 'Você pode pedir a medida protetiva na delegacia, sem precisar de advogado e sem pagar nada.',
+    passos: ['Delegacia', 'Pedido', 'Proteção'],
+  },
+  ligue: {
+    title: 'Ligue 180',
+    text: 'Gratuito, sigiloso e 24 horas, para orientação sobre seus direitos.',
+    botao: 'Ligar 180',
+  },
+  nota: 'Conteúdo informativo, não substitui orientação jurídica. Em caso de dúvida, procure a Defensoria Pública.',
+  /** alt do celular (tela codada, descrita como imagem) */
+  altTela: 'Tela "Conteúdo e direitos" do Amparo, com a Lei Maria da Penha explicada, como pedir uma medida protetiva e o monitoramento eletrônico do agressor.',
 }
 
 // 3.8 (a construir: textos revisados contra o COPY 3.8 na construção)

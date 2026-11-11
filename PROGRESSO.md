@@ -21,6 +21,7 @@
 | 6 | Dores: banner + lista com celular | `#como-funciona` (itens `#dor-disfarce`, `#dor-cofre`, `#dor-rede`, `#dor-risco`, `#dor-direitos`) | ✅ pronta |
 | 7 | Leitura de risco com IA | `#leitura-risco` | ✅ pronta — aguardando revisão do cliente (commit `9ef496e`) |
 | 8 | Como começar | `#comecar` | ✅ pronta — palco fixo Gardance com 4 passos e cartões animados (aguardando revisão) |
+| 8.5 | Seus direitos (bento) | `#direitos` | ✅ pronta — aguardando revisão (conferir a Lei 15.383/2026) |
 | 9 | FAQ + emergência | `#faq` | ⏳ a construir (versão da rodada 1 no lugar) |
 | 10 | CTA final | `#cta` | ⏳ a construir (versão da rodada 1 no lugar) |
 | 11 | Rodapé | — | ⏳ a construir (versão da rodada 1, já com os links e textos do COPY 3.11) |
@@ -101,6 +102,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | M3 | Banner das Dores no celular: título a ~72px do chip, "não deveria ser um risco." em uma linha (20px de respiro), rosto acima do título — prints em `./screenshots/mobile-2/` | (ver git log) |
 | M4 | Banner das Dores no celular: título no maior tamanho sem quebrar (calc com vw), subtítulo e tópicos descidos ~140px com o rosto inteiro no vão, degradê com contraste AA — prints em `./screenshots/mobile-3/` | (ver git log) |
 | M4b | Foto do banner das Dores no celular de volta ao enquadramento anterior (fundo atrás do chip e do título); título e texto como no M4 | (ver git log) |
+| 8.5 | Seção nova Seus direitos (#direitos): bento com celular da Central de Direitos, 5 direitos com visual próprio e Ligue 180; link nas Dores; COPY §3.85 — prints em `./screenshots/direitos/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
