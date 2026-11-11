@@ -34,7 +34,16 @@ export function RiskTimeline() {
     if (!el) return
     const ol = el.querySelector('ol')!
     const line = el.querySelector<HTMLElement>('[data-tl-line]')!
+    const sticky = el.querySelector<HTMLElement>('[data-tl-sticky]')!
     const layout = () => {
+      // Topo do bloco fixo: centralizado, mas sempre com o conteúdo inteiro (até o texto dos
+      // cartões) dentro da tela — em telas baixas ele sobe o necessário (pedido do cliente).
+      if (window.matchMedia(LG).matches) {
+        const vh = window.innerHeight
+        const h = sticky.offsetHeight
+        const centered = Math.max(96, vh / 2 - 320)
+        sticky.style.top = `${Math.round(Math.min(centered, vh - h - 24))}px`
+      } else sticky.style.top = ''
       const markers = el.querySelectorAll('[data-tl-marker]')
       const o = ol.getBoundingClientRect()
       const a = markers[0].getBoundingClientRect()
@@ -55,7 +64,11 @@ export function RiskTimeline() {
     layout()
     const ro = new ResizeObserver(layout)
     ro.observe(ol)
-    return () => ro.disconnect()
+    window.addEventListener('resize', layout)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', layout)
+    }
   }, [])
 
   useGSAP(
@@ -214,10 +227,10 @@ export function RiskTimeline() {
       {/* Desktop: bloco fixo por ~150vh enquanto a linha se preenche (sem sticky com movimento reduzido) */}
       <div data-tl-pin className="relative lg:h-[160vh] lg:motion-reduce:h-auto">
         {/* Fixo só com a altura do conteúdo, centralizado na tela: ao soltar, a seção seguinte vem logo depois (sem o vazio de uma tela inteira em 1920). */}
-        <div className="lg:sticky lg:top-[max(6rem,calc(50vh-20rem))] lg:motion-reduce:static">
+        <div data-tl-sticky className="lg:sticky lg:top-[max(6rem,calc(50vh-20rem))] lg:motion-reduce:static">
           <h3
             data-appear
-            className="text-center font-display text-[1.5rem] leading-tight font-semibold tracking-[-0.01em] text-texto md:text-[1.875rem]"
+            className="mx-auto max-w-[20ch] text-center font-display text-[1.5rem] leading-tight font-semibold tracking-[-0.01em] text-balance text-texto md:max-w-none md:text-[1.875rem]"
           >
             {A.title}
           </h3>

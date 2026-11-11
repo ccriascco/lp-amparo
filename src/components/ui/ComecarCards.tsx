@@ -43,7 +43,7 @@ function WelcomeCard({ className }: { className?: string }) {
   return (
     <div
       className={clsx(
-        'w-[210px] [&_.shadow-phone]:bg-[rgb(30_20_26/0.55)] [&_.shadow-phone]:p-[1.8cqw] [&_.shadow-phone]:shadow-[0_30px_60px_-30px_rgb(0_0_0/0.6)] [&_.shadow-phone]:ring-1 [&_.shadow-phone]:ring-white/25 [&_.shadow-phone]:backdrop-blur-md [&_.shadow-phone>div:first-child]:rounded-[14.4cqw]',
+        'w-[180px] [&_.shadow-phone]:bg-[rgb(30_20_26/0.55)] [&_.shadow-phone]:p-[1.8cqw] [&_.shadow-phone]:shadow-[0_30px_60px_-30px_rgb(0_0_0/0.6)] [&_.shadow-phone]:ring-1 [&_.shadow-phone]:ring-white/25 [&_.shadow-phone]:backdrop-blur-md [&_.shadow-phone>div:first-child]:rounded-[14.4cqw]',
         className,
       )}
     >
@@ -51,7 +51,7 @@ function WelcomeCard({ className }: { className?: string }) {
         <div className="relative h-full w-full bg-vinho-profundo">
           <Picture
             slot="boas-vindas-foto"
-            sizes="210px"
+            sizes="180px"
             className="absolute inset-0 size-full object-cover object-[50%_20%]"
           />
           <div

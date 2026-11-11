@@ -592,3 +592,9 @@ Referências: NextPay mobile (banner) e Gardance mobile (palco). Os sites não p
   - SEO: JSON-LD `FAQPage` com as 7 perguntas, renderizado na seção.
   - O componente `Accordion` antigo ficou sem uso na página (só no `/#kit`).
   - Verificado com `node scripts/check-faq.mjs <url> <pasta>`: 1ª aberta; clique na 4 → só a 4 aberta e a digitação aparece; Enter abre e Espaço fecha a 6; 7 perguntas no JSON-LD; sem erros. Prints em `screenshots/faq/` e `screenshots/comecar-mockup/`.
+
+## Ajustes de 11/11/2026 (5) — linha do tempo e mockup (pedido do cliente)
+- "Como o app se adapta ao seu risco" no celular: largura máx. 20ch + `text-balance` (2 linhas equilibradas, sem "risco" sozinho).
+- Linha do tempo no desktop: o topo do bloco fixo é calculado (centralizado, mas nunca deixando o texto dos cartões fora da tela). Em telas baixas (ex.: 1358×610) ele sobe o necessário. Medido: texto dos cartões termina em 515/610, 681/900, 771/1080px.
+- Mockup do passo 1 de `#comecar`: 210 → 180px. A pílula mostra "Entrar" do lado direito (conferido; o print do cliente com "Criar conta" dos dois lados vinha de uma página com a animação antiga em memória — recarregar resolve).
+- Prints em `screenshots/ajustes-11-11c/`.
