@@ -133,7 +133,7 @@ export function CtaFinal() {
         </div>
 
         {/* Respiro para a mulher aparecer inteira antes do rodapé */}
-        <div aria-hidden className="h-[calc(max(115svh,760px)-560px)] md:h-[min(42vw,560px)]" />
+        <div aria-hidden className="h-[calc(max(115svh,760px)-560px)] md:h-[min(26vw,370px)]" />
         </div>
 
         <Footer />
