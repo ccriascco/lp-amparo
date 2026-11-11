@@ -17,6 +17,7 @@ import { CalculatorScreen, type CalculatorHandle } from '../components/phone/Cal
 import { Button } from '../components/ui/Button'
 import { Chip } from '../components/ui/Chip'
 import { CircularBadge } from '../components/ui/CircularBadge'
+import { HeroRings } from '../components/ui/HeroRings'
 import { NotificationCard } from '../components/ui/NotificationCard'
 import { PhoneFrame } from '../components/ui/PhoneFrame'
 import { Container } from '../components/ui/Section'
@@ -52,7 +53,7 @@ export function Hero() {
         className="absolute inset-0 -z-10 overflow-hidden mask-[linear-gradient(180deg,#000_calc(100%-200px),transparent)]"
       >
         <div data-hero-veil className="absolute inset-0" style={{ background: 'var(--grad-hero)' }}>
-          <HeroRings />
+          <HeroRings className="top-[calc(100%-370px)] left-1/2 md:top-[calc(100%-460px)] lg:top-[calc(100%-480px)]" />
         </div>
       </div>
 
@@ -206,32 +207,6 @@ export function Hero() {
         <CircularBadge />
       </div>
     </section>
-  )
-}
-
-/** Anéis do hero (§6.19, variante `hero`): 12 anéis a cada 90px, centrados no celular central. */
-function HeroRings() {
-  const rings = Array.from({ length: 12 }, (_, i) => 150 + i * 90)
-  const max = rings[rings.length - 1]
-  return (
-    <svg
-      data-rings
-      aria-hidden
-      viewBox={`${-max - 2} ${-max - 2} ${max * 2 + 4} ${max * 2 + 4}`}
-      className="pointer-events-none absolute top-[calc(100%-370px)] left-1/2 h-[2600px] w-[2600px] -translate-x-1/2 -translate-y-1/2 md:top-[calc(100%-460px)] lg:top-[calc(100%-480px)]"
-      fill="none"
-    >
-      {rings.map((r, i) => (
-        <circle
-          key={r}
-          data-ring
-          r={r}
-          stroke={`rgb(149 75 110 / ${(0.18 - (i * 0.1) / 11).toFixed(3)})`}
-          strokeWidth={1}
-          vectorEffect="non-scaling-stroke"
-        />
-      ))}
-    </svg>
   )
 }
 

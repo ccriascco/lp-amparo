@@ -368,8 +368,17 @@ export const faq = {
 
 // 3.10 (a construir: textos revisados contra o COPY 3.10 na construção)
 export const ctaFinal = {
+  /** Chip (complemento do pedido do cliente, 11/11/2026). */
+  chip: 'O primeiro passo',
   h2: 'Você merece se sentir segura.',
-  text: 'O primeiro passo pode ser pequeno e discreto.',
+  text: 'Gratuito, discreto e direto no navegador do celular. O primeiro passo pode ser pequeno.',
+  /** Micro-itens abaixo do botão (pedido do cliente). */
+  itens: ['Gratuito', 'Funciona no navegador', 'Modo disfarce'],
+  /** Notificações flutuando ao lado do celular (pedido do cliente). */
+  notificacoes: [
+    { title: 'Alerta enviado à sua rede', text: 'Sua rede foi avisada', time: 'agora' },
+    { title: 'Localização compartilhada', text: 'Só com as suas guardiãs', time: 'agora' },
+  ],
   /** Cartão "Hoje" (linha do tempo de exemplo no app). */
   hojeTitle: 'Hoje',
   hoje: [
@@ -396,6 +405,22 @@ export const emergencia = {
 export const footer = {
   voltarTopo: 'Voltar ao topo',
   lema: 'Você não está sozinha.',
+  /** Descrição curta = og:description do COPY §2. */
+  descricao: 'Ajuda que cabe no seu celular sem chamar atenção.',
+  /** Pílulas (pedido do cliente). */
+  pilulas: ['Discreto', 'Com IA', 'Gratuito'],
+  colunas: {
+    navegacao: 'Navegação',
+    direitos: 'Seus direitos',
+    projeto: 'Projeto',
+  },
+  linksDireitos: [
+    { label: 'Central de direitos', href: '#direitos' },
+    { label: 'Ligue 180 · Central da Mulher', href: 'tel:180' },
+    { label: 'Emergência · 190', href: 'tel:190' },
+  ],
+  sobreTcc: 'Sobre o TCC',
+  base: '© 2026 Amparo · Projeto de TCC em Ciência da Computação, UNIRP',
   legal:
     'Amparo é um projeto acadêmico (TCC — Ciência da Computação, UNIRP, 2026) em desenvolvimento. Não substitui os serviços oficiais de segurança e atendimento à mulher.',
   dados: 'Dados: 19º Anuário Brasileiro de Segurança Pública (FBSP, 2025).',

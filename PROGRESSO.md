@@ -24,8 +24,9 @@
 | 8.5 | Seus direitos (bento) | `#direitos` | ✅ pronta — aguardando revisão (conferir a Lei 15.383/2026) |
 | 8.6 | O que sua guardiã recebe (banner) | `#guardia` | ✅ pronta — aguardando revisão dos textos |
 | 9 | FAQ em conversa + emergência | `#faq` | ✅ pronta — aguardando revisão |
-| 10 | CTA final | `#cta` | ⏳ a construir (versão da rodada 1 no lugar) |
-| 11 | Rodapé | — | ⏳ a construir (versão da rodada 1, já com os links e textos do COPY 3.11) |
+| 10/11 | CTA final (anéis do hero, celular calculadora → início, notificações, botão magnético) e rodapé (brilhos, 3 colunas de links, marca d'água do logotipo) — prints em `./screenshots/cta/` e `./screenshots/rodape/` | (ver git log) |
+| 10 | CTA final | `#cta` | ✅ pronta — aguardando revisão |
+| 11 | Rodapé | — | ✅ pronto — aguardando revisão |
 
 ### Fora do plano (não serão construídas)
 Removidas do código e do `copy.ts` em 10/11/2026: **Modo Disfarce** como seção própria (`StepShowcase`), **Recursos** (`FeatureStack`/bento), os pilares **SOS, Cofre, Rede e Risco** como seções separadas, as **demos "Experimente"**, **Seus direitos**, **Mitos e verdades**, **Segurança**, **Cartão de acesso**, **Para quem quer ajudar** e a **Galeria antes do CTA**. O que esses recursos mostravam agora vive nos itens das Dores (§3.6) e na Leitura de risco (§3.7).
