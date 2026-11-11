@@ -22,7 +22,7 @@ const MOB = '(max-width: 1023.98px) and (prefers-reduced-motion: no-preference)'
  * toda em `vinho-profundo`. A linha vai do marco Baixo ao marco Alto e se preenche com o scroll
  * (desktop: bloco fixo por ~150vh; abaixo de 1024px: vertical, sem sticky). Cada marco acende quando
  * a linha chega nele (cor + anéis, medidor por DrawSVG) e o cartão do nível fica nítido, com a
- * ilustração acendendo e flutuando. Não apaga ao voltar, só ao sair pelo início da seção.
+ * ilustração acendendo. Não apaga ao voltar, só ao sair pelo início da seção.
  * O markup já traz o estado final (tudo aceso e nítido): é o que fica com movimento reduzido.
  */
 export function RiskTimeline() {
@@ -75,8 +75,8 @@ export function RiskTimeline() {
         const line = q('[data-tl-line]')[0]
         const fill = q('[data-tl-fill]')[0]
 
-        // Laços de cada nível (anéis do marco + ilustração flutuando), criados pausados.
-        const loops = items.map((it, i) => {
+        // Laços de cada nível (anéis pulsando no marco), criados pausados.
+        const loops = items.map((it) => {
           const ls: gsap.core.Tween[] = []
           it.querySelectorAll<HTMLElement>('[data-tl-pulse]').forEach((r) => {
             const k = Number(r.dataset.tlI)
@@ -90,15 +90,6 @@ export function RiskTimeline() {
                 .pause(),
             )
           })
-          ls.push(
-            gsap
-              .fromTo(
-                arts[i],
-                { y: -6 },
-                { y: 6, duration: 2.5, ease: 'sine.inOut', yoyo: true, repeat: -1 },
-              )
-              .pause(),
-          )
           return ls
         })
 
@@ -116,7 +107,7 @@ export function RiskTimeline() {
         const off = () => {
           gsap.set(cards, { y: 24, filter: 'blur(6px)' })
           gsap.set(bodies, { opacity: 0.4 })
-          gsap.set(arts, { opacity: 0.5, y: 0 })
+          gsap.set(arts, { opacity: 0.5 })
           gsap.set(gauges, { drawSVG: '0% 0%' })
         }
         items.forEach((it) => delete it.dataset.on)
@@ -149,7 +140,7 @@ export function RiskTimeline() {
           const ease = 'power2.out'
           gsap.to(cards[i], { y: 24, filter: 'blur(6px)', duration: 0.5, ease, overwrite: true })
           gsap.to(bodies[i], { opacity: 0.4, duration: 0.5, ease, overwrite: true })
-          gsap.to(arts[i], { opacity: 0.5, y: 0, duration: 0.5, ease, overwrite: true })
+          gsap.to(arts[i], { opacity: 0.5, duration: 0.5, ease, overwrite: true })
           gsap.to(gauges[i], { drawSVG: '0% 0%', duration: 0.5, ease, overwrite: true })
         }
 
@@ -305,7 +296,7 @@ export function RiskTimeline() {
                           <Picture
                             slot={SLOTS[i]}
                             sizes="(min-width: 1024px) 340px, 80vw"
-                            className="size-full object-contain"
+                            className="size-full object-cover"
                           />
                         </div>
                       </div>
