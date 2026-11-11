@@ -125,9 +125,9 @@ const SLOTS = [
     file: '../../src/assets/app-screens/boas-vindas.png',
     crop: { left: 6, top: 6, width: 440, height: 630 },
   },
-  // CTA + rodapé (bloco único): foto de fundo (céu, mulher de costas, grama). Horizontal e vertical.
-  { slot: 'cta-fundo', file: 'cta-fundo.jpg', crop: { left: 0, top: 0, width: 2528, height: 1696 }, widths: [960, 1600, 2200] },
-  { slot: 'cta-fundo-mobile', file: 'cta-fundo-mobile.jpg', crop: { left: 0, top: 0, width: 1696, height: 2528 }, widths: [480, 720, 1080] },
+  // CTA + rodapé (bloco único): foto de fundo recortada em 16:9 (desktop, mantendo a grama) e 9:16 (celular).
+  { slot: 'cta-fundo', file: 'cta-fundo.jpg', crop: { left: 0, top: 274, width: 2528, height: 1422 }, widths: [960, 1600, 2200, 2528] },
+  { slot: 'cta-fundo-mobile', file: 'cta-fundo-mobile.jpg', crop: { left: 137, top: 0, width: 1422, height: 2528 }, widths: [480, 720, 1080] },
   // #guardia: fundo do banner (horizontal 1536×1024 e vertical 1696×2528 para o celular)
   { slot: 'guardia-fundo', file: 'guardia-fundo.png', crop: { left: 0, top: 0, width: 1536, height: 1024 } },
   { slot: 'guardia-fundo-mobile', file: 'guardia-fundo-mobile.jpg', crop: { left: 0, top: 0, width: 1696, height: 2528 }, widths: [480, 720, 1080] },

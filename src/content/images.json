@@ -256,15 +256,16 @@
   },
   "cta-fundo": {
     "width": 2528,
-    "height": 1696,
+    "height": 1422,
     "widths": [
       960,
       1600,
-      2200
+      2200,
+      2528
     ]
   },
   "cta-fundo-mobile": {
-    "width": 1696,
+    "width": 1422,
     "height": 2528,
     "widths": [
       480,

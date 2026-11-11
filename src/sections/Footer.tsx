@@ -65,7 +65,7 @@ export function Footer() {
   return (
     <footer
       ref={root}
-      className="relative mx-3 mb-3 -mt-[200px] overflow-hidden rounded-[24px] border border-white/12 bg-[rgb(75_42_63/0.55)] px-5 pt-8 pb-6 text-white/80 backdrop-blur-[24px] backdrop-saturate-[140%] md:mx-6 md:mt-0 md:mb-6 md:px-14 md:pt-16 md:pb-8"
+      className="relative mx-3 mb-10 -mt-[200px] overflow-hidden rounded-[24px] border border-white/14 bg-[rgb(149_75_110/0.08)] px-5 pt-8 pb-6 text-white/80 shadow-[inset_0_1px_0_rgb(255_255_255/0.08)] backdrop-blur-[28px] backdrop-saturate-[140%] md:mx-auto md:mt-0 md:mb-16 md:max-w-[calc(var(--grid)+48px)] md:px-14 md:pt-16 md:pb-8 max-md:bg-[rgb(149_75_110/0.1)]"
     >
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
         <div data-ft-stagger className="lg:col-span-5">

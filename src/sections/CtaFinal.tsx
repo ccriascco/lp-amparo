@@ -66,12 +66,26 @@ export function CtaFinal() {
   )
 
   return (
-    <section ref={root} id="cta" aria-labelledby="cta-title" className="bg-branco p-3 md:p-4">
+    <section ref={root} id="cta" aria-labelledby="cta-title" className="bg-branco">
       <div
         data-cta-shell
         data-header-dark
-        className="on-dark relative isolate overflow-clip rounded-[24px] bg-vinho-profundo"
+        className="on-dark relative isolate flow-root overflow-clip bg-vinho-profundo"
       >
+        {/* Foto em tela cheia (sem margem). Desktop: cobre o bloco inteiro — o rodapé de vidro mostra
+            a foto desfocada por trás. Celular: área própria no topo (~115svh) que dissolve em vinho. */}
+        <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-[max(115svh,760px)] overflow-hidden md:inset-0 md:h-auto">
+          <div data-cta-zoom className="absolute inset-0">
+            <Picture
+              slot="cta-fundo"
+              mobileSlot="cta-fundo-mobile"
+              sizes="100vw"
+              className="size-full object-cover object-[50%_30%] md:object-[50%_20%]"
+            />
+          </div>
+          <div className="absolute inset-0" style={{ background: SHADE }} />
+          <div className="absolute inset-0 md:hidden" style={{ background: FADE_MOBILE }} />
+        </div>
         {/* Celular: brilho vinho atrás da metade de baixo do cartão de vidro */}
         <div
           aria-hidden
@@ -80,21 +94,7 @@ export function CtaFinal() {
 
         {/* CTA sobre o céu + respiro (a foto é posicionada em relação a este bloco) */}
         <div className="relative">
-          {/* Foto ancorada no CTA: termina logo depois dos pés da mulher (122% da área do CTA no
-              desktop; ~115svh no celular) e dissolve em vinho-profundo sob o cartão de vidro. */}
-          <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-[max(115svh,760px)] overflow-hidden md:h-[132%]">
-            <div data-cta-zoom className="absolute inset-0">
-              <Picture
-                slot="cta-fundo"
-                mobileSlot="cta-fundo-mobile"
-                sizes="100vw"
-                className="size-full object-cover object-[50%_30%] md:object-[50%_100%]"
-              />
-            </div>
-            <div className="absolute inset-0" style={{ background: SHADE }} />
-            <div className="absolute inset-0" style={{ background: FADE_MOBILE }} />
-          </div>
-        <div className="flex flex-col items-center px-5 pt-[88px] text-center md:px-8 md:pt-[120px]">
+        <div className="mx-auto flex max-w-(--grid) flex-col items-center px-5 pt-[88px] text-center md:px-8 md:pt-[104px]">
           <span
             data-appear
             className="inline-flex items-center rounded-full border border-white/20 bg-white/12 px-4 py-2 caption text-white backdrop-blur-md"
@@ -104,11 +104,11 @@ export function CtaFinal() {
           <h2
             id="cta-title"
             data-words
-            className="mt-5 max-w-[12ch] font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05] font-semibold tracking-[-0.025em] text-balance text-white md:max-w-[18ch]"
+            className="mt-5 max-w-[12ch] font-display text-[clamp(2.5rem,5.2vw,4.75rem)] leading-[1.05] font-semibold tracking-[-0.025em] text-balance text-white md:max-w-[24ch]"
           >
             {C.h2}
           </h2>
-          <p data-appear className="mt-5 max-w-[560px] lead text-pretty text-white/85">
+          <p data-appear className="mt-5 max-w-[560px] lead text-pretty text-white/85 md:max-w-[720px]">
             {C.text}
           </p>
           <div data-appear className="mt-8 w-full max-w-[420px] md:w-auto md:max-w-none">
@@ -133,7 +133,7 @@ export function CtaFinal() {
         </div>
 
         {/* Respiro para a mulher aparecer inteira antes do rodapé */}
-        <div aria-hidden className="h-[calc(max(115svh,760px)-560px)] md:h-[600px]" />
+        <div aria-hidden className="h-[calc(max(115svh,760px)-560px)] md:h-[min(42vw,560px)]" />
         </div>
 
         <Footer />
