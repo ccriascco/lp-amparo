@@ -234,7 +234,7 @@ export function LeituraRisco() {
           <SectionHeading id="leitura-risco-title" className="mt-5">
             {L.h2}
           </SectionHeading>
-          <p data-appear className="mt-6 max-w-[640px] lead text-pretty text-texto-secundario">
+          <p data-appear className="mt-6 lead text-pretty text-texto-secundario">
             {L.sub}
           </p>
         </div>

@@ -143,9 +143,15 @@
   font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
+/* Subtítulo padrão de todas as seções (pedido do cliente, 11/11): 1,0625rem no celular, 1,25rem a
+   partir de 768px, entrelinha 1,55, até 56ch. Cor: texto-secundario no claro, white/80 no escuro. */
 @utility lead {
-  font-size: clamp(1.125rem, 1.4vw, 1.3125rem);
+  font-size: 1.0625rem;
   line-height: 1.55;
+  max-width: 56ch;
+  @media (width >= 48rem) {
+    font-size: 1.25rem;
+  }
 }
 @utility text-body {
   font-size: 1.0625rem;

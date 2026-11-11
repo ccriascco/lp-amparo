@@ -65,7 +65,7 @@ export function Hero() {
             {hero.h1}
           </h1>
           <div data-hero-rest className="mx-auto max-w-[820px]">
-            <p className="mx-auto mt-6 max-w-[52ch] lead text-pretty text-texto-secundario">
+            <p className="mx-auto mt-6 lead text-pretty text-texto-secundario">
               {hero.sub}
             </p>
             <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">

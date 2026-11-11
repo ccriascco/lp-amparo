@@ -235,15 +235,47 @@ export const leituraRisco = {
 
 // 3.8 (a construir: textos revisados contra o COPY 3.8 na construção)
 export const comecar = {
+  chip: 'Como começar',
   h2: 'Comece em poucos minutos.',
-  /** Rótulos da barra de progresso do palco (COPY 3.12). */
-  labels: ['1. Crie sua conta', '2. Modo Disfarce', '3. Rede de apoio', '4. Pronto'],
+  /** Subtítulo (pedido do cliente, seção 8). */
+  sub: 'Do primeiro acesso à sua rede de apoio pronta, tudo pelo navegador do celular.',
+  /** Passos (COPY 3.8): rótulo da barra, título e 1 linha. */
   steps: [
-    { strong: 'Crie sua conta.', rest: ' Use um e-mail ao qual só você tenha acesso.' },
-    { strong: 'Escolha o Modo Disfarce', rest: ' e crie o seu código de 4 números.' },
-    { strong: 'Adicione sua rede de apoio.', rest: ' Pelo menos uma pessoa de confiança.' },
-    { strong: 'Pronto.', rest: ' O Amparo fica com você, discreto, até você precisar.' },
-  ] satisfies Lead[],
+    { label: '1. Crie sua conta', title: 'Crie sua conta', text: 'Use um e-mail ao qual só você tenha acesso.' },
+    { label: '2. Modo Disfarce', title: 'Ative o Modo Disfarce', text: 'Escolha um código de 4 números que só você sabe.' },
+    { label: '3. Rede de apoio', title: 'Adicione sua rede', text: 'Convide pelo menos uma pessoa de confiança.' },
+    { label: '4. Pronto', title: 'Pronto', text: 'O Amparo fica com você, discreto, até você precisar.' },
+  ],
+  /** Microtextos dos cartões do palco (pedido do cliente; boas-vindas = tela boas-vindas.png). */
+  cards: {
+    boasVindas: {
+      title: 'Você não está sozinha',
+      text: 'Peça ajuda a qualquer momento, com um toque mesmo com a tela bloqueada.',
+      opcoes: ['Criar conta', 'Entrar'],
+    },
+    disfarce: {
+      title: 'Criando seu código…',
+      sub: '4 números que só você sabe',
+      icone: 'Ícone de calculadora',
+    },
+    rede: {
+      title: 'Convidando sua rede…',
+      guardias: [
+        { name: 'Ana Beatriz', initials: 'AB' },
+        { name: 'Lúcia', initials: 'LU' },
+        { name: 'Rafaela', initials: 'RA' },
+      ],
+      enviado: 'Convite enviado',
+      aceitou: 'Aceitou',
+    },
+    pronto: {
+      title: 'Tudo pronto',
+      itens: ['Conta criada', 'Modo Disfarce ativo', 'Rede de apoio pronta'],
+    },
+  },
+  /** Celular: progresso no topo de cada bloco ('1/4'…). */
+  de: '/4',
+  ariaPassos: 'Passos para começar',
 }
 
 // 3.9 (a construir: textos revisados contra o COPY 3.9 na construção)

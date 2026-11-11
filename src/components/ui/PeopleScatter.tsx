@@ -78,7 +78,7 @@ const PHOTOS: Floating[] = [
     mobile: { left: '30%', bottom: '1%' },
   },
   {
-    slot: 'comecar-2',
+    slot: 'pessoas-rua',
     pos: { right: '4%', top: '84%' },
     size: 120,
     speed: 0.95,

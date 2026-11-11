@@ -102,23 +102,27 @@ const SLOTS = [
     file: 'mulher-sofa-lendo-celular.png',
     crop: { left: 100, top: 0, width: 819, height: 1024 },
   },
-  // comecar-2: mulher sorrindo para o celular (1024×1024)
+  // pessoas-rua: mulher sorrindo para o celular (1024×1024) — foto provisória do Manifesto
+  // (era o slot comecar-2; renomeado quando a seção 8 ganhou as fotos próprias).
   {
-    slot: 'comecar-2',
+    slot: 'pessoas-rua',
     file: 'mulher-rua-sorrindo-celular.png',
     crop: { left: 0, top: 120, width: 1024, height: 576 },
   },
-  // comecar-3: duas mulheres olhando o mesmo celular. O crachá "Ampore" começa em y≈835:
-  // os recortes terminam em y=776 (16:9) e y=800 (mobile), então ele não existe nos arquivos gerados.
+  // Seção 8 (#comecar): fotos do palco (1672×941, inteiras em 16:9) + recortes 4:5 do celular
+  { slot: 'comecar-1', file: 'comecar-1.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
+  { slot: 'comecar-2', file: 'comecar-2.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
+  { slot: 'comecar-3', file: 'comecar-3.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
+  { slot: 'comecar-4', file: 'comecar-4.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
+  { slot: 'comecar-1-mobile', file: 'comecar-1.png', crop: { left: 476, top: 0, width: 753, height: 941 } },
+  { slot: 'comecar-2-mobile', file: 'comecar-2.png', crop: { left: 340, top: 0, width: 753, height: 941 } },
+  { slot: 'comecar-3-mobile', file: 'comecar-3.png', crop: { left: 460, top: 0, width: 753, height: 941 } },
+  { slot: 'comecar-4-mobile', file: 'comecar-4.png', crop: { left: 576, top: 0, width: 753, height: 941 } },
+  // Foto da tela de boas-vindas do app (para a tela codada no passo 1), sem os cantos arredondados
   {
-    slot: 'comecar-3',
-    file: 'mulher-mostrando-celular-a-senhora.png',
-    crop: { left: 0, top: 200, width: 1024, height: 576 },
-  },
-  {
-    slot: 'comecar-3-mobile',
-    file: 'mulher-mostrando-celular-a-senhora.png',
-    crop: { left: 190, top: 0, width: 640, height: 800 },
+    slot: 'boas-vindas-foto',
+    file: '../../src/assets/app-screens/boas-vindas.png',
+    crop: { left: 6, top: 6, width: 440, height: 630 },
   },
   // Ilustrações da linha do tempo de #leitura-risco (1536×1024, inteiras; object-fit: contain)
   { slot: 'risco-baixo', file: 'risco-baixo.png', crop: { left: 0, top: 0, width: 1536, height: 1024 } },
@@ -130,8 +134,6 @@ const SLOTS = [
 const PLACEHOLDERS = [
   { slot: 'cofre', width: 1600, height: 900 },
   { slot: 'cofre-mobile', width: 1080, height: 1350 },
-  { slot: 'comecar-1', width: 1600, height: 900 },
-  { slot: 'comecar-4', width: 1600, height: 900 },
 ]
 
 async function placeholderSource(width, height) {

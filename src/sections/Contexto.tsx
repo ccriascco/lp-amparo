@@ -117,7 +117,7 @@ export function Contexto() {
             </div>
             <p
               data-appear
-              className="max-w-[52ch] lead text-pretty text-texto-secundario lg:col-span-5"
+              className="lead text-pretty text-texto-secundario lg:col-span-5"
             >
               {contexto.text}
             </p>

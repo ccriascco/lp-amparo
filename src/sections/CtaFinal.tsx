@@ -35,7 +35,7 @@ export function CtaFinal() {
           <h2 id="cta-title" data-words className="mx-auto max-w-[14ch] display-l text-white">
             {ctaFinal.h2}
           </h2>
-          <p className="mx-auto mt-5 max-w-[36ch] lead text-white/85">{ctaFinal.text}</p>
+          <p className="mx-auto mt-5 lead text-white/80">{ctaFinal.text}</p>
           <div className="mt-9 flex justify-center">
             <Button
               href={APP_URL}

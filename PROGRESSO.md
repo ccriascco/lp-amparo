@@ -20,7 +20,7 @@
 | 5 | Benefícios | `#beneficios` | ✅ pronta (etiqueta branca, confirmada) |
 | 6 | Dores: banner + lista com celular | `#como-funciona` (itens `#dor-disfarce`, `#dor-cofre`, `#dor-rede`, `#dor-risco`, `#dor-direitos`) | ✅ pronta |
 | 7 | Leitura de risco com IA | `#leitura-risco` | ✅ pronta — aguardando revisão do cliente (commit `9ef496e`) |
-| 8 | Como começar | `#comecar` | ⏳ a construir (versão da rodada 1 no lugar) |
+| 8 | Como começar | `#comecar` | ✅ pronta — palco fixo Gardance com 4 passos e cartões animados (aguardando revisão) |
 | 9 | FAQ + emergência | `#faq` | ⏳ a construir (versão da rodada 1 no lugar) |
 | 10 | CTA final | `#cta` | ⏳ a construir (versão da rodada 1 no lugar) |
 | 11 | Rodapé | — | ⏳ a construir (versão da rodada 1, já com os links e textos do COPY 3.11) |
@@ -92,13 +92,13 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 5d/3i/4o | Ajustes de 11/11: Benefícios sem links e H2 todo preto; foto central de `#pessoas` sem encolher; cartão das Dores cresce ao entrar — prints em `./screenshots/ajustes-11-11/` | (ver git log) |
 | 4p | Cartão das Dores: entrada por `clip-path` (não escala) — sem faixas brancas nem engasgos ao voltar o scroll; `scripts/check-scroll-perf.mjs` — prints em `./screenshots/dores-entrada-clip/` | (ver git log) |
 | 7j | Seção 7 — ajustes 10: ilustrações da linha do tempo preenchendo o cartão (cover), sem flutuar — prints em `./screenshots/leitura-risco-timeline-6/` | (ver git log) |
+| 8 | Seção 8 — Como começar: palco fixo (Gardance) com 4 passos, fotos novas, cartões animados por passo, barra de progresso clicável; blocos empilhados no celular; subtítulos de todas as seções padronizados (`lead`) — prints em `./screenshots/comecar/` e `./screenshots/subtitulos/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
 ## Próximo passo
 1. **Revisão do cliente da seção 7** (`screenshots/leitura-risco-2/`, incluindo `esfera-animada.gif`) e ajustes que ela pedir.
 2. Depois, na ordem, sempre com os textos do `COPY.md` e a rotina de 5 passos do CLAUDE.md:
-   - **8 Como começar** (`#comecar`, COPY §3.8);
    - **9 FAQ + emergência** (`#faq`, COPY §3.9);
    - **10 CTA final** (`#cta`, COPY §3.10);
    - **11 Rodapé** (COPY §3.11).
@@ -236,9 +236,9 @@ Pendências conhecidas: aviso "chunk > 500 kB" do pacote principal no build (Fas
 ## Fotos
 Originais em `assets/fotos/` e arquivos gerados em `public/images/` (`npm run images` → `<slot>-<largura>.avif|webp` + `.jpg`). **Tudo versionado no git.**
 
-**Definitivas, em uso:** `risco-baixo`, `risco-medio`, `risco-alto` (ilustrações da linha do tempo, #leitura-risco), `numeros` (#contexto), `contexto` (centro do Manifesto), `pessoas-janela`, `rede-duas-mulheres`, `direitos-1` a `direitos-4` (Manifesto), `beneficio-tranquilidade`, `beneficio-controle`, `beneficio-confianca` (Benefícios), `dores-banner` (Dores), `ai-sphere.png` (fallback da esfera, gerado do próprio canvas).
+**Definitivas, em uso:** `comecar-1` a `comecar-4` (+ `-mobile`, palco de #comecar), `boas-vindas-foto` (tela codada do passo 1), `risco-baixo`, `risco-medio`, `risco-alto` (ilustrações da linha do tempo, #leitura-risco), `numeros` (#contexto), `contexto` (centro do Manifesto), `pessoas-janela`, `rede-duas-mulheres`, `direitos-1` a `direitos-4` (Manifesto), `beneficio-tranquilidade`, `beneficio-controle`, `beneficio-confianca` (Benefícios), `dores-banner` (Dores), `ai-sphere.png` (fallback da esfera, gerado do próprio canvas).
 
-**Provisórias, em uso** (alternativas de `assets/fotos/` até chegarem as definitivas): `sos-mobile` (espelhada), `risco` e `comecar-2` — as três no Manifesto.
+**Provisórias, em uso** (alternativas de `assets/fotos/` até chegarem as definitivas): `sos-mobile` (espelhada), `risco` e `pessoas-rua` (era `comecar-2`) — as três no Manifesto.
 
 **Da rodada 1, em uso até a seção ser refeita:** `cta-final` e `cta-final-mobile` (CTA final, seção 10).
 

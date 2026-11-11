@@ -318,7 +318,7 @@ export function Dores() {
             <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <p
                 data-banner-appear
-                className="max-w-[44ch] text-[1.25rem] leading-snug text-pretty text-white/80"
+                className="lead text-pretty text-white/80"
               >
                 {b.sub}
               </p>
