@@ -2,7 +2,7 @@
 
 > Leia este arquivo antes de qualquer coisa. Ele diz onde o trabalho parou. Detalhes de cada decisão estão no `NOTES.md`.
 
-Última atualização: 10/11/2026 (fim da sessão) · Repositório: https://github.com/ccriascco/lp-amparo (branch `main`)
+Última atualização: 11/11/2026 · Repositório: https://github.com/ccriascco/lp-amparo (branch `main`)
 
 ---
 
@@ -37,7 +37,8 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 - [x] Embaixo, só "Como o app se adapta ao seu risco" (3 cartões iguais, pílula do nível no topo, hover/foco sobe 4px + borda vinho), princípios e nota. **Sem** seletor Baixo/Médio/Alto, **sem** "Ver como chegamos nisso", **sem** legenda do FONAR, sem linha de luz e sem absorção no scroll.
 - [x] Desempenho: dpr ≤ 1.5, render pausado fora da tela, 3D em `React.lazy` carregado só perto da seção (não entra no carregamento inicial), CPU 4× com mediana de 60fps.
 - [x] Fallback sem WebGL / movimento reduzido: `public/images/ai-sphere.png` + pílulas paradas.
-- [ ] Revisão do cliente (prints e GIF em `screenshots/leitura-risco-2/`).
+- [x] Pílulas não se sobrepõem mais: a de trás esmaece ao cruzar a da frente (medido com `scripts/check-pills.mjs`; prints em `screenshots/leitura-risco-3/`).
+- [ ] Revisão do cliente (prints e GIF em `screenshots/leitura-risco-2/` e `leitura-risco-3/`).
 
 ## Itens concluídos
 | Item | O que é | Commit |
@@ -75,6 +76,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 7 | Seção 7 — Leitura de risco com IA: orbe em CSS, fontes em órbita absorvidas ao rolar, cartão de resultado com níveis e "Ver como chegamos nisso", cartões de adaptação, princípios e nota — prints em `./screenshots/leitura-risco/` | 61eefc3 |
 | 5c | Benefícios de volta à versão anterior (etiqueta branca sempre aberta, hover só levanta) — revoga o item 5b | 9ef496e |
 | 7b | Seção 7 — ajustes 2: esfera da IA em partículas 3D (three + R3F, carregada só perto da tela), 7 pílulas em duas órbitas com profundidade, partículas soltas, cartões de adaptação sem seletor; removidos o cartão de resultado, a legenda do FONAR, a linha de luz e a absorção — prints e GIF em `./screenshots/leitura-risco-2/` | 9ef496e |
+| 7c | Seção 7 — ajustes 3: oclusão entre pílulas que se cruzam nas órbitas (sobreposição legível de ~55% dos quadros para ~0) — prints em `./screenshots/leitura-risco-3/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 

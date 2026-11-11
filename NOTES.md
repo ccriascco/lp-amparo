@@ -418,3 +418,9 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
 - **"Como o app se adapta ao seu risco"** (texto do cliente): 3 cartões iguais, pílula do nível no topo (tons de vinho), texto do COPY 3.7 e o pedaço da interface; hover/foco sobe 4px e ganha borda vinho. Sem seletor. Princípios e nota mantidos.
 - **Pílulas novas (texto do cliente):** "Frequência dos registros", "Ameaças relatadas", "Tipo de violência", "Histórico recente".
 - Prints em `screenshots/leitura-risco-2/` + `esfera-animada.gif` (48 quadros montados com o sharp; a gravação de vídeo do Playwright exigiria baixar o ffmpeg).
+
+## Seção 7 — ajustes 3: pílulas sem sobreposição (11/11/2026)
+- **Crítica (passo 4):** com as duas órbitas em sentidos opostos, as pílulas se cruzavam na tela e o texto de uma ficava em cima do da outra ("Ameaças relatadas" × "Frequência dos registros", "Frequência" × "Sinais de risco oficiais"; no celular, duas pílulas de trás amontoadas).
+- **Correção:** oclusão por quadro em `place()` (`LeituraRisco.tsx`). Quando duas pílulas se encostam (folga de 12px na horizontal e 8px na vertical), a que está mais atrás esmaece (até 10% da opacidade) e desfoca (até +3px), como se passasse por trás da outra. A transição é gradual, proporcional ao quanto elas se cobrem. O empilhamento passou a seguir a profundidade real (z 1–17 atrás da esfera, 20–40 na frente). Órbitas, velocidades e o modo de movimento reduzido não mudaram.
+- **Medido** com `node scripts/check-pills.mjs <url> 1440,1024,390` (amostra de 30s, conta quadros com duas pílulas legíveis, opacidade > 0,5, sobrepostas). Antes: 64/120, 68/120 e 55/120 quadros (até 9.038px²). Depois: 1/120, 1/120 e 0/120 (até 85px², só no quadro de transição).
+- Prints em `screenshots/leitura-risco-3/` (e `reduzido/`).

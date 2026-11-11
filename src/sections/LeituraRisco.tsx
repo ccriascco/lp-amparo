@@ -150,16 +150,36 @@ export function LeituraRisco() {
       return { o: orbits[oi], base: (idx / same) * Math.PI * 2 + oi * 0.6 }
     })
 
+    // Tamanho de cada pílula (medido uma vez; a escala nunca passa de 1).
+    const size = pills.map((p) => ({ w: p.offsetWidth, h: p.offsetHeight }))
+
     const place = (t: number) => {
-      pills.forEach((p, i) => {
+      const pos = pills.map((_, i) => {
         const { o, base } = slot[i]
-        const theta = base + o.dir * ((t / o.period) * Math.PI * 2)
-        const { x, y, front } = project(o, theta)
-        const f = reduced ? 1 : front
+        return project(o, base + o.dir * ((t / o.period) * Math.PI * 2))
+      })
+      // Oclusão: quando duas pílulas se cruzam, a que está mais atrás esmaece e desfoca, como se
+      // passasse por trás da outra (as órbitas se cruzam na tela e o texto não pode se sobrepor).
+      const hide = pos.map(() => 0)
+      for (let i = 0; i < pos.length; i++) {
+        for (let j = i + 1; j < pos.length; j++) {
+          const ox = (size[i].w + size[j].w) / 2 + 12 - Math.abs(pos[i].x - pos[j].x)
+          const oy = (size[i].h + size[j].h) / 2 + 8 - Math.abs(pos[i].y - pos[j].y)
+          if (ox <= 0 || oy <= 0) continue
+          const amount = Math.min(1, ox / 48) * Math.min(1, oy / 16)
+          const back = pos[i].front < pos[j].front ? i : j
+          hide[back] = Math.max(hide[back], amount)
+        }
+      }
+      pills.forEach((p, i) => {
+        const { x, y, front: f } = pos[i]
+        const h = hide[i]
         p.style.transform = `translate(-50%, -50%) translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) scale(${(0.85 + 0.15 * f).toFixed(3)})`
-        p.style.opacity = (0.35 + 0.65 * f).toFixed(3)
-        p.style.filter = f < 0.5 ? `blur(${((0.5 - f) * 2).toFixed(2)}px)` : 'none'
-        p.style.zIndex = f >= 0.5 ? '30' : '5'
+        p.style.opacity = ((0.35 + 0.65 * f) * (1 - 0.9 * h)).toFixed(3)
+        const blur = Math.max(0, 0.5 - f) * 2 + h * 3
+        p.style.filter = blur > 0.01 ? `blur(${blur.toFixed(2)}px)` : 'none'
+        // Ordem de empilhamento pela profundidade real (a esfera fica em z-10).
+        p.style.zIndex = String(f >= 0.5 ? 20 + Math.round(f * 20) : 1 + Math.round(f * 16))
       })
       dots.forEach((d, i) => {
         const [r, tilt, roll, period, , phase, alpha] = DOTS[i]
