@@ -2,135 +2,254 @@
   "rede-duas-mulheres": {
     "width": 768,
     "height": 1024,
-    "widths": [640, 768]
+    "widths": [
+      640,
+      768
+    ]
   },
   "ajudar": {
     "width": 1086,
     "height": 1448,
-    "widths": [640, 1080, 1086]
+    "widths": [
+      640,
+      1080,
+      1086
+    ]
   },
   "contexto": {
     "width": 1122,
     "height": 1402,
-    "widths": [640, 1080, 1122]
+    "widths": [
+      640,
+      1080,
+      1122
+    ]
   },
   "direitos-1": {
     "width": 1051,
     "height": 1402,
-    "widths": [640, 1051]
+    "widths": [
+      640,
+      1051
+    ]
   },
   "direitos-2": {
     "width": 1051,
     "height": 1402,
-    "widths": [640, 1051]
+    "widths": [
+      640,
+      1051
+    ]
   },
   "direitos-3": {
     "width": 1051,
     "height": 1402,
-    "widths": [640, 1051]
+    "widths": [
+      640,
+      1051
+    ]
   },
   "direitos-4": {
     "width": 1051,
     "height": 1402,
-    "widths": [640, 1051]
+    "widths": [
+      640,
+      1051
+    ]
   },
   "cta-final": {
     "width": 1672,
     "height": 941,
-    "widths": [640, 1080, 1600, 1672]
+    "widths": [
+      640,
+      1080,
+      1600,
+      1672
+    ]
   },
   "cta-final-mobile": {
     "width": 753,
     "height": 941,
-    "widths": [640, 753]
+    "widths": [
+      640,
+      753
+    ]
   },
   "numeros": {
     "width": 1086,
     "height": 1357,
-    "widths": [640, 1080, 1086]
+    "widths": [
+      640,
+      1080,
+      1086
+    ]
   },
   "dores-banner": {
     "width": 1672,
     "height": 941,
-    "widths": [640, 1080, 1600, 1672]
+    "widths": [
+      640,
+      1080,
+      1600,
+      1672
+    ]
   },
   "pessoas-janela": {
     "width": 1024,
     "height": 1024,
-    "widths": [640, 1024]
+    "widths": [
+      640,
+      1024
+    ]
   },
   "beneficio-tranquilidade": {
     "width": 1122,
     "height": 1402,
-    "widths": [640, 1080, 1122]
+    "widths": [
+      640,
+      1080,
+      1122
+    ]
   },
   "beneficio-controle": {
     "width": 1122,
     "height": 1402,
-    "widths": [640, 1080, 1122]
+    "widths": [
+      640,
+      1080,
+      1122
+    ]
   },
   "beneficio-confianca": {
     "width": 1122,
     "height": 1402,
-    "widths": [640, 1080, 1122]
+    "widths": [
+      640,
+      1080,
+      1122
+    ]
   },
   "sos": {
     "width": 1672,
     "height": 941,
-    "widths": [640, 1080, 1600, 1672]
+    "widths": [
+      640,
+      1080,
+      1600,
+      1672
+    ]
   },
   "sos-mobile": {
     "width": 753,
     "height": 941,
-    "widths": [640, 753]
+    "widths": [
+      640,
+      753
+    ]
   },
   "risco": {
     "width": 1024,
     "height": 576,
-    "widths": [640, 1024]
+    "widths": [
+      640,
+      1024
+    ]
   },
   "risco-mobile": {
     "width": 819,
     "height": 1024,
-    "widths": [640, 819]
+    "widths": [
+      640,
+      819
+    ]
   },
   "comecar-2": {
     "width": 1024,
     "height": 576,
-    "widths": [640, 1024]
+    "widths": [
+      640,
+      1024
+    ]
   },
   "comecar-3": {
     "width": 1024,
     "height": 576,
-    "widths": [640, 1024]
+    "widths": [
+      640,
+      1024
+    ]
   },
   "comecar-3-mobile": {
     "width": 640,
     "height": 800,
-    "widths": [640]
+    "widths": [
+      640
+    ]
+  },
+  "risco-baixo": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      640,
+      1080,
+      1536
+    ]
+  },
+  "risco-medio": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      640,
+      1080,
+      1536
+    ]
+  },
+  "risco-alto": {
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      640,
+      1080,
+      1536
+    ]
   },
   "cofre": {
     "width": 1600,
     "height": 900,
-    "widths": [640, 1080, 1600],
+    "widths": [
+      640,
+      1080,
+      1600
+    ],
     "placeholder": true
   },
   "cofre-mobile": {
     "width": 1080,
     "height": 1350,
-    "widths": [640, 1080],
+    "widths": [
+      640,
+      1080
+    ],
     "placeholder": true
   },
   "comecar-1": {
     "width": 1600,
     "height": 900,
-    "widths": [640, 1080, 1600],
+    "widths": [
+      640,
+      1080,
+      1600
+    ],
     "placeholder": true
   },
   "comecar-4": {
     "width": 1600,
     "height": 900,
-    "widths": [640, 1080, 1600],
+    "widths": [
+      640,
+      1080,
+      1600
+    ],
     "placeholder": true
   }
 }

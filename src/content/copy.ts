@@ -233,8 +233,6 @@ export const leituraRisco = {
         text: 'Os canais de emergência ficam à frente: 180, 190 e a delegacia mais próxima.',
       },
     ],
-    /** Microtextos das ilustrações (decorativas, fora da árvore de acessibilidade). */
-    ilustracao: { pronta: 'Pronta para avisar', numeros: ['180', '190'] },
   },
 }
 

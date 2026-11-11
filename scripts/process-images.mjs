@@ -120,6 +120,10 @@ const SLOTS = [
     file: 'mulher-mostrando-celular-a-senhora.png',
     crop: { left: 190, top: 0, width: 640, height: 800 },
   },
+  // Ilustrações da linha do tempo de #leitura-risco (1536×1024, inteiras; object-fit: contain)
+  { slot: 'risco-baixo', file: 'risco-baixo.png', crop: { left: 0, top: 0, width: 1536, height: 1024 } },
+  { slot: 'risco-medio', file: 'risco-medio.png', crop: { left: 0, top: 0, width: 1536, height: 1024 } },
+  { slot: 'risco-alto', file: 'risco-alto.png', crop: { left: 0, top: 0, width: 1536, height: 1024 } },
 ]
 
 /** Placeholders (DESIGN §8): --grad-vinho + gota em white/10, com os nomes exatos dos slots. */
