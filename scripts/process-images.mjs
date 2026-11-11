@@ -117,7 +117,7 @@ const SLOTS = [
   { slot: 'comecar-1-mobile', file: 'comecar-1.png', crop: { left: 476, top: 0, width: 753, height: 941 } },
   { slot: 'comecar-2-mobile', file: 'comecar-2.png', crop: { left: 340, top: 0, width: 753, height: 941 } },
   { slot: 'comecar-3-mobile', file: 'comecar-3.png', crop: { left: 460, top: 0, width: 753, height: 941 } },
-  { slot: 'comecar-4-mobile', file: 'comecar-4.png', crop: { left: 576, top: 0, width: 753, height: 941 } },
+  { slot: 'comecar-4-mobile', file: 'comecar-4.png', crop: { left: 418, top: 0, width: 753, height: 941 } },
   // Foto da tela de boas-vindas do app (para a tela codada no passo 1), sem os cantos arredondados
   {
     slot: 'boas-vindas-foto',

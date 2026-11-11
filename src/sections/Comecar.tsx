@@ -177,14 +177,14 @@ export function Comecar() {
     >
       {/* Cabeçalho centralizado (pedido do cliente, 11/11) */}
       <Container>
-        <div className="mx-auto flex max-w-[760px] flex-col items-center text-center">
+        <div className="mx-auto flex max-w-[1080px] flex-col items-center text-center">
           <div data-appear>
             <Chip dot>{comecar.chip}</Chip>
           </div>
           <SectionHeading id="comecar-title" className="mt-5">
             {comecar.h2}
           </SectionHeading>
-          <p data-appear className="mt-6 lead text-pretty text-texto-secundario">
+          <p data-appear className="mt-6 lead text-pretty text-texto-secundario md:max-w-[72ch]">
             {comecar.sub}
           </p>
         </div>
