@@ -85,14 +85,6 @@ export function Direitos() {
               data-dr-phone
               className={clsx(CARD, 'relative flex h-[560px] flex-col items-center overflow-hidden lg:h-full lg:min-h-[560px]')}
             >
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background:
-                    'radial-gradient(60% 50% at 50% 100%, rgb(149 75 110 / 0.12) 0%, transparent 70%)',
-                }}
-              />
               {/* Topo: ícone, título e subtítulo (preenche o espaço acima do celular) */}
               <div className="relative z-10 flex max-w-[300px] flex-col items-center px-7 pt-8 text-center">
                 <span aria-hidden className="grid size-11 place-items-center rounded-sm bg-vinho text-white">
@@ -104,7 +96,7 @@ export function Direitos() {
                 <p className="mt-2 text-[0.9375rem] text-pretty text-texto-secundario">{D.central.text}</p>
               </div>
               {/* Invólucro absoluto (o PhoneFrame tem `relative` próprio): logo abaixo do texto */}
-              <div className="absolute top-[220px] w-[280px] lg:top-[236px] lg:w-[300px]">
+              <div className="absolute top-[220px] w-[280px] lg:top-[236px] lg:w-[300px] [&_.shadow-phone]:shadow-[0_24px_48px_-28px_rgb(75_42_63/0.28)]">
                 <PhoneFrame label={D.altTela}>
                   <DireitosScreen />
                 </PhoneFrame>
@@ -135,9 +127,6 @@ export function Direitos() {
           </BentoCard>
         </ul>
 
-        <p className="mx-auto mt-10 max-w-[60ch] text-center caption font-normal text-texto-secundario">
-          {D.nota}
-        </p>
       </Container>
     </section>
   )

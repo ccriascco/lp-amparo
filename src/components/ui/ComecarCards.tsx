@@ -26,14 +26,10 @@ const CARD = 'w-[340px] max-w-full rounded-card-lg bg-white p-6 text-left shadow
 /** 1) Crie sua conta: tela de boas-vindas do app (boas-vindas.png) num celular. */
 function WelcomeCard({ className }: { className?: string }) {
   const b = C.boasVindas
-  // Mesmo formato dos outros cartões do palco (340px, branco; pedido do cliente: em 1920 o celular
-  // ficava grande demais): o celular fica dentro do cartão, cortado em cima, mostrando da foto até o
-  // seletor "Criar conta / Entrar".
+  // Cartão branco pequeno (pedido do cliente) com o celular inteiro dentro, sem sombra própria.
   return (
-    <div className={clsx(CARD, 'relative h-[300px] overflow-hidden p-0', className)}>
-    {/* Invólucro absoluto: o PhoneFrame tem `relative` próprio. Mostra a metade de baixo da tela
-        (título, texto e o seletor), com a base da moldura cortada pelo cartão. */}
-    <div className="absolute -bottom-5 left-1/2 w-[240px] -translate-x-1/2">
+    <div className={clsx(CARD, 'w-max p-4', className)}>
+    <div className="w-[150px] [&_.shadow-phone]:shadow-none">
     <PhoneFrame label={`${b.title}. ${b.text}`}>
       <div className="relative h-full w-full bg-white">
         <Picture

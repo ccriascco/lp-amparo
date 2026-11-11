@@ -125,6 +125,9 @@ const SLOTS = [
     file: '../../src/assets/app-screens/boas-vindas.png',
     crop: { left: 6, top: 6, width: 440, height: 630 },
   },
+  // #guardia: fundo do banner (horizontal 1536×1024 e vertical 1696×2528 para o celular)
+  { slot: 'guardia-fundo', file: 'guardia-fundo.png', crop: { left: 0, top: 0, width: 1536, height: 1024 } },
+  { slot: 'guardia-fundo-mobile', file: 'guardia-fundo-mobile.jpg', crop: { left: 0, top: 0, width: 1696, height: 2528 }, widths: [480, 720, 1080] },
   // Ilustrações da linha do tempo de #leitura-risco (1536×1024, inteiras; object-fit: contain)
   { slot: 'risco-baixo', file: 'risco-baixo.png', crop: { left: 0, top: 0, width: 1536, height: 1024 } },
   { slot: 'risco-medio', file: 'risco-medio.png', crop: { left: 0, top: 0, width: 1536, height: 1024 } },

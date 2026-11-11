@@ -571,3 +571,13 @@ Referências: NextPay mobile (banner) e Gardance mobile (palco). Os sites não p
 - **Cartão do celular em `#direitos`:** sai o badge "Linguagem simples · 12 temas"; entram ícone (`BookOpen` em quadrado vinho), título "Central de Direitos" e subtítulo "Tudo o que a lei garante, explicado em linguagem simples dentro do app." (texto novo, para o cliente revisar; no `copy.ts` e no `COPY.md`), com o celular (300px) logo abaixo.
 - **Bug corrigido:** o `PhoneFrame` tem `relative` no próprio elemento, que vencia o `absolute` passado em `className`; as posições viravam deslocamentos relativos (celular "flutuando" fora do lugar). Agora a posição vai num invólucro.
 - Prints em `screenshots/espacamentos/` (1920 e 1440; 390 do cartão do celular).
+
+## Ajustes de 11/11/2026 (4) e seção nova `#guardia` (pedido do cliente)
+- **`#direitos`:** sem o brilho rosado sob o celular; sombra do celular suave (`0 24px 48px -28px rgb(75 42 63 / .28)` no lugar da `shadow-phone`). Nota "Conteúdo informativo…" removida (página, `copy.ts` e `COPY.md`).
+- **Passo 1 do palco de `#comecar`:** cartão branco menor (`w-max`, padding 16px) com o celular inteiro (150px) dentro, sem sombra própria.
+- **`#guardia` — O que sua guardiã recebe** (`src/sections/Guardia.tsx`, depois de `#direitos`). O `COPY.md` não tinha a seção: textos redigidos a partir do que o COPY já afirma (SOS com toque longo e sem barulho, localização só no SOS, "confirmou", cofre e leitura de risco privados) e registrados no `COPY.md` §3.86 e no `copy.ts → guardia` — **para o cliente revisar**.
+  - Fotos novas: "Noite aconchegante no sofá" → `guardia-fundo` (1536×1024) e a vertical `Gemini_Generated_Image…jfif` → `guardia-fundo-mobile` (1696×2528, 480/720/1080px), via `<picture>` com `media` (até 767px).
+  - Shell com margem 16px (12px), raio 24px, `min(100svh, 860px)` / mínimo 680px (no celular, pelo menos a altura da tela). Escurecimento do topo (`#4B2A3F` 70% → transparente até 35%) e da base (`#111` 88% → `#4B2A3F` 40% → transparente até 55%).
+  - Topo: chip de vidro, H2 Quicksand 600 `clamp(36px, 4.2vw, 56px)` em 2 linhas no desktop, subtítulo `white/75` até 520px. Base: linha `white/15` e 4 itens soltos (ícone de linha 32px, título 18px, texto 15px `white/75`), 4 colunas no desktop, 2 a partir de 640px e 1 coluna no celular com o ícone à esquerda (no 2×2 de 390px os textos passavam de 3 linhas).
+  - Movimento: foto 1.12 → 1 com scrub ao entrar e parallax de −6%; H2 palavra por palavra; ícones desenhados (DrawSVG) e textos subindo do desfoque em stagger de 0,12s; hover sobe o ícone 3px com brilho vinho. Movimento reduzido: estático. Header escuro sobre o banner.
+  - Prints em `screenshots/guardia/` (1440, 390, `reduzido/`).

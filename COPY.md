@@ -65,6 +65,7 @@ lang: pt-BR
 | 7 | Leitura de risco com IA | `#leitura-risco` | a construir |
 | 8 | Como começar | `#comecar` | pronta |
 | 8.5 | Seus direitos (bento) | `#direitos` | pronta |
+| 8.6 | O que sua guardiã recebe (banner) | `#guardia` | pronta |
 | 9 | FAQ + emergência | `#faq` | a construir |
 | 10 | CTA final | `#cta` | a construir |
 | 11 | Rodapé | — | a construir |
@@ -174,8 +175,16 @@ lang: pt-BR
 - **Monitoramento do agressor** · Desde 2026 (Lei 15.383), o monitoramento eletrônico do agressor é uma medida protetiva própria.
 - **Pedido sem advogado e sem custo** · Você pode pedir a medida protetiva na delegacia, sem precisar de advogado e sem pagar nada. · Delegacia → Pedido → Proteção
 - Microtextos das ilustrações: forma de violência · Pedido de medida protetiva (Pedido enviado → Em análise → Concedida) · Boletim de ocorrência · Não exigido · Sinais de alerta · Nível de atenção · Você · Alerta de aproximação · agora · Custo · R$ 0,00 · Advogado · Não precisa
-- Nota pequena: Conteúdo informativo, não substitui orientação jurídica. Em caso de dúvida, procure a Defensoria Pública.
 - Dores, item 5: link **Conheça seus direitos** → `#direitos`.
+
+### 3.86 O que sua guardiã recebe (`#guardia`)
+- Chip: **Rede de apoio**
+- H2: **O que sua guardiã recebe quando você pede ajuda.**
+- Subtítulo: Você escolhe até 5 pessoas de confiança. Elas só são avisadas quando você aciona o SOS.
+- **Um alerta na hora** · Um toque longo no SOS e ela recebe o aviso, sem barulho no seu celular.
+- **Onde você está** · A localização vai junto com o alerta, e só quando você aciona o SOS.
+- **A confirmação** · Ela confirma que recebeu, e você vê quem já foi avisada.
+- **Só o necessário** · Seus registros, o cofre e a leitura de risco continuam só com você.
 
 ### 3.9 FAQ (`#faq`)
 - H2: **Perguntas frequentes**

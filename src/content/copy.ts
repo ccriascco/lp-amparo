@@ -279,7 +279,6 @@ export const direitos = {
     advogado: 'Advogado',
     naoPrecisa: 'Não precisa',
   },
-  nota: 'Conteúdo informativo, não substitui orientação jurídica. Em caso de dúvida, procure a Defensoria Pública.',
   /** Topo do cartão do celular (pedido do cliente: título, subtítulo e ícone no lugar do badge). */
   central: {
     title: 'Central de Direitos',
@@ -287,6 +286,20 @@ export const direitos = {
   },
   /** alt do celular (tela codada, descrita como imagem) */
   altTela: 'Tela "Conteúdo e direitos" do Amparo, com a Lei Maria da Penha explicada, como pedir uma medida protetiva e o monitoramento eletrônico do agressor.',
+}
+
+// 3.86 — O que sua guardiã recebe (banner; pedido do cliente, 11/11/2026). Textos redigidos a
+// partir do COPY (SOS, localização só no SOS, confirmação, cofre e leitura privados) — revisar.
+export const guardia = {
+  chip: 'Rede de apoio',
+  h2: 'O que sua guardiã recebe quando você pede ajuda.',
+  sub: 'Você escolhe até 5 pessoas de confiança. Elas só são avisadas quando você aciona o SOS.',
+  itens: [
+    { title: 'Um alerta na hora', text: 'Um toque longo no SOS e ela recebe o aviso, sem barulho no seu celular.' },
+    { title: 'Onde você está', text: 'A localização vai junto com o alerta, e só quando você aciona o SOS.' },
+    { title: 'A confirmação', text: 'Ela confirma que recebeu, e você vê quem já foi avisada.' },
+    { title: 'Só o necessário', text: 'Seus registros, o cofre e a leitura de risco continuam só com você.' },
+  ],
 }
 
 // 3.8 (a construir: textos revisados contra o COPY 3.8 na construção)

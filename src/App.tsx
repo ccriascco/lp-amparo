@@ -4,6 +4,7 @@ import { Preloader } from './sections/Preloader'
 import { useSiteMotion } from './motion/useSiteMotion'
 import { Comecar } from './sections/Comecar'
 import { Direitos } from './sections/Direitos'
+import { Guardia } from './sections/Guardia'
 import { Contexto } from './sections/Contexto'
 import { CtaFinal } from './sections/CtaFinal'
 import { Dores } from './sections/Dores'
@@ -70,6 +71,7 @@ function Landing() {
         <LeituraRisco />
         <Comecar />
         <Direitos />
+        <Guardia />
         <Faq />
         <CtaFinal />
       </main>
