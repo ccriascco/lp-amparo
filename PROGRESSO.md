@@ -43,6 +43,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 - [x] Cartões de volta à versão anterior (borda, pílula, 1 linha do COPY 3.7, painel embaixo; empilhados no celular), agora com as ilustrações novas no painel (11/11) — prints em `screenshots/leitura-risco-6/`.
 - [x] "Como o app se adapta ao seu risco" virou uma **linha do tempo** Baixo → Médio → Alto (`RiskTimeline.tsx`): linha que se preenche com o scroll (bloco fixo ~150vh no desktop; vertical sem sticky abaixo de 1024px), marcos que acendem com anéis, medidor por nível, cartão com mini ilustração + título + 1 linha. Princípios e nota continuam fora (aguardando confirmação). Prints em `screenshots/leitura-risco-timeline/`.
 - [x] Linha do tempo: a linha vai do marco Baixo ao Alto, tudo em `vinho-profundo`, ilustrações do cliente (`risco-baixo/medio/alto`) no topo dos cartões, acendendo e flutuando por nível (11/11) — prints em `screenshots/leitura-risco-timeline-4/`.
+- [x] Setas entre os marcos enchem de cor com animação; a linha volta com o scroll e os níveis apagam na ordem inversa (11/11) — prints em `screenshots/leitura-risco-timeline-5/`.
 - [ ] Revisão do cliente.
 
 ## Itens concluídos
@@ -87,6 +88,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 7f | Seção 7 — ajustes 6: cartões de volta à versão anterior, com as ilustrações novas no painel — prints em `./screenshots/leitura-risco-6/` | (ver git log) |
 | 7g | Seção 7 — ajustes 7: linha do tempo de níveis (`RiskTimeline`), substitui os cartões — prints em `./screenshots/leitura-risco-timeline/` | (ver git log) |
 | 7h | Seção 7 — ajustes 8: linha do Baixo ao Alto, uma cor só (`vinho-profundo`), ilustrações nos cartões — prints em `./screenshots/leitura-risco-timeline-4/` | (ver git log) |
+| 7i | Seção 7 — ajustes 9: setas animadas e linha que acompanha o scroll nos dois sentidos — prints em `./screenshots/leitura-risco-timeline-5/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 

@@ -9,6 +9,8 @@ const A = leituraRisco.adapta
 
 const ICONS: LucideIcon[] = [ShieldCheck, BellRing, PhoneCall]
 const SLOTS: ImageSlot[] = ['risco-baixo', 'risco-medio', 'risco-alto']
+/** Posição das setas ao longo da linha (entre Baixo e Médio, entre Médio e Alto). */
+const CHEV_AT = [0.25, 0.75]
 
 /** Desktop com movimento: linha horizontal e bloco fixo. Abaixo de 1024px: linha vertical. */
 const LG = '(min-width: 1024px)'
@@ -103,7 +105,7 @@ export function RiskTimeline() {
         // Estado inicial: nada aceso, linha vazia, cartões apagados.
         const on = items.map(() => false)
         let visible = false
-        let max = 0
+        const chevs = q('[data-tl-chev]')
         // Revela por recorte, a partir do marco Baixo.
         const setFill = (f: number) => {
           const rest = `${((1 - f) * 100).toFixed(2)}%`
@@ -118,6 +120,7 @@ export function RiskTimeline() {
           gsap.set(gauges, { drawSVG: '0% 0%' })
         }
         items.forEach((it) => delete it.dataset.on)
+        chevs.forEach((c) => delete c.dataset.on)
         setFill(0)
         off()
 
@@ -126,26 +129,43 @@ export function RiskTimeline() {
           on[i] = true
           items[i].dataset.on = ''
           const ease = 'expo.out'
-          gsap.to(cards[i], { y: 0, filter: 'blur(0px)', duration: 0.8, ease })
-          gsap.to(bodies[i], { opacity: 1, duration: 0.8, ease })
-          gsap.to(arts[i], { opacity: 1, duration: 0.8, ease })
+          gsap.to(cards[i], { y: 0, filter: 'blur(0px)', duration: 0.8, ease, overwrite: true })
+          gsap.to(bodies[i], { opacity: 1, duration: 0.8, ease, overwrite: true })
+          gsap.to(arts[i], { opacity: 1, duration: 0.8, ease, overwrite: 'auto' })
           gsap.to(gauges[i], {
             drawSVG: `0% ${Number(gauges[i].dataset.fill) * 100}%`,
             duration: 1.2,
             ease: 'power2.out',
+            overwrite: true,
           })
           sync()
         }
-        const reset = () => {
-          max = 0
-          setFill(0)
-          items.forEach((it, i) => {
-            on[i] = false
-            delete it.dataset.on
-          })
+        // Voltando com o scroll: o nível apaga quando a linha recua para antes do marco.
+        const deactivate = (i: number) => {
+          if (!on[i]) return
+          on[i] = false
+          delete items[i].dataset.on
           sync()
-          gsap.killTweensOf([...cards, ...bodies, ...arts, ...gauges])
-          off()
+          const ease = 'power2.out'
+          gsap.to(cards[i], { y: 24, filter: 'blur(6px)', duration: 0.5, ease, overwrite: true })
+          gsap.to(bodies[i], { opacity: 0.4, duration: 0.5, ease, overwrite: true })
+          gsap.to(arts[i], { opacity: 0.5, y: 0, duration: 0.5, ease, overwrite: true })
+          gsap.to(gauges[i], { drawSVG: '0% 0%', duration: 0.5, ease, overwrite: true })
+        }
+
+        // Setas entre os marcos: enchem de cor com um "pulo" quando a linha passa por elas.
+        const chevOn = chevs.map(() => false)
+        const setChev = (k: number, v: boolean) => {
+          if (chevOn[k] === v) return
+          chevOn[k] = v
+          const c = chevs[k]
+          if (v) {
+            c.dataset.on = ''
+            gsap.fromTo(c, { scale: 0.7 }, { scale: 1, duration: 0.6, ease: 'back.out(3)', overwrite: true })
+          } else {
+            delete c.dataset.on
+            gsap.fromTo(c, { scale: 1.1 }, { scale: 1, duration: 0.3, ease: 'power2.out', overwrite: true })
+          }
         }
 
         // Posição de cada marco ao longo da linha (0 = Baixo, 1 = Alto).
@@ -169,14 +189,15 @@ export function RiskTimeline() {
           onRefresh: measure,
           onUpdate: (self) => {
             // Desktop: a linha enche nos primeiros 85% do bloco fixo; o resto é respiro no fim.
+            // Acompanha o scroll nos dois sentidos: ao voltar, a linha recua e os níveis apagam.
             const f = desk ? Math.min(1, self.progress / 0.85) : self.progress
-            if (self.progress > 0) activate(0) // a linha sai do Baixo: ele acende assim que começa
-            if (f <= max) return
-            max = f
-            setFill(max)
-            pos.forEach((p, i) => max >= p - 0.01 && activate(i))
+            setFill(f)
+            // A linha sai do Baixo: ele acende assim que a rolagem começa.
+            pos.forEach((p, i) =>
+              (i === 0 ? self.progress > 0 : f >= p - 0.01) ? activate(i) : deactivate(i),
+            )
+            CHEV_AT.forEach((p, k) => setChev(k, f >= p))
           },
-          onLeaveBack: reset,
         })
         // Laços só com a linha do tempo na tela.
         ScrollTrigger.create({
@@ -190,7 +211,7 @@ export function RiskTimeline() {
         })
 
         // Ao sair deste modo (ex.: movimento reduzido), o markup volta ao estado final.
-        return () => items.forEach((it) => (it.dataset.on = ''))
+        return () => [...items, ...chevs].forEach((it) => (it.dataset.on = ''))
       })
       return () => mm.revert()
     },
@@ -220,13 +241,20 @@ export function RiskTimeline() {
                 className="absolute inset-y-0 -inset-x-px rounded-full bg-vinho-profundo lg:inset-x-0 lg:-inset-y-px"
               />
               {/* Chevrons entre os marcos (o risco subindo) */}
-              {[25, 75].map((x) => (
+              {CHEV_AT.map((x) => (
                 <span
                   key={x}
-                  className="absolute top-1/2 hidden size-6 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-borda bg-white text-vinho-profundo/70 lg:grid"
-                  style={{ left: `${x}%` }}
+                  className="absolute top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:block"
+                  style={{ left: `${x * 100}%` }}
                 >
-                  <ChevronRight className="size-3.5" strokeWidth={2.25} />
+                  {/* Caixa interna separada: o GSAP anima a escala sem desfazer a centralização */}
+                  <span
+                    data-tl-chev
+                    data-on=""
+                    className="grid size-6 place-items-center rounded-full border border-borda bg-white text-vinho-profundo/70 transition-colors duration-300 data-on:border-vinho-profundo data-on:bg-vinho-profundo data-on:text-white"
+                  >
+                    <ChevronRight className="size-3.5" strokeWidth={2.25} />
+                  </span>
                 </span>
               ))}
             </span>

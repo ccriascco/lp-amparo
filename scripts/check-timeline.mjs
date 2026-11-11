@@ -1,5 +1,5 @@
-// Confere a linha do tempo de #leitura-risco no desktop: marcos acendendo com o scroll, sem apagar
-// ao voltar dentro da seção, e reset ao sair pelo início. Uso: node scripts/check-timeline.mjs <url>
+// Confere a linha do tempo de #leitura-risco no desktop: linha, setas e marcos acompanhando o scroll
+// nos dois sentidos (indo e voltando). Uso: node scripts/check-timeline.mjs <url>
 import { chromium } from 'playwright-core'
 const url = process.argv[2] ?? 'http://localhost:5173/'
 const CHROME = process.env.CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe'
@@ -24,10 +24,12 @@ const at = async (p) => {
   await page.waitForTimeout(900)
   return page.evaluate(() => ({
     on: [...document.querySelectorAll('[data-tl-item]')].map((i) => (i.hasAttribute('data-on') ? 1 : 0)).join(''),
+    linha: (() => { const m = /inset\(0px ([\d.]+)%/.exec(document.querySelector('[data-tl-fill]').style.clipPath); return m ? Math.round(100 - +m[1]) + '%' : '100%' })(),
+    setas: [...document.querySelectorAll('[data-tl-chev]')].map((c) => (c.hasAttribute('data-on') ? 1 : 0)).join(''),
     sticky: Math.round(document.querySelector('[data-tl-pin] > div').getBoundingClientRect().top),
   }))
 }
-for (const [label, p] of [['início (0.2)', 0.2], ['meio (0.55)', 0.55], ['fim (1)', 1], ['volta (0.3)', 0.3], ['acima da seção', -0.4]])
+for (const [label, p] of [['ida 0.1', 0.1], ['ida 0.3', 0.3], ['ida 0.55', 0.55], ['ida 0.75', 0.75], ['ida fim', 1], ['volta 0.75', 0.75], ['volta 0.55', 0.55], ['volta 0.3', 0.3], ['volta 0.1', 0.1], ['acima da seção', -0.4]])
   console.log(label.padEnd(16), JSON.stringify(await at(p)))
 console.log('erros:', errors.length ? errors : 'nenhum')
 await browser.close()
