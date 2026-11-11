@@ -1,13 +1,10 @@
 import { useGSAP } from '@gsap/react'
-import { Smartphone } from 'lucide-react'
 import { useRef, type CSSProperties } from 'react'
-import { Button } from '../components/ui/Button'
 import { Chip } from '../components/ui/Chip'
 import { cardLoop, PHONE_STACK, PHONE_STAGE, StepCard } from '../components/ui/ComecarCards'
 import { Container, SectionHeading } from '../components/ui/Section'
 import { Picture, type ImageSlot } from '../components/ui/TintedPhoto'
-import { comecar, cta } from '../content/copy'
-import { APP_URL } from '../lib/config'
+import { comecar } from '../content/copy'
 import { getLenis, gsap, ScrollTrigger } from '../lib/gsap'
 
 /** Rolagem por passo (pedido do cliente, 11/11: menos voltas da roda para trocar de passo). */
@@ -165,7 +162,7 @@ export function Comecar() {
       ref={root}
       id="comecar"
       aria-labelledby="comecar-title"
-      className="bg-branco pt-20 pb-20 md:pt-28 md:pb-28"
+      className="bg-branco pt-16 pb-16 md:pt-20 lg:pt-24 motion-safe:pb-0"
     >
       {/* Cabeçalho centralizado (pedido do cliente, 11/11) */}
       <Container>
@@ -318,12 +315,6 @@ export function Comecar() {
         </ol>
       </Container>
 
-      {/* CTA depois do palco */}
-      <Container className="mt-12 flex justify-center md:mt-16">
-        <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
-          {cta.acessar}
-        </Button>
-      </Container>
     </section>
   )
 }

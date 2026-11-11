@@ -10,7 +10,8 @@ export function Container({ className, children }: { className?: string; childre
 }
 
 /** Ritmo vertical entre seções (DESIGN.md §3.3). */
-export const SECTION_Y = 'py-20 md:py-28'
+/** Espaço vertical das seções (reduzido a pedido do cliente, 11/11: 64 / 80 / 96px). */
+export const SECTION_Y = 'py-16 md:py-20 lg:py-24'
 
 type HeadingProps = {
   id: string

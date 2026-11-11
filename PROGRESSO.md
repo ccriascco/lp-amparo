@@ -104,6 +104,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | M4b | Foto do banner das Dores no celular de volta ao enquadramento anterior (fundo atrás do chip e do título); título e texto como no M4 | (ver git log) |
 | 8.5 | Seção nova Seus direitos (#direitos): bento com celular da Central de Direitos, 5 direitos com visual próprio e Ligue 180; link nas Dores; COPY §3.85 — prints em `./screenshots/direitos/` | (ver git log) |
 | 8.5b | #direitos: fundo branco, sem Ligue 180, cartões com ilustrações animadas por direito (donut, rastreador, varredura, mapa com MotionPath, fluxo com token), celular com lista rolando e badge — prints em `./screenshots/direitos/` | (ver git log) |
+| E1 | Espaçamentos menores (64/80/96px), linha do tempo sem o vazio em 1920, sem o CTA depois do Como começar, cartão do passo 1 no padrão dos outros, cartão do celular de #direitos com ícone/título/subtítulo — prints em `./screenshots/espacamentos/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 

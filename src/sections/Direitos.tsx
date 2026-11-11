@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react'
 import clsx from 'clsx'
-import { FileText, Gavel, ListChecks, Radar, ShieldCheck, type LucideIcon } from 'lucide-react'
+import { BookOpen, FileText, Gavel, ListChecks, Radar, ShieldCheck, type LucideIcon } from 'lucide-react'
 import { useRef, type ReactNode } from 'react'
 import {
   MonitoramentoArt,
@@ -26,7 +26,7 @@ const CARD = clsx(
 
 /**
  * `#direitos` (pedido do cliente): bento "Seus direitos" em fundo branco. Centro: celular com a
- * tela "Conteúdo e direitos" (lista rolando devagar) e um badge flutuando. Em volta, um direito por
+ * tela "Conteúdo e direitos" (lista rolando devagar) com ícone, título e subtítulo em cima. Em volta, um direito por
  * cartão, cada um com uma ilustração animada própria (`DireitosArt`) no mesmo lugar (embaixo do
  * texto); embaixo, o pedido sem advogado em 3 colunas. Movimento reduzido: tudo no estado final.
  */
@@ -38,22 +38,17 @@ export function Direitos() {
       const mm = gsap.matchMedia()
       mm.add('(prefers-reduced-motion: no-preference)', () => {
         const q = gsap.utils.selector(root)
-        // Lista da tela rolando devagar e o badge flutuando, só com o cartão na tela.
+        // Lista da tela rolando devagar, só com o cartão na tela.
         const list = gsap.fromTo(
           q('[data-dr-list]'),
           { y: 0 },
           { y: -120, duration: 8, ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true },
         )
-        const badge = gsap.fromTo(
-          q('[data-dr-badge]'),
-          { y: -6 },
-          { y: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, paused: true },
-        )
         ScrollTrigger.create({
           trigger: q('[data-dr-phone]')[0],
           start: 'top 90%',
           end: 'bottom 10%',
-          onToggle: (self) => [list, badge].forEach((t) => (self.isActive ? t.play() : t.pause())),
+          onToggle: (self) => (self.isActive ? list.play() : list.pause()),
         })
       })
       return () => mm.revert()
@@ -66,7 +61,7 @@ export function Direitos() {
       ref={root}
       id="direitos"
       aria-labelledby="direitos-title"
-      className="bg-branco py-20 md:py-28"
+      className="bg-branco py-16 md:py-20 lg:py-24"
     >
       <Container>
         {/* Cabeçalho centralizado */}
@@ -88,7 +83,7 @@ export function Direitos() {
           <li className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
             <div
               data-dr-phone
-              className={clsx(CARD, 'relative flex h-[440px] justify-center overflow-hidden lg:h-full lg:min-h-[560px]')}
+              className={clsx(CARD, 'relative flex h-[560px] flex-col items-center overflow-hidden lg:h-full lg:min-h-[560px]')}
             >
               <div
                 aria-hidden
@@ -98,19 +93,22 @@ export function Direitos() {
                     'radial-gradient(60% 50% at 50% 100%, rgb(149 75 110 / 0.12) 0%, transparent 70%)',
                 }}
               />
-              <PhoneFrame
-                className="absolute top-12 w-[280px] lg:top-[30%] lg:w-[330px]"
-                label={D.altTela}
-              >
-                <DireitosScreen />
-              </PhoneFrame>
-              <span
-                data-dr-badge
-                aria-hidden
-                className="absolute top-4 right-4 rounded-full border border-borda/70 bg-white px-3.5 py-2 font-display text-[12px] font-semibold whitespace-nowrap text-vinho-profundo shadow-card lg:top-[14%] lg:right-auto lg:left-1/2 lg:-translate-x-1/2"
-              >
-                {D.art.badge}
-              </span>
+              {/* Topo: ícone, título e subtítulo (preenche o espaço acima do celular) */}
+              <div className="relative z-10 flex max-w-[300px] flex-col items-center px-7 pt-8 text-center">
+                <span aria-hidden className="grid size-11 place-items-center rounded-sm bg-vinho text-white">
+                  <BookOpen className="size-5" strokeWidth={1.5} />
+                </span>
+                <h3 className="mt-5 font-display text-xl leading-tight font-semibold text-texto">
+                  {D.central.title}
+                </h3>
+                <p className="mt-2 text-[0.9375rem] text-pretty text-texto-secundario">{D.central.text}</p>
+              </div>
+              {/* Invólucro absoluto (o PhoneFrame tem `relative` próprio): logo abaixo do texto */}
+              <div className="absolute top-[220px] w-[280px] lg:top-[236px] lg:w-[300px]">
+                <PhoneFrame label={D.altTela}>
+                  <DireitosScreen />
+                </PhoneFrame>
+              </div>
             </div>
           </li>
 

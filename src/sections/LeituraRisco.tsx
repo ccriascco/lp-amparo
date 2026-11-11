@@ -223,7 +223,7 @@ export function LeituraRisco() {
     <section
       id="leitura-risco"
       aria-labelledby="leitura-risco-title"
-      className={clsx('relative overflow-x-clip bg-branco', SECTION_Y)}
+      className={clsx('relative overflow-x-clip bg-branco', SECTION_Y, 'lg:pb-12')}
     >
       <Container className="relative">
         {/* Cabeçalho */}

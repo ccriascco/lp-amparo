@@ -72,7 +72,7 @@ export function Beneficios() {
       ref={root}
       id="beneficios"
       aria-labelledby="beneficios-title"
-      className="bg-branco py-24 md:py-32"
+      className="bg-branco py-16 md:py-20 lg:py-24"
     >
       <Container>
         {/* Cabeçalho: chip + H2 à esquerda, botão à direita alinhado pela base */}

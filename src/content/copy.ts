@@ -278,9 +278,13 @@ export const direitos = {
     custo: 'Custo',
     advogado: 'Advogado',
     naoPrecisa: 'Não precisa',
-    badge: 'Linguagem simples · 12 temas',
   },
   nota: 'Conteúdo informativo, não substitui orientação jurídica. Em caso de dúvida, procure a Defensoria Pública.',
+  /** Topo do cartão do celular (pedido do cliente: título, subtítulo e ícone no lugar do badge). */
+  central: {
+    title: 'Central de Direitos',
+    text: 'Tudo o que a lei garante, explicado em linguagem simples dentro do app.',
+  },
   /** alt do celular (tela codada, descrita como imagem) */
   altTela: 'Tela "Conteúdo e direitos" do Amparo, com a Lei Maria da Penha explicada, como pedir uma medida protetiva e o monitoramento eletrônico do agressor.',
 }

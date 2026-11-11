@@ -104,7 +104,7 @@ export function Contexto() {
     <section ref={root} id="contexto" aria-labelledby="contexto-title" className="bg-branco">
       {/* Fundo branco (pedido do cliente, 10/11/2026: substitui o shell rosado dos Ajustes 3) */}
       <div>
-        <Container className="py-20 md:py-28">
+        <Container className="py-16 md:py-20 lg:py-24">
           {/* Cabeçalho em duas colunas, alinhado pela base */}
           <div className="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
             <div className="lg:col-span-7">

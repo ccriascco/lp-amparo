@@ -358,7 +358,7 @@ export function Dores() {
         </div>
 
         {/* ── Lista com o celular ── */}
-        <Container className="pt-8 pb-24 lg:pt-0 lg:pb-28 min-[100rem]:px-24">
+        <Container className="pt-8 pb-16 lg:pt-0 lg:pb-20 min-[100rem]:px-24">
           <div className="lg:grid lg:grid-cols-12 lg:gap-12">
             {/* Esquerda: as 5 dores, rolando normalmente */}
             <ul className="flex flex-col gap-14 pt-12 lg:col-span-5 lg:gap-0 lg:pt-0">

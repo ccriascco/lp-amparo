@@ -212,8 +212,9 @@ export function RiskTimeline() {
   return (
     <div ref={root} className="mt-10 md:mt-14">
       {/* Desktop: bloco fixo por ~150vh enquanto a linha se preenche (sem sticky com movimento reduzido) */}
-      <div data-tl-pin className="relative lg:h-[250vh] lg:motion-reduce:h-auto">
-        <div className="lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:pt-16 lg:motion-reduce:static lg:motion-reduce:min-h-0 lg:motion-reduce:pt-0">
+      <div data-tl-pin className="relative lg:h-[160vh] lg:motion-reduce:h-auto">
+        {/* Fixo só com a altura do conteúdo, centralizado na tela: ao soltar, a seção seguinte vem logo depois (sem o vazio de uma tela inteira em 1920). */}
+        <div className="lg:sticky lg:top-[max(6rem,calc(50vh-20rem))] lg:motion-reduce:static">
           <h3
             data-appear
             className="text-center font-display text-[1.5rem] leading-tight font-semibold tracking-[-0.01em] text-texto md:text-[1.875rem]"
