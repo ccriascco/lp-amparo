@@ -353,8 +353,7 @@ export const faq = {
   chip: 'Dúvidas',
   h2: 'Perguntas que você pode estar se fazendo.',
   sub: 'Toque numa pergunta e o Amparo responde.',
-  painel: { nome: 'Amparo', status: 'responde na hora', agora: 'agora' },
-  ajuda: 'Ainda ficou com dúvida?',
+  painel: { agora: 'agora' },
   items: [
     { q: 'O Amparo é gratuito? Preciso baixar em alguma loja?', a: ['É gratuito e funciona direto no navegador do celular. É só acessar.'] satisfies Rich },
     { q: 'Preciso ter feito denúncia ou ter medida protetiva?', a: ['Não. Você pode usar o Amparo a qualquer momento, inclusive antes de decidir denunciar.'] satisfies Rich },

@@ -607,3 +607,11 @@ Referências: NextPay mobile (banner) e Gardance mobile (palco). Os sites não p
 - Movimento reduzido: tudo parado (sem magnetismo, sem deriva, marca d'água visível a 4%, tela inicial no celular).
 - Os componentes antigos `ConcentricRings` e `CircularBadge` ficaram sem uso na página.
 - Prints em `screenshots/cta/` e `screenshots/rodape/` (1440, 390, `reduzido/`).
+
+## `#faq` — ajustes 2 (11/11/2026, pedido do cliente)
+- Saem a coluna esquerda (mini-cartão "Ainda ficou com dúvida?" e a faixa 190/180 — os números seguem no rodapé, coluna "Seus direitos") e o cabeçalho do painel (avatar, "Amparo", "responde na hora", ponto verde, linha). Textos retirados do `copy.ts`/COPY.
+- Uma coluna centralizada: chip, H2 `clamp(40px, 4.2vw, 60px)` em 2 linhas, subtítulo `clamp(18px, 1.6vw, 22px)` até 560px; card a 48px, até 880px.
+- Fundo branco com brilho radial vinho 12% no centro e os anéis do hero (`HeroRings`) atrás do card, girando muito devagar (240s/volta) e respirando (opacidade 0,7 ↔ 1, 5s).
+- Card branco, raio 24px, borda `rgb(228 211 217 / .55)`, sombra `0 24px 60px -30px rgb(75 42 63 / .22)`, padding 40px (20px no celular).
+- Perguntas à esquerda (`superficie`, canto inferior esquerdo 6px; aberta = vinho/branco). Respostas e pontinhos à direita (vinho com texto branco, canto inferior direito 6px, até 80% / 90% no celular, avatar à direita, "agora" embaixo). Entrada dos balões vindo da esquerda (x −24, blur 6px).
+- Accordion, teclado e JSON-LD sem mudança (`check-faq.mjs` sem erros). Prints em `screenshots/faq/`.
