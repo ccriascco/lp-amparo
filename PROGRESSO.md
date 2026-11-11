@@ -41,6 +41,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 - [x] Anéis concêntricos iguais aos do hero atrás da esfera (no lugar da grade de pontos); sem os 3 princípios abaixo dos cartões (pedido do cliente, 11/11) — prints em `screenshots/leitura-risco-4/`.
 - [x] Cartões de "Como o app se adapta ao seu risco" refeitos com ilustração montada com peças do app (Baixo: escudo + linha calma; Médio: sino + rede; Alto: 180/190 + pin), medidor por nível, movimento contínuo só na tela, carrossel no celular (`RiskLevelCards.tsx`); nota do protótipo removida (11/11) — prints em `screenshots/leitura-risco-5/`.
 - [x] Cartões de volta à versão anterior (borda, pílula, 1 linha do COPY 3.7, painel embaixo; empilhados no celular), agora com as ilustrações novas no painel (11/11) — prints em `screenshots/leitura-risco-6/`.
+- [x] "Como o app se adapta ao seu risco" virou uma **linha do tempo** Baixo → Médio → Alto (`RiskTimeline.tsx`): linha que se preenche com o scroll (bloco fixo ~150vh no desktop; vertical sem sticky abaixo de 1024px), marcos que acendem com anéis, medidor por nível, cartão com mini ilustração + título + 1 linha. Princípios e nota continuam fora (aguardando confirmação). Prints em `screenshots/leitura-risco-timeline/`.
 - [ ] Revisão do cliente.
 
 ## Itens concluídos
@@ -83,6 +84,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 7d | Seção 7 — ajustes 4: anéis do hero atrás da esfera, sem os 3 princípios — prints em `./screenshots/leitura-risco-4/` | (ver git log) |
 | 7e | Seção 7 — ajustes 5: cartões de nível com ilustração em camadas (`RiskLevelCards`), textos novos no `copy.ts`, sem a nota do protótipo — prints em `./screenshots/leitura-risco-5/` | (ver git log) |
 | 7f | Seção 7 — ajustes 6: cartões de volta à versão anterior, com as ilustrações novas no painel — prints em `./screenshots/leitura-risco-6/` | (ver git log) |
+| 7g | Seção 7 — ajustes 7: linha do tempo de níveis (`RiskTimeline`), substitui os cartões — prints em `./screenshots/leitura-risco-timeline/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -105,7 +107,7 @@ Pendências conhecidas: aviso "chunk > 500 kB" do pacote principal no build (Fas
 - **Cartão único das Dores** (padrão NextPay): fundo branco, um cartão com margem de 16px (12px no celular), raio 24px, degradê `#4B2A3F` → `#954B6E`, **foto do banner em cores naturais** dissolvendo por máscara; título "Pedir ajuda / não deveria ser um risco." em duas linhas inteiras (até 108px); lista em vidro claro com o celular sticky.
 - **Celular das Dores com ~300px** fixo, cortado pela base de um painel de no máximo 560px.
 - **Benefícios (confirmado pelo cliente):** etiqueta **branca** sempre aberta (tópico, texto e link → `#dor-rede`, `#dor-cofre`, `#leitura-risco`); hover só levanta a etiqueta (zoom leve da foto). A versão com etiqueta de vidro no padrão Gardance (`37f0740`) foi descartada.
-- **Seção 7:** esfera de partículas 3D com anéis de luz e pílulas orbitando, anéis concêntricos do hero ao fundo, sem os princípios e sem a nota do protótipo; cartões de nível na versão anterior (borda, pílula, 1 linha do COPY 3.7, empilhados no celular) com as ilustrações em camadas no painel; sem seletor de nível, sem "Ver como chegamos nisso", sem legenda do FONAR (detalhes em "Seção 7 — estado").
+- **Seção 7:** esfera de partículas 3D com anéis de luz e pílulas orbitando, anéis concêntricos do hero ao fundo, sem os princípios e sem a nota do protótipo; "Como o app se adapta" em linha do tempo de níveis (Baixo/Médio/Alto) com o scroll, cartões com mini ilustração, título e 1 linha (textos do cliente); sem seletor de nível, sem "Ver como chegamos nisso", sem legenda do FONAR (detalhes em "Seção 7 — estado").
 - **Navegação:** header e rodapé com Como funciona (`#como-funciona`), Leitura de risco (`#leitura-risco`), Como começar (`#comecar`), Dúvidas (`#faq`); rodapé + "Voltar ao topo". Pílula "SOS silencioso" do hero → `#como-funciona`.
 
 ### Decisões anteriores (histórico, na ordem em que foram tomadas)

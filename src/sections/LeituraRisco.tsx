@@ -12,7 +12,7 @@ import {
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Chip } from '../components/ui/Chip'
 import { Container, SECTION_Y, SectionHeading } from '../components/ui/Section'
-import { RiskLevelCards } from '../components/ui/RiskLevelCards'
+import { RiskTimeline } from '../components/ui/RiskTimeline'
 import { leituraRisco } from '../content/copy'
 import { gsap } from '../lib/gsap'
 import { useReducedMotion } from '../lib/useReducedMotion'
@@ -82,7 +82,7 @@ function hasWebGL() {
  * `#leitura-risco` (COPY 3.7 + ajustes do cliente): esfera da IA em partículas 3D (three + R3F,
  * carregada só perto da tela), cercada por pílulas de vidro em duas órbitas com profundidade e por
  * partículas soltas, tudo passando continuamente. Abaixo, "Como o app se adapta ao seu risco",
- * e os cartões com ilustração (`RiskLevelCards`). Sem WebGL ou com movimento reduzido: imagem estática da esfera
+ * e a linha do tempo de níveis (`RiskTimeline`). Sem WebGL ou com movimento reduzido: imagem estática da esfera
  * e pílulas paradas.
  */
 export function LeituraRisco() {
@@ -301,16 +301,8 @@ export function LeituraRisco() {
           </div>
         </div>
 
-        {/* Como o app se adapta ao seu risco */}
-        <div className="mt-10 md:mt-14">
-          <h3
-            data-appear
-            className="text-center font-display text-[1.375rem] leading-tight font-semibold tracking-[-0.01em] text-texto md:text-[1.625rem]"
-          >
-            {L.adapta.title}
-          </h3>
-          <RiskLevelCards />
-        </div>
+        {/* Como o app se adapta ao seu risco: linha do tempo de níveis */}
+        <RiskTimeline />
       </Container>
     </section>
   )
