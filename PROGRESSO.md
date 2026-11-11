@@ -93,6 +93,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 4p | Cartão das Dores: entrada por `clip-path` (não escala) — sem faixas brancas nem engasgos ao voltar o scroll; `scripts/check-scroll-perf.mjs` — prints em `./screenshots/dores-entrada-clip/` | (ver git log) |
 | 7j | Seção 7 — ajustes 10: ilustrações da linha do tempo preenchendo o cartão (cover), sem flutuar — prints em `./screenshots/leitura-risco-timeline-6/` | (ver git log) |
 | 8 | Seção 8 — Como começar: palco fixo (Gardance) com 4 passos, fotos novas, cartões animados por passo, barra de progresso clicável; blocos empilhados no celular; subtítulos de todas as seções padronizados (`lead`) — prints em `./screenshots/comecar/` e `./screenshots/subtitulos/` | (ver git log) |
+| 8b | Ajustes: cabeçalho de #comecar centralizado, palco em tela cheia crescendo ao entrar, 750px por passo; foto central do Manifesto com entrada; título da linha do tempo maior — prints em `./screenshots/comecar-2/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 

@@ -216,7 +216,7 @@ export function RiskTimeline() {
         <div className="lg:sticky lg:top-0 lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:pt-16 lg:motion-reduce:static lg:motion-reduce:min-h-0 lg:motion-reduce:pt-0">
           <h3
             data-appear
-            className="text-center font-display text-[1.375rem] leading-tight font-semibold tracking-[-0.01em] text-texto md:text-[1.625rem]"
+            className="text-center font-display text-[1.5rem] leading-tight font-semibold tracking-[-0.01em] text-texto md:text-[1.875rem]"
           >
             {A.title}
           </h3>

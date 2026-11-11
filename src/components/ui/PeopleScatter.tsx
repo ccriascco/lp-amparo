@@ -258,7 +258,7 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
             aria-hidden
             className="relative z-20 mx-auto mt-10 w-[136px] origin-bottom lg:absolute lg:top-[calc(50%+130px)] lg:left-1/2 lg:mt-0 lg:-ml-[75px] lg:w-[150px]"
           >
-            <div data-appear="float" className="lg:contents">
+            <div data-appear="float">
               {/* Invólucro próprio para a subida contínua */}
               <div data-center-drift>
                 <TintedPhoto

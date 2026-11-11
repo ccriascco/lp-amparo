@@ -502,3 +502,8 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
   - Laços só no passo ativo e com a seção visível; celular: cada bloco toca o seu laço quando está na tela. Markup = estado final (movimento reduzido sem laços).
   - Verificado: `node scripts/check-comecar.mjs <url>` (clique nos rótulos 3 → 4 → 2: passo ativo, só o cartão ativo interativo, só o laço ativo andando, sem erros); `check-scroll-perf.mjs` no trilho (subindo p95 17ms; descendo inclui o carregamento das fotos). Build sem erros.
   - Prints: `screenshots/comecar/` (1440 nos 4 passos com a barra no meio, 390 inteira, movimento reduzido) e `screenshots/subtitulos/` (hero, contexto, banner das Dores com o `lead` novo).
+
+## Ajustes de 11/11/2026 (2) — Manifesto, linha do tempo e Como começar (pedido do cliente)
+- **`#pessoas`, foto central:** ganhou a mesma entrada das outras fotos (`data-appear="float"`). O invólucro tinha `lg:contents` (sem caixa no desktop), então a entrada não aparecia; era para não brigar com o encolhimento, que já saiu.
+- **"Como o app se adapta ao seu risco":** um pouco maior — 1,5rem no celular e 1,875rem a partir de 768px (antes 1,375 / 1,625).
+- **`#comecar`:** cabeçalho centralizado (chip, H2, subtítulo). O palco passa a ocupar a tela inteira (sem margem nem limite do grid, como a referência da Gardance); o conteúdo continua alinhado ao grid. Entrada como o cartão das Dores: `clip-path` de `inset(4% 6% round 32px)` até a tela cheia sem cantos, enquanto o trilho chega ao topo. Troca de passo mais rápida: 750px de rolagem por passo (antes 1500px). `check-comecar.mjs` sem erros. Prints em `screenshots/comecar-2/` (`entrando/` mostra a abertura).

@@ -10,7 +10,8 @@ import { comecar, cta } from '../content/copy'
 import { APP_URL } from '../lib/config'
 import { getLenis, gsap, ScrollTrigger } from '../lib/gsap'
 
-const STEP_PX = 1500
+/** Rolagem por passo (pedido do cliente, 11/11: menos voltas da roda para trocar de passo). */
+const STEP_PX = 750
 const PHOTOS: ImageSlot[] = ['comecar-1', 'comecar-2', 'comecar-3', 'comecar-4']
 const PHOTOS_MOBILE: ImageSlot[] = [
   'comecar-1-mobile',
@@ -70,6 +71,18 @@ export function Comecar() {
         gsap.set(fills, { scaleX: 0 })
         cards.forEach((c, i) => (c.inert = i !== 0))
         labels.forEach((l, i) => l.toggleAttribute('data-active', i === 0))
+
+        // Entrada do palco (como o cartão das Dores): começa menor, com cantos arredondados, e cresce
+        // até a tela cheia enquanto o trilho chega ao topo. Por recorte, sem escalar o palco.
+        gsap.fromTo(
+          q('[data-cm-stage]'),
+          { clipPath: 'inset(4% 6% 4% 6% round 32px)' },
+          {
+            clipPath: 'inset(0% 0% 0% 0% round 0px)',
+            ease: 'none',
+            scrollTrigger: { trigger: track.current, start: 'top bottom', end: 'top top', scrub: true },
+          },
+        )
 
         const setActive = (i: number) => {
           if (i === active) return
@@ -152,9 +165,9 @@ export function Comecar() {
       aria-labelledby="comecar-title"
       className="bg-branco pt-20 pb-20 md:pt-28 md:pb-28"
     >
-      {/* Cabeçalho (padrão Gardance): à esquerda, dentro do grid */}
+      {/* Cabeçalho centralizado (pedido do cliente, 11/11) */}
       <Container>
-        <div className="max-w-[760px]">
+        <div className="mx-auto flex max-w-[760px] flex-col items-center text-center">
           <div data-appear>
             <Chip dot>{comecar.chip}</Chip>
           </div>
@@ -175,10 +188,9 @@ export function Comecar() {
         className="relative mt-10 hidden md:motion-safe:block"
         style={{ height: `calc(100vh + ${STEP_PX * 4}px)` }}
       >
-        <div className="sticky top-0 h-screen p-4">
-          <div
-            className="on-dark relative mx-auto h-full max-w-(--grid) overflow-clip rounded-[24px] bg-vinho-profundo"
-          >
+        {/* Palco em tela cheia (como a referência); entra crescendo a partir das laterais */}
+        <div className="sticky top-0 h-screen">
+          <div data-cm-stage className="on-dark relative h-full overflow-clip bg-vinho-profundo">
             {/* Fotos empilhadas (só a do passo ativo visível) */}
             {PHOTOS.map((slot, i) => (
               <div
@@ -190,7 +202,7 @@ export function Comecar() {
               >
                 <Picture
                   slot={slot}
-                  sizes="(min-width: 1600px) 1440px, 100vw"
+                  sizes="100vw"
                   className="size-full object-cover"
                 />
               </div>
@@ -198,7 +210,7 @@ export function Comecar() {
             <div aria-hidden className="absolute inset-0" style={{ background: SHADE_BOTTOM }} />
             <div aria-hidden className="absolute inset-0" style={{ background: SHADE_LEFT }} />
 
-            <div className="absolute inset-0 flex flex-col justify-end px-8 pt-28 pb-6 lg:px-12 lg:pb-8">
+            <div className="absolute inset-0 mx-auto flex max-w-(--grid) flex-col justify-end px-8 pt-28 pb-6 lg:pb-8">
               <div className="flex items-end justify-between gap-8">
                 {/* Título + descrição do passo (empilhados; só o ativo visível) */}
                 <div className="grid min-w-0 flex-1">
