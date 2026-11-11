@@ -96,6 +96,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 8b | Ajustes: cabeçalho de #comecar centralizado, palco em tela cheia crescendo ao entrar, 750px por passo; foto central do Manifesto com entrada; título da linha do tempo maior — prints em `./screenshots/comecar-2/` | (ver git log) |
 | 8c | Header some enquanto o palco de #comecar está em tela cheia e volta ao sair | (ver git log) |
 | 8d | Foto nova no passo 4 (mulher saindo de casa); cabeçalho de #comecar mais largo — prints em `./screenshots/comecar-3/` | (ver git log) |
+| M1 | Mobile (≤767px): banner das Dores de ponta a ponta (chip no topo, título dividido, pílulas em linhas) e Como começar com o palco em tela cheia só com fotos e barra compacta; scroll horizontal em 360px corrigido — prints em `./screenshots/mobile-1/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -118,6 +119,7 @@ Pendências conhecidas: aviso "chunk > 500 kB" do pacote principal no build (Fas
 - **Celular das Dores com ~300px** fixo, cortado pela base de um painel de no máximo 560px.
 - **Benefícios (confirmado pelo cliente):** etiqueta **branca** sempre aberta (tópico e texto; os links saíram em 11/11); H2 todo preto (a 2ª linha deixou de ser vinho em 11/11); hover só levanta a etiqueta (zoom leve da foto). A versão com etiqueta de vidro no padrão Gardance (`37f0740`) foi descartada.
 - **Seção 7:** esfera de partículas 3D com anéis de luz e pílulas orbitando, anéis concêntricos do hero ao fundo, sem os princípios e sem a nota do protótipo; "Como o app se adapta" em linha do tempo de níveis (Baixo/Médio/Alto) com o scroll, do marco Baixo ao Alto, toda em `vinho-profundo`; cartões com as ilustrações `risco-baixo/medio/alto`, título e 1 linha (textos do cliente); sem seletor de nível, sem "Ver como chegamos nisso", sem legenda do FONAR (detalhes em "Seção 7 — estado").
+- **Mobile (≤767px, 11/11):** banner das Dores sem margem, chip no topo sobre a foto, título dividido (esquerda/direita) e pílulas em linhas de largura total; Como começar com o palco em tela cheia, sem os cartões interativos, barra compacta só com o passo atual. Desktop/tablet sem mudança.
 - **Navegação:** header e rodapé com Como funciona (`#como-funciona`), Leitura de risco (`#leitura-risco`), Como começar (`#comecar`), Dúvidas (`#faq`); rodapé + "Voltar ao topo". Pílula "SOS silencioso" do hero → `#como-funciona`.
 
 ### Decisões anteriores (histórico, na ordem em que foram tomadas)

@@ -104,11 +104,13 @@ export function Dores() {
         // % de cada lateral escondido no início: menor que o padding interno do cartão (48px no
         // desktop, 20px no celular), para o recorte nunca cortar texto nem o chip do banner.
         const side = desktop ? 3.5 : 4
+        // Celular (≤767px): cartão de ponta a ponta, termina sem cantos (pedido do cliente).
+        const phone = window.matchMedia('(max-width: 767.98px)').matches
         gsap.fromTo(
           card,
-          { clipPath: `inset(0% ${side}% 0% ${side}% round 48px)` },
+          { clipPath: `inset(0% ${side}% 0% ${side}% round ${phone ? 24 : 48}px)` },
           {
-            clipPath: 'inset(0% 0% 0% 0% round 24px)',
+            clipPath: `inset(0% 0% 0% 0% round ${phone ? 0 : 24}px)`,
             ease: 'none',
             scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 20%', scrub: true },
           },
@@ -264,14 +266,14 @@ export function Dores() {
       ref={root}
       id="como-funciona"
       aria-labelledby="dores-title"
-      className="bg-branco p-3 md:p-4"
+      className="bg-branco md:p-4"
     >
       {/* Cartão único (padrão NextPay): banner e lista no mesmo fundo, sem divisão.
           overflow-clip (não hidden) para os cantos sem quebrar o sticky do celular. */}
       <div
         data-header-dark
         data-dores-card
-        className="on-dark relative mx-auto max-w-(--grid) overflow-clip rounded-[24px]"
+        className="on-dark relative mx-auto max-w-(--grid) overflow-clip md:rounded-[24px]"
         style={{ background: CARD_BG }}
       >
         {/* ── Banner ── */}
@@ -280,7 +282,7 @@ export function Dores() {
           <div
             data-banner-photo
             aria-hidden
-            className="relative h-[58svh] lg:absolute lg:inset-0 lg:h-full"
+            className="relative h-[58svh] max-md:h-[54svh] lg:absolute lg:inset-0 lg:h-full"
             style={PHOTO_MASK}
           >
             <Picture
@@ -292,11 +294,18 @@ export function Dores() {
           </div>
           {/* Só o necessário para o texto: véu suave atrás do título e do subtítulo */}
           <div aria-hidden className="pointer-events-none absolute inset-0" style={TEXT_SCRIM} />
+          {/* Celular: o chip fica no topo do cartão, sobre a foto (padrão NextPay mobile) */}
+          <span
+            data-banner-appear
+            className="absolute top-6 left-5 z-10 inline-flex w-max items-center rounded-full px-4 py-2 caption text-white glass md:hidden"
+          >
+            {b.chip}
+          </span>
 
-          <div className="relative z-10 mx-auto -mt-28 flex flex-col gap-10 px-5 pb-4 md:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:px-12 lg:pt-28 lg:pb-14 min-[100rem]:px-24">
+          <div className="relative z-10 mx-auto -mt-28 flex flex-col gap-10 px-5 pb-4 max-md:-mt-24 max-md:gap-6 md:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:px-12 lg:pt-28 lg:pb-14 min-[100rem]:px-24">
             <span
               data-banner-appear
-              className="inline-flex w-max items-center rounded-full px-4 py-2 caption text-white glass"
+              className="inline-flex w-max items-center rounded-full px-4 py-2 caption text-white glass max-md:hidden"
             >
               {b.chip}
             </span>
@@ -304,12 +313,12 @@ export function Dores() {
             <div data-banner-title>
               <h2
                 id="dores-title"
-                className="flex flex-col font-display text-[clamp(2.75rem,7.4vw,6.75rem)] leading-[0.98] font-medium tracking-[-0.03em] lg:whitespace-nowrap"
+                className="flex flex-col font-display text-[clamp(2.75rem,7.4vw,6.75rem)] leading-[0.98] font-medium tracking-[-0.03em] max-md:text-[clamp(2rem,9vw,2.75rem)] lg:whitespace-nowrap"
               >
                 <span data-banner-line="1" className="text-borda">
                   {b.line1}
                 </span>
-                <span data-banner-line="2" className="text-white lg:self-end lg:text-right">
+                <span data-banner-line="2" className="text-white max-md:max-w-[12ch] max-md:self-end max-md:text-right max-md:text-balance lg:self-end lg:text-right">
                   {b.line2}
                 </span>
               </h2>
@@ -322,12 +331,12 @@ export function Dores() {
               >
                 {b.sub}
               </p>
-              <ul className="flex flex-wrap gap-2 lg:justify-end">
+              <ul className="flex flex-wrap gap-2 max-md:flex-col lg:justify-end">
                 {b.pills.map((p) => (
                   <li
                     key={p}
                     data-banner-appear
-                    className="rounded-full px-4 py-2 text-small font-semibold text-white glass"
+                    className="rounded-full px-4 py-2 text-small font-semibold text-white max-md:rounded-[12px] max-md:border max-md:border-white/15 max-md:px-4 max-md:py-3.5 max-md:text-[15px] md:glass"
                   >
                     {p}
                   </li>

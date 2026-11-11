@@ -19,9 +19,11 @@ const PHOTOS_MOBILE: ImageSlot[] = [
   'comecar-3-mobile',
   'comecar-4-mobile',
 ]
-/** Palco fixo: a partir de 768px e com movimento. Abaixo disso (ou com movimento reduzido), blocos. */
-const STAGE = '(min-width: 768px) and (prefers-reduced-motion: no-preference)'
-const STACK_MOTION = '(max-width: 767.98px) and (prefers-reduced-motion: no-preference)'
+/** Palco fixo em tela cheia em todas as larguras com movimento; com movimento reduzido, blocos. */
+const STAGE_BIG = '(min-width: 768px) and (prefers-reduced-motion: no-preference)'
+const STAGE_PHONE = '(max-width: 767.98px) and (prefers-reduced-motion: no-preference)'
+/** Enquadramento das fotos 16:9 em tela vertical (celular): rosto inteiro na tela. */
+const PHOTO_POS = ['52% 50%', '40% 50%', '47% 50%', '47% 50%']
 
 /** Escurecimento da base e da esquerda, transparente no centro e no topo (várias paradas, sem emenda). */
 const SHADE_BOTTOM =
@@ -30,11 +32,12 @@ const SHADE_LEFT =
   'linear-gradient(to right, rgb(43 24 36 / 0.62) 0%, rgb(75 42 63 / 0.35) 28%, rgb(75 42 63 / 0.1) 50%, transparent 66%)'
 
 /**
- * `#comecar` (seção 8, padrão Gardance "Como funciona"): cabeçalho à esquerda e um palco fixo
- * (100vh) num trilho de 4 × 1500px. A foto de fundo, o título, a descrição e o cartão interativo
- * trocam a cada passo; a barra de progresso na base enche com o scroll e seus rótulos levam a cada
- * passo. Abaixo de 768px e com movimento reduzido: 4 blocos empilhados (foto 4:5, texto por cima,
- * cartão sobrepondo a borda). Laços dos cartões só no passo ativo e com a seção na tela.
+ * `#comecar` (seção 8, padrão Gardance "Como funciona"): cabeçalho centralizado e um palco fixo em
+ * tela cheia (100svh) num trilho de 4 × 750px. A foto de fundo, o título, a descrição e o cartão
+ * interativo trocam a cada passo; a barra de progresso na base enche com o scroll e seus rótulos
+ * levam a cada passo. Celular (≤767px, padrão Gardance mobile): o mesmo palco, só com a foto, o texto
+ * e a barra compacta (rótulo do passo atual); sem os cartões. Movimento reduzido: blocos empilhados.
+ * Laços dos cartões só no passo ativo e com a seção na tela.
  */
 export function Comecar() {
   const root = useRef<HTMLElement>(null)
@@ -54,14 +57,16 @@ export function Comecar() {
       const mm = gsap.matchMedia()
 
       // ── Palco fixo ──────────────────────────────────────────────
-      mm.add(STAGE, () => {
+      mm.add({ big: STAGE_BIG, phone: STAGE_PHONE }, (ctx) => {
+        const phone = Boolean((ctx.conditions as { phone?: boolean }).phone)
         const q = gsap.utils.selector(track)
         const texts = q('[data-cm-text]')
         const cards = q('[data-cm-card]')
         const photos = q('[data-cm-photo]')
         const fills = q('[data-cm-fill]')
         const labels = q('[data-cm-label]')
-        const loops = cards.map((c, i) => cardLoop(i, c))
+        // No celular os cartões não aparecem: nada de laço rodando escondido.
+        const loops = phone ? [] : cards.map((c, i) => cardLoop(i, c))
         let active = 0
         let visible = false
 
@@ -76,7 +81,7 @@ export function Comecar() {
         // até a tela cheia enquanto o trilho chega ao topo. Por recorte, sem escalar o palco.
         gsap.fromTo(
           q('[data-cm-stage]'),
-          { clipPath: 'inset(4% 6% 4% 6% round 32px)' },
+          { clipPath: phone ? 'inset(3% 4% 3% 4% round 24px)' : 'inset(4% 6% 4% 6% round 32px)' },
           {
             clipPath: 'inset(0% 0% 0% 0% round 0px)',
             ease: 'none',
@@ -94,7 +99,7 @@ export function Comecar() {
           gsap.to(photos[prev], { opacity: 0, duration: 0.8, ease: 'power1.inOut', overwrite: 'auto' })
           gsap.fromTo(
             texts[i],
-            { autoAlpha: 0, y: 50 },
+            { autoAlpha: 0, y: phone ? 30 : 50 },
             { autoAlpha: 1, y: 0, duration: 0.6, ease: 'expo.out', delay: 0.15, overwrite: true },
           )
           gsap.fromTo(
@@ -105,8 +110,8 @@ export function Comecar() {
           gsap.to(photos[i], { opacity: 1, duration: 0.8, ease: 'power1.inOut', overwrite: 'auto' })
           cards.forEach((c, k) => (c.inert = k !== i))
           labels.forEach((l, k) => l.toggleAttribute('data-active', k === i))
-          loops[prev].pause()
-          if (visible) loops[i].restart()
+          loops[prev]?.pause()
+          if (visible) loops[i]?.restart()
         }
 
         ScrollTrigger.create({
@@ -128,8 +133,8 @@ export function Comecar() {
           end: 'bottom top',
           onToggle: (self) => {
             visible = self.isActive
-            if (visible) loops[active].restart()
-            else loops[active].pause()
+            if (visible) loops[active]?.restart()
+            else loops[active]?.pause()
           },
         })
 
@@ -147,20 +152,6 @@ export function Comecar() {
           cards.forEach((c) => (c.inert = false))
           labels.forEach((l) => l.removeAttribute('data-active'))
         }
-      })
-
-      // ── Blocos empilhados (celular, com movimento): laço de cada cartão quando o bloco aparece ──
-      mm.add(STACK_MOTION, () => {
-        gsap.utils.toArray<HTMLElement>('[data-cm-block]', root.current).forEach((block, i) => {
-          const card = block.querySelector<HTMLElement>('[data-cm-block-card]')!
-          const loop = cardLoop(i, card)
-          ScrollTrigger.create({
-            trigger: block,
-            start: 'top 85%',
-            end: 'bottom 15%',
-            onToggle: (self) => (self.isActive ? loop.restart() : loop.pause()),
-          })
-        })
       })
 
       return () => mm.revert()
@@ -195,11 +186,11 @@ export function Comecar() {
         ref={track}
         data-cm-track
         data-header-dark
-        className="relative mt-10 hidden md:motion-safe:block"
-        style={{ height: `calc(100vh + ${STEP_PX * 4}px)` }}
+        className="relative mt-10 hidden motion-safe:block"
+        style={{ height: `calc(100svh + ${STEP_PX * 4}px)` }}
       >
         {/* Palco em tela cheia (como a referência); entra crescendo a partir das laterais */}
-        <div className="sticky top-0 h-screen">
+        <div className="sticky top-0 h-svh">
           <div data-cm-stage className="on-dark relative h-full overflow-clip bg-vinho-profundo">
             {/* Fotos empilhadas (só a do passo ativo visível) */}
             {PHOTOS.map((slot, i) => (
@@ -212,15 +203,18 @@ export function Comecar() {
               >
                 <Picture
                   slot={slot}
-                  sizes="100vw"
+                  // Foto 16:9 em object-cover: em telas mais altas que 16:9 ela ocupa a altura toda,
+                  // então a largura exibida é ~1,78 × a altura da tela (não 100vw).
+                  sizes="(max-aspect-ratio: 16/9) 178svh, 100vw"
+                  position={PHOTO_POS[i]}
                   className="size-full object-cover"
                 />
               </div>
             ))}
             <div aria-hidden className="absolute inset-0" style={{ background: SHADE_BOTTOM }} />
-            <div aria-hidden className="absolute inset-0" style={{ background: SHADE_LEFT }} />
+            <div aria-hidden className="absolute inset-0 max-md:hidden" style={{ background: SHADE_LEFT }} />
 
-            <div className="absolute inset-0 mx-auto flex max-w-(--grid) flex-col justify-end px-8 pt-28 pb-6 lg:pb-8">
+            <div className="absolute inset-0 mx-auto flex max-w-(--grid) flex-col justify-end px-5 pt-24 pb-6 md:px-8 md:pt-28 lg:pb-8">
               <div className="flex items-end justify-between gap-8">
                 {/* Título + descrição do passo (empilhados; só o ativo visível) */}
                 <div className="grid min-w-0 flex-1">
@@ -231,17 +225,17 @@ export function Comecar() {
                       className="col-start-1 row-start-1 self-end pb-2"
                       style={{ opacity: i === 0 ? 1 : 0 }}
                     >
-                      <h3 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.02] font-medium tracking-[-0.02em] text-balance text-white">
+                      <h3 className="font-display text-[clamp(2rem,9vw,2.5rem)] leading-[1.02] md:text-[clamp(2.5rem,5vw,4.5rem)] font-medium tracking-[-0.02em] text-balance text-white">
                         {s.title}
                       </h3>
-                      <p className="mt-4 max-w-[30ch] text-[1.25rem] leading-[1.55] text-pretty text-white/80">
+                      <p className="mt-3 max-w-[30ch] text-[1.0625rem] leading-[1.55] text-pretty text-white/80 md:mt-4 md:text-[1.25rem]">
                         {s.text}
                       </p>
                     </div>
                   ))}
                 </div>
                 {/* Cartão interativo do passo (canto inferior direito) */}
-                <div className="grid shrink-0 justify-items-end">
+                <div className="grid shrink-0 justify-items-end max-md:hidden">
                   {comecar.steps.map((s, i) => (
                     <div
                       key={s.title}
@@ -256,14 +250,15 @@ export function Comecar() {
               </div>
 
               {/* Barra de progresso: 4 colunas; clicar no rótulo rola até o passo */}
-              <div className="mt-8 grid grid-cols-4 gap-4 lg:gap-6">
+              {/* Celular: barra compacta só com o passo atual (rótulo em cima, linha embaixo) */}
+              <div className="mt-6 grid grid-cols-1 md:mt-8 md:grid-cols-4 md:gap-4 lg:gap-6">
                 {comecar.steps.map((s, i) => (
                   <button
                     key={s.label}
                     type="button"
                     data-cm-label
                     onClick={() => goTo(i)}
-                    className="group/l min-h-11 cursor-pointer pt-1 text-left"
+                    className="group/l flex min-h-11 cursor-pointer flex-col gap-3 pt-1 text-left max-md:hidden max-md:flex-col-reverse max-md:data-active:flex"
                   >
                     <span aria-hidden className="relative block h-[2px] overflow-hidden rounded-full bg-white/25">
                       <span
@@ -271,7 +266,7 @@ export function Comecar() {
                         className="absolute inset-0 origin-left rounded-full bg-white"
                       />
                     </span>
-                    <span className="mt-3 block text-[0.9375rem] font-semibold text-white/70 transition-colors duration-300 group-hover/l:text-white group-data-active/l:text-white">
+                    <span className="block text-[0.9375rem] font-semibold text-white/70 transition-colors duration-300 group-hover/l:text-white group-data-active/l:text-white">
                       {s.label}
                     </span>
                   </button>
@@ -283,7 +278,7 @@ export function Comecar() {
       </div>
 
       {/* ── Blocos empilhados (celular e movimento reduzido) ── */}
-      <Container className="mt-10 md:motion-safe:hidden">
+      <Container className="mt-10 motion-safe:hidden">
         <ol aria-label={comecar.ariaPassos} className="grid gap-14 md:grid-cols-2 md:gap-x-8">
           {comecar.steps.map((s, i) => (
             <li key={s.title} data-cm-block>
@@ -299,21 +294,21 @@ export function Comecar() {
                   />
                 </span>
               </div>
-              <div className="relative mt-3 aspect-[4/5] overflow-hidden rounded-card-lg bg-vinho-profundo">
+              <div className="relative mt-3 aspect-[4/5] overflow-hidden rounded-card-lg bg-vinho-profundo max-md:-mx-5 max-md:aspect-auto max-md:h-svh max-md:rounded-none">
                 <Picture
                   slot={PHOTOS_MOBILE[i]}
                   sizes="(min-width: 768px) 45vw, 92vw"
                   className="absolute inset-0 size-full object-cover"
                 />
                 <div aria-hidden className="absolute inset-0" style={{ background: SHADE_BOTTOM }} />
-                <div className="absolute inset-x-0 bottom-0 px-6 pb-20">
+                <div className="absolute inset-x-0 bottom-0 px-6 pb-20 max-md:px-5 max-md:pb-10">
                   <h3 className="font-display text-[2.25rem] leading-[1.05] font-medium tracking-[-0.02em] text-white">
                     {s.title}
                   </h3>
                   <p className="mt-2 lead text-pretty text-white/80">{s.text}</p>
                 </div>
               </div>
-              <div data-cm-block-card className="relative z-10 -mt-14 flex justify-center px-3">
+              <div data-cm-block-card className="relative z-10 -mt-14 flex justify-center px-3 max-md:hidden">
                 <StepCard i={i} phoneClassName={PHONE_STACK} />
               </div>
             </li>
