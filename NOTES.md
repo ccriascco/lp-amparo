@@ -581,3 +581,14 @@ Referências: NextPay mobile (banner) e Gardance mobile (palco). Os sites não p
   - Topo: chip de vidro, H2 Quicksand 600 `clamp(36px, 4.2vw, 56px)` em 2 linhas no desktop, subtítulo `white/75` até 520px. Base: linha `white/15` e 4 itens soltos (ícone de linha 32px, título 18px, texto 15px `white/75`), 4 colunas no desktop, 2 a partir de 640px e 1 coluna no celular com o ícone à esquerda (no 2×2 de 390px os textos passavam de 3 linhas).
   - Movimento: foto 1.12 → 1 com scrub ao entrar e parallax de −6%; H2 palavra por palavra; ícones desenhados (DrawSVG) e textos subindo do desfoque em stagger de 0,12s; hover sobe o ícone 3px com brilho vinho. Movimento reduzido: estático. Header escuro sobre o banner.
   - Prints em `screenshots/guardia/` (1440, 390, `reduzido/`).
+
+## `#faq` em conversa + mockup do passo 1 (11/11/2026, pedido do cliente)
+- **Passo 1 do palco de `#comecar`:** sai o cartão branco; mockup "clean" como a referência: moldura fina translúcida (vidro escuro 55%, borda branca 25%, sombra suave), foto ocupando a tela, título e texto em branco sobre degradê vinho, seletor "Criar conta / Entrar" em vidro com a pílula branca deslizando. Os rótulos escuros vão dentro da pílula (recortados e contra-deslocados), então a cor acompanha a pílula.
+- **`#faq` refeita** (`src/sections/Faq.tsx`): perguntas como balões da usuária (direita) e respostas como mensagens do Amparo (esquerda), no design system do Amparo (sem imitar apps de mensagem). Perguntas e respostas exatamente as do COPY §3.9 (o `copy.ts` tinha a lista antiga, substituída). Chip/H2/subtítulo/painel/CTA do pedido no `copy.ts` e no COPY §3.9.
+  - Grid 5/7 com gap 64px; esquerda fixa (top 120px) com chip, H2, subtítulo, mini-cartão "Ainda ficou com dúvida?" + "Acessar o Amparo" e, embaixo, a **faixa de emergência 190/180** (não estava no pedido, mas o CLAUDE.md exige 190 e 180 sempre visíveis no FAQ). Celular: título → painel → CTA.
+  - Accordion: `<button aria-expanded aria-controls>` + `role="region"`; só uma aberta, a 1ª aberta ao carregar; Enter/Espaço nativos; anel de foco vinho 2px. Ao abrir: balão vinho, "+" gira para "×", 3 pontinhos por ~600ms, resposta com avatar e "agora"; altura animada (GSAP `height: auto`). Movimento reduzido: resposta direta com fade.
+  - Entrada: H2 palavra por palavra; balões em stagger de 0,08s vindo da direita (x 24, blur 6px). Hover: fundo vinho 6% e x −2px.
+  - Padding vertical 120px / 72px como o pedido (as outras seções usam 64–96px).
+  - SEO: JSON-LD `FAQPage` com as 7 perguntas, renderizado na seção.
+  - O componente `Accordion` antigo ficou sem uso na página (só no `/#kit`).
+  - Verificado com `node scripts/check-faq.mjs <url> <pasta>`: 1ª aberta; clique na 4 → só a 4 aberta e a digitação aparece; Enter abre e Espaço fecha a 6; 7 perguntas no JSON-LD; sem erros. Prints em `screenshots/faq/` e `screenshots/comecar-mockup/`.

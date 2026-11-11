@@ -349,56 +349,20 @@ export const comecar = {
 
 // 3.9 (a construir: textos revisados contra o COPY 3.9 na construção)
 export const faq = {
-  h2: 'Perguntas frequentes',
-  sub: 'Respostas rápidas para as dúvidas mais comuns.',
+  /** Seção em conversa (pedido do cliente, 11/11/2026); perguntas e respostas = COPY 3.9. */
+  chip: 'Dúvidas',
+  h2: 'Perguntas que você pode estar se fazendo.',
+  sub: 'Toque numa pergunta e o Amparo responde.',
+  painel: { nome: 'Amparo', status: 'responde na hora', agora: 'agora' },
+  ajuda: 'Ainda ficou com dúvida?',
   items: [
-    { q: 'O Amparo é gratuito?', a: ['Sim.'] satisfies Rich },
-    {
-      q: 'Preciso baixar em alguma loja?',
-      a: [
-        'Não. O Amparo funciona direto no navegador do seu celular. É só acessar.',
-      ] satisfies Rich,
-    },
-    {
-      q: 'Preciso ter feito denúncia ou ter medida protetiva?',
-      a: [
-        'Não. Você pode usar o Amparo em qualquer momento, inclusive antes de decidir denunciar.',
-      ] satisfies Rich,
-    },
-    {
-      q: 'As minhas guardiãs vão saber que eu uso o Amparo?',
-      a: [
-        'Elas recebem um convite discreto, que não revela o motivo nem o nome do app, e só são avisadas quando você aciona o pedido de ajuda.',
-      ] satisfies Rich,
-    },
-    {
-      q: 'E se ele pegar o meu celular?',
-      a: [
-        'Com o Modo Disfarce, ele vai ver uma calculadora que funciona normalmente. A área protegida só abre com o seu código.',
-      ] satisfies Rich,
-    },
-    {
-      q: 'Os registros valem como prova?',
-      a: [
-        'Cada registro guarda data, hora, local e um código de integridade que mostra que o arquivo não foi alterado. Isso fortalece o valor do registro, e a decisão de usá-lo é sempre sua.',
-      ] satisfies Rich,
-    },
-    {
-      q: 'A inteligência artificial decide o que eu devo fazer?',
-      a: [
-        'Não. Ela oferece uma leitura do risco para apoiar você. Você pode ver como ela chegou nisso e ignorar a sugestão quando quiser.',
-      ] satisfies Rich,
-    },
-    {
-      q: 'O Amparo substitui a polícia?',
-      a: [
-        'Não. Em perigo imediato, ligue ',
-        { strong: '190' },
-        '. Para orientação, ligue ',
-        { strong: '180' },
-        ': é gratuito, sigiloso e funciona 24 horas.',
-      ] satisfies Rich,
-    },
+    { q: 'O Amparo é gratuito? Preciso baixar em alguma loja?', a: ['É gratuito e funciona direto no navegador do celular. É só acessar.'] satisfies Rich },
+    { q: 'Preciso ter feito denúncia ou ter medida protetiva?', a: ['Não. Você pode usar o Amparo a qualquer momento, inclusive antes de decidir denunciar.'] satisfies Rich },
+    { q: 'E se ele pegar o meu celular?', a: ['Ele vai ver uma calculadora que funciona normalmente. A área protegida só abre com o seu código.'] satisfies Rich },
+    { q: 'Meus dados estão seguros?', a: ['Senhas e código são guardados com criptografia, a conexão é segura e a localização só é usada quando você aciona o SOS. Você pode apagar seus registros quando quiser, como garante a LGPD.'] satisfies Rich },
+    { q: 'O app explica os meus direitos?', a: ['Sim. A Central de Direitos explica a Lei Maria da Penha, as medidas protetivas e os sinais de um relacionamento abusivo em linguagem simples.'] satisfies Rich },
+    { q: 'Conheço alguém que pode precisar. Como indico?', a: ['Compartilhe o link com cuidado, numa conversa a sós e num momento seguro, de preferência num celular que só ela usa.'] satisfies Rich },
+    { q: 'O Amparo substitui a polícia?', a: ['Não. Em perigo imediato, ligue ', { strong: '190' }, '. Para orientação, ligue ', { strong: '180' }, '.'] satisfies Rich },
   ],
 }
 

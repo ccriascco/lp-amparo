@@ -23,50 +23,62 @@ export function StepCard({ i, phoneClassName }: { i: number; phoneClassName?: st
 
 const CARD = 'w-[340px] max-w-full rounded-card-lg bg-white p-6 text-left shadow-float'
 
-/** 1) Crie sua conta: tela de boas-vindas do app (boas-vindas.png) num celular. */
+/**
+ * 1) Crie sua conta: mockup "clean" da tela de boas-vindas (pedido do cliente, como a referência):
+ * sem cartão por trás, moldura fina e translúcida, foto ocupando a tela, título e texto em branco e o
+ * seletor "Criar conta / Entrar" em vidro. A pílula branca desliza; os rótulos escuros vão dentro
+ * dela (recortados), então a cor de cada rótulo acompanha a pílula.
+ */
 function WelcomeCard({ className }: { className?: string }) {
   const b = C.boasVindas
-  // Cartão branco pequeno (pedido do cliente) com o celular inteiro dentro, sem sombra própria.
+  const labels = (dark: boolean) =>
+    b.opcoes.map((o) => (
+      <span
+        key={o}
+        className={clsx('grid w-1/2 place-items-center text-[17px] font-bold', dark ? 'text-vinho-profundo' : 'text-white')}
+      >
+        {o}
+      </span>
+    ))
   return (
-    <div className={clsx(CARD, 'w-max p-4', className)}>
-    <div className="w-[150px] [&_.shadow-phone]:shadow-none">
-    <PhoneFrame label={`${b.title}. ${b.text}`}>
-      <div className="relative h-full w-full bg-white">
-        <Picture
-          slot="boas-vindas-foto"
-          sizes="280px"
-          className="absolute inset-x-0 top-0 h-[600px] w-full object-cover"
-        />
-        <div className="absolute inset-x-0 bottom-0 h-[300px] rounded-t-[36px] bg-white px-7 pt-6">
-          <div className="flex justify-center gap-2">
-            <span className="h-2 w-8 rounded-full bg-vinho" />
-            {[0, 1, 2].map((k) => (
-              <span key={k} className="size-2 rounded-full bg-borda" />
-            ))}
-          </div>
-          <p className="mt-5 font-display text-[30px] leading-tight font-semibold text-texto">
-            {b.title}
-          </p>
-          <p className="mt-2 text-[17px] leading-snug text-texto-secundario">{b.text}</p>
-          {/* Seletor "Criar conta / Entrar": a pílula branca desliza entre as opções */}
-          <div className="relative mt-6 grid h-14 grid-cols-2 rounded-full bg-superficie p-1.5">
-            <span
-              data-cm-pill
-              className="absolute top-1.5 bottom-1.5 left-1.5 w-[calc(50%-6px)] rounded-full bg-white shadow-card"
-            />
-            {b.opcoes.map((o) => (
+    <div
+      className={clsx(
+        'w-[210px] [&_.shadow-phone]:bg-[rgb(30_20_26/0.55)] [&_.shadow-phone]:p-[1.8cqw] [&_.shadow-phone]:shadow-[0_30px_60px_-30px_rgb(0_0_0/0.6)] [&_.shadow-phone]:ring-1 [&_.shadow-phone]:ring-white/25 [&_.shadow-phone]:backdrop-blur-md [&_.shadow-phone>div:first-child]:rounded-[14.4cqw]',
+        className,
+      )}
+    >
+      <PhoneFrame label={`${b.title}. ${b.text}`}>
+        <div className="relative h-full w-full bg-vinho-profundo">
+          <Picture
+            slot="boas-vindas-foto"
+            sizes="210px"
+            className="absolute inset-0 size-full object-cover object-[50%_20%]"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, rgb(75 42 63 / 0) 35%, rgb(75 42 63 / 0.55) 62%, rgb(43 24 36 / 0.92) 100%)',
+            }}
+          />
+          <div className="absolute inset-x-0 bottom-0 px-8 pb-10 text-center">
+            <p className="font-display text-[36px] leading-[1.1] font-semibold text-white">{b.title}</p>
+            <p className="mx-auto mt-3 max-w-[300px] text-[17px] leading-snug text-white/80">{b.text}</p>
+            {/* Seletor em vidro: base com rótulos brancos + pílula branca com rótulos escuros */}
+            <div className="relative mt-8 h-[60px] rounded-full border border-white/30 bg-white/15 p-1.5 backdrop-blur-md">
+              <div className="flex h-full">{labels(false)}</div>
               <span
-                key={o}
-                className="relative grid place-items-center text-[17px] font-bold text-vinho-profundo"
+                data-cm-pill
+                className="absolute top-1.5 bottom-1.5 left-1.5 w-[calc(50%-6px)] overflow-hidden rounded-full bg-white shadow-card"
               >
-                {o}
+                <span data-cm-pill-inner className="absolute inset-y-0 left-0 flex w-[calc(200%+0px)]">
+                  {labels(true)}
+                </span>
               </span>
-            ))}
+            </div>
           </div>
         </div>
-      </div>
-    </PhoneFrame>
-    </div>
+      </PhoneFrame>
     </div>
   )
 }
@@ -193,9 +205,13 @@ export function cardLoop(i: number, el: HTMLElement): gsap.core.Timeline {
   if (i === 0) {
     // A pílula desliza entre "Criar conta" e "Entrar" a cada 1,6s.
     const pill = q('[data-cm-pill]')
+    const inner = q('[data-cm-pill-inner]')
     tl.set(pill, { xPercent: 0 })
+      .set(inner, { xPercent: 0 })
       .to(pill, { xPercent: 100, ...swap }, 1.1)
+      .to(inner, { xPercent: -50, ...swap }, 1.1)
       .to(pill, { xPercent: 0, ...swap }, 2.7)
+      .to(inner, { xPercent: 0, ...swap }, 2.7)
       .to({}, { duration: 0 }, 3.2)
   } else if (i === 1) {
     // As 4 bolinhas enchem uma a uma (0,35s), a chave liga, pausa e recomeça.

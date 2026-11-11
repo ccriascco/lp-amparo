@@ -187,8 +187,11 @@ lang: pt-BR
 - **Só o necessário** · Seus registros, o cofre e a leitura de risco continuam só com você.
 
 ### 3.9 FAQ (`#faq`)
-- H2: **Perguntas frequentes**
-- Subtítulo: Respostas rápidas para as dúvidas mais comuns.
+- Chip: **Dúvidas**
+- H2: **Perguntas que você pode estar se fazendo.**
+- Subtítulo: Toque numa pergunta e o Amparo responde.
+- Painel de conversa: **Amparo** · responde na hora · resposta com "agora"
+- Mini-cartão: Ainda ficou com dúvida? · **Acessar o Amparo**
 - Faixa de emergência: **Em perigo agora? Ligue 190.** · **Precisa de orientação? Ligue 180**: gratuito, sigiloso, 24 horas.
 1. **O Amparo é gratuito? Preciso baixar em alguma loja?** É gratuito e funciona direto no navegador do celular. É só acessar.
 2. **Preciso ter feito denúncia ou ter medida protetiva?** Não. Você pode usar o Amparo a qualquer momento, inclusive antes de decidir denunciar.

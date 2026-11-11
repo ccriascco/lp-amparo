@@ -344,3 +344,9 @@ html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* Pontinhos de digitação do FAQ (#faq) */
+@keyframes faq-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.6; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}

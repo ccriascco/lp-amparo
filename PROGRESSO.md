@@ -23,7 +23,7 @@
 | 8 | Como começar | `#comecar` | ✅ pronta — palco fixo Gardance com 4 passos e cartões animados (aguardando revisão) |
 | 8.5 | Seus direitos (bento) | `#direitos` | ✅ pronta — aguardando revisão (conferir a Lei 15.383/2026) |
 | 8.6 | O que sua guardiã recebe (banner) | `#guardia` | ✅ pronta — aguardando revisão dos textos |
-| 9 | FAQ + emergência | `#faq` | ⏳ a construir (versão da rodada 1 no lugar) |
+| 9 | FAQ em conversa + emergência | `#faq` | ✅ pronta — aguardando revisão |
 | 10 | CTA final | `#cta` | ⏳ a construir (versão da rodada 1 no lugar) |
 | 11 | Rodapé | — | ⏳ a construir (versão da rodada 1, já com os links e textos do COPY 3.11) |
 
@@ -107,13 +107,13 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 8.5b | #direitos: fundo branco, sem Ligue 180, cartões com ilustrações animadas por direito (donut, rastreador, varredura, mapa com MotionPath, fluxo com token), celular com lista rolando e badge — prints em `./screenshots/direitos/` | (ver git log) |
 | E1 | Espaçamentos menores (64/80/96px), linha do tempo sem o vazio em 1920, sem o CTA depois do Como começar, cartão do passo 1 no padrão dos outros, cartão do celular de #direitos com ícone/título/subtítulo — prints em `./screenshots/espacamentos/` | (ver git log) |
 | 8.6 | Seção nova #guardia (banner com 4 itens soltos sobre a foto); celular de #direitos com sombra suave e sem a nota; passo 1 do palco com o celular inteiro num cartão menor — prints em `./screenshots/guardia/` | (ver git log) |
+| 9 | FAQ em conversa (balões de pergunta, digitação e resposta do Amparo, JSON-LD FAQPage, 190/180 visíveis); mockup clean no passo 1 do Como começar — prints em `./screenshots/faq/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
 ## Próximo passo
 1. **Revisão do cliente da seção 7** (`screenshots/leitura-risco-2/`, incluindo `esfera-animada.gif`) e ajustes que ela pedir.
 2. Depois, na ordem, sempre com os textos do `COPY.md` e a rotina de 5 passos do CLAUDE.md:
-   - **9 FAQ + emergência** (`#faq`, COPY §3.9);
    - **10 CTA final** (`#cta`, COPY §3.10);
    - **11 Rodapé** (COPY §3.11).
    Os objetos `comecar`, `faq` e `ctaFinal` do `copy.ts` ainda têm os textos antigos: trocar pelos do COPY ao construir cada seção.
