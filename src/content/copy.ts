@@ -373,11 +373,6 @@ export const ctaFinal = {
   text: 'Gratuito, discreto e direto no navegador do celular. O primeiro passo pode ser pequeno.',
   /** Micro-itens abaixo do botão (pedido do cliente). */
   itens: ['Gratuito', 'Funciona no navegador', 'Modo disfarce'],
-  /** Notificações flutuando ao lado do celular (pedido do cliente). */
-  notificacoes: [
-    { title: 'Alerta enviado à sua rede', text: 'Sua rede foi avisada', time: 'agora' },
-    { title: 'Localização compartilhada', text: 'Só com as suas guardiãs', time: 'agora' },
-  ],
   /** Cartão "Hoje" (linha do tempo de exemplo no app). */
   hojeTitle: 'Hoje',
   hoje: [
@@ -403,10 +398,10 @@ export const emergencia = {
 // 3.11 (links: `nav.links` + "Voltar ao topo")
 export const footer = {
   voltarTopo: 'Voltar ao topo',
-  lema: 'Você não está sozinha.',
-  /** Descrição curta = og:description do COPY §2. */
-  descricao: 'Ajuda que cabe no seu celular sem chamar atenção.',
-  /** Pílulas (pedido do cliente). */
+  /** Rodapé em vidro sobre a foto do CTA (pedido do cliente, 11/11/2026). */
+  titulo: 'Proteção que cabe no seu dia a dia.',
+  descricao:
+    'O Amparo fica no seu celular como um app comum, lê os sinais de risco com você e avisa quem você confia quando precisar. Ajuda real, no seu tempo e do seu jeito.',
   pilulas: ['Discreto', 'Com IA', 'Gratuito'],
   colunas: {
     navegacao: 'Navegação',
@@ -418,12 +413,11 @@ export const footer = {
     { label: 'Ligue 180 · Central da Mulher', href: 'tel:180' },
     { label: 'Emergência · 190', href: 'tel:190' },
   ],
-  sobreTcc: 'Sobre o TCC',
-  base: '© 2026 Amparo · Projeto de TCC em Ciência da Computação, UNIRP',
-  legal:
-    'Amparo é um projeto acadêmico (TCC — Ciência da Computação, UNIRP, 2026) em desenvolvimento. Não substitui os serviços oficiais de segurança e atendimento à mulher.',
+  /** Faixa gigante em loop (decorativa). */
+  marquee: 'Amparo',
+  copyright: '© 2026 Amparo. Todos os direitos reservados.',
+  /** Fonte dos números: agora fica abaixo dos números de #contexto (não no rodapé). */
   dados: 'Dados: 19º Anuário Brasileiro de Segurança Pública (FBSP, 2025).',
-  copyright: '© 2026 Amparo',
 }
 
 // §4

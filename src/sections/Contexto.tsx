@@ -5,7 +5,7 @@ import { NotificationCard } from '../components/ui/NotificationCard'
 import { Container, SectionHeading } from '../components/ui/Section'
 import { StatsBand } from '../components/ui/StatsBand'
 import { TintedPhoto } from '../components/ui/TintedPhoto'
-import { contexto, emergencia, hero, numeros } from '../content/copy'
+import { contexto, emergencia, hero, numeros, footer } from '../content/copy'
 import { gsap, MQ } from '../lib/gsap'
 
 /** Ícones na ordem dos números: feminicídios, dentro de casa, companheiros, medidas descumpridas. */
@@ -178,12 +178,11 @@ export function Contexto() {
               </div>
             </div>
 
-            <StatsBand
-              stats={numeros.stats}
-              icons={ICONS}
-              highlight={3}
-              className="order-1 lg:col-span-7"
-            />
+            <div className="order-1 lg:col-span-7">
+              <StatsBand stats={numeros.stats} icons={ICONS} highlight={3} />
+              {/* Fonte dos números (saiu do rodapé, pedido do cliente) */}
+              <p className="mt-4 text-[13px] text-texto-secundario">{footer.dados}</p>
+            </div>
           </div>
         </Container>
       </div>

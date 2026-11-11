@@ -206,18 +206,17 @@ lang: pt-BR
 - Texto: Gratuito, discreto e direto no navegador do celular. O primeiro passo pode ser pequeno.
 - CTA: **Acessar o Amparo**
 - Micro-itens: Gratuito · Funciona no navegador · Modo disfarce
-- Notificações ao lado do celular: **Alerta enviado à sua rede** · Sua rede foi avisada / **Localização compartilhada** · Só com as suas guardiãs
 - Cartão "Hoje" (fora do uso desde 11/11/2026): 09:12 · **Registro salvo no cofre** / 18:40 · **Alerta enviado à sua rede** / 18:41 · **Ana Beatriz confirmou**
 
-### 3.11 Rodapé
-- Logo branco + **Você não está sozinha.** · Ajuda que cabe no seu celular sem chamar atenção.
+### 3.11 Rodapé (vidro sobre a foto do CTA, bloco único com o #cta)
+- Logo branco
+- Título: **Proteção que cabe no seu dia a dia.**
+- Subtítulo: O Amparo fica no seu celular como um app comum, lê os sinais de risco com você e avisa quem você confia quando precisar. Ajuda real, no seu tempo e do seu jeito.
 - Pílulas: Discreto · Com IA · Gratuito
-- Colunas: **Navegação** (Como funciona · Leitura de risco · Como começar · Dúvidas · Voltar ao topo) · **Seus direitos** (Central de direitos · Ligue 180 · Central da Mulher · Emergência · 190) · **Projeto** (Acessar o Amparo · Sobre o TCC)
-- Links: Como funciona · Leitura de risco · Como começar · Dúvidas · **Voltar ao topo**
-- Emergência: **Ligue 190** · **Ligue 180**
-- Texto legal: Amparo é um projeto acadêmico (TCC — Ciência da Computação, UNIRP, 2026) em desenvolvimento. Não substitui os serviços oficiais de segurança e atendimento à mulher.
-- Dados: 19º Anuário Brasileiro de Segurança Pública (FBSP, 2025).
-- © 2026 Amparo · Projeto de TCC em Ciência da Computação, UNIRP
+- Colunas: **Navegação** (Como funciona · Leitura de risco · Como começar · Dúvidas · Voltar ao topo) · **Seus direitos** (Central de direitos · Ligue 180 · Central da Mulher · Emergência · 190) · **Projeto** (Acessar o Amparo)
+- Faixa gigante em loop: Amparo · Amparo · …
+- © 2026 Amparo. Todos os direitos reservados.
+- Saíram em 11/11/2026: o texto legal do projeto acadêmico e "Sobre o TCC". A fonte dos dados ("Dados: 19º Anuário Brasileiro de Segurança Pública (FBSP, 2025).") fica abaixo dos números de `#contexto`.
 
 ---
 

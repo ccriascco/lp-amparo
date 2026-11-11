@@ -9,7 +9,6 @@ import { Contexto } from './sections/Contexto'
 import { CtaFinal } from './sections/CtaFinal'
 import { Dores } from './sections/Dores'
 import { Faq } from './sections/Faq'
-import { Footer } from './sections/Footer'
 import { Header } from './sections/Header'
 import { Hero } from './sections/Hero'
 import { MarqueeBand } from './sections/MarqueeBand'
@@ -75,7 +74,6 @@ function Landing() {
         <Faq />
         <CtaFinal />
       </main>
-      <Footer />
     </>
   )
 }

@@ -26,6 +26,7 @@
 | 9 | FAQ em conversa + emergência | `#faq` | ✅ pronta — aguardando revisão |
 | 10/11 | CTA final (anéis do hero, celular calculadora → início, notificações, botão magnético) e rodapé (brilhos, 3 colunas de links, marca d'água do logotipo) — prints em `./screenshots/cta/` e `./screenshots/rodape/` | (ver git log) |
 | 9b | FAQ em uma coluna centralizada com anéis do hero ao fundo; perguntas à esquerda, respostas vinho à direita; sem a coluna do CTA e sem o cabeçalho do painel — prints em `./screenshots/faq/` | (ver git log) |
+| 10/11b | CTA final + rodapé como bloco único sobre a foto (céu/mulher/grama), rodapé em vidro com faixa "Amparo" em loop; fonte dos dados abaixo dos números de #contexto; sem texto legal e sem "Sobre o TCC" — prints em `./screenshots/cta/` e `./screenshots/rodape/` | (ver git log) |
 | 10 | CTA final | `#cta` | ✅ pronta — aguardando revisão |
 | 11 | Rodapé | — | ✅ pronto — aguardando revisão |
 
