@@ -59,12 +59,12 @@ const PHOTO_MASK: CSSProperties = {
 
 /** Véu #4B2A3F 60% só atrás do título e do subtítulo, sem bordas. */
 /**
- * Celular: a borda de cima da foto some no vinho do cartão (sem linha), e a foto se dissolve de novo
- * logo acima do subtítulo, que começa em ~132px + título (~64px) + 24px + 30vw.
+ * Celular: a foto (mesmo enquadramento de antes, atrás do chip e do título) se dissolve no vinho do
+ * cartão logo acima do subtítulo, que começa em ~132px + título (~64px) + 24px + 30vw (contraste AA).
  */
 const MOBILE_TEXT_BG: CSSProperties = {
   background:
-    'linear-gradient(180deg, #4b2a3f 112px, rgb(75 42 63 / 0) 200px, rgb(75 42 63 / 0) calc(188px + 30vw), rgb(75 42 63 / 0.85) calc(214px + 30vw), #4b2a3f calc(236px + 30vw))',
+    'linear-gradient(180deg, transparent calc(150px + 30vw), rgb(75 42 63 / 0.85) calc(210px + 30vw), #4b2a3f calc(236px + 30vw))',
 }
 const TEXT_SCRIM: CSSProperties = {
   background: [
@@ -290,7 +290,7 @@ export function Dores() {
           <div
             data-banner-photo
             aria-hidden
-            className="relative h-[58svh] max-md:absolute max-md:inset-x-0 max-md:top-[112px] max-md:h-[calc(220px+30vw)] lg:absolute lg:inset-0 lg:h-full"
+            className="relative h-[58svh] max-md:absolute max-md:inset-x-0 max-md:-top-12 max-md:h-[540px] lg:absolute lg:inset-0 lg:h-full"
             style={PHOTO_MASK}
           >
             <Picture
