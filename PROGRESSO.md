@@ -302,7 +302,7 @@ npx skills ls
 
 ### Variáveis de ambiente
 - O arquivo `.env` **não** está no git (ignorado pelo `.gitignore`); só o `.env.example` é versionado.
-- Variável necessária: **`VITE_APP_URL`** — endereço do web app do Amparo na Netlify (ex.: `https://SEU-APP.netlify.app`). Todos os botões "Acessar o Amparo" e "Entrar" usam ela. Sem ela, os botões apontam para o endereço de exemplo.
+- Variável: **`VITE_APP_URL`** = `https://amparo-sos.com.br/` (endereço do app, 11/11/2026). Todos os botões "Acessar o Amparo" e "Entrar" usam ela; sem ela, o código já usa esse mesmo endereço.
 
 ### O que está no git
 - Fotos originais em `assets/fotos/` (16) e otimizadas em `public/images/` (AVIF/WebP/JPG) — versionadas.
