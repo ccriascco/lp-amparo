@@ -116,22 +116,25 @@ export function RiskLevelCards() {
   )
 
   return (
-    <ul
-      ref={root}
-      data-appear-stagger
-      tabIndex={0}
-      aria-label={A.title}
-      className="no-scrollbar -mx-5 mt-8 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pt-1 pb-6 md:-mx-8 md:scroll-px-8 md:px-8 lg:mx-0 lg:mt-10 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0 lg:pb-0"
-    >
+    <ul ref={root} data-appear-stagger className="mt-8 grid gap-5 lg:mt-10 lg:grid-cols-3">
       {A.levels.map((l, i) => (
-        <li key={l.label} className="flex w-[85vw] max-w-[420px] shrink-0 snap-start lg:w-auto lg:max-w-none">
+        <li key={l.label} className="flex">
           <article
             data-rl-card
-            className="group flex w-full flex-col rounded-card-lg bg-white p-2.5 shadow-card transition-[translate,box-shadow] duration-300 ease-amparo hover:-translate-y-1 hover:shadow-float motion-reduce:transition-none lg:h-[460px]"
+            className="group flex w-full flex-col rounded-card-lg border-[1.5px] border-borda bg-white p-6 transition-[translate,border-color,box-shadow] duration-300 ease-amparo hover:-translate-y-1 hover:border-vinho hover:shadow-float motion-reduce:transition-none"
           >
+            <span
+              className={clsx(
+                'w-max rounded-full px-3.5 py-1.5 text-[0.9375rem] leading-none font-bold',
+                LEVEL_PILL[i],
+              )}
+            >
+              {l.label}
+            </span>
+            <p className="mt-4 text-[0.9375rem] text-pretty text-texto-secundario">{l.text}</p>
             <div
               aria-hidden
-              className="relative h-[248px] shrink-0 overflow-hidden rounded-card bg-superficie lg:h-[276px]"
+              className="relative mt-5 h-[236px] shrink-0 overflow-hidden rounded-card bg-superficie lg:h-[256px]"
             >
               {/* Grade de pontos sutil + mancha vinho que cresce com o nível */}
               <div className="absolute inset-0 bg-[radial-gradient(rgb(149_75_110/0.06)_1.5px,transparent_1.5px)] bg-size-[16px_16px]" />
@@ -141,24 +144,9 @@ export function RiskLevelCards() {
                   background: `radial-gradient(circle at 50% 58%, rgb(149 75 110 / ${BLOB[i]}) 0%, transparent 62%)`,
                 }}
               />
-              <div className="absolute top-1/2 left-1/2 h-[232px] w-[300px] -translate-x-1/2 -translate-y-1/2 max-[399px]:scale-[0.82]">
+              <div className="absolute top-1/2 left-1/2 h-[232px] w-[300px] -translate-x-1/2 -translate-y-1/2 max-[419px]:scale-[0.78]">
                 {i === 0 ? <Baixo /> : i === 1 ? <Medio /> : <Alto />}
               </div>
-            </div>
-
-            <div className="flex flex-1 flex-col px-3.5 pt-5 pb-4">
-              <span
-                className={clsx(
-                  'w-max rounded-full px-3 py-1.5 text-[0.8125rem] leading-none font-bold',
-                  LEVEL_PILL[i],
-                )}
-              >
-                {l.label}
-              </span>
-              <h4 className="mt-3.5 font-display text-[1.375rem] leading-tight font-semibold tracking-[-0.01em] text-texto">
-                {l.title}
-              </h4>
-              <p className="mt-1.5 text-[0.9375rem] text-pretty text-texto-secundario">{l.text}</p>
             </div>
           </article>
         </li>
