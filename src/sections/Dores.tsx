@@ -95,6 +95,19 @@ export function Dores() {
         const { desktop } = ctx.conditions as { desktop: boolean }
         const banner = q('[data-banner]')[0]
         const leave = { trigger: banner, start: 'top top', end: 'bottom top', scrub: true }
+        // Entrada do cartão (pedido do cliente, 11/11): cresce até o tamanho final enquanto entra
+        // na tela, acompanhando o scroll. Escala termina em 1 (identidade), sem afetar o sticky.
+        const card = q('[data-dores-card]')[0]
+        gsap.fromTo(
+          card,
+          { scale: desktop ? 0.86 : 0.92 },
+          {
+            scale: 1,
+            ease: 'none',
+            transformOrigin: '50% 0%',
+            scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 15%', scrub: true },
+          },
+        )
         // Enquanto o banner sai: a foto sobe mais devagar que o texto e escurece, dissolvendo no
         // fundo do cartão; o título sobe e perde opacidade aos poucos (padrão NextPay).
         gsap.to(q('[data-banner-photo]'), {
@@ -252,6 +265,7 @@ export function Dores() {
           overflow-clip (não hidden) para os cantos sem quebrar o sticky do celular. */}
       <div
         data-header-dark
+        data-dores-card
         className="on-dark relative mx-auto max-w-(--grid) overflow-clip rounded-[24px]"
         style={{ background: CARD_BG }}
       >

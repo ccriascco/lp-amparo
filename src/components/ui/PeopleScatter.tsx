@@ -86,9 +86,8 @@ const PHOTOS: Floating[] = [
   },
 ]
 
-/** Foto central: 150px no estado final (CSS); entra a partir de ~340px (escala 2,27). */
+/** Foto central: 150px (CSS), sem animação de tamanho. */
 const CENTER_FINAL = 150
-const CENTER_START = 340
 
 type PeopleScatterProps = {
   phrase: string
@@ -127,17 +126,8 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
           )
         })
 
-        // Foto central (desktop): grande na base, cobrindo a frase → 150px abaixo dela.
-        if (desktop) {
-          gsap.from('[data-scatter-center]', {
-            scale: CENTER_START / CENTER_FINAL,
-            y: () => vh() * 0.12,
-            ease: 'none',
-            scrollTrigger: { trigger: el, start: 'top 85%', end: 'top top', scrub: true },
-          })
-        }
-
-        // Foto central também se move (pedido do cliente): depois de encolher, sobe devagar
+        // Foto central (pedido do cliente, 11/11): sem o encolhimento da entrada; fica no tamanho
+        // normal, como as outras fotos, e sobe devagar
         // enquanto o palco está fixo, em vez de ficar parada encostada na base.
         gsap.fromTo(
           '[data-center-drift]',
@@ -269,11 +259,11 @@ export function PeopleScatter({ phrase, centerSlot, headingId }: PeopleScatterPr
             className="relative z-20 mx-auto mt-10 w-[136px] origin-bottom lg:absolute lg:top-[calc(50%+130px)] lg:left-1/2 lg:mt-0 lg:-ml-[75px] lg:w-[150px]"
           >
             <div data-appear="float" className="lg:contents">
-              {/* Invólucro próprio para a subida contínua (não disputa o encolhimento da entrada) */}
+              {/* Invólucro próprio para a subida contínua */}
               <div data-center-drift>
                 <TintedPhoto
                   slot={centerSlot}
-                  sizes={`${CENTER_START}px`}
+                  sizes={`${CENTER_FINAL * 2}px`}
                   overlay="none"
                   natural
                   className="aspect-[4/5] rounded-card shadow-float"

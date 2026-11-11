@@ -117,19 +117,16 @@ export const beneficios = {
       slot: 'beneficio-tranquilidade',
       title: 'Mais tranquilidade',
       text: 'Sua rede de apoio fica a um toque, mesmo em silêncio.',
-      link: { label: 'Conheça a rede de apoio', href: '#dor-rede' },
     },
     {
       slot: 'beneficio-controle',
       title: 'Sua história, suas escolhas',
       text: 'Registre agora e decida depois o que fazer, sem pressão.',
-      link: { label: 'Conheça o cofre de provas', href: '#dor-cofre' },
     },
     {
       slot: 'beneficio-confianca',
       title: 'Decida com informação',
       text: 'Entenda seus direitos e acompanhe como está o seu risco.',
-      link: { label: 'Conheça a leitura de risco', href: '#leitura-risco' },
     },
   ],
 } as const

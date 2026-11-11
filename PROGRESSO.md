@@ -89,6 +89,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 7g | Seção 7 — ajustes 7: linha do tempo de níveis (`RiskTimeline`), substitui os cartões — prints em `./screenshots/leitura-risco-timeline/` | (ver git log) |
 | 7h | Seção 7 — ajustes 8: linha do Baixo ao Alto, uma cor só (`vinho-profundo`), ilustrações nos cartões — prints em `./screenshots/leitura-risco-timeline-4/` | (ver git log) |
 | 7i | Seção 7 — ajustes 9: setas animadas e linha que acompanha o scroll nos dois sentidos — prints em `./screenshots/leitura-risco-timeline-5/` | (ver git log) |
+| 5d/3i/4o | Ajustes de 11/11: Benefícios sem links e H2 todo preto; foto central de `#pessoas` sem encolher; cartão das Dores cresce ao entrar — prints em `./screenshots/ajustes-11-11/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -110,7 +111,7 @@ Pendências conhecidas: aviso "chunk > 500 kB" do pacote principal no build (Fas
 - **Grid responsivo (confirmado pelo cliente):** `--grid` = **1280px** até 1599px de tela (inclui 1440) e **1440px** a partir de 1600px (inclui 1920). Todo conteúdo e o cartão das Dores usam `max-w-(--grid)`. Padding interno do cartão das Dores: 96px a partir de 1600px.
 - **Cartão único das Dores** (padrão NextPay): fundo branco, um cartão com margem de 16px (12px no celular), raio 24px, degradê `#4B2A3F` → `#954B6E`, **foto do banner em cores naturais** dissolvendo por máscara; título "Pedir ajuda / não deveria ser um risco." em duas linhas inteiras (até 108px); lista em vidro claro com o celular sticky.
 - **Celular das Dores com ~300px** fixo, cortado pela base de um painel de no máximo 560px.
-- **Benefícios (confirmado pelo cliente):** etiqueta **branca** sempre aberta (tópico, texto e link → `#dor-rede`, `#dor-cofre`, `#leitura-risco`); hover só levanta a etiqueta (zoom leve da foto). A versão com etiqueta de vidro no padrão Gardance (`37f0740`) foi descartada.
+- **Benefícios (confirmado pelo cliente):** etiqueta **branca** sempre aberta (tópico e texto; os links saíram em 11/11); H2 todo preto (a 2ª linha deixou de ser vinho em 11/11); hover só levanta a etiqueta (zoom leve da foto). A versão com etiqueta de vidro no padrão Gardance (`37f0740`) foi descartada.
 - **Seção 7:** esfera de partículas 3D com anéis de luz e pílulas orbitando, anéis concêntricos do hero ao fundo, sem os princípios e sem a nota do protótipo; "Como o app se adapta" em linha do tempo de níveis (Baixo/Médio/Alto) com o scroll, do marco Baixo ao Alto, toda em `vinho-profundo`; cartões com as ilustrações `risco-baixo/medio/alto`, título e 1 linha (textos do cliente); sem seletor de nível, sem "Ver como chegamos nisso", sem legenda do FONAR (detalhes em "Seção 7 — estado").
 - **Navegação:** header e rodapé com Como funciona (`#como-funciona`), Leitura de risco (`#leitura-risco`), Como começar (`#comecar`), Dúvidas (`#faq`); rodapé + "Voltar ao topo". Pílula "SOS silencioso" do hero → `#como-funciona`.
 

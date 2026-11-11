@@ -473,3 +473,9 @@ Cada seção passa por: 1) mini-plano aqui (wireframe do §9, referência, o que
 - **Setas entre os marcos** (a 25% e 75% da linha): quando a linha passa por elas, enchem de `vinho-profundo` com ícone branco e um "pulo" (escala 0,7 → 1, `back.out`); ao voltar, apagam. Caixa interna separada para a animação (o GSAP zera o `translate` que centraliza a externa).
 - **A linha acompanha o scroll nos dois sentidos** (revoga o "não volta a apagar" dos ajustes 7): ao rolar para cima ela recua, e setas, marcos, medidores e cartões apagam na ordem inversa (cartão desce 24px, desfoca 6px, texto 0,4, ilustração 0,5, medidor esvazia, 0,5s). O Baixo apaga só no início do bloco.
 - `scripts/check-timeline.mjs` agora mede a linha (% preenchido), as setas e os marcos indo e voltando: estados idênticos na ida e na volta (ex.: 0,55 → linha 65%, setas 10, marcos 110), sem erros. Prints em `screenshots/leitura-risco-timeline-5/`.
+
+## Ajustes de 11/11/2026 — Benefícios, Manifesto e Dores (pedido do cliente)
+- **`#beneficios`:** saem os links rosa das etiquetas ("Conheça a rede de apoio", "Conheça o cofre de provas", "Conheça a leitura de risco"), também do `copy.ts`; a etiqueta fica só com tópico e texto. A 2ª linha do H2 ("Um amparo no seu dia a dia.") deixa de ser `vinho` e fica preta como a 1ª (`texto`).
+- **`#pessoas`:** a foto central perde o encolhimento da entrada (340px → 150px); fica no tamanho normal (150px), como as outras, e mantém a subida lenta com o scroll e a flutuação.
+- **`#como-funciona` (cartão das Dores):** ao entrar na tela, o cartão cresce até o tamanho atual com o scroll (`scale` 0,86 → 1 no desktop, 0,92 → 1 no celular, origem no topo, de `top bottom` a `top 15%`). Termina em escala 1, sem quebrar o celular sticky da lista (conferido). Movimento reduzido: sem animação.
+- Prints em `screenshots/ajustes-11-11/` (`dores-entrando/` mostra o cartão no meio do crescimento).
