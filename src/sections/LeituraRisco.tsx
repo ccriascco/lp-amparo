@@ -2,11 +2,8 @@ import clsx from 'clsx'
 import {
   Activity,
   ClipboardList,
-  Eye,
   FolderLock,
-  HeartHandshake,
   History,
-  LockKeyhole,
   MapPin,
   MessageSquareWarning,
   Phone,
@@ -34,7 +31,6 @@ const FONTE_ICONS: LucideIcon[] = [
   Tags,
   History,
 ]
-const PRINCIPIO_ICONS: LucideIcon[] = [HeartHandshake, Eye, LockKeyhole]
 /** Pílula do nível no topo de cada cartão — só tons de vinho (nunca semáforo). */
 const LEVEL_PILL = [
   'bg-superficie text-vinho',
@@ -237,12 +233,6 @@ export function LeituraRisco() {
       aria-labelledby="leitura-risco-title"
       className={clsx('relative overflow-x-clip bg-branco', SECTION_Y)}
     >
-      {/* Grade de pontos sutil que some nas bordas */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[1100px] bg-[radial-gradient(rgb(149_75_110/0.06)_1.5px,transparent_1.5px)] mask-[radial-gradient(ellipse_55%_50%_at_50%_50%,#000_30%,transparent_100%)] bg-size-[24px_24px]"
-      />
-
       <Container className="relative">
         {/* Cabeçalho */}
         <div className="mx-auto flex max-w-[680px] flex-col items-center text-center">
@@ -263,6 +253,13 @@ export function LeituraRisco() {
           data-lr-stage
           className="relative mx-auto mt-6 grid h-[440px] place-items-center lg:mt-2 lg:h-[620px]"
         >
+          {/* Anéis concêntricos atrás da esfera, iguais aos do hero, dissolvendo nas bordas */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute top-1/2 left-1/2 h-[1400px] w-[2400px] -translate-x-1/2 -translate-y-1/2 scale-[0.55] mask-[radial-gradient(ellipse_closest-side,#000_45%,transparent_100%)] lg:scale-100"
+          >
+            <StageRings />
+          </div>
           {/* Halo que pulsa atrás da esfera */}
           <div
             aria-hidden
@@ -344,29 +341,37 @@ export function LeituraRisco() {
           </ul>
         </div>
 
-        {/* Princípios */}
-        <ul data-appear-stagger className="mt-20 grid gap-8 sm:grid-cols-3 md:mt-24">
-          {L.principios.map((p, i) => {
-            const Icon = PRINCIPIO_ICONS[i]
-            return (
-              <li key={p.title} className="flex flex-col items-center text-center">
-                <span className="grid size-12 place-items-center rounded-full bg-superficie text-vinho">
-                  <Icon className="size-[22px]" strokeWidth={1.75} aria-hidden />
-                </span>
-                <p className="mt-4 font-display text-xl font-semibold text-texto">{p.title}</p>
-                <p className="mt-1.5 max-w-[30ch] text-[0.9375rem] text-pretty text-texto-secundario">
-                  {p.text}
-                </p>
-              </li>
-            )
-          })}
-        </ul>
-
-        <p className="mx-auto mt-14 max-w-[60ch] text-center caption font-normal text-texto-secundario">
+        <p className="mx-auto mt-12 max-w-[60ch] md:mt-16 text-center caption font-normal text-texto-secundario">
           {L.nota}
         </p>
       </Container>
     </section>
+  )
+}
+
+/** Anéis da esfera: mesmo desenho do hero (§6.19, 12 anéis a cada 90px), começando fora da esfera.
+ *  `data-rings` faz o `useSiteMotion` expandi-los devagar com o scroll. */
+function StageRings() {
+  const rings = Array.from({ length: 12 }, (_, i) => 300 + i * 90)
+  const max = rings[rings.length - 1]
+  return (
+    <svg
+      data-rings
+      aria-hidden
+      viewBox={`${-max - 2} ${-max - 2} ${max * 2 + 4} ${max * 2 + 4}`}
+      className="absolute top-1/2 left-1/2 size-[2804px] -translate-x-1/2 -translate-y-1/2"
+      fill="none"
+    >
+      {rings.map((r, i) => (
+        <circle
+          key={r}
+          r={r}
+          stroke={`rgb(149 75 110 / ${(0.18 - (i * 0.1) / 11).toFixed(3)})`}
+          strokeWidth={1}
+          vectorEffect="non-scaling-stroke"
+        />
+      ))}
+    </svg>
   )
 }
 

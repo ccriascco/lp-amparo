@@ -34,11 +34,12 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 - [x] 3 anéis de luz finos com "cometa" (TubeGeometry + shader de gradiente) e halo rosé/vinho pulsando atrás.
 - [x] 7 pílulas de vidro em duas órbitas (28s e 40s, sentidos opostos) com profundidade (atrás: scale 0.85, opacidade 0.35, blur 1px); 5 pílulas numa órbita no celular.
 - [x] 12 partículas soltas em órbitas lentas.
-- [x] Embaixo, só "Como o app se adapta ao seu risco" (3 cartões iguais, pílula do nível no topo, hover/foco sobe 4px + borda vinho), princípios e nota. **Sem** seletor Baixo/Médio/Alto, **sem** "Ver como chegamos nisso", **sem** legenda do FONAR, sem linha de luz e sem absorção no scroll.
+- [x] Embaixo, só "Como o app se adapta ao seu risco" (3 cartões iguais, pílula do nível no topo, hover/foco sobe 4px + borda vinho), nota (os princípios saíram em 11/11). **Sem** seletor Baixo/Médio/Alto, **sem** "Ver como chegamos nisso", **sem** legenda do FONAR, sem linha de luz e sem absorção no scroll.
 - [x] Desempenho: dpr ≤ 1.5, render pausado fora da tela, 3D em `React.lazy` carregado só perto da seção (não entra no carregamento inicial), CPU 4× com mediana de 60fps.
 - [x] Fallback sem WebGL / movimento reduzido: `public/images/ai-sphere.png` + pílulas paradas.
 - [x] Pílulas não se sobrepõem mais: a de trás esmaece ao cruzar a da frente (medido com `scripts/check-pills.mjs`; prints em `screenshots/leitura-risco-3/`).
-- [ ] Revisão do cliente (prints e GIF em `screenshots/leitura-risco-2/` e `leitura-risco-3/`).
+- [x] Anéis concêntricos iguais aos do hero atrás da esfera (no lugar da grade de pontos); sem os 3 princípios abaixo dos cartões (pedido do cliente, 11/11) — prints em `screenshots/leitura-risco-4/`.
+- [ ] Revisão do cliente.
 
 ## Itens concluídos
 | Item | O que é | Commit |
@@ -77,6 +78,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 5c | Benefícios de volta à versão anterior (etiqueta branca sempre aberta, hover só levanta) — revoga o item 5b | 9ef496e |
 | 7b | Seção 7 — ajustes 2: esfera da IA em partículas 3D (three + R3F, carregada só perto da tela), 7 pílulas em duas órbitas com profundidade, partículas soltas, cartões de adaptação sem seletor; removidos o cartão de resultado, a legenda do FONAR, a linha de luz e a absorção — prints e GIF em `./screenshots/leitura-risco-2/` | 9ef496e |
 | 7c | Seção 7 — ajustes 3: oclusão entre pílulas que se cruzam nas órbitas (sobreposição legível de ~55% dos quadros para ~0) — prints em `./screenshots/leitura-risco-3/` | (ver git log) |
+| 7d | Seção 7 — ajustes 4: anéis do hero atrás da esfera, sem os 3 princípios — prints em `./screenshots/leitura-risco-4/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -99,7 +101,7 @@ Pendências conhecidas: aviso "chunk > 500 kB" do pacote principal no build (Fas
 - **Cartão único das Dores** (padrão NextPay): fundo branco, um cartão com margem de 16px (12px no celular), raio 24px, degradê `#4B2A3F` → `#954B6E`, **foto do banner em cores naturais** dissolvendo por máscara; título "Pedir ajuda / não deveria ser um risco." em duas linhas inteiras (até 108px); lista em vidro claro com o celular sticky.
 - **Celular das Dores com ~300px** fixo, cortado pela base de um painel de no máximo 560px.
 - **Benefícios (confirmado pelo cliente):** etiqueta **branca** sempre aberta (tópico, texto e link → `#dor-rede`, `#dor-cofre`, `#leitura-risco`); hover só levanta a etiqueta (zoom leve da foto). A versão com etiqueta de vidro no padrão Gardance (`37f0740`) foi descartada.
-- **Seção 7:** esfera de partículas 3D com anéis de luz e pílulas orbitando; sem seletor de nível, sem "Ver como chegamos nisso", sem legenda do FONAR (detalhes em "Seção 7 — estado").
+- **Seção 7:** esfera de partículas 3D com anéis de luz e pílulas orbitando, anéis concêntricos do hero ao fundo, sem os princípios; sem seletor de nível, sem "Ver como chegamos nisso", sem legenda do FONAR (detalhes em "Seção 7 — estado").
 - **Navegação:** header e rodapé com Como funciona (`#como-funciona`), Leitura de risco (`#leitura-risco`), Como começar (`#comecar`), Dúvidas (`#faq`); rodapé + "Voltar ao topo". Pílula "SOS silencioso" do hero → `#como-funciona`.
 
 ### Decisões anteriores (histórico, na ordem em que foram tomadas)

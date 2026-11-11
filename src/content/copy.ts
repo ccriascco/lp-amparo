@@ -232,11 +232,6 @@ export const leituraRisco = {
     enviarAviso: 'Enviar aviso à minha rede',
     acoes: ['Ligar 180', 'Ligar 190', 'Delegacia mais próxima'],
   },
-  principios: [
-    { title: 'Apoia, não decide', text: 'A sugestão é sua para seguir ou ignorar.' },
-    { title: 'Transparente', text: 'Você sempre vê quais sinais levaram à leitura.' },
-    { title: 'Privada', text: 'A leitura fica só com você, no seu aparelho e na sua conta.' },
-  ],
   nota: 'Protótipo acadêmico: o modelo foi treinado com dados sintéticos. A validação com dados reais é a próxima etapa.',
 }
 
