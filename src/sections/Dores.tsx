@@ -58,6 +58,14 @@ const PHOTO_MASK: CSSProperties = {
 }
 
 /** Véu #4B2A3F 60% só atrás do título e do subtítulo, sem bordas. */
+/**
+ * Celular: a borda de cima da foto some no vinho do cartão (sem linha), e a foto se dissolve de novo
+ * logo acima do subtítulo, que começa em ~132px + título (~64px) + 24px + 30vw.
+ */
+const MOBILE_TEXT_BG: CSSProperties = {
+  background:
+    'linear-gradient(180deg, #4b2a3f 112px, rgb(75 42 63 / 0) 200px, rgb(75 42 63 / 0) calc(188px + 30vw), rgb(75 42 63 / 0.85) calc(214px + 30vw), #4b2a3f calc(236px + 30vw))',
+}
 const TEXT_SCRIM: CSSProperties = {
   background: [
     'radial-gradient(60% 38% at 55% 52%, rgb(75 42 63 / 0.6) 0%, rgb(75 42 63 / 0.3) 45%, transparent 75%)',
@@ -282,7 +290,7 @@ export function Dores() {
           <div
             data-banner-photo
             aria-hidden
-            className="relative h-[58svh] max-md:absolute max-md:inset-x-0 max-md:-top-12 max-md:h-[540px] lg:absolute lg:inset-0 lg:h-full"
+            className="relative h-[58svh] max-md:absolute max-md:inset-x-0 max-md:top-[112px] max-md:h-[calc(220px+30vw)] lg:absolute lg:inset-0 lg:h-full"
             style={PHOTO_MASK}
           >
             <Picture
@@ -294,6 +302,8 @@ export function Dores() {
           </div>
           {/* Só o necessário para o texto: véu suave atrás do título e do subtítulo */}
           <div aria-hidden className="pointer-events-none absolute inset-0" style={TEXT_SCRIM} />
+          {/* Celular: fundo vinho por trás do subtítulo e dos tópicos (contraste AA sobre a foto) */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 md:hidden" style={MOBILE_TEXT_BG} />
           {/* Celular: o chip fica no topo do cartão, sobre a foto (padrão NextPay mobile) */}
           <span
             data-banner-appear
@@ -313,7 +323,7 @@ export function Dores() {
             <div data-banner-title>
               <h2
                 id="dores-title"
-                className="flex flex-col font-display text-[clamp(2.75rem,7.4vw,6.75rem)] leading-[0.98] font-medium tracking-[-0.03em] max-md:text-[clamp(1.5rem,7.2vw,2.25rem)] lg:whitespace-nowrap"
+                className="flex flex-col font-display text-[clamp(2.75rem,7.4vw,6.75rem)] leading-[0.98] font-medium tracking-[-0.03em] max-md:text-[clamp(1.75rem,calc((100vw-40px)/11),2.6rem)] max-md:tracking-[-0.035em] lg:whitespace-nowrap"
               >
                 <span data-banner-line="1" className="text-borda">
                   {b.line1}
@@ -324,7 +334,8 @@ export function Dores() {
               </h2>
             </div>
 
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            {/* Celular: espaço para o rosto entre o título e o texto (~140px em 390px) */}
+            <div className="flex flex-col gap-5 max-md:mt-[30vw] lg:flex-row lg:items-end lg:justify-between">
               <p
                 data-banner-appear
                 className="lead text-pretty text-white/80"

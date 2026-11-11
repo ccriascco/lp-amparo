@@ -533,3 +533,9 @@ Referências: NextPay mobile (banner) e Gardance mobile (palco). Os sites não p
 - "não deveria ser um risco." em uma linha (`nowrap`), alinhada à direita; "Pedir ajuda" à esquerda. Título no celular `clamp(1.5rem, 7.2vw, 2.25rem)` nas duas linhas. Medido: 1 linha e 20px de respiro à direita em 360, 390 e 430px.
 - Foto: como é horizontal e preenche a altura, o `object-position` vertical não muda nada; o rosto foi posto acima do título subindo a camada (`-top-12`) e com `object-position: 70% 50%`: os olhos ficam entre o chip e "Pedir ajuda", sem texto por cima.
 - Prints em `screenshots/mobile-2/`.
+
+## Banner das Dores no celular — ajustes 3 (11/11/2026, pedido do cliente)
+- **Título no maior tamanho sem quebrar:** `clamp(1.75rem, calc((100vw - 40px) / 11), 2.6rem)` com `letter-spacing: -0.035em` no celular ("não deveria ser um risco." mede ~10,9em). Medido: 29 / 32 / 35px em 360 / 390 / 430, linha 2 em uma linha com 22px à esquerda e 20px à direita. Com a linha 2 ocupando a largura toda, o desencontro com a linha 1 fica pequeno (a linha 1 continua à esquerda, a 2 à direita). Posição igual (~71px abaixo do chip).
+- **Subtítulo e tópicos mais abaixo:** `margin-top: 30vw` no bloco (vão título → subtítulo de 132 / 141 / 153px). A foto passou a ser uma faixa atrás desse vão (começa a 112px, altura `220px + 30vw`), com o rosto inteiro (olhos, nariz e boca) entre o título e o texto.
+- **Degradê do celular** (`MOBILE_TEXT_BG`): a borda de cima da foto some no vinho (sem linha) e a foto se dissolve até `#4B2A3F` sólido logo acima do subtítulo. Fundo atrás do subtítulo e dos tópicos com luminância ≈ 0,035 → contraste ≈ 7,6:1 com `white/80` (AA ≥ 4,5:1).
+- Desktop sem mudança (classes só `max-md:` / camada `md:hidden`). Prints em `screenshots/mobile-3/`.

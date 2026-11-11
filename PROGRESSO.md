@@ -99,6 +99,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | M1 | Mobile (≤767px): banner das Dores de ponta a ponta (chip no topo, título dividido, pílulas em linhas) e Como começar com o palco em tela cheia só com fotos e barra compacta; scroll horizontal em 360px corrigido — prints em `./screenshots/mobile-1/` | (ver git log) |
 | M2 | Como começar no celular com as fotos verticais do cliente (9:16, `<picture>` com `media`, 480/720/941px), rosto no terço superior — prints em `./screenshots/comecar-mobile/` | (ver git log) |
 | M3 | Banner das Dores no celular: título a ~72px do chip, "não deveria ser um risco." em uma linha (20px de respiro), rosto acima do título — prints em `./screenshots/mobile-2/` | (ver git log) |
+| M4 | Banner das Dores no celular: título no maior tamanho sem quebrar (calc com vw), subtítulo e tópicos descidos ~140px com o rosto inteiro no vão, degradê com contraste AA — prints em `./screenshots/mobile-3/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
