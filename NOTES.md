@@ -527,3 +527,9 @@ Referências: NextPay mobile (banner) e Gardance mobile (palco). Os sites não p
 - Enquadramento no celular (`object-position` só até 767px, por variável CSS): passos 1, 3 e 4 `center 25%` (rosto no terço superior), passo 2 `center 45%` (mãos e celular no centro). Título, descrição e barra na base não cobrem rosto nem mãos; o escurecimento da base continua. Desktop volta ao enquadramento central padrão das fotos horizontais.
 - Os blocos de movimento reduzido também usam as fotos verticais com o mesmo enquadramento.
 - Conferido em 360/390/430 sem scroll horizontal; desktop sem mudança (`check-comecar.mjs`). Prints em `screenshots/comecar-mobile/`.
+
+## Banner das Dores no celular — ajustes 2 (11/11/2026, pedido do cliente)
+- Título mais perto do chip (padrão NextPay mobile): no celular a foto vira camada de fundo (absoluta, 540px, 48px acima do topo do cartão) e o conteúdo começa a 132px do topo — título a ~71px abaixo do chip; subtítulo e pílulas logo abaixo, como antes. O site da NextPay não pôde ser aberto num navegador interativo neste ambiente.
+- "não deveria ser um risco." em uma linha (`nowrap`), alinhada à direita; "Pedir ajuda" à esquerda. Título no celular `clamp(1.5rem, 7.2vw, 2.25rem)` nas duas linhas. Medido: 1 linha e 20px de respiro à direita em 360, 390 e 430px.
+- Foto: como é horizontal e preenche a altura, o `object-position` vertical não muda nada; o rosto foi posto acima do título subindo a camada (`-top-12`) e com `object-position: 70% 50%`: os olhos ficam entre o chip e "Pedir ajuda", sem texto por cima.
+- Prints em `screenshots/mobile-2/`.

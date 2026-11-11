@@ -282,14 +282,14 @@ export function Dores() {
           <div
             data-banner-photo
             aria-hidden
-            className="relative h-[58svh] max-md:h-[54svh] lg:absolute lg:inset-0 lg:h-full"
+            className="relative h-[58svh] max-md:absolute max-md:inset-x-0 max-md:-top-12 max-md:h-[540px] lg:absolute lg:inset-0 lg:h-full"
             style={PHOTO_MASK}
           >
             <Picture
               slot="dores-banner"
               sizes="100vw"
               position="66% 35%"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover max-md:object-[70%_50%]"
             />
           </div>
           {/* Só o necessário para o texto: véu suave atrás do título e do subtítulo */}
@@ -302,7 +302,7 @@ export function Dores() {
             {b.chip}
           </span>
 
-          <div className="relative z-10 mx-auto -mt-28 flex flex-col gap-10 px-5 pb-4 max-md:-mt-24 max-md:gap-6 md:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:px-12 lg:pt-28 lg:pb-14 min-[100rem]:px-24">
+          <div className="relative z-10 mx-auto -mt-28 flex flex-col gap-10 px-5 pb-4 max-md:mt-0 max-md:gap-6 max-md:pt-[132px] md:px-8 lg:mt-0 lg:h-full lg:justify-between lg:gap-0 lg:px-12 lg:pt-28 lg:pb-14 min-[100rem]:px-24">
             <span
               data-banner-appear
               className="inline-flex w-max items-center rounded-full px-4 py-2 caption text-white glass max-md:hidden"
@@ -313,12 +313,12 @@ export function Dores() {
             <div data-banner-title>
               <h2
                 id="dores-title"
-                className="flex flex-col font-display text-[clamp(2.75rem,7.4vw,6.75rem)] leading-[0.98] font-medium tracking-[-0.03em] max-md:text-[clamp(2rem,9vw,2.75rem)] lg:whitespace-nowrap"
+                className="flex flex-col font-display text-[clamp(2.75rem,7.4vw,6.75rem)] leading-[0.98] font-medium tracking-[-0.03em] max-md:text-[clamp(1.5rem,7.2vw,2.25rem)] lg:whitespace-nowrap"
               >
                 <span data-banner-line="1" className="text-borda">
                   {b.line1}
                 </span>
-                <span data-banner-line="2" className="text-white max-md:max-w-[12ch] max-md:self-end max-md:text-right max-md:text-balance lg:self-end lg:text-right">
+                <span data-banner-line="2" className="text-white max-md:self-end max-md:text-right max-md:whitespace-nowrap lg:self-end lg:text-right">
                   {b.line2}
                 </span>
               </h2>
