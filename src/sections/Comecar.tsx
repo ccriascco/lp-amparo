@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react'
 import { Smartphone } from 'lucide-react'
-import { useRef } from 'react'
+import { useRef, type CSSProperties } from 'react'
 import { Button } from '../components/ui/Button'
 import { Chip } from '../components/ui/Chip'
 import { cardLoop, PHONE_STACK, PHONE_STAGE, StepCard } from '../components/ui/ComecarCards'
@@ -22,8 +22,9 @@ const PHOTOS_MOBILE: ImageSlot[] = [
 /** Palco fixo em tela cheia em todas as larguras com movimento; com movimento reduzido, blocos. */
 const STAGE_BIG = '(min-width: 768px) and (prefers-reduced-motion: no-preference)'
 const STAGE_PHONE = '(max-width: 767.98px) and (prefers-reduced-motion: no-preference)'
-/** Enquadramento das fotos 16:9 em tela vertical (celular): rosto inteiro na tela. */
-const PHOTO_POS = ['52% 50%', '40% 50%', '47% 50%', '47% 50%']
+/** Celular (≤767px): fotos verticais 9:16 próprias; rosto no terço superior (passos 1, 3, 4) e as
+ *  mãos com o celular no centro (passo 2), acima do texto da base. */
+const PHOTO_POS_MOBILE = ['center 25%', 'center 45%', 'center 25%', 'center 25%']
 
 /** Escurecimento da base e da esquerda, transparente no centro e no topo (várias paradas, sem emenda). */
 const SHADE_BOTTOM =
@@ -199,15 +200,15 @@ export function Comecar() {
                 data-cm-photo
                 aria-hidden
                 className="absolute inset-0"
-                style={{ opacity: i === 0 ? 1 : 0 }}
+                style={{ opacity: i === 0 ? 1 : 0, '--pm': PHOTO_POS_MOBILE[i] } as CSSProperties}
               >
                 <Picture
                   slot={slot}
+                  mobileSlot={PHOTOS_MOBILE[i]}
                   // Foto 16:9 em object-cover: em telas mais altas que 16:9 ela ocupa a altura toda,
                   // então a largura exibida é ~1,78 × a altura da tela (não 100vw).
                   sizes="(max-aspect-ratio: 16/9) 178svh, 100vw"
-                  position={PHOTO_POS[i]}
-                  className="size-full object-cover"
+                  className="size-full object-cover max-md:object-[var(--pm)]"
                 />
               </div>
             ))}
@@ -297,7 +298,8 @@ export function Comecar() {
               <div className="relative mt-3 aspect-[4/5] overflow-hidden rounded-card-lg bg-vinho-profundo max-md:-mx-5 max-md:aspect-auto max-md:h-svh max-md:rounded-none">
                 <Picture
                   slot={PHOTOS_MOBILE[i]}
-                  sizes="(min-width: 768px) 45vw, 92vw"
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                  position={PHOTO_POS_MOBILE[i]}
                   className="absolute inset-0 size-full object-cover"
                 />
                 <div aria-hidden className="absolute inset-0" style={{ background: SHADE_BOTTOM }} />

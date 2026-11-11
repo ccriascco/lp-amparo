@@ -212,35 +212,39 @@
     ]
   },
   "comecar-1-mobile": {
-    "width": 753,
-    "height": 941,
+    "width": 941,
+    "height": 1672,
     "widths": [
-      640,
-      753
+      480,
+      720,
+      941
     ]
   },
   "comecar-2-mobile": {
-    "width": 753,
-    "height": 941,
+    "width": 941,
+    "height": 1672,
     "widths": [
-      640,
-      753
+      480,
+      720,
+      941
     ]
   },
   "comecar-3-mobile": {
-    "width": 753,
-    "height": 941,
+    "width": 941,
+    "height": 1672,
     "widths": [
-      640,
-      753
+      480,
+      720,
+      941
     ]
   },
   "comecar-4-mobile": {
-    "width": 753,
-    "height": 941,
+    "width": 941,
+    "height": 1672,
     "widths": [
-      640,
-      753
+      480,
+      720,
+      941
     ]
   },
   "boas-vindas-foto": {

@@ -97,6 +97,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 8c | Header some enquanto o palco de #comecar está em tela cheia e volta ao sair | (ver git log) |
 | 8d | Foto nova no passo 4 (mulher saindo de casa); cabeçalho de #comecar mais largo — prints em `./screenshots/comecar-3/` | (ver git log) |
 | M1 | Mobile (≤767px): banner das Dores de ponta a ponta (chip no topo, título dividido, pílulas em linhas) e Como começar com o palco em tela cheia só com fotos e barra compacta; scroll horizontal em 360px corrigido — prints em `./screenshots/mobile-1/` | (ver git log) |
+| M2 | Como começar no celular com as fotos verticais do cliente (9:16, `<picture>` com `media`, 480/720/941px), rosto no terço superior — prints em `./screenshots/comecar-mobile/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 
@@ -241,7 +242,7 @@ Pendências conhecidas: aviso "chunk > 500 kB" do pacote principal no build (Fas
 ## Fotos
 Originais em `assets/fotos/` e arquivos gerados em `public/images/` (`npm run images` → `<slot>-<largura>.avif|webp` + `.jpg`). **Tudo versionado no git.**
 
-**Definitivas, em uso:** `comecar-1` a `comecar-4` (+ `-mobile`, palco de #comecar; a antiga foto do passo 4 ficou em `assets/fotos/comecar-4-alt-caminhando.png`, sem uso), `boas-vindas-foto` (tela codada do passo 1), `risco-baixo`, `risco-medio`, `risco-alto` (ilustrações da linha do tempo, #leitura-risco), `numeros` (#contexto), `contexto` (centro do Manifesto), `pessoas-janela`, `rede-duas-mulheres`, `direitos-1` a `direitos-4` (Manifesto), `beneficio-tranquilidade`, `beneficio-controle`, `beneficio-confianca` (Benefícios), `dores-banner` (Dores), `ai-sphere.png` (fallback da esfera, gerado do próprio canvas).
+**Definitivas, em uso:** `comecar-1` a `comecar-4` (palco de #comecar a partir de 768px) e `comecar-1-mobile` a `comecar-4-mobile` (fotos verticais 9:16 do cliente, até 767px; a antiga foto do passo 4 ficou em `assets/fotos/comecar-4-alt-caminhando.png`, sem uso), `boas-vindas-foto` (tela codada do passo 1), `risco-baixo`, `risco-medio`, `risco-alto` (ilustrações da linha do tempo, #leitura-risco), `numeros` (#contexto), `contexto` (centro do Manifesto), `pessoas-janela`, `rede-duas-mulheres`, `direitos-1` a `direitos-4` (Manifesto), `beneficio-tranquilidade`, `beneficio-controle`, `beneficio-confianca` (Benefícios), `dores-banner` (Dores), `ai-sphere.png` (fallback da esfera, gerado do próprio canvas).
 
 **Provisórias, em uso** (alternativas de `assets/fotos/` até chegarem as definitivas): `sos-mobile` (espelhada), `risco` e `pessoas-rua` (era `comecar-2`) — as três no Manifesto.
 

@@ -31,7 +31,14 @@ const OVERLAY = {
   none: 'tinted--none',
 }
 
-/** `<picture>` AVIF/WebP com `srcset` a partir de `public/images/` (gerado por `npm run images`). */
+/** Até 767px o `<picture>` pode trocar de arquivo (direção de arte: ex. foto vertical no celular). */
+const MOBILE_MEDIA = '(max-width: 767px)'
+
+/**
+ * `<picture>` AVIF/WebP com `srcset` a partir de `public/images/` (gerado por `npm run images`).
+ * Com `mobileSlot`, o navegador baixa só a imagem certa: a de `mobileSlot` até 767px, a de `slot`
+ * a partir de 768px.
+ */
 export function Picture({
   slot,
   alt = '',
@@ -39,14 +46,35 @@ export function Picture({
   priority,
   className,
   position,
-}: Pick<TintedPhotoProps, 'slot' | 'alt' | 'sizes' | 'priority' | 'className' | 'position'>) {
+  mobileSlot,
+  mobileSizes = '100vw',
+}: Pick<TintedPhotoProps, 'slot' | 'alt' | 'sizes' | 'priority' | 'className' | 'position'> & {
+  mobileSlot?: ImageSlot
+  mobileSizes?: string
+}) {
   const meta = images[slot]
-  const set = (ext: string) =>
-    meta.widths.map((w) => `/images/${slot}-${w}.${ext} ${w}w`).join(', ')
+  const set = (s: ImageSlot, ext: string) =>
+    images[s].widths.map((w) => `/images/${s}-${w}.${ext} ${w}w`).join(', ')
   return (
     <picture>
-      <source type="image/avif" srcSet={set('avif')} sizes={sizes} />
-      <source type="image/webp" srcSet={set('webp')} sizes={sizes} />
+      {mobileSlot && (
+        <>
+          <source
+            media={MOBILE_MEDIA}
+            type="image/avif"
+            srcSet={set(mobileSlot, 'avif')}
+            sizes={mobileSizes}
+          />
+          <source
+            media={MOBILE_MEDIA}
+            type="image/webp"
+            srcSet={set(mobileSlot, 'webp')}
+            sizes={mobileSizes}
+          />
+        </>
+      )}
+      <source type="image/avif" srcSet={set(slot, 'avif')} sizes={sizes} />
+      <source type="image/webp" srcSet={set(slot, 'webp')} sizes={sizes} />
       <img
         src={`/images/${slot}.jpg`}
         alt={alt}

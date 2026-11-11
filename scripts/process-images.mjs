@@ -109,15 +109,16 @@ const SLOTS = [
     file: 'mulher-rua-sorrindo-celular.png',
     crop: { left: 0, top: 120, width: 1024, height: 576 },
   },
-  // Seção 8 (#comecar): fotos do palco (1672×941, inteiras em 16:9) + recortes 4:5 do celular
+  // Seção 8 (#comecar): fotos do palco (1672×941, inteiras em 16:9) e as versões verticais do
+  // celular (9:16, 941×1672, enviadas pelo cliente; usadas até 767px), em 480/720/941px
   { slot: 'comecar-1', file: 'comecar-1.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
   { slot: 'comecar-2', file: 'comecar-2.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
   { slot: 'comecar-3', file: 'comecar-3.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
   { slot: 'comecar-4', file: 'comecar-4.png', crop: { left: 0, top: 0, width: 1672, height: 941 } },
-  { slot: 'comecar-1-mobile', file: 'comecar-1.png', crop: { left: 476, top: 0, width: 753, height: 941 } },
-  { slot: 'comecar-2-mobile', file: 'comecar-2.png', crop: { left: 340, top: 0, width: 753, height: 941 } },
-  { slot: 'comecar-3-mobile', file: 'comecar-3.png', crop: { left: 460, top: 0, width: 753, height: 941 } },
-  { slot: 'comecar-4-mobile', file: 'comecar-4.png', crop: { left: 418, top: 0, width: 753, height: 941 } },
+  { slot: 'comecar-1-mobile', file: 'comecar-1-mobile.png', crop: { left: 0, top: 0, width: 941, height: 1672 }, widths: [480, 720, 941] },
+  { slot: 'comecar-2-mobile', file: 'comecar-2-mobile.png', crop: { left: 0, top: 0, width: 941, height: 1672 }, widths: [480, 720, 941] },
+  { slot: 'comecar-3-mobile', file: 'comecar-3-mobile.png', crop: { left: 0, top: 0, width: 941, height: 1672 }, widths: [480, 720, 941] },
+  { slot: 'comecar-4-mobile', file: 'comecar-4-mobile.png', crop: { left: 0, top: 0, width: 941, height: 1672 }, widths: [480, 720, 941] },
   // Foto da tela de boas-vindas do app (para a tela codada no passo 1), sem os cantos arredondados
   {
     slot: 'boas-vindas-foto',
@@ -192,10 +193,10 @@ async function photos() {
       })),
     )),
   ]
-  for (const { slot, input, crop, flip, placeholder } of jobs) {
+  for (const { slot, input, crop, flip, placeholder, widths: fixed } of jobs) {
     let base = sharp(input).extract(crop)
     if (flip) base = base.flop()
-    const widths = [...WIDTHS.filter((w) => w < crop.width), crop.width].filter(
+    const widths = fixed ?? [...WIDTHS.filter((w) => w < crop.width), crop.width].filter(
       (w, i, a) => a.indexOf(w) === i && w <= 2200,
     )
     manifest[slot] = {

@@ -519,3 +519,11 @@ Referências: NextPay mobile (banner) e Gardance mobile (palco). Os sites não p
   - Movimento reduzido no celular: 4 passos empilhados em tela cheia (foto 4:5 em 100svh, texto por cima), sem cartões.
   - **Scroll horizontal em 360px corrigido:** vinha da lista empilhada antiga do Como começar (cartões de 340px), que no celular saiu. `scrollWidth` = largura da tela em 360, 390 e 430.
 - Prints em `screenshots/mobile-1/` (banner 360/390/430, `chip/`, os 4 passos em 390, passo 2 em 360 e 430, `reduzido/`).
+
+## Como começar — fotos verticais no celular (11/11/2026, pedido do cliente)
+- O cliente enviou 4 fotos verticais 9:16 (941×1672) para o celular. Estavam em `assets/fotos/` (não em `public/images/`, como dizia o pedido), já com os nomes `comecar-1-mobile.png` … `comecar-4-mobile.png` — os PNGs originais (~2 MB cada) ficam fora do bundle, como as outras fotos-fonte.
+- `process-images.mjs`: os slots `comecar-N-mobile` passam a usar essas fotos inteiras (antes eram recortes 4:5 das horizontais), com larguras próprias 480/720/941 (opção nova `widths` por slot). AVIF (qualidade 55, equivalente visual a ~80) e WebP (78): 15–62 KB em AVIF, 20–83 KB em WebP. Os recortes 4:5 antigos foram apagados.
+- `Picture` ganhou `mobileSlot`: `<source media="(max-width: 767px)">` (AVIF e WebP) antes das fontes normais, então o navegador baixa só a imagem da tela. Conferido pela rede: em 390px só `comecar-N-mobile-*.avif`; em 1440px só `comecar-N-1672.avif`.
+- Enquadramento no celular (`object-position` só até 767px, por variável CSS): passos 1, 3 e 4 `center 25%` (rosto no terço superior), passo 2 `center 45%` (mãos e celular no centro). Título, descrição e barra na base não cobrem rosto nem mãos; o escurecimento da base continua. Desktop volta ao enquadramento central padrão das fotos horizontais.
+- Os blocos de movimento reduzido também usam as fotos verticais com o mesmo enquadramento.
+- Conferido em 360/390/430 sem scroll horizontal; desktop sem mudança (`check-comecar.mjs`). Prints em `screenshots/comecar-mobile/`.
