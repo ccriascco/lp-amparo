@@ -71,7 +71,11 @@ export function Header() {
   const pill = compact || open
 
   return (
-    <header data-header className="fixed inset-x-0 top-3 z-50 px-3 md:top-4 md:px-4">
+    <header
+      data-header
+      className="fixed inset-x-0 top-3 z-50 px-3 transition-[translate,opacity] duration-500 ease-amparo md:top-4 md:px-4 motion-reduce:transition-none [[data-hide-header]_&]:pointer-events-none [[data-hide-header]_&]:-translate-y-[140%] [[data-hide-header]_&]:opacity-0 [[data-hide-header]_&]:focus-within:pointer-events-auto [[data-hide-header]_&]:focus-within:translate-y-0 [[data-hide-header]_&]:focus-within:opacity-100"
+    >
+      {/* Some enquanto o palco de #comecar está em tela cheia (<html data-hide-header>); volta com o foco. */}
       <div
         data-header-pill
         className={clsx(

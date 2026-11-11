@@ -133,7 +133,17 @@ export function Comecar() {
           },
         })
 
+        // Header some enquanto o palco ocupa a tela inteira e volta ao sair (pedido do cliente).
+        const html = document.documentElement
+        ScrollTrigger.create({
+          trigger: track.current,
+          start: 'top top',
+          end: 'bottom bottom',
+          onToggle: (self) => html.toggleAttribute('data-hide-header', self.isActive),
+        })
+
         return () => {
+          html.removeAttribute('data-hide-header')
           cards.forEach((c) => (c.inert = false))
           labels.forEach((l) => l.removeAttribute('data-active'))
         }
