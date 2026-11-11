@@ -90,6 +90,7 @@ O último pedido do cliente para a seção 7 está **todo implementado** (commit
 | 7h | Seção 7 — ajustes 8: linha do Baixo ao Alto, uma cor só (`vinho-profundo`), ilustrações nos cartões — prints em `./screenshots/leitura-risco-timeline-4/` | (ver git log) |
 | 7i | Seção 7 — ajustes 9: setas animadas e linha que acompanha o scroll nos dois sentidos — prints em `./screenshots/leitura-risco-timeline-5/` | (ver git log) |
 | 5d/3i/4o | Ajustes de 11/11: Benefícios sem links e H2 todo preto; foto central de `#pessoas` sem encolher; cartão das Dores cresce ao entrar — prints em `./screenshots/ajustes-11-11/` | (ver git log) |
+| 4p | Cartão das Dores: entrada por `clip-path` (não escala) — sem faixas brancas nem engasgos ao voltar o scroll; `scripts/check-scroll-perf.mjs` — prints em `./screenshots/dores-entrada-clip/` | (ver git log) |
 
 Rodada 1 (base técnica reaproveitada): `acf5a91` (ambiente), `8d07a22` (fundações), `005fa86` (seções), `b3abcac` (movimento).
 

@@ -96,16 +96,21 @@ export function Dores() {
         const banner = q('[data-banner]')[0]
         const leave = { trigger: banner, start: 'top top', end: 'bottom top', scrub: true }
         // Entrada do cartão (pedido do cliente, 11/11): cresce até o tamanho final enquanto entra
-        // na tela, acompanhando o scroll. Escala termina em 1 (identidade), sem afetar o sticky.
+        // na tela, acompanhando o scroll. Feito por recorte (clip-path) e não por escala: o cartão
+        // tem várias telas de altura (banner + lista com o celular sticky) e escalá-lo obrigava o
+        // navegador a redesenhar uma camada gigante a cada quadro (faixas brancas e engasgos ao
+        // voltar o scroll). O recorte só muda a área visível; o conteúdo não é redesenhado.
         const card = q('[data-dores-card]')[0]
+        // % de cada lateral escondido no início: menor que o padding interno do cartão (48px no
+        // desktop, 20px no celular), para o recorte nunca cortar texto nem o chip do banner.
+        const side = desktop ? 3.5 : 4
         gsap.fromTo(
           card,
-          { scale: desktop ? 0.86 : 0.92 },
+          { clipPath: `inset(0% ${side}% 0% ${side}% round 48px)` },
           {
-            scale: 1,
+            clipPath: 'inset(0% 0% 0% 0% round 24px)',
             ease: 'none',
-            transformOrigin: '50% 0%',
-            scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 15%', scrub: true },
+            scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 20%', scrub: true },
           },
         )
         // Enquanto o banner sai: a foto sobe mais devagar que o texto e escurece, dissolvendo no
