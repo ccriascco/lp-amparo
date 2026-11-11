@@ -424,7 +424,8 @@ export function HomeRiscoScreen() {
 export function DireitosScreen() {
   const t = app.direitosTela
   const icons = [Scale, FileCheck2, Radar]
-  const tops = [213, 402, 613]
+  // Topos relativos à lista (que começa logo abaixo do cabeçalho de 190px; antes: 213/402/613).
+  const tops = [23, 212, 423]
   const heights = [176, 198, 200]
   return (
     <Screen>
@@ -432,6 +433,9 @@ export function DireitosScreen() {
         <p className="text-[22.5px] leading-tight font-bold">{t.title}</p>
         <p className="mt-[8px] text-[13px] leading-[1.45] text-white/85">{t.subtitle}</p>
       </PhotoHeader>
+      {/* Lista recortada abaixo do cabeçalho: `data-dr-list` permite rolar só ela (#direitos). */}
+      <div className="absolute inset-x-0 top-[190px] bottom-0 overflow-hidden">
+        <div data-dr-list className="absolute inset-0">
       {t.cards.map((c, i) => {
         const Icon = icons[i]
         return (
@@ -452,6 +456,8 @@ export function DireitosScreen() {
           </div>
         )
       })}
+        </div>
+      </div>
       {/* O 3º cartão some sob a barra, como no app */}
       <div className="absolute inset-x-0 bottom-0 h-[150px] bg-gradient-to-t from-white via-white/90 to-transparent" />
       <AppNav />

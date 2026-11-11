@@ -173,7 +173,7 @@ lang: pt-BR
 - **Medida protetiva sem boletim** · Desde 2023 (Lei 14.550), a medida protetiva pode ser concedida sem boletim de ocorrência, inquérito ou processo.
 - **Monitoramento do agressor** · Desde 2026 (Lei 15.383), o monitoramento eletrônico do agressor é uma medida protetiva própria.
 - **Pedido sem advogado e sem custo** · Você pode pedir a medida protetiva na delegacia, sem precisar de advogado e sem pagar nada. · Delegacia → Pedido → Proteção
-- **Ligue 180** · Gratuito, sigiloso e 24 horas, para orientação sobre seus direitos. · botão **Ligar 180** (tel:180)
+- Microtextos das ilustrações: forma de violência · Pedido de medida protetiva (Pedido enviado → Em análise → Concedida) · Boletim de ocorrência · Não exigido · Sinais de alerta · Nível de atenção · Você · Alerta de aproximação · agora · Custo · R$ 0,00 · Advogado · Não precisa · Linguagem simples · 12 temas
 - Nota pequena: Conteúdo informativo, não substitui orientação jurídica. Em caso de dúvida, procure a Defensoria Pública.
 - Dores, item 5: link **Conheça seus direitos** → `#direitos`.
 

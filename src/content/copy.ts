@@ -263,10 +263,22 @@ export const direitos = {
     text: 'Você pode pedir a medida protetiva na delegacia, sem precisar de advogado e sem pagar nada.',
     passos: ['Delegacia', 'Pedido', 'Proteção'],
   },
-  ligue: {
-    title: 'Ligue 180',
-    text: 'Gratuito, sigiloso e 24 horas, para orientação sobre seus direitos.',
-    botao: 'Ligar 180',
+  /** Microtextos das ilustrações (pedido do cliente, ajustes do bento; decorativos). */
+  art: {
+    formaLegenda: 'forma de violência',
+    pedidoTitulo: 'Pedido de medida protetiva',
+    etapas: ['Pedido enviado', 'Em análise', 'Concedida'],
+    boletim: 'Boletim de ocorrência',
+    naoExigido: 'Não exigido',
+    sinaisTitulo: 'Sinais de alerta',
+    atencao: 'Nível de atenção',
+    voce: 'Você',
+    alerta: 'Alerta de aproximação',
+    agora: 'agora',
+    custo: 'Custo',
+    advogado: 'Advogado',
+    naoPrecisa: 'Não precisa',
+    badge: 'Linguagem simples · 12 temas',
   },
   nota: 'Conteúdo informativo, não substitui orientação jurídica. Em caso de dúvida, procure a Defensoria Pública.',
   /** alt do celular (tela codada, descrita como imagem) */

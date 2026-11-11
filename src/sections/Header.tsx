@@ -60,7 +60,8 @@ export function Header() {
         start: 'top 48px',
         end: 'bottom 48px',
         onToggle: (self) => {
-          if (self.isActive) active.add(el)
+          // Elemento escondido (ex.: palco de #comecar com movimento reduzido) não conta.
+          if (self.isActive && el.getClientRects().length > 0) active.add(el)
           else active.delete(el)
           setOverDark(active.size > 0)
         },
