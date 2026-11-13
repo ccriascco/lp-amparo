@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { Calculator, Check } from 'lucide-react'
 import { comecar, cta } from '../../content/copy'
-import { APP_URL } from '../../lib/config'
 import { gsap } from '../../lib/gsap'
 import { PhoneFrame } from './PhoneFrame'
 import { Picture } from './TintedPhoto'
@@ -179,10 +178,8 @@ function ProntoCard() {
       <div aria-hidden className="mt-5 h-1.5 overflow-hidden rounded-full bg-superficie">
         <span data-cm-bar className="block h-full origin-left rounded-full bg-vinho" />
       </div>
-      <a
-        href={APP_URL}
-        target="_blank"
-        rel="noopener"
+      <button
+        type="button"
         className="relative mt-5 flex h-12 items-center justify-center overflow-hidden rounded-full bg-vinho font-bold text-white transition-[background-color,scale] duration-200 hover:bg-vinho-profundo active:scale-[0.97]"
       >
         <span
@@ -191,7 +188,7 @@ function ProntoCard() {
           className="absolute inset-y-0 left-0 w-1/3 -translate-x-full bg-linear-to-r from-transparent via-white/35 to-transparent"
         />
         <span className="relative">{cta.acessar}</span>
-      </a>
+      </button>
     </div>
   )
 }

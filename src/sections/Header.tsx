@@ -7,7 +7,6 @@ import logoBranco from '../assets/brand/amparo-logo-horizontal-branco-recortado.
 import logoVinho from '../assets/brand/amparo-logo-horizontal-vinho-recortado.png'
 import { Button } from '../components/ui/Button'
 import { cta, nav } from '../content/copy'
-import { APP_URL } from '../lib/config'
 import { getLenis, gsap, ScrollTrigger } from '../lib/gsap'
 
 /**
@@ -151,22 +150,17 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-1">
-          <a
-            href={APP_URL}
-            target="_blank"
-            rel="noopener"
+          <button
+            type="button"
             className={clsx(
               'hidden h-11 items-center rounded-full px-3.5 text-[0.9375rem] font-bold transition-colors duration-250 sm:inline-flex',
               dark ? 'text-white hover:bg-white/10' : 'text-vinho hover:bg-superficie',
             )}
           >
             {nav.entrar}
-          </a>
+          </button>
           <div className="hidden sm:block">
             <Button
-              href={APP_URL}
-              target="_blank"
-              rel="noopener"
               size="sm"
               variant={dark ? 'on-dark' : 'primary'}
               className="hover:scale-[1.03]"
@@ -214,23 +208,18 @@ export function Header() {
           </ul>
         </nav>
         <Button
-          href={APP_URL}
-          target="_blank"
-          rel="noopener"
           variant="on-dark"
           block
           className="mt-8"
         >
           {cta.acessar}
         </Button>
-        <a
-          href={APP_URL}
-          target="_blank"
-          rel="noopener"
-          className="mt-3 flex min-h-12 items-center justify-center font-bold text-white/85"
+        <button
+          type="button"
+          className="mt-3 flex min-h-12 w-full items-center justify-center font-bold text-white/85"
         >
           {nav.entrar}
-        </a>
+        </button>
       </div>
     </header>
   )

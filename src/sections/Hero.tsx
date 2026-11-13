@@ -22,7 +22,6 @@ import { NotificationCard } from '../components/ui/NotificationCard'
 import { PhoneFrame } from '../components/ui/PhoneFrame'
 import { Container } from '../components/ui/Section'
 import { a11y, cta, hero, ui } from '../content/copy'
-import { APP_URL } from '../lib/config'
 import { useHeroMotion } from '../motion/useHeroMotion'
 
 /** Pilha de notificações (a mais nova em cima). Estado final; a timeline faz elas chegarem. */
@@ -70,7 +69,7 @@ export function Hero() {
               {hero.sub}
             </p>
             <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-              <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
+              <Button icon={<Smartphone />}>
                 {cta.acessar}
               </Button>
               <Button variant="secondary" href={hero.ctaSecondary.href} icon={<ArrowDown />}>

@@ -3,7 +3,6 @@ import { Check } from 'lucide-react'
 import { useRef } from 'react'
 import { Picture } from '../components/ui/TintedPhoto'
 import { cta, ctaFinal as C } from '../content/copy'
-import { APP_URL } from '../lib/config'
 import { gsap } from '../lib/gsap'
 import { Footer } from './Footer'
 
@@ -112,15 +111,13 @@ export function CtaFinal() {
             {C.text}
           </p>
           <div data-appear className="mt-8 w-full max-w-[420px] md:w-auto md:max-w-none">
-            <a
+            <button
+              type="button"
               data-cta-magnet
-              href={APP_URL}
-              target="_blank"
-              rel="noopener"
               className="inline-flex min-h-14 w-full items-center justify-center rounded-full bg-white px-9 text-[1.0625rem] font-bold text-vinho shadow-float transition-[background-color,scale] duration-200 hover:bg-superficie focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white active:scale-[0.97] md:w-auto"
             >
               {cta.acessar}
-            </a>
+            </button>
           </div>
           <ul data-appear className="mt-5 flex max-w-[320px] flex-wrap justify-center gap-x-5 gap-y-2 text-sm font-semibold text-white md:max-w-none">
             {C.itens.map((t) => (

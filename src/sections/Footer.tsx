@@ -3,18 +3,17 @@ import { EyeOff, Heart, Sparkles, type LucideIcon } from 'lucide-react'
 import { useRef } from 'react'
 import logoBranco from '../assets/brand/amparo-logo-horizontal-branco-recortado.png'
 import { cta, footer as F, nav } from '../content/copy'
-import { APP_URL } from '../lib/config'
 import { gsap, ScrollTrigger } from '../lib/gsap'
 
 const PILL_ICONS: LucideIcon[] = [EyeOff, Sparkles, Heart]
 
-type FooterLink = { label: string; href: string; external?: boolean }
+type FooterLink = { label: string; href?: string }
 
 const COLUMNS: { title: string; links: FooterLink[] }[] = [
   { title: F.colunas.navegacao, links: [...nav.links, { label: F.voltarTopo, href: '#inicio' }] },
   { title: F.colunas.direitos, links: F.linksDireitos },
   // "Privacidade" só quando a página existir (ainda não existe); sem redes sociais.
-  { title: F.colunas.projeto, links: [{ label: cta.acessar, href: APP_URL, external: true }] },
+  { title: F.colunas.projeto, links: [{ label: cta.acessar }] },
 ]
 
 /**
@@ -101,11 +100,12 @@ export function Footer() {
             <div key={c.title} className={i === 2 ? 'max-sm:col-span-2' : ''}>
               <p className="text-xs font-bold tracking-[0.08em] text-white/50 uppercase">{c.title}</p>
               <ul className="mt-3 space-y-0.5">
-                {c.links.map((l) => (
+                {c.links.map((l) => {
+                  const Tag = l.href ? 'a' : 'button'
+                  return (
                   <li key={l.label}>
-                    <a
-                      href={l.href}
-                      {...(l.external ? { target: '_blank', rel: 'noopener' } : {})}
+                    <Tag
+                      {...(l.href ? { href: l.href } : { type: 'button' as const })}
                       className="group relative inline-flex min-h-11 items-center text-[0.9375rem] text-white/80 transition-colors hover:text-white focus-visible:text-white"
                     >
                       {l.label}
@@ -113,9 +113,10 @@ export function Footer() {
                         aria-hidden
                         className="absolute inset-x-0 bottom-2.5 h-px origin-left scale-x-0 bg-white transition-transform duration-300 ease-amparo group-hover:scale-x-100 group-focus-visible:scale-x-100"
                       />
-                    </a>
+                    </Tag>
                   </li>
-                ))}
+                  )
+                })}
               </ul>
             </div>
           ))}

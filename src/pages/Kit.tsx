@@ -23,7 +23,6 @@ import { PhoneFrame } from '../components/ui/PhoneFrame'
 import { CalculatorScreen } from '../components/phone/CalculatorScreen'
 import { HomeScreen } from '../components/phone/HomeScreen'
 import { a11y, contexto, cta, dores, hero, leituraRisco } from '../content/copy'
-import { APP_URL } from '../lib/config'
 import { formatNumber } from '../lib/format'
 import { Header } from '../sections/Header'
 
@@ -89,7 +88,7 @@ export default function Kit() {
 
         <Block title="Botões">
           <div className="flex flex-wrap items-center gap-4">
-            <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
+            <Button icon={<Smartphone />}>
               {cta.acessar}
             </Button>
             <Button variant="secondary" href="#como-funciona" icon={<ArrowDown />}>
@@ -101,7 +100,7 @@ export default function Kit() {
             </Button>
           </div>
           <div className="on-dark mt-4 flex flex-wrap items-center gap-4 rounded-card-lg bg-vinho-profundo p-6">
-            <Button variant="on-dark" href={APP_URL} target="_blank" rel="noopener">
+            <Button variant="on-dark">
               {cta.acessar}
             </Button>
           </div>

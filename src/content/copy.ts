@@ -38,7 +38,7 @@ export const nav = {
     { label: 'Como começar', href: '#comecar' },
     { label: 'Dúvidas', href: '#faq' },
   ],
-  /** Link de texto antes do botão (abre VITE_APP_URL). */
+  /** Link de texto antes do botão (sem link por enquanto). */
   entrar: 'Entrar',
 }
 

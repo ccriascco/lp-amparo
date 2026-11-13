@@ -6,7 +6,6 @@ import { Chip } from '../components/ui/Chip'
 import { Container } from '../components/ui/Section'
 import { TintedPhoto, type ImageSlot } from '../components/ui/TintedPhoto'
 import { beneficios, cta } from '../content/copy'
-import { APP_URL } from '../lib/config'
 import { gsap, MQ } from '../lib/gsap'
 
 const b = beneficios
@@ -85,7 +84,7 @@ export function Beneficios() {
             </h2>
           </div>
           <div data-appear className="shrink-0">
-            <Button href={APP_URL} target="_blank" rel="noopener" icon={<Smartphone />}>
+            <Button icon={<Smartphone />}>
               {cta.acessar}
             </Button>
           </div>
